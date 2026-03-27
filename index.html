@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imports de Luxo | O Padrão da Elegância</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-luxo: #FDFCFB; /* Bege claríssimo/Champagne */
+            --gold: #00CED1;
+            --black-soft: #1A1A1A;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-luxo); color: var(--black-soft); scroll-behavior: smooth; }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        .btn-gold { background-color: var(--gold); transition: all 0.4s ease; }
+        .btn-gold:hover { background-color: #00CED1; transform: scale(1.02); letter-spacing: 0.1em; }
+        .luxury-card { border: 1px solid rgb(0, 206, 209); background: white; }
+        .fade-in { animation: fadeIn 1.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="antialiased text-gray-900 pt-28 overflow-x-hidden">
+
+    <!-- BARRA SUPERIOR (URGÊNCIA SUTIL) -->
+    <div class="fixed top-0 left-0 w-full z-50 bg-black text-white text-[10px] uppercase tracking-[0.3em] py-2 text-center">
+        marcas Exclusivas | Frete em todo Brasil
+    </div>
+
+    <!-- NAVBAR PREMIUM -->
+<header class="fixed top-8 left-0 w-full z-50 bg-white py-4 px-4 md:py-6 md:px-20 border-b border-gray-100 shadow-sm">
+
+    <div class="flex items-center justify-between gap-4">
+        <!-- LOGO -->
+        <div class="text-xl sm:text-2xl md:text-3xl font-serif font-bold tracking-tight">
+            IMPORTS <span class="italic font-light">de Luxo</span>
+        </div>
+
+        <!-- MOBILE MENU BUTTON -->
+        <button id="mobileMenuButton" onclick="toggleMobileMenu()" class="lg:hidden text-2xl p-2 text-gray-700 hover:text-cyan-500 transition" aria-label="Abrir menu">
+            ☰
+        </button>
+
+        <!-- DESKTOP MENU -->
+        <nav class="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center space-x-8 text-[13px] uppercase tracking-widest font-semibold">
+            <a href="index.html" class="hover:text-cyan-500 transition">Início</a>
+            <a href="bolsas.html" class="hover:text-cyan-500 transition">Bolsas</a>
+            <a href="relogios.html" class="hover:text-cyan-500 transition">Relógios</a>
+            <a href="oculos.html" class="hover:text-cyan-500 transition">Óculos</a>
+            <a href="calcados.html" class="hover:text-cyan-500 transition">Calçados</a>
+            <a href="acessorios.html" class="hover:text-cyan-500 transition">Acessórios</a>
+            <a href="cintos.html" class="hover:text-cyan-500 transition">Cintos</a>
+        </nav>
+
+        <!-- ÍCONES -->
+        <div class="flex items-center space-x-4 text-xl">
+            <div class="relative">
+                <button onclick="toggleSearch()" class="hover:text-cyan-500 transition text-xl">🔍︎</button>
+                <div id="searchBox" class="hidden absolute right-0 top-12 bg-white border border-gray-200 shadow-2xl p-4 w-64 rounded-lg z-50">
+                    <form action="pesquisa.html" method="GET">
+                        <input type="text" name="q" placeholder="Buscar produto..." class="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none">
+                    </form>
+                </div>
+            </div>
+            <div class="relative cursor-pointer" onclick="toggleCart()">
+                <span class="text-2xl">🛒</span>
+                <span id="cartCount" class="absolute -top-2 -right-2 bg-cyan-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- NAV MOBILE -->
+<div id="mobileNav" class="hidden fixed top-[110px] left-0 w-full bg-white z-40 border-b border-gray-100 md:hidden">
+    <nav class="flex flex-col p-6 space-y-4 text-[13px] uppercase tracking-[0.2em] font-bold">
+        
+        <a href="bolsas.html" class="hover:text-cyan-500 transition">Bolsas</a>
+        <a href="relogios.html" class="hover:text-cyan-500 transition">Relógios</a>
+        <a href="oculos.html" class="hover:text-cyan-500 transition">Óculos</a>
+        <a href="calcados.html" class="hover:text-cyan-500 transition">Calçados</a>
+        <a href="acessorios.html" class="hover:text-cyan-500 transition">Acessórios</a>
+        <a href="cintos.html" class="hover:text-cyan-500 transition">Cintos</a>
+    </nav>
+</div>
+
+    <!-- HERO SECTION -->
+<section class="relative min-h-[58vh] md:min-h-[90vh] flex items-start pt-24 md:items-center md:pt-0 px-6 md:px-20 overflow-hidden bg-[#FDFCFB]">
+
+    <div class="absolute inset-0 z-0">
+
+    <!-- MOBILE -->
+    <img src="https://raw.githubusercontent.com/souzajulen-ui/imagem-hermes/main/Bolsas%20de%20luxo%20em%20pedestais%20perfeitos.png"
+         class="block md:hidden w-full h-full object-cover">
+
+    <!-- DESKTOP -->
+    <img src="https://raw.githubusercontent.com/souzajulen-ui/bolsas-hermes/main/bolsas_direita%20(1).png"
+        class="hidden md:block w-full h-full object-cover object-right">
+
+    <!-- OVERLAY -->
+    <div class="absolute inset-0 bg-white/75 md:bg-white/0"></div>
+
+</div>
+
+    <!-- CONTEÚDO -->
+    <div class="relative z-10 max-w-xl text-center md:text-left mx-auto md:mx-0">
+        <span class="text-black uppercase tracking-[0.3em] text-[13px] md:text-xs font-bold mb-4 block pt-28">
+            A recompensa do seu sucesso
+        </span>
+
+        <h1 class="text-3xl sm:text-4xl md:text-6xl leading-tight font-serif mb-4 ">
+            O luxo que você merece,
+            <span class="italic font-light block mt-2 text-3xl sm:text-3xl md:text-5xl underline decoration-cyan-400">
+                agora ao seu alcance.
+            </span>
+        </h1>
+        <span class="block text-[13px] text-gray-500 uppercase tracking-tighter italic mt-56 md:mt-0">+ de 1.000 clientes satisfeitas</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- BOLSAS -->
+<section id="Bolsas" class="category-section py-20 px- md:px-20"> 
+    <div class="max-w-7xl mx-auto flex justify-between items-end mb-6 border-b border-gray-100 pb-4">
+        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4">Bolsas</h2>
+        <a href="bolsas.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition">Exibir Mais</a>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10">
+
+    <!-- PRODUTO 1 -->
+    <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+
+            <img src="https://saint-laurent.dam.kering.com/m/5182f80e1603f7ae/Medium2-803541AAEAX9207_A.jpg?v=2"
+                 class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                 alt="Bolsa Saint Laurent Loulou"
+                 onclick="openGallery('bolsa-saint-laurent')">
+            <h3 class="font-serif text-lg mb-2">Bolsa Saint Laurent Loulou</h3>
+            <p class="text-xl font-semibold mb-4">R$ 2.390,00</p>
+            <button
+
+class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+data-name="Bolsa Saint Laurent Loulou - branca e dourada - 30 cm"
+data-price="2390.00"
+data-image="https://saint-laurent.dam.kering.com/m/5182f80e1603f7ae/Medium2-803541AAEAX9207_A.jpg?v=2">
+Adicionar ao carrinho
+</button>
+        </div>
+        <!-- PRODUTO 2 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://cdn-images.farfetch-contents.com/19/44/63/85/19446385_43454593_1000.jpg"
+                 class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                 alt="bolsa Valentino Garavani"
+                 onclick="openGallery('bolsa-valentino')">
+            <h3 class="font-serif text-lg mb-2">Bolsa Valentino Garavani</h3>
+            <p class="text-xl font-semibold mb-4">R$ 2.290,00</p>
+        <button
+class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+data-name="Bolsa Valentino Garavani - preta e dourada"
+data-price="2290.00"
+data-image="https://cdn-images.farfetch-contents.com/19/44/63/85/19446385_43454593_1000.jpg">
+Adicionar ao carrinho
+</button>
+        </div>
+
+        <!-- PRODUTO 3 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://www.chanel.com/images///f_auto//-9562336526366.jpg"
+                 class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                 onclick="openGallery('bolsa-chanel')"
+                 alt="bolsa chanel small">
+            <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Bolsa Chanel Small 25</h3>
+            <p class="text-xl font-semibold mb-4">R$ 2.590,00</p>
+        <button
+
+class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+data-name="Bolsa Chanel Small 25 - branca e dourada "
+data-price="2590.00"
+data-image="https://www.chanel.com/images///f_auto//-9562336526366.jpg">
+Adicionar ao carrinho
+</button>
+        </div>
+        <!-- PRODUTO 4 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://cdn-images.farfetch-contents.com/25/77/03/99/25770399_56379859_1000.jpg"
+                 class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                 alt="bolsa Miu Miu Aventure"
+                 onclick="openGallery('bolsa-miu-miu')">
+            <h3 class="font-serif text-lg mb-2">Bolsa Miu Miu Aventure</h3>
+            <p class="text-xl font-semibold mb-4">R$ 2.590,00</p>
+        <button
+class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+data-name="Bolsa Miu Miu Aventure - Marrom"
+data-price="2590.00"
+data-image="https://cdn-images.farfetch-contents.com/25/77/03/99/25770399_56379859_1000.jpg">
+Adicionar ao carrinho
+</button>
+    </div>
+    </div>
+</section>
+
+<!-- relógio -->
+<section id="Relogios" class="category-section py-20 px- md:px-20">
+    <div class="max-w-7xl mx-auto flex justify-between items-end mb-6 border-b border-gray-100 pb-4">
+        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4">Relógios</h2>
+        <a href="relogios.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition">Exibir Mais</a>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10">
+
+<!-- PRODUTO 1 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://cartier.vtexassets.com/arquivos/ids/184584/W4PN0007_1.jpg?v=636972722014970000"
+                class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                alt="relógio Cartier Panthère"
+                onclick="openGallery('relogio-cartier-panthe')">
+            <h3 class="font-serif text-lg mb-2">relógio Cartier Panthère</h3>
+            <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+
+<button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+data-name="Relógio Cartier Panthère - aço com pedra"
+data-price="1590.00"
+data-image="https://cartier.vtexassets.com/arquivos/ids/184584/W4PN0007_1.jpg?v=636972722014970000">
+Adicionar ao carrinho
+</button>
+    </div>
+
+        <!-- PRODUTO 2 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/1447968.png"
+                 class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                 alt="relógio Bvulgari Serpenti"
+                 onclick="openGallery('relogio-bulgari-serpenti')">
+            <h3 class="font-serif text-lg mb-2">relógio Bvlgari Serpenti</h3>
+            <p class="text-xl font-semibold mb-4">R$ 1.790,00</p>
+
+            <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+data-name="Relógio Bvlgari Serpenti - dourado e aço"
+data-price="1790.00"
+data-image="https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/1447968.png">
+Adicionar ao carrinho
+</button>
+        </div>
+
+        <!-- PRODUTO 3 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1920/v1/catalogue/2025/upright-c/m279173-0011.jpg"
+                 class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                 alt="relogio Rolex Lady-Datejust"
+                 onclick="openGallery('relogio-rolex-lady')">
+            <h3 class="font-serif text-lg mb-2">relógio Rolex Lady-Datejust</h3>
+            <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+
+<button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+data-name="relogio Rolex Lady-Datejust - dourado e aço"
+data-price="1590.00"
+data-image="https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1920/v1/catalogue/2025/upright-c/m279173-0011.jpg">
+Adicionar ao carrinho
+</button>
+        </div>
+
+        <!-- PRODUTO 4 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://cartier.vtexassets.com/arquivos/ids/209273-1200-auto?v=637629229625000000&width=1200&height=auto&aspect=true"
+                 class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                 alt="relógio cartier ballon blue"
+                 onclick="openGallery('relogio-cartier-ballon')">
+            <h3 class="font-serif text-lg mb-2">relógio Cartier Ballon Bleu</h3>
+            <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+
+<button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+data-name="Relógio Cartier Ballon Bleu - aço"
+data-price="1590.00"
+data-image="https://cartier.vtexassets.com/arquivos/ids/209273-1200-auto?v=637629229625000000&width=1200&height=auto&aspect=true">
+Adicionar ao carrinho
+</button>
+        </div>
+    </div>
+</section>
+
+<!-- oculos de sol -->
+<section id="Oculos" class="category-section py-20 px- md:px-20">
+    <div class="max-w-7xl mx-auto flex justify-between items-end mb-6 border-b border-gray-100 pb-4">
+        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4">Óculos</h2>
+        <a href="oculos.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition">Exibir Mais</a>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10">
+
+
+<!-- PRODUTO 1 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://www.otticasm.com/media/catalog/product/cache/all/small_image/1200x800/9df78eab33525d08d6e5fb8d27136e95/m/i/miu-miu-mu-04zs-19p2z1.jpg"
+                 class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                 alt="oculos Miu Miu"
+                 onclick="openGallery('oculos-miu-miu')">
+            <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Óculos Miu Miu</h3>
+            <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+            <button 
+class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+data-name="Óculos Miu Miu Oval tartaruga - Lentes Marrom"
+data-price="890.00"
+data-image="https://www.otticasm.com/media/catalog/product/cache/all/small_image/1200x800/9df78eab33525d08d6e5fb8d27136e95/m/i/miu-miu-mu-04zs-19p2z1.jpg">
+Adicionar ao carrinho
+</button>
+        </div>
+
+        <!-- PRODUTO 2 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://wanny.vteximg.com.br/arquivos/ids/192203-500-500/Produto.jpg?v=638803667335270000"
+                 class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                 alt="oculos Tom Ford Falconer"
+                 onclick="openGallery('oculos-tom-ford')">
+
+            <h3 class="font-serif text-lg mb-2">Óculos Tom Ford Falconer</h3>
+            <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+            <button 
+class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+data-name="Óculos Tom Ford Falconer tartaruga - lente Marrom"
+data-price="890.00"
+data-image="https://wanny.vteximg.com.br/arquivos/ids/192203-500-500/Produto.jpg?v=638803667335270000">
+Adicionar ao carrinho
+</button>
+        </div>
+
+        <!-- PRODUTO 3 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://wanny.vteximg.com.br/arquivos/ids/179938-750-750/Produto.jpg?v=638024365385500000"
+                 class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                 alt="oculos Valentino"
+                 onclick="openGallery('oculos-valentino')">
+
+            <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Óculos Valentino</h3>
+            <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+            <button 
+class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+data-name="Óculos de Sol Valentino Geométrico com Corrente V-Logo"
+data-price="890.00"
+data-image="https://wanny.vteximg.com.br/arquivos/ids/179938-750-750/Produto.jpg?v=638024365385500000">
+Adicionar ao carrinho
+</button>
+        </div>
+
+        <!-- PRODUTO 4 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://pretavoir.us/cdn/shop/files/bottega-veneta-bv1305s-002-hd-1.jpg?v=1707301799"
+                 class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                 alt="oculos Bottega Veneta"
+                 onclick="openGallery('oculos-bottega-veneta')">
+
+            <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Óculos Bottega Veneta</h3>
+            <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+            <button 
+class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+data-name="Óculos de Sol Bottega Veneta Sardine Aviator - Dourado e lente chá"
+data-price="890.00"
+data-image="https://pretavoir.us/cdn/shop/files/bottega-veneta-bv1305s-002-hd-1.jpg?v=1707301799">
+Adicionar ao carrinho
+</button>
+        </div>
+    </div>
+</section>
+
+<!-- calçados -->
+<section id="Calçados" class="category-section py-20 px- md:px-20">
+    <div class="max-w-7xl mx-auto flex justify-between items-end mb-6 border-b border-gray-100 pb-4">
+        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4">Calçados</h2>
+        <a href="calçados.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition">Exibir Mais</a>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10">
+
+
+<!-- PRODUTO 1 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://cdn-images.farfetch-contents.com/21/99/29/60/21992960_65046420_1000.jpg"
+                 class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                 alt="Sandália Saint Laurent"
+                 onclick="openGallery('sandalia-saint-laurent')">
+            <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Sandália Saint Laurent</h3>
+            <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+            <button 
+class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+data-name="Sandália Saint Laurent Opyum - Couro Envernizado Preta com Salto Dourado"
+data-price="1590.00"
+data-image="https://cdn-images.farfetch-contents.com/21/99/29/60/21992960_65046420_1000.jpg">
+Adicionar ao carrinho
+</button>
+        </div>
+
+        <!-- PRODUTO 2 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://valentino-cdn.thron.com/delivery/public/image/valentino/17de05d5-f3a9-4f38-a500-5d3465082691/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80&size=35&format=auto"
+                 class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                 alt="Sandália Valentino Rockstud"
+                 onclick="openGallery('sandalia-valentino-rockstud')">
+
+            <h3 class="font-serif text-lg mb-2">Sandália Valentino Rockstud</h3>
+            <p class="text-xl font-semibold mb-4">R$ 1.199,00</p>
+            <button 
+class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+data-name="Sandália Valentino Rockstud - branca"
+data-price="1199.00"
+data-image="https://valentino-cdn.thron.com/delivery/public/image/valentino/17de05d5-f3a9-4f38-a500-5d3465082691/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80&size=35&format=auto">
+Adicionar ao carrinho
+</button>
+        </div>
+
+        <!-- PRODUTO 3 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://cdn-images.farfetch-contents.com/29/84/62/21/29846221_58892503_1000.jpg"
+                 class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                 alt="Tênis Gucci Screener"
+                 onclick="openGallery('tenis-gucci-screener')">
+
+            <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Tênis Gucci Screener</h3>
+            <p class="text-sm text-gray-400 line-through">R$ 1.790,00</p>
+            <p class="text-xl font-semibold mb-4">R$ 1.390,00</p>
+            <button 
+class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+data-name="Tênis Gucci Screener - tradicional"
+data-price="1390.00"
+data-image="https://cdn-images.farfetch-contents.com/29/84/62/21/29846221_58892503_1000.jpg">
+Adicionar ao carrinho
+</button>
+        </div>
+
+        <!-- PRODUTO 4 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://cdn-images.farfetch-contents.com/30/64/98/21/30649821_59680088_1000.jpg"
+                 class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                 alt="Sandália René Caovilla Cleo"
+                 onclick="openGallery('sandalia-rene-caovilla-cleo')">
+
+            <h3 class="font-serif text-lg mb-2">Sandália René Caovilla Cleo</h3>
+            <p class="text-sm text-gray-400 line-through">R$ 1.590,00</p>
+            <p class="text-xl font-semibold mb-4">R$ 990,00</p>
+            <button 
+class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+data-name="Sandália René Caovilla Cleo - bege"
+data-price="890.00"
+data-image="https://cdn-images.farfetch-contents.com/30/64/98/21/30649821_59680088_1000.jpg">
+Adicionar ao carrinho
+</button>
+        </div>
+    </div>
+</section>
+
+<!-- acessorios -->
+<section id="Acessorios" class="category-section py-20 px- md:px-20"> 
+    <div class="max-w-7xl mx-auto flex justify-between items-end mb-6 border-b border-gray-100 pb-4">
+        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4">Acessórios</h2>
+        <a href="acessorios.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition">Exibir Mais</a>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10">
+
+        <!-- PRODUTO 1 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://cartier.vtexassets.com/arquivos/ids/211109/B6067517_2.png?v=638956120448730000" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="pulseira Cartier" onclick="openGallery('pulseira-cartier')">
+            <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">pulseira Cartier</h3>
+            <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+            <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+            data-name="pulseira Cartier tradicional - dourada"
+            data-price="380.00"
+            data-image="https://cartier.vtexassets.com/arquivos/ids/211109/B6067517_2.png?v=638956120448730000">
+            Adicionar ao carrinho
+            </button>
+        </div>
+
+<!-- PRODUTO 2 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://cartier.vtexassets.com/arquivos/ids/199718-1200-auto?v=637269792238100000&width=1200&height=auto&aspect=true" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Cartier JUSTE UN CLOU" onclick="openGallery('pulseira-cartier-juste')">
+            <h3 class="font-serif text-lg mb-2">Cartier JUSTE UN CLOU</h3>
+            <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+            <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+            data-name="pulseira Cartier JUSTE UN CLOU - dourada"
+            data-price="380.00"
+            data-image="https://cartier.vtexassets.com/arquivos/ids/199718-1200-auto?v=637269792238100000&width=1200&height=auto&aspect=true">
+            Adicionar ao carrinho
+            </button>
+        </div>
+
+<!-- PRODUTO 3 -->
+         <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://tiffany.vtexassets.com/arquivos/ids/185691-1200-1200/pulseira-de-elos-medios-em-ouro-amarelo-com-diamantes-70751216_1.jpg?v=638969301659900000" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Pulseira Tiffany HardWear" onclick="openGallery('pulseira-tiffany-hardwear')">
+            <h3 class="font-serif text-lg mb-2">Pulseira Tiffany HardWear</h3>
+            <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+            <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+            data-name="Pulseira Tiffany HardWear - dourada"
+            data-price="380.00"
+            data-image="https://tiffany.vtexassets.com/arquivos/ids/185691-1200-1200/pulseira-de-elos-medios-em-ouro-amarelo-com-diamantes-70751216_1.jpg?v=638969301659900000">
+            Adicionar ao carrinho
+            </button>
+        </div>
+
+<!-- PRODUTO 4 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://frontrow.com.br/cdn/shop/files/4498364922073c4f781d9463951ce429.jpg?v=1753731948&width=3000" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="pulseira Tiffany Knot" onclick="openGallery('pulseira-tiffany-knot')">
+            <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">pulseira Tiffany Knot</h3>
+            <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+            <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+            data-name="pulseira Tiffany Knot - dourada com pedra"
+            data-price="380.00"
+            data-image="https://frontrow.com.br/cdn/shop/files/4498364922073c4f781d9463951ce429.jpg?v=1753731948&width=3000">
+            Adicionar ao carrinho
+            </button>
+        </div>
+        </div>
+</section>
+
+
+<!-- cintos -->
+<section id="Cintos" class="category-section py-20 px- md:px-20"> 
+    <div class="max-w-7xl mx-auto flex justify-between items-end mb-6 border-b border-gray-100 pb-4">
+        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4">Cintos</h2>
+        <a href="cintos.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition">Exibir Mais</a>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10">
+
+        <!-- PRODUTO 1 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://cdn-images.farfetch-contents.com/32/88/47/04/32884704_63328413_1000.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Cinto Chloé" onclick="openGallery('cinto-chloe')">
+            <h3 class="font-serif text-lg mb-2">Cinto Chloé</h3>
+            <p class="text-xl font-semibold mb-4">R$ 650,00</p>
+            <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+            data-name="Cinto Chloé - Marrom"
+            data-price="650.00"
+            data-image="https://cdn-images.farfetch-contents.com/32/88/47/04/32884704_63328413_1000.jpg">
+            Adicionar ao carrinho
+            </button>
+        </div>
+
+<!-- PRODUTO 2 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://cdn-images.farfetch-contents.com/15/16/50/27/15165027_56058889_1000.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Cinto Gucci" onclick="openGallery('cinto-gucci')">
+            <h3 class="font-serif text-lg mb-2">Cinto Gucci</h3>
+            <p class="text-xl font-semibold mb-4">R$ 650,00</p>
+            <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+            data-name="Cinto Gucci - preto"
+            data-price="650.00"
+            data-image="https://cdn-images.farfetch-contents.com/15/16/50/27/15165027_56058889_1000.jpg">
+            Adicionar ao carrinho
+            </button>
+        </div>
+
+<!-- PRODUTO 3 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://cintosjulioalmeida.com.br/wp-content/uploads/2020/03/13898886_17705319_480.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Cinto Valentino Garavani" onclick="openGallery('cinto-valentino')">
+            <h3 class="font-serif text-lg mb-2">Cinto Valentino Garavani</h3>
+            <p class="text-xl font-semibold mb-4">R$ 650,00</p>
+            <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+            data-name="Cinto Valentino Garavani - Preto e logo dourada"
+            data-price="650.00"
+            data-image="https://cintosjulioalmeida.com.br/wp-content/uploads/2020/03/13898886_17705319_480.jpg">
+            Adicionar ao carrinho
+            </button>
+        </div>
+
+<!-- PRODUTO 4 -->
+        <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+            <img src="https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-30-mm--M0322U_PM1_Closeup%20view.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Cinto Louis Vuitton" onclick="openGallery('cinto-louis-vuitton')">
+            <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cinto Louis Vuitton</h3>
+            <p class="text-xl font-semibold mb-4">R$ 450,00</p>
+            <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+            data-name="Cinto Louis Vuitton - Tradicional"
+            data-price="450.00"
+            data-image="https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-30-mm--M0322U_PM1_Closeup%20view.jpg" class="w-full h-64 object-cover mb-6 group-hover:scale-105 transition duration-500">
+            Adicionar ao carrinho
+            </button>
+        </div>
+        </div>
+</section>
+
+
+
+    <!-- BENEFÍCIOS (MÉTODO 1:1) -->
+    <section id="beneficios" class="py-24 bg-white px-6 md:px-20">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+            <div class="text-center md:text-left">
+                <h3 class="font-serif text-2xl mb-4">Acabamento Impecável</h3>
+                <p class="text-black-500 text-sm leading-relaxed font-light">Nossas peças seguem o padrão 1:1. O mesmo peso, a mesma textura do couro e as marcações idênticas aos modelos de boutique.</p>
+            </div>
+            <div class="text-center md:text-left">
+                <h3 class="font-serif text-2xl mb-4">Curadoria Premium</h3>
+                <p class="text-black-500 text-sm leading-relaxed font-light">Não vendemos réplicas comuns. Cada item da <strong>Imports de Luxo</strong> passa por uma inspeção manual antes de chegar até você.</p>
+            </div>
+            <div class="text-center md:text-left">
+                <h3 class="font-serif text-2xl mb-4">Discrição & Segurança</h3>
+                <p class="text-black-500 text-sm leading-relaxed font-light">Embalagens premium e envio segurado. Sua experiência de compra é tratada com o sigilo e a exclusividade que o luxo exige.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO EMOCIONAL -->
+    <section id="experiencia" class="py-32 bg-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <span class="text-cyan-700 text-4xl mb-4 block font-serif italic">“</span>
+            <h2 class="text-3xl md:text-5xl font-serif mb-8 leading-tight italic">Elegância é a única beleza que nunca desaparece.</h2>
+            <p class="text-black-600 text-lg font-light leading-loose mb-10">
+                Portar um acessório de grife não é sobre o objeto, é sobre a <strong>sensação</strong>. É a confiança ao entrar em uma reunião, o brilho no olhar em um jantar especial e o respeito que sua presença impõe. Na Imports de Luxo, entregamos essa experiência incrível.
+            </p>
+            <div class="w-24 h-[1px] bg-cyan-600 mx-auto"></div>
+        </div>
+    </section>
+
+    <!-- PROVA SOCIAL / DEPOIMENTOS -->
+    <section class="py-24 bg-white px-6 md:px-20">
+        <h2 class="text-center font-serif text-3xl mb-16 uppercase tracking-widest">Relatos de clientes</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="luxury-card p-10 italic shadow-sm">
+                <div class="flex text-amber-500 mb-4 text-xs">★★★★★</div>
+                <p class="text-gray-600 mb-8 font-light text-sm">"Eu tenho bolsas originais e comprei uma da Imports de Luxo para testar. Fiquei chocada, é impossível notar a diferença. O metal, o fecho... tudo perfeito."</p>
+                <p class="text-[10px] uppercase font-bold tracking-widest">— Cláudia M., Brasília</p>
+            </div>
+            <div class="luxury-card p-10 italic shadow-sm">
+                <div class="flex text-amber-500 mb-4 text-xs">★★★★★</div>
+                <p class="text-gray-600 mb-8 font-light text-sm">"O relógio é lindo e a caixa é magnífica. Atendimento impecável via WhatsApp."</p>
+                <p class="text-[10px] uppercase font-bold tracking-widest">— Dr. Renato F., Porto Alegre</p>
+            </div>
+            <div class="luxury-card p-10 italic shadow-sm">
+                <div class="flex text-amber-500 mb-4 text-xs">★★★★★</div>
+                <p class="text-gray-600 mb-8 font-light text-sm">"Comprei um óculos e chegou em 4 dias em SP. A lente é ótima e o acabamento da haste é muito boa"</p>
+                <p class="text-[10px] uppercase font-bold tracking-widest">— Juliana P., São Paulo</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SELOS DE GARANTIA -->
+    <section id="garantia" class="py-16 border-t border-black-100 bg-white">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="flex flex-col items-center text-center">
+                <div class="w-12 h-12 mb-4 border border-cyan-500 rounded-full flex items-center justify-center text-amber-700">✓</div>
+                <span class="text-[10px] uppercase font-bold tracking-widest"> atendimento rápido</span>
+            </div>
+            <div class="flex flex-col items-center text-center">
+                <div class="w-12 h-12 mb-4 border border-cyan-500 rounded-full flex items-center justify-center text-amber-700">🔒</div>
+                <span class="text-[10px] uppercase font-bold tracking-widest">Pagamento seguro</span>
+            </div>
+            <div class="flex flex-col items-center text-center">
+                <div class="w-12 h-12 mb-4 border border-cyan-500 rounded-full flex items-center justify-center text-amber-700">📦</div>
+                <span class="text-[10px] uppercase font-bold tracking-widest">Inspeção Pré-Envio</span>
+            </div>
+            <div class="flex flex-col items-center text-center">
+                <div class="w-12 h-12 mb-4 border border-cyan-500 rounded-full flex items-center justify-center text-amber-700">💎</div>
+                <span class="text-[10px] uppercase font-bold tracking-widest">Qualidade premium</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION FINAL -->
+    <section id="colecao" class="py-24 bg-black text-white text-center">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-4xl md:text-6xl font-serif mb-8 italic">Faça parte do mundo Imports de Luxo</h2>
+            <p class="text-gray-400 font-light mb-12 text-lg">Clique no botão abaixo para acessar o atendimento via WhatsApp.</p>
+            <a href="https://wa.me/message/6AMQ5WF2AWS2L1" class="btn-gold px-12 py-6 text-sm uppercase tracking-[0.3em] font-bold inline-block shadow-xl">
+                acesso ao WhatsApp
+            </a>
+            <p class="mt-8 text-[10px] uppercase tracking-widest text-gray-500 italic"></p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-white py-16 px-6 md:px-20 border-t border-gray-100">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-12 mb-16">
+            <div class="col-span-1 md:col-span-2">
+                <div class="text-2xl font-serif font-bold mb-6 italic">IMPORTS DE LUXO</div>
+                <p class="text-gray-500 text-xs font-light max-w-sm leading-loose uppercase tracking-tighter">Sua boutique de confiança para itens premium internacionais. Unindo o desejo da alta moda e Elegância.</p>
+            </div>
+            <div>
+                <h4 class="text-[11px] font-bold uppercase tracking-widest mb-6">Institucional</h4>
+                <ul class="text-xs text-gray-500 space-y-3 font-light">
+                    <li><a href="#" class="hover:text-amber-600 transition">Políticas de Privacidade</a></li>
+                    <li><a href="#" class="hover:text-amber-600 transition">Trocas e Devoluções</a></li>
+                    <li><a href="#" class="hover:text-amber-600 transition">Termos de Uso</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-[11px] font-bold uppercase tracking-widest mb-6">Atendimento</h4>
+                <p class="text-xs text-gray-500 font-light leading-relaxed">
+                    Segunda a domingo: 09h às 22h<br>
+                    E-mail: reneetartarelli@gmail.com
+                </p>
+            </div>
+            <div>
+                <h4 class="text-[11px] font-bold uppercase tracking-widest mb-6">Formas de Pagamento</h4>
+                <div class="grid grid-cols-4 gap-3">
+                    <div class="bg-white-100 p-2 rounded flex items-center justify-center">
+                        <img src="https://logosmarcas.net/wp-content/uploads/2020/04/Visa-Logo-2014%E2%80%93presente.jpg" alt="VISA" class="w-full h-auto object-contain">
+                    </div>
+                    <div class="bg-white-100 p-2 rounded flex items-center justify-center">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQtLk6e-zGF6C2RSMHVg57wBxu6F-Aufauew&s" alt="Mastercard" class="w-full h-auto object-contain">
+                    </div>
+                    <div class="bg-white-100 p-2 rounded flex items-center justify-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Hipercard_logo.svg" alt="Hipercard" class="w-full h-auto object-contain">
+                    </div>
+                    <div class="bg-white-100 p-2 rounded flex items-center justify-center">
+                        <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSg6kd87KuRiNiDqwgI3AKAnvYLgxNaeOvyQntCfuzp6PSgh9bX" alt="Elo" class="w-full h-auto object-contain">
+                    </div>
+                    <div class="bg-white-100 p-2 rounded flex items-center justify-center">
+                        <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRSXwrqUH2v6eZ2JlpoHtDLxUbLc4YcgWS922B58C_KH5RBXaZD" alt="AMEX" class="w-full h-auto object-contain">
+                    </div>
+                    <div class="bg-white-100 p-2 rounded flex items-center justify-center">
+                        <img src="https://images.seeklogo.com/logo-png/39/1/pix-logo-png_seeklogo-392002.png" alt="Pix" class="w-full h-auto object-contain">
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-400 uppercase tracking-widest font-medium">
+            <p>© 2015 IMPORTS DE LUXO</p>
+            <div class="flex gap-6 italic lowercase font-serif text-lg">
+        </div>
+    </footer>
+
+
+
+<!-- CARRINHO LATERAL -->
+<div id="cartSidebar" class="fixed top-0 right-[-400px] w-80 md:w-96 h-full bg-white shadow-2xl z-[60] p-6 flex flex-col transition-all duration-500">
+    <div class="flex justify-between items-center mb-8 border-b pb-4">
+        <h2 class="text-xl font-serif font-bold uppercase tracking-widest">Seu Carrinho</h2>
+        <button onclick="toggleCart()" class="text-2xl hover:text-red-500">✕</button>
+    </div>
+    
+    <div id="cartItems" class="flex-grow overflow-y-auto space-y-4">
+        </div>
+
+    <div class="border-t pt-6 mt-4">
+        <div class="flex justify-between text-lg font-bold mb-6">
+            <span>Total:</span>
+            <span id="cartTotal">R$ 0,00</span>
+        </div>
+        <button onclick="finalizarCompra()" class="w-full bg-cyan-500 text-white py-4 text-xs uppercase tracking-[0.2em] font-bold hover:bg-black transition">
+            Finalizar Pedido via WhatsApp
+        </button>
+    </div>
+</div>
+
+<div id="cartOverlay" onclick="toggleCart()" class="fixed inset-0 bg-black/50 z-[55] hidden"></div>
+
+<script>
+    // 1. Variável global do carrinho
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // 2. Função para abrir/fechar o carrinho
+    function toggleCart() {
+        const sidebar = document.getElementById("cartSidebar");
+        const overlay = document.getElementById("cartOverlay");
+        
+        if (sidebar.style.right === "0px") {
+            sidebar.style.right = "-400px";
+            overlay.classList.add("hidden");
+        } else {
+            sidebar.style.right = "0px";
+            overlay.classList.remove("hidden");
+            renderCart();
+        }
+    }
+
+    // 3. Função para ADICIONAR ao carrinho
+    // Esta função captura os dados dos botões que você já tem no HTML
+    document.addEventListener("click", function(e) {
+        if (e.target && e.target.classList.contains("add-cart")) {
+            const name = e.target.getAttribute("data-name");
+            const price = parseFloat(e.target.getAttribute("data-price"));
+            const image = e.target.getAttribute("data-image");
+
+            cart.push({ name, price, image });
+            saveCart();
+            toggleCart(); // Abre o carrinho automaticamente ao adicionar
+        }
+    });
+
+    function saveCart() {
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+    }
+
+    function updateCartCount() {
+        const counts = document.querySelectorAll("#cartCount");
+        counts.forEach(c => c.innerText = cart.length);
+    }
+
+    // 4. Função para desenhar os itens na tela
+    function renderCart() {
+        const container = document.getElementById("cartItems");
+        const totalElement = document.getElementById("cartTotal");
+        container.innerHTML = "";
+        let total = 0;
+
+        if (cart.length === 0) {
+            container.innerHTML = "<p class='text-center text-gray-400 py-10'>Seu carrinho está vazio.</p>";
+        } else {
+            cart.forEach((item, index) => {
+                total += item.price;
+                container.innerHTML += `
+                    <div class="flex items-center gap-4 border-b pb-4">
+                        <img src="${item.image}" class="w-16 h-16 object-contain">
+                        <div class="flex-grow">
+                            <h4 class="text-[10px] font-bold uppercase">${item.name}</h4>
+                            <p class="text-sm font-semibold text-cyan-600">R$ ${item.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+                        </div>
+                        <button onclick="removeItem(${index})" class="text-gray-300 hover:text-red-500 text-xs">REMOVER</button>
+                    </div>
+                `;
+            });
+        }
+        totalElement.innerText = `R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+    }
+
+    function removeItem(index) {
+        cart.splice(index, 1);
+        saveCart();
+        renderCart();
+    }
+
+    // 5. Função de Finalizar (Mensagem WhatsApp)
+function finalizarCompra() {
+    if (cart.length === 0) return alert("Adicione itens para continuar!");
+
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    const lista = cart.map(i => `• ${i.name} (R$ ${i.price})`).join('\n');
+
+    // verifica se é singular ou plural
+    const frase = cart.length === 1
+        ? "Olá! Gostaria de saber mais sobre este produto:"
+        : "Olá! Gostaria de saber mais sobre estes produtos:";
+
+    const texto = encodeURIComponent(
+        `${frase}\n\n${lista}\n\n*Total: R$ ${total.toFixed(2)}*\n\nPoderia me informar o prazo de entrega e as formas de pagamento?`
+    );
+
+    window.open(`https://wa.me/5544998214237?text=${texto}`, '_blank');
+}
+
+    // 6. Função de Busca (Toggle)
+    function toggleSearch() {
+        const box = document.getElementById("searchBox");
+        box.classList.toggle("hidden");
+    }
+
+    // 7. Função de Menu Mobile
+    function toggleMobileMenu() {
+        const mobileNav = document.getElementById("mobileNav");
+        mobileNav.classList.toggle("hidden");
+    }
+
+    // Inicia o contador ao carregar
+    updateCartCount();
+
+    // GALERIA MODAL DE FOTOS
+    let currentImageIndex = 0;
+    let currentGallery = [];
+
+    // Dados das galerias de cada produto
+    const productGalleries = {
+        'bolsa-saint-laurent': [
+            'https://saint-laurent.dam.kering.com/m/5182f80e1603f7ae/Medium2-803541AAEAX9207_A.jpg?v=2',
+            'https://saint-laurent.dam.kering.com/m/501e20ec1e0e5f4f/Medium2-803541AAEAX9207_B.jpg?v=2',
+            'https://saint-laurent.dam.kering.com/m/62220c909381e23/Medium2-803541AAEAX9207_E.jpg?v=2'
+        ],
+        'bolsa-valentino': [
+            'https://cdn-images.farfetch-contents.com/19/44/63/85/19446385_43454593_1000.jpg',
+            'https://ounass-kw.atgcdn.ae/small_light(p=zoom,of=webp,q=65)/pub/media/catalog/product/2/1/217249943_black_e2.jpg?ts=1713862805.2459',
+            'https://valentino-cdn.thron.com/delivery/public/image/valentino/c927b7eb-d182-4ced-ad31-c0c41b4e8e34/ihqstx/std/2000x0/Valentino-Garavani-Loc%C3%B2-Small-Shoulder-Bag-In-Calfskin?quality=80&size=35&format=auto'
+        ],
+        'bolsa-chanel': [
+            'https://www.chanel.com/images///f_auto//-9562336526366.jpg',
+            'https://www.manfrimstore.com.br/cdn/shop/files/041b548c.jpg?v=1765833954&width=1600',
+            'https://www.manfrimstore.com.br/cdn/shop/files/84482c67.jpg?v=1765833954&width=1600',
+            'https://www.manfrimstore.com.br/cdn/shop/files/27efe14b.jpg?v=1765833954&width=1600'
+        ],
+        'bolsa-miu-miu': [
+            'https://cdn-images.farfetch-contents.com/25/77/03/99/25770399_56379859_1000.jpg',
+            'https://cdn-images.farfetch-contents.com/25/77/03/99/25770399_56379860_1000.jpg',
+            'https://cdn-images.farfetch-contents.com/25/77/03/99/25770399_56379857_1000.jpg'
+        ],
+        'relogio-cartier-panthe': [
+            'https://cartier.vtexassets.com/arquivos/ids/184584/W4PN0007_1.jpg?v=636972722014970000',
+            'https://cartier.vtexassets.com/arquivos/ids/242366-1200-auto?v=638762830400600000&width=1200&height=auto&aspect=true',
+            'https://cartier.vtexassets.com/arquivos/ids/242367-1200-auto?v=638762830400600000&width=1200&height=auto&aspect=true',
+            'https://cartier.vtexassets.com/arquivos/ids/242368-1200-auto?v=638762830400600000&width=1200&height=auto&aspect=true',
+            'https://cartier.vtexassets.com/arquivos/ids/184585-1200-auto?v=636972722038270000&width=1200&height=auto&aspect=true',
+            'https://cartier.vtexassets.com/arquivos/ids/184586-1200-auto?v=636972722053300000&width=1200&height=auto&aspect=true',
+            'https://cartier.vtexassets.com/arquivos/ids/242370-1200-auto?v=638762830400600000&width=1200&height=auto&aspect=true'
+        ],
+        'relogio-bulgari-serpenti': [
+            'https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/1447968.png',
+            'https://media.bulgari.com/image/upload/c_pad,h_1124,w_1440/q_auto/f_auto/1447967.png',
+            'https://media.bulgari.com/image/upload/c_fill,h_1635,w_1090/q_auto/f_auto/1390539.png'
+        ],
+        'relogio-rolex-lady': [
+            'https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1920/v1/catalogue/2025/upright-c/m279173-0011.jpg',
+            'https://www.sarajoias.com.br/rolex/fotos/d/slide4_landscape/m126333-0010.webp',
+            'https://www.sarajoias.com.br/rolex/fotos/d/slide2_landscape/m126333-0010.webp'
+        ],
+        'relogio-cartier-ballon': [
+            'https://cartier.vtexassets.com/arquivos/ids/209273-1200-auto?v=637629229625000000&width=1200&height=auto&aspect=true',
+            'https://cartier.vtexassets.com/arquivos/ids/242561-1200-auto?v=638762828310670000&width=1200&height=auto&aspect=true',
+            'https://cartier.vtexassets.com/arquivos/ids/242562-1200-auto?v=638762828310670000&width=1200&height=auto&aspect=true',
+            'https://cartier.vtexassets.com/arquivos/ids/242564-1200-auto?v=638762828310670000&width=1200&height=auto&aspect=true',
+            'https://cartier.vtexassets.com/arquivos/ids/209274-1200-auto?v=639017507818170000&width=1200&height=auto&aspect=true',
+            'https://cartier.vtexassets.com/arquivos/ids/209275-1200-auto?v=639017507818170000&width=1200&height=auto&aspect=true'
+        ],
+        'oculos-miu-miu': [
+            'https://www.otticasm.com/media/catalog/product/cache/all/small_image/1200x800/9df78eab33525d08d6e5fb8d27136e95/m/i/miu-miu-mu-04zs-19p2z1.jpg',
+            'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU04Z/E19PF02Z1/SMU04Z_E19P_F02Z1_C_050_SLS.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+            'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU04Z/E19PF02Z1/SMU04Z_E19P_F02Z1_C_050_MDL.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg'
+        ],
+        'oculos-tom-ford': [
+            'https://wanny.vteximg.com.br/arquivos/ids/192203-500-500/Produto.jpg?v=638803667335270000',
+            'https://wanny.vteximg.com.br/arquivos/ids/192204-500-500/Produto.jpg?v=638803667335270000',
+            'https://wanny.vteximg.com.br/arquivos/ids/192205-500-500/Produto.jpg?v=638803667335270000'
+        ],
+        'oculos-valentino': [
+            'https://wanny.vteximg.com.br/arquivos/ids/179938-750-750/Produto.jpg?v=638024365385500000',
+            'https://wanny.vteximg.com.br/arquivos/ids/179939-750-750/Produto.jpg?v=638024365385500000',
+            'https://wanny.vteximg.com.br/arquivos/ids/179940-750-750/Produto.jpg?v=638024365385500000'
+        ],
+        'oculos-bottega-veneta': [
+            'https://pretavoir.us/cdn/shop/files/bottega-veneta-bv1305s-002-hd-1.jpg?v=1707301799',
+            'https://pretavoir.us/cdn/shop/files/bottega-veneta-bv1305s-002-hd-2.jpg?v=1707301799',
+            'https://pretavoir.us/cdn/shop/files/bottega-veneta-bv1305s-002-hd-3.jpg?v=1707301799'
+        ],
+        'sandalia-saint-laurent': [
+            'https://cdn-images.farfetch-contents.com/21/99/29/60/21992960_65046420_1000.jpg',
+            'https://saint-laurent.dam.kering.com/m/7eda317a53cfb50/Medium2-5576621TV1A1000_D.jpg?v=4',
+            'https://saint-laurent.dam.kering.com/m/54b9ffd2b0cbc0c6/Medium2-5576621TV1A1000_C.jpg?v=4',
+            'https://saint-laurent.dam.kering.com/m/34fa6194a94961d2/Medium2-5576621TV1A1000_B.jpg?v=4'
+        ],
+        'sandalia-valentino-rockstud': [
+            'https://valentino-cdn.thron.com/delivery/public/image/valentino/17de05d5-f3a9-4f38-a500-5d3465082691/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80&size=35&format=auto',
+            'https://valentino-cdn.thron.com/delivery/public/image/valentino/6098f4c7-9e68-485e-8793-fa5475face8b/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80&size=35&format=auto',
+            'https://valentino-cdn.thron.com/delivery/public/image/valentino/81e8f894-4b4c-4e1c-b97e-e0263a7d7f39/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80&size=35&format=auto',
+            'https://valentino-cdn.thron.com/delivery/public/image/valentino/402d2558-3a2f-4039-a649-4359e22c6c0b/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80&size=35&format=auto'
+        ],
+        'tenis-gucci-screener': [
+            'https://cdn-images.farfetch-contents.com/29/84/62/21/29846221_58892503_1000.jpg',
+            'https://cdn-images.farfetch-contents.com/29/84/62/21/29846221_58892487_1000.jpg',
+            'https://www.manfrimstore.com.br/cdn/shop/files/IMG-1443.jpg?v=1732969255&width=1600'
+        ],
+        'sandalia-rene-caovilla-cleo': [
+            'https://cdn-images.farfetch-contents.com/30/64/98/21/30649821_59680088_1000.jpg',
+            'https://www.pegueibode.com.br/cdn/shop/files/WhatsAppImage2026-01-21at13.52.56_2.jpg?v=1769014480&width=990',
+            'https://www.pegueibode.com.br/cdn/shop/files/WhatsAppImage2026-01-21at13.52.56_1.jpg?v=1769014498&width=990'
+        ],
+        'pulseira-cartier': [
+            'https://cartier.vtexassets.com/arquivos/ids/211109/B6067517_2.png?v=638956120448730000',
+            'https://cartier.vtexassets.com/arquivos/ids/211058-1200-auto?v=637871166780400000&width=1200&height=auto&aspect=true',
+            'https://cartier.vtexassets.com/arquivos/ids/211160-1200-auto?v=638956120448730000&width=1200&height=auto&aspect=true'
+        ],
+        'pulseira-cartier-juste': [
+            'https://cartier.vtexassets.com/arquivos/ids/199718-1200-auto?v=637269792238100000&width=1200&height=auto&aspect=true',
+            'https://cartier.vtexassets.com/arquivos/ids/200464-1200-auto?v=638841429044270000&width=1200&height=auto&aspect=true',
+        ],
+        'pulseira-tiffany-hardwear': [
+            'https://lh3.googleusercontent.com/pw/AP1GczPUeR5IWV_CSHTuL-o4j9467l8FMlziD-pLX2uiIuV1WK2rbzE7CbU5lmbdgqviZWzOthEiT2bEH2G-NQ1omEHYwJ9g1Fd-zg9kRPQo6sgo7HJs_CIa0KJ9zNLS93NHAvwpKxnxSgJicwVUKyyLhRucGg=w810-h945-s-no-gm?authuser=0',
+            'https://tiffany.vtexassets.com/arquivos/ids/187078-1200-1200/pulseira-de-elos-medios-em-ouro-amarelo-com-diamantes-70751216_5.jpg?v=639059925871670000',
+            'https://tiffany.vtexassets.com/arquivos/ids/187270-1200-1200/pulseira-de-elos-medios-em-ouro-amarelo-com-diamantes-70751216_6.jpg?v=639059925871800000',
+            'https://tiffany.vtexassets.com/arquivos/ids/186107-1200-1200/pulseira-de-elos-medios-em-ouro-amarelo-com-diamantes-70751216_2.jpg?v=639059925871670000'
+        ],
+        'pulseira-tiffany-knot': [
+            'https://press.tiffany.com/wp-content/uploads/69525881_BLT_H23_v1_TM_092023_RGB_ALT_4x5-1.jpg',
+            'https://frontrow.com.br/cdn/shop/files/4498364922073c4f781d9463951ce429.jpg?v=1753731948&width=3000',
+            'https://frontrow.com.br/cdn/shop/files/a7d0c3ac7198257160c52ecbc039cd35.jpg?v=1753731948&width=3000',
+            'https://frontrow.com.br/cdn/shop/files/082fadf47ec4b3fe2d3292a3e1dcfced.jpg?v=1753731948&width=3000'
+        ],
+        'cinto-chloe': [
+            'https://cdn-images.farfetch-contents.com/32/88/47/04/32884704_63328413_1000.jpg',
+            'https://cdn-images.farfetch-contents.com/32/88/47/04/32884704_63327152_1000.jpg',
+            'https://cdn-images.farfetch-contents.com/32/88/47/04/32884704_63265415_1000.jpg'
+        ],
+        'cinto-gucci': [
+            'https://cdn-images.farfetch-contents.com/15/16/50/27/15165027_56058889_1000.jpg',
+            'https://cdn-images.farfetch-contents.com/15/36/99/43/15369943_54741546_1000.jpg',
+            'https://cdn-images.farfetch-contents.com/15/36/99/43/15369943_54741545_1000.jpg'
+        ],
+        'cinto-valentino': [
+            'https://cintosjulioalmeida.com.br/wp-content/uploads/2020/03/13898886_17705319_480.jpg',
+            'https://cintosjulioalmeida.com.br/wp-content/uploads/2020/03/13898886_17705322_480.jpg'
+        ],
+        'cinto-louis-vuitton': [
+            'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-30-mm--M0322U_PM1_Closeup%20view.jpg',
+            'https://gringa.com.br/cdn/shop/files/CINTO-LOUIS-VUITTON-MONOGRAM-LV-INITIALES-REVERSIBLE-BELT-80-PRETO-ORIGINAL-00053779c.png?v=1687815913&width=960',
+            'https://gringa.com.br/cdn/shop/files/CINTO-LOUIS-VUITTON-MONOGRAM-LV-INITIALES-REVERSIBLE-BELT-80-PRETO-ORIGINAL-00053779m.png?v=1687815913&width=960'
+        ]
+    };
+
+    function openGallery(galleryId) {
+        if (productGalleries[galleryId]) {
+            currentGallery = productGalleries[galleryId];
+            currentImageIndex = 0;
+            
+            // Gera thumbnails dinamicamente
+            const thumbContainer = document.querySelector(".gallery-thumbs-container");
+            thumbContainer.innerHTML = '';
+            currentGallery.forEach((image, index) => {
+                const thumb = document.createElement('img');
+                thumb.className = 'gallery-thumb w-20 h-20 object-cover cursor-pointer border-2 border-gray-200 hover:border-cyan-500 transition';
+                thumb.src = image;
+                thumb.onclick = () => {
+                    currentImageIndex = index;
+                    updateGalleryImage();
+                };
+                thumbContainer.appendChild(thumb);
+            });
+            
+            document.getElementById("modalGallery").classList.remove("hidden");
+            document.getElementById("galleryOverlay").classList.remove("hidden");
+            updateGalleryImage();
+        }
+    }
+
+    function closeGallery() {
+        document.getElementById("modalGallery").classList.add("hidden");
+        document.getElementById("galleryOverlay").classList.add("hidden");
+    }
+
+    function nextImage() {
+        currentImageIndex = (currentImageIndex + 1) % currentGallery.length;
+        updateGalleryImage();
+    }
+
+    function prevImage() {
+        currentImageIndex = (currentImageIndex - 1 + currentGallery.length) % currentGallery.length;
+        updateGalleryImage();
+    }
+
+    function updateGalleryImage() {
+        document.getElementById("mainGalleryImage").src = currentGallery[currentImageIndex];
+        document.getElementById("imageCounter").textContent = `${currentImageIndex + 1} / ${currentGallery.length}`;
+        
+        // Atualiza estilos dos thumbnails
+        document.querySelectorAll(".gallery-thumb").forEach((thumb, index) => {
+            thumb.classList.toggle("border-cyan-500", index === currentImageIndex);
+            thumb.classList.toggle("border-gray-200", index !== currentImageIndex);
+        });
+    }
+
+</script>
+
+<!-- MODAL GALERIA -->
+<div id="modalGallery" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
+    <div class="bg-white w-full max-w-5xl mx-4 rounded-lg shadow-2xl overflow-hidden">
+        <!-- Cabeçalho -->
+        <div class="bg-cyan-500 text-white px-6 py-4 flex justify-between items-center">
+            <span class="text-sm uppercase tracking-widest font-bold" id="imageCounter">1 / 3</span>
+            <button onclick="closeGallery()" class="text-2xl hover:text-red-500 transition">✕</button>
+        </div>
+        
+        <!-- Imagem Principal -->
+        <div class="relative bg-white flex items-center justify-center min-h-[70vh]">
+            <img id="mainGalleryImage" src="" class="max-w-full max-h-[70vh] object-contain">
+            
+            <!-- Botões de Navegação -->
+            <button onclick="prevImage()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-12 h-12 rounded-full flex items-center justify-center text-xl transition">
+                ❮
+            </button>
+            <button onclick="nextImage()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-12 h-12 rounded-full flex items-center justify-center text-xl transition">
+                ❯
+            </button>
+        </div>
+        
+        <!-- Thumbnails -->
+        <div class="bg-gray-50 px-6 py-4 flex gap-3 overflow-x-auto justify-center gallery-thumbs-container">
+        </div>
+    </div>
+</div>
+
+<div id="galleryOverlay" class="fixed inset-0 bg-black/70 z-[65] hidden"></div>
+
+</body>
+</html>

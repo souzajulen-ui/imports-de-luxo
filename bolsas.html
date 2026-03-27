@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolsas de Grife | Imports de Luxo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-luxo: #FDFCFB;
+            --gold: #00CED1;
+            --black-soft: #1A1A1A;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-luxo); color: var(--black-soft); }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        .btn-gold { background-color: var(--gold); transition: all 0.4s ease; }
+        .btn-gold:hover { background-color: #008B8B; transform: scale(1.02); }
+        .luxury-card { border: 1px solid rgb(0, 206, 209); background: white; }
+    </style>
+</head>
+<body class="antialiased text-gray-900 pt-32">
+
+    <div class="fixed top-0 left-0 w-full z-50 bg-black text-white text-[10px] uppercase tracking-[0.3em] py-2 text-center">
+        marcas Exclusivas | Frete em todo Brasil
+    </div>
+
+    <header class="fixed top-8 left-0 w-full z-50 bg-white py-6 px-6 md:px-20 flex items-center justify-between border-b border-gray-100 shadow-sm">
+        <div class="text-2xl md:text-3xl font-serif font-bold tracking-tight">
+            <a href="index.html">IMPORTS <span class="italic font-light">de Luxo</span></a>
+        </div>
+
+        <!-- MOBILE MENU BUTTON -->
+        <button id="mobileMenuButton" onclick="toggleMobileMenu()" class="lg:hidden text-2xl p-2 text-gray-700 hover:text-cyan-500 transition" aria-label="Abrir menu">
+            ☰
+        </button>
+
+        <nav class="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center space-x-8 text-[13px] uppercase tracking-widest font-semibold">
+    <a href="index.html" class="hover:text-cyan-500 transition">Início</a>
+    <a href="bolsas.html" class="hover:text-cyan-500 transition">Bolsas</a>
+    <a href="relogios.html" class="hover:text-cyan-500 transition">Relógios</a>
+    <a href="oculos.html" class="hover:text-cyan-500 transition">Óculos</a>
+    <a href="calcados.html" class="hover:text-cyan-500 transition">Calçados</a>
+    <a href="acessorios.html" class="hover:text-cyan-500 transition">Acessórios</a>
+    <a href="cintos.html" class="hover:text-cyan-500 transition">Cintos</a>
+</nav>
+
+        <div class="flex items-center space-x-6 text-xl">
+            <button onclick="toggleCart()" class="relative hover:text-cyan-500 transition">
+                🛒
+                <span id="cartCount" class="absolute -top-2 -right-2 bg-cyan-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobileNav" class="hidden fixed top-[110px] left-0 w-full bg-white z-40 border-b border-gray-100 md:hidden">
+    <nav class="flex flex-col p-6 space-y-4 text-[13px] uppercase tracking-[0.2em] font-bold">
+        <a href="index.html" class="hover:text-cyan-500 transition">Início</a>
+        
+        <a href="relogios.html" class="hover:text-cyan-500 transition">Relógios</a>
+        <a href="oculos.html" class="hover:text-cyan-500 transition">Óculos</a>
+        <a href="calcados.html" class="hover:text-cyan-500 transition">Calçados</a>
+        <a href="acessorios.html" class="hover:text-cyan-500 transition">Acessórios</a>
+        <a href="cintos.html" class="hover:text-cyan-500 transition">Cintos</a>
+    </nav>
+</div>
+
+    <section class="py-16 text-center bg-white border-b">
+        <h1 class="text-4xl md:text-6xl font-serif mb-4">Bolsas</h1>
+        <p class="text-gray-500 uppercase tracking-widest text-xs">Curadoria Premium Padrão 1:1</p>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-0 py-8"> 
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 md:gap-8">
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/19/44/63/85/19446385_43454593_1000.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Bolsa Valentino" onclick="openGallery('bolsa-valentino-garavani')">
+                <h3 class="font-serif text-lg mb-2">Bolsa Valentino Garavani</h3>
+                <p class="text-xl font-semibold mb-4">R$ 2.290,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Bolsa Valentino Garavani - preta e dourada" data-price="2290.00" data-image="https://cdn-images.farfetch-contents.com/19/44/63/85/19446385_43454593_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://www.chanel.com/images///f_auto//-9562336526366.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Bolsa Chanel" onclick="openGallery('bolsa-chanel-small')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Bolsa Chanel Small 25</h3>
+                <p class="text-xl font-semibold mb-4">R$ 2.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Bolsa Chanel Small 25 - branca e dourada" data-price="2590.00" data-image="https://www.chanel.com/images///f_auto//-9562336526366.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/25/77/03/99/25770399_56379859_1000.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Bolsa Miu Miu" onclick="openGallery('bolsa-miu-miu-aventure')">
+                <h3 class="font-serif text-lg mb-2">Bolsa Miu Miu Aventure</h3>
+                <p class="text-xl font-semibold mb-4">R$ 2.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Bolsa Miu Miu Aventure - Marrom" data-price="2590.00" data-image="https://cdn-images.farfetch-contents.com/25/77/03/99/25770399_56379859_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/33/25/46/45/33254645_63880694_1000.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Bolsa Miu Miu" onclick="openGallery('bolsa-miu-miu-wander')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Bolsa Wander Miu Miu </h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.990,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Bolsa Wander Miu Miu - couro matelassê Branco" data-price="1990.00" data-image="https://cdn-images.farfetch-contents.com/33/25/46/45/33254645_63880694_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://assets.christiandior.com/is/image/diorprod/M1324CZBBM928_SBG_E01?$r9x10_raw$&crop=0,0,4000,5000&wid=1850&hei=2000&scale=1&bfc=on&qlt=85" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Bolsa Dior Book Tote" onclick="openGallery('bolsa-dior-book-tote')">
+                <h3 class=" font-serif text-lg mb-2 h-14 md:h-auto">Bolsa Dior Book Tote</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.990,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Bolsa Dior Book Tote - azul" data-price="1990.00" data-image="https://assets.christiandior.com/is/image/diorprod/M1324CZBBM928_SBG_E01?$r9x10_raw$&crop=0,0,4000,5000&wid=1850&hei=2000&scale=1&bfc=on&qlt=85">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://bobags.com.br/assets-v2/products/mala-keepall-45-monogram-louis-vuitton-fce0a15ee49821668d4159b1cf9cbe8d32491498.jpeg?w=700&cache=d4b44564722748239b0dcf03249071f80c913&fm=webp&s=871013db783b9f9e6ce5a4cf992f7019" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Bolsa Louis Vuitton Keepall" onclick="openGallery('bolsa-louis-vuitton-keepall')">
+                <h3 class="font-serif text-lg mb-2">Bolsa Louis Vuitton Keepall</h3>
+                <p class="text-xl font-semibold mb-4">R$ 2.500,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Bolsa Louis Vuitton Keepall - classica" data-price="2500.00" data-image="https://bobags.com.br/assets-v2/products/mala-keepall-45-monogram-louis-vuitton-fce0a15ee49821668d4159b1cf9cbe8d32491498.jpeg?w=700&cache=d4b44564722748239b0dcf03249071f80c913&fm=webp&s=871013db783b9f9e6ce5a4cf992f7019">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://saint-laurent.dam.kering.com/m/51e71777869b879/eCom-698651AAANG1000_A.jpg?v=11" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Bolsa YSL Shopping Máxi Icare" onclick="openGallery('bolsa-ysl-sacola')">
+                <h3 class="font-serif text-lg mb-2">Bolsa YSL sacola</h3>
+                <p class="text-xl font-semibold mb-4">R$ 2.500,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Bolsa YSL sacola - preta" data-price="2500.00" data-image="https://saint-laurent.dam.kering.com/m/51e71777869b879/eCom-698651AAANG1000_A.jpg?v=11">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/18/42/95/06/18429506_54809843_1000.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Bolsa YSL 5 á 7" onclick="openGallery('bolsa-ysl-mini')">
+                <h3 class="font-serif text-lg mb-2">Bolsa YSL Míni Le</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Bolsa YSL Míni Le 5 à 7 - couro preto com ferragens douradas" data-price="1890.00" data-image="https://cdn-images.farfetch-contents.com/18/42/95/06/18429506_54809843_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://saint-laurent.dam.kering.com/m/4a4b754485c4cb76/eCom-803541AAEAX1000_A.jpg?v=3" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Saint Laurent Loulou" onclick="openGallery('bolsa-saint-laurent-loulou-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Bolsa Saint Laurent Loulou 30cm</h3>
+                <p class="text-xl font-semibold mb-4">R$ 2.390,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Bolsa Saint Laurent Loulou - couro preto - 30 cm" data-price="2390.00" data-image="https://saint-laurent.dam.kering.com/m/4a4b754485c4cb76/eCom-803541AAEAX1000_A.jpg?v=3">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://saint-laurent.dam.kering.com/m/5182f80e1603f7ae/Medium2-803541AAEAX9207_A.jpg?v=2" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Bolsa Saint Laurent" onclick="openGallery('bolsa-saint-laurent-loulou-2')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Bolsa Saint Laurent Loulou 30 cm</h3>
+                <p class="text-xl font-semibold mb-4">R$ 2.390,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Bolsa Saint Laurent Loulou - branca e dourada - 30 cm" data-price="2390.00" data-image="https://saint-laurent.dam.kering.com/m/5182f80e1603f7ae/Medium2-803541AAEAX9207_A.jpg?v=2">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://lh3.googleusercontent.com/pw/AP1GczPsHcX6idJ5TIjn8VKzWS_XDKdYVUaMq6GNIgJESMbI2CJWYzKrQYvmhtapc7g42eSQrXk2PCn9DLyzHhu-mXHkHv_YxWjzRfTSNhhvaUSGHrbKSxRa7WEsLDKv5ODBcVn9ODZGjvF0F-onTvZ1C8pj3g=w809-h809-s-no-gm?authuser=0" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Saint Laurent College" onclick="openGallery('bolsa-saint-laurent-college')">
+                <h3 class="font-serif text-lg mb-2">Saint Laurent College</h3>
+                <p class="text-xl font-semibold mb-4">R$ 2.290,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Saint Laurent College - couro matelassê" data-price="2290.00" data-image="https://lh3.googleusercontent.com/pw/AP1GczPsHcX6idJ5TIjn8VKzWS_XDKdYVUaMq6GNIgJESMbI2CJWYzKrQYvmhtapc7g42eSQrXk2PCn9DLyzHhu-mXHkHv_YxWjzRfTSNhhvaUSGHrbKSxRa7WEsLDKv5ODBcVn9ODZGjvF0F-onTvZ1C8pj3g=w809-h809-s-no-gm?authuser=0">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn.endource.com/image/direct/f3a34eea54c1a75ddd9d9d7b6bd0afe067fa0c82/default.jpg?class=1600&optimizer=image" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Bolsa Gucci Giglio Large" onclick="openGallery('bolsa-gucci-giglio')">
+                <h3 class="font-serif text-lg mb-2">Gucci Giglio Large</h3>
+                <p class="text-xl font-semibold mb-4">R$ 3.500,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Bolsa Gucci Giglio Large - marrom" data-price="3500.00" data-image="https://cdn.endource.com/image/direct/f3a34eea54c1a75ddd9d9d7b6bd0afe067fa0c82/default.jpg?class=1600&optimizer=image">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/15/35/99/79/15359979_53139015_1000.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Gucci Dionysus GG" onclick="openGallery('bolsa-gucci-dionysus')">
+                <h3 class="font-serif text-lg mb-2">Gucci Dionysus</h3>
+                <p class="text-xl font-semibold mb-4">R$ 2.290,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Gucci Dionysus GG - Tradicional" data-price="2290.00" data-image="https://cdn-images.farfetch-contents.com/15/35/99/79/15359979_53139015_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/12/56/23/29/12562329_55769738_2048.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="bolsa tiracolo Gucci GG" onclick="openGallery('bolsa-gucci-tiracolo')">
+                <h3 class="font-serif text-lg mb-2">bolsa Gucci tiracolo GG</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="bolsa Gucci tiracolo GG - preta" data-price="1890.00" data-image="https://cdn-images.farfetch-contents.com/12/56/23/29/12562329_55769738_2048.jpg">Adicionar ao carrinho</button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-white py-10 text-center border-t border-gray-100">
+        <p class="text-[10px] text-gray-400 uppercase tracking-widest">© 2015 IMPORTS DE LUXO - Todos os direitos reservados</p>
+    </footer>
+
+    <div id="cartSidebar" style="right:-400px;" class="fixed top-0 w-80 h-full bg-white shadow-2xl transition-all duration-500 z-50 p-6 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold font-serif">Seu Carrinho</h2>
+            <button onclick="toggleCart()" class="text-red-500 font-bold">X</button>
+        </div>
+        <div id="cartItems"></div>
+        <div class="mt-6 border-t pt-4">
+            <p class="text-lg font-bold mb-4">Total: <span id="cartTotal">R$ 0,00</span></p>
+            <button onclick="finalizarCompra()" class="bg-cyan-500 text-white w-full py-3 font-bold hover:bg-cyan-600 transition">Finalizar no WhatsApp</button>
+        </div>
+    </div>
+<!-- MODAL GALERIA -->
+<div id="modalGallery" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
+    <div class="bg-white w-full max-w-5xl mx-4 rounded-lg shadow-2xl overflow-hidden">
+        <!-- Cabeçalho -->
+        <div class="bg-cyan-500 text-white px-6 py-4 flex justify-between items-center">
+            <span class="text-sm uppercase tracking-widest font-bold" id="imageCounter">1 / 3</span>
+            <button onclick="closeGallery()" class="text-2xl hover:text-red-500 transition">✕</button>
+        </div>
+        
+        <!-- Imagem Principal -->
+        <div class="relative bg-white flex items-center justify-center min-h-[70vh]">
+            <img id="mainGalleryImage" src="" class="max-w-full max-h-[70vh] object-contain">
+            
+            <!-- Botões de Navegação -->
+            <button onclick="prevImage()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-12 h-12 rounded-full flex items-center justify-center text-xl transition">
+                ❮
+            </button>
+            <button onclick="nextImage()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-12 h-12 rounded-full flex items-center justify-center text-xl transition">
+                ❯
+            </button>
+        </div>
+        
+        <!-- Thumbnails -->
+        <div class="bg-gray-50 px-6 py-4 flex gap-3 overflow-x-auto justify-center gallery-thumbs-container">
+        </div>
+    </div>
+</div>
+
+<div id="galleryOverlay" class="fixed inset-0 bg-black/70 z-[65] hidden"></div>
+    <script>
+        function toggleCart() {
+            const sidebar = document.getElementById("cartSidebar");
+            const isOpen = sidebar.style.right === "0px";
+            sidebar.style.right = isOpen ? "-400px" : "0px";
+            if (!isOpen) renderCart();
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cartCount").innerText = cart.length;
+        }
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartItems = document.getElementById("cartItems");
+            const cartTotal = document.getElementById("cartTotal");
+            cartItems.innerHTML = "";
+            let total = 0;
+
+            cart.forEach((product, index) => {
+                total += product.price;
+                cartItems.innerHTML += `
+                    <div class="flex items-center gap-4 mb-4 border-b pb-4">
+                        <img src="${product.image}" class="w-16 h-16 object-cover rounded">
+                        <div class="flex-1">
+                            <h3 class="text-[10px] font-bold uppercase">${product.name}</h3>
+                            <p class="text-sm font-semibold">${product.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+                        </div>
+                        <button onclick="removeItem(${index})" class="text-red-500 text-xs">Remover</button>
+                    </div>`;
+            });
+            cartTotal.innerText = total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+        }
+
+        function finalizarCompra() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        if (cart.length === 0) return alert("Seu carrinho está vazio!");
+
+        let total = 0;
+
+        // frase singular ou plural
+        let mensagem = cart.length === 1
+        ? "Olá! Gostaria de saber mais sobre este produto:\n\n"
+        : "Olá! Gostaria de saber mais sobre estes produtos:\n\n";
+
+        cart.forEach(item => {
+        mensagem += `- ${item.name} (R$ ${item.price.toFixed(2)})\n`;
+        total += item.price;
+    });
+        mensagem += `\n*Total: R$ ${total.toFixed(2)}*\n\n`;
+        mensagem += "Poderia me informar o prazo de entrega e as formas de pagamento?";
+
+        window.open(`https://wa.me/5544998214237?text=${encodeURIComponent(mensagem)}`, '_blank');
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            updateCartCount();
+            const buttons = document.querySelectorAll(".add-cart");
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const name = this.getAttribute("data-name");
+                    const price = parseFloat(this.getAttribute("data-price"));
+                    const image = this.getAttribute("data-image");
+                    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    cart.push({ name, price, image });
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    updateCartCount();
+                    toggleCart();
+                });
+            });
+        });
+
+        // GALERIA MODAL DE FOTOS
+        let currentImageIndex = 0;
+        let currentGallery = [];
+
+        // Dados das galerias apenas para produtos de bolsas
+        const productGalleries = {
+            'bolsa-valentino-garavani': [
+                'https://cdn-images.farfetch-contents.com/19/44/63/85/19446385_43454593_1000.jpg',
+                'https://ounass-kw.atgcdn.ae/small_light(p=zoom,of=webp,q=65)/pub/media/catalog/product/2/1/217249943_black_e2.jpg?ts=1713862805.2459',
+                'https://valentino-cdn.thron.com/delivery/public/image/valentino/c927b7eb-d182-4ced-ad31-c0c41b4e8e34/ihqstx/std/2000x0/Valentino-Garavani-Loc%C3%B2-Small-Shoulder-Bag-In-Calfskin?quality=80&size=35&format=auto'
+            ],
+            'bolsa-chanel-small': [
+                'https://www.chanel.com/images///f_auto//-9562336526366.jpg',
+                'https://www.manfrimstore.com.br/cdn/shop/files/041b548c.jpg?v=1765833954&width=1600',
+                'https://www.manfrimstore.com.br/cdn/shop/files/84482c67.jpg?v=1765833954&width=1600',
+                'https://www.manfrimstore.com.br/cdn/shop/files/27efe14b.jpg?v=1765833954&width=1600'
+            ],
+            'bolsa-miu-miu-aventure': [
+                'https://cdn-images.farfetch-contents.com/25/77/03/99/25770399_56379859_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/25/77/03/99/25770399_56379860_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/25/77/03/99/25770399_56379857_1000.jpg'
+            ],
+            'bolsa-miu-miu-wander': [
+                'https://cdn-images.farfetch-contents.com/33/25/46/45/33254645_63880694_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/33/25/46/45/33254645_63880696_1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/5/5BP/5BP078/AN88F0009/5BP078_AN88_F0009_V_OOO_SLR.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/5/5BP/5BP078/AN88F0009/5BP078_AN88_F0009_V_OOO_SLO.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/5/5BP/5BP078/AN88F0009/5BP078_AN88_F0009_V_OOO_MDLA.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/5/5BP/5BP078/AN88F0009/5BP078_AN88_F0009_V_OOO_MDL.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg'
+            ],
+            'bolsa-dior-book-tote': [
+                'https://assets.christiandior.com/is/image/diorprod/M1324CZBBM928_SBG_E01?$r9x10_raw$&crop=0,0,4000,5000&wid=1850&hei=2000&scale=1&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/M1324CZBBM928_SBG_E07-1?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/M1324CZBBM928_SBG_E03?$r9x10_raw$&crop=0,0,4000,5000&wid=1850&hei=2000&scale=1&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/M1324CZBBM928_SBG_E06?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/M1324CZBBM928_SBG_E09?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85'
+            ],
+            'bolsa-louis-vuitton-keepall': [
+                'https://bobags.com.br/assets-v2/products/mala-keepall-45-monogram-louis-vuitton-fce0a15ee49821668d4159b1cf9cbe8d32491498.jpeg?w=700&cache=d4b44564722748239b0dcf03249071f80c913&fm=webp&s=871013db783b9f9e6ce5a4cf992f7019',
+                'https://gringa.com.br/cdn/shop/products/Bolsa-Louis-Vuitton-Monogram-Keepall-45-Bandouliere-Marrom-Original-19149l.png?v=1657704297&width=960',
+                'https://gringa.com.br/cdn/shop/products/Bolsa-Louis-Vuitton-Monogram-Keepall-45-Bandouliere-Marrom-Original-19149fu.png?v=1657704303&width=960',
+                'https://gringa.com.br/cdn/shop/products/Bolsa-Louis-Vuitton-Monogram-Keepall-45-Bandouliere-Marrom-Original-19149d.png?v=1657704326&width=960'
+            ],
+            'bolsa-ysl-sacola': [
+                'https://saint-laurent.dam.kering.com/m/51e71777869b879/eCom-698651AAANG1000_A.jpg?v=11',
+                'https://saint-laurent.dam.kering.com/m/612c1e5a18de9272/Medium2-698651AAANG1000_B.jpg?v=14',
+                'https://saint-laurent.dam.kering.com/m/3bbd626a6f7eb79a/Medium2-698651AAANG1000_C.jpg?v=7',
+                'https://saint-laurent.dam.kering.com/m/380d7df95dd4be40/Medium2-698651AAANG1000_D.jpg?v=6',
+                'https://saint-laurent.dam.kering.com/m/43503ac24e0816f9/Medium2-698651AAANG1000_F.jpg?v=7',
+                'https://saint-laurent.dam.kering.com/m/34464a891ea600c8/Medium2-698651AAANG1000_E.jpg?v=6'
+            ],
+            'bolsa-ysl-mini': [
+                'https://cdn-images.farfetch-contents.com/18/42/95/06/18429506_54809843_1000.jpg',
+                'https://saint-laurent.dam.kering.com/m/4852edc301debd9c/eCom-7103182R20W1000_B.jpg?v=3',
+                'https://saint-laurent.dam.kering.com/m/1f27d673eea7c987/eCom-7103182R20W1000_C.jpg?v=3',
+                'https://saint-laurent.dam.kering.com/m/2ca30fd032e3c5c1/eCom-7103182R20W1000_D.jpg?v=3'
+            ],
+            'bolsa-saint-laurent-loulou-1': [
+                'https://saint-laurent.dam.kering.com/m/4a4b754485c4cb76/eCom-803541AAEAX1000_A.jpg?v=3',
+                'https://saint-laurent.dam.kering.com/m/1c8780bbde56c349/Medium2-803541AAEAX1000_B.jpg?v=3',
+                'https://saint-laurent.dam.kering.com/m/778b72f14705dd53/Medium2-803541AAEAX1000_D.jpg?v=1',
+                'https://saint-laurent.dam.kering.com/m/69b19fb5f6a0a2e/Medium2-803541AAEAX1000_E.jpg?v=1',
+                'https://saint-laurent.dam.kering.com/m/1d2307d252fd4b2b/Medium2-803541AAEAX1000_F.jpg?v=1'
+            ],
+            'bolsa-saint-laurent-loulou-2': [
+                'https://saint-laurent.dam.kering.com/m/5182f80e1603f7ae/Medium2-803541AAEAX9207_A.jpg?v=2',
+                'https://saint-laurent.dam.kering.com/m/501e20ec1e0e5f4f/Medium2-803541AAEAX9207_B.jpg?v=2',
+                'https://saint-laurent.dam.kering.com/m/62220c909381e23/Medium2-803541AAEAX9207_E.jpg?v=2'
+            ],
+            'bolsa-saint-laurent-college': [
+                'https://lh3.googleusercontent.com/pw/AP1GczPsHcX6idJ5TIjn8VKzWS_XDKdYVUaMq6GNIgJESMbI2CJWYzKrQYvmhtapc7g42eSQrXk2PCn9DLyzHhu-mXHkHv_YxWjzRfTSNhhvaUSGHrbKSxRa7WEsLDKv5ODBcVn9ODZGjvF0F-onTvZ1C8pj3g=w809-h809-s-no-gm?authuser=0',
+                'https://toptoptop1.com/wp-content/uploads/2025/04/wsxc1744900540655_1.jpg',
+                'https://toptoptop1.com/wp-content/uploads/2025/04/wsxc1744900540711_2-700x700.jpg',
+            ],    
+            'bolsa-gucci-giglio': [
+                'https://cdn.endource.com/image/direct/f3a34eea54c1a75ddd9d9d7b6bd0afe067fa0c82/default.jpg?class=1600&optimizer=image',
+                'https://www.net-a-porter.com/variants/images/46376663163012553/e1/w2000_q60.jpg',
+                'https://www.net-a-porter.com/variants/images/46376663163012553/e2/w2000_q60.jpg',
+                'https://www.net-a-porter.com/variants/images/46376663163012553/fr/w2000_q60.jpg'
+            ],
+            'bolsa-gucci-dionysus': [
+                'https://cdn-images.farfetch-contents.com/15/35/99/79/15359979_53139015_1000.jpg',
+                'https://gringa.com.br/cdn/shop/products/Bolsa-Gucci-Small-GG-Supreme-Dionysus-Bege-Original-17231l.png?v=1652909462&width=960',
+                'https://gringa.com.br/cdn/shop/products/Bolsa-Gucci-Small-GG-Supreme-Dionysus-Bege-Original-17231d.png?v=1652909485&width=960',
+                'https://cdn-images.farfetch-contents.com/15/35/99/79/15359979_53139017_1000.jpg',
+                'https://gringa.com.br/cdn/shop/products/Bolsa-Gucci-Small-GG-Supreme-Dionysus-Bege-Original-17231fu.png?v=1652909490&width=960'
+            ],
+            'bolsa-gucci-tiracolo': [
+                'https://cdn-images.farfetch-contents.com/12/56/23/29/12562329_55769738_2048.jpg',
+                'https://cdn-images.farfetch-contents.com/12/56/23/29/12562329_55769732_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/12/56/23/29/12562329_55769731_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/12/56/23/29/12562329_55769746_1000.jpg'
+            ]
+        };
+
+        function openGallery(galleryId) {
+            if (productGalleries[galleryId]) {
+                currentGallery = productGalleries[galleryId];
+                currentImageIndex = 0;
+                
+                // Gera thumbnails dinamicamente
+                const thumbContainer = document.querySelector(".gallery-thumbs-container");
+                thumbContainer.innerHTML = '';
+                currentGallery.forEach((image, index) => {
+                    const thumb = document.createElement('img');
+                    thumb.className = 'gallery-thumb w-20 h-20 object-cover cursor-pointer border-2 border-gray-200 hover:border-cyan-500 transition';
+                    thumb.src = image;
+                    thumb.onclick = () => {
+                        currentImageIndex = index;
+                        updateGalleryImage();
+                    };
+                    thumbContainer.appendChild(thumb);
+                });
+                
+                document.getElementById("modalGallery").classList.remove("hidden");
+                document.getElementById("galleryOverlay").classList.remove("hidden");
+                updateGalleryImage();
+            }
+        }
+
+        function closeGallery() {
+            document.getElementById("modalGallery").classList.add("hidden");
+            document.getElementById("galleryOverlay").classList.add("hidden");
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % currentGallery.length;
+            updateGalleryImage();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + currentGallery.length) % currentGallery.length;
+            updateGalleryImage();
+        }
+
+        function updateGalleryImage() {
+            document.getElementById("mainGalleryImage").src = currentGallery[currentImageIndex];
+            document.getElementById("imageCounter").textContent = `${currentImageIndex + 1} / ${currentGallery.length}`;
+            
+            // Atualiza estilos dos thumbnails
+            document.querySelectorAll(".gallery-thumb").forEach((thumb, index) => {
+                thumb.classList.toggle("border-cyan-500", index === currentImageIndex);
+                thumb.classList.toggle("border-gray-200", index !== currentImageIndex);
+            });
+        }
+
+        function toggleMobileMenu() {
+        const mobileNav = document.getElementById("mobileNav");
+        mobileNav.classList.toggle("hidden");
+        }
+
+
+        // Fechar ao clicar no overlay
+        document.addEventListener("DOMContentLoaded", function() {
+            const overlay = document.getElementById("galleryOverlay");
+            if (overlay) {
+                overlay.addEventListener("click", closeGallery);
+            }
+        });
+    </script>
+</body>
+</html>
