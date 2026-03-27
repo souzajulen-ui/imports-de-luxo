@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acessórios de Luxo | Imports de Luxo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-luxo: #FDFCFB;
+            --gold: #00CED1;
+            --black-soft: #1A1A1A;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-luxo); color: var(--black-soft); }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="antialiased text-gray-900 pt-32">
+
+    <div class="fixed top-0 left-0 w-full z-50 bg-black text-white text-[10px] uppercase tracking-[0.3em] py-2 text-center">
+        toque de Elegância | material impecável
+    </div>
+
+    <header class="fixed top-8 left-0 w-full z-50 bg-white py-6 px-6 md:px-20 flex items-center justify-between border-b border-gray-100 shadow-sm">
+        <div class="text-2xl md:text-3xl font-serif font-bold tracking-tight">
+            <a href="index.html">IMPORTS <span class="italic font-light">de Luxo</span></a>
+        </div>
+
+        <!-- MOBILE MENU BUTTON -->
+        <button id="mobileMenuButton" onclick="toggleMobileMenu()" class="lg:hidden text-2xl p-2 text-gray-700 hover:text-cyan-500 transition" aria-label="Abrir menu">
+            ☰
+        </button>
+
+        <nav class="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center space-x-8 text-[13px] uppercase tracking-widest font-semibold">
+    <a href="index.html" class="hover:text-cyan-500 transition">Início</a>
+    <a href="bolsas.html" class="hover:text-cyan-500 transition">Bolsas</a>
+    <a href="relogios.html" class="hover:text-cyan-500 transition">Relógios</a>
+    <a href="oculos.html" class="hover:text-cyan-500 transition">Óculos</a>
+    <a href="calcados.html" class="hover:text-cyan-500 transition">Calçados</a>
+    <a href="acessorios.html" class="hover:text-cyan-500 transition">Acessórios</a>
+    <a href="cintos.html" class="hover:text-cyan-500 transition">Cintos</a>
+</nav>
+
+        <div class="flex items-center space-x-6 text-xl">
+            <button onclick="toggleCart()" class="relative hover:text-cyan-500 transition">
+                🛒
+                <span id="cartCount" class="absolute -top-2 -right-2 bg-cyan-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+            </button>
+        </div>
+    </header>
+
+ <div id="mobileNav" class="hidden fixed top-[110px] left-0 w-full bg-white z-40 border-b border-gray-100 md:hidden">
+    <nav class="flex flex-col p-6 space-y-4 text-[13px] uppercase tracking-[0.2em] font-bold">
+        <a href="index.html" class="hover:text-cyan-500 transition">Início</a>
+        
+        <a href="bolsas.html" class="hover:text-cyan-500 transition">Bolsas</a>
+        <a href="relogios.html" class="hover:text-cyan-500 transition">Relógios</a>
+        <a href="oculos.html" class="hover:text-cyan-500 transition">Óculos</a>
+        <a href="calcados.html" class="hover:text-cyan-500 transition">Calçados</a>
+        <a href="cintos.html" class="hover:text-cyan-500 transition">Cintos</a>
+    </nav>
+</div>
+
+    <section class="py-16 text-center bg-white border-b">
+        <h1 class="text-4xl md:text-6xl font-serif mb-4">Acessórios</h1>
+        <p class="text-gray-500 uppercase tracking-widest text-xs">o luxo em detalhes</p>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-0 py-8"> 
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 md:gap-8">
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cartier.vtexassets.com/arquivos/ids/211109/B6067517_2.png?v=638956120448730000"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                     alt="pulseira Cartier tradicional" onclick="openGallery('acessorio-cartier-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">pulseira Cartier tradicional</h3>
+                <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="pulseira Cartier tradicional - dourada" data-price="380.00" data-image="https://cartier.vtexassets.com/arquivos/ids/211109/B6067517_2.png?v=638956120448730000">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cartier.vtexassets.com/arquivos/ids/199718-1200-auto?v=637269792238100000&width=1200&height=auto&aspect=true"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    alt="Cartier JUSTE UN CLOU" onclick="openGallery('acessorio-cartier-2')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cartier JUSTE UN CLOU</h3>
+                <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="pulseira JUSTE UN CLOU - dourada" data-price="380.00" data-image="https://cartier.vtexassets.com/arquivos/ids/199718-1200-auto?v=637269792238100000&width=1200&height=auto&aspect=true">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://tiffany.vtexassets.com/arquivos/ids/185691-1200-1200/pulseira-de-elos-medios-em-ouro-amarelo-com-diamantes-70751216_1.jpg?v=638969301659900000"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    alt="Pulseira Tiffany HardWear" onclick="openGallery('acessorio-tiffany-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Pulseira Tiffany HardWear</h3>
+                <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Pulseira Tiffany HardWear - dourada" data-price="380.00" data-image="https://tiffany.vtexassets.com/arquivos/ids/185691-1200-1200/pulseira-de-elos-medios-em-ouro-amarelo-com-diamantes-70751216_1.jpg?v=638969301659900000">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://frontrow.com.br/cdn/shop/files/4498364922073c4f781d9463951ce429.jpg?v=1753731948&width=3000"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    alt="Tiffany Knot" onclick="openGallery('acessorio-tiffany-2')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Tiffany Knot</h3>
+                <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="pulseira Tiffany Knot - ouro amarelo com pedra" data-price="380.00" data-image="https://frontrow.com.br/cdn/shop/files/4498364922073c4f781d9463951ce429.jpg?v=1753731948&width=3000">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://tiffany.vtexassets.com/arquivos/ids/168441/bracelete-tiffany-knot-de-duas-voltas-em-ouro-amarelo-68890217_2.jpg?v=638285928526100000"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    alt="Tiffany Knot" onclick="openGallery('acessorio-tiffany-11')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Tiffany Knot</h3>
+                <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="pulseira Tiffany Knot - ouro amarelo" data-price="380.00" data-image="https://tiffany.vtexassets.com/arquivos/ids/168441/bracelete-tiffany-knot-de-duas-voltas-em-ouro-amarelo-68890217_2.jpg?v=638285928526100000">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://tiffany.vtexassets.com/arquivos/ids/168465/bracelete-tiffany-knot-de-duas-voltas-em-ouro-branco-com-diamantes-70300486_2.jpg?v=638285928640630000"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    alt="Tiffany Knot" onclick="openGallery('acessorio-tiffany-12')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Tiffany Knot</h3>
+                <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="pulseira Tiffany Knot - Prata com pedra" data-price="380.00" data-image="https://tiffany.vtexassets.com/arquivos/ids/168465/bracelete-tiffany-knot-de-duas-voltas-em-ouro-branco-com-diamantes-70300486_2.jpg?v=638285928640630000">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://tiffany.vtexassets.com/arquivos/ids/168493/bracelete-tiffany-knot-de-duas-voltas-em-ouro-com-diamantes-69525911_2.jpg?v=639059877770500000"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    alt="Tiffany Knot" onclick="openGallery('acessorio-tiffany-13')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Tiffany Knot</h3>
+                <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="pulseira Tiffany Knot - Rosé com pedra" data-price="380.00" data-image="https://tiffany.vtexassets.com/arquivos/ids/168493/bracelete-tiffany-knot-de-duas-voltas-em-ouro-com-diamantes-69525911_2.jpg?v=639059877770500000">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://tiffany.vtexassets.com/arquivos/ids/168532/bracelete-tiffany-knot-de-duas-voltas-em-ouro-rosa-70152622_2.jpg?v=639059877987600000"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    alt="Tiffany Knot" onclick="openGallery('acessorio-tiffany-14')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Tiffany Knot</h3>
+                <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="pulseira Tiffany Knot - Rosé" data-price="380.00" data-image="https://tiffany.vtexassets.com/arquivos/ids/168532/bracelete-tiffany-knot-de-duas-voltas-em-ouro-rosa-70152622_2.jpg?v=639059877987600000">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://images.tcdn.com.br/img/img_prod/1346020/gargantilha_knot_com_diamantes_em_ouro_18k_2977_1_5d013b4469c391a88335d7f644ff89bf.png"
+                     class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                     alt="Colar Tiffany Laço" onclick="openGallery('acessorio-tiffany-3')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Colar Tiffany Laço</h3>
+                <p class="text-xl font-semibold mb-4">R$ 450,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Colar Tiffany Laço - dourado" data-price="450.00" data-image="https://images.tcdn.com.br/img/img_prod/1346020/gargantilha_knot_com_diamantes_em_ouro_18k_2977_1_5d013b4469c391a88335d7f644ff89bf.png">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://tiffany.vtexassets.com/arquivos/ids/179645/Bracelete-Narrow-em-Ouro-Amarelo-com-Diamantes-74363520_1.jpg?v=638844700307600000"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    alt="Bracelete Tiffany lock" onclick="openGallery('acessorio-tiffany-5')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Bracelete Tiffany Lock</h3>
+                <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Bracelete Tiffany Narrow - Ouro Amarelo com pedras" data-price="380.00" data-image="https://tiffany.vtexassets.com/arquivos/ids/179645/Bracelete-Narrow-em-Ouro-Amarelo-com-Diamantes-74363520_1.jpg?v=638844700307600000">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://tiffany.vtexassets.com/arquivos/ids/174471/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70158205_1.jpg?v=638318772924000000"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    alt="Bracelete Tiffany lock" onclick="openGallery('acessorio-tiffany-6')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Bracelete Tiffany Lock</h3>
+                <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Bracelete Tiffany Narrow - Ouro Amarelo e cravejada em pedras" data-price="380.00" data-image="https://tiffany.vtexassets.com/arquivos/ids/174471/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70158205_1.jpg?v=638318772924000000">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://tiffany.vtexassets.com/arquivos/ids/179655/Bracelete-Narrow-em-Ouro-Branco-com-Diamantes-74363881_1.jpg?v=638844700341500000"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    alt="Bracelete Tiffany lock" onclick="openGallery('acessorio-tiffany-7')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Bracelete Tiffany Lock</h3>
+                <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Bracelete Tiffany Narrow - Prata com pedras" data-price="380.00" data-image="https://tiffany.vtexassets.com/arquivos/ids/179655/Bracelete-Narrow-em-Ouro-Branco-com-Diamantes-74363881_1.jpg?v=638844700341500000">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://tiffany.vtexassets.com/arquivos/ids/168927/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_1.jpg?v=638285930767530000"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    alt="Bracelete Tiffany lock" onclick="openGallery('acessorio-tiffany-8')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Bracelete Tiffany Lock</h3>
+                <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Bracelete Tiffany Narrow - Prata e cravejada em pedras" data-price="380.00" data-image="https://tiffany.vtexassets.com/arquivos/ids/168927/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_1.jpg?v=638285930767530000">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://tiffany.vtexassets.com/arquivos/ids/175755/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_1.jpg?v=638326424659030000"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    alt="Bracelete Tiffany lock" onclick="openGallery('acessorio-tiffany-9')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Bracelete Tiffany Lock</h3>
+                <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Bracelete Tiffany Narrow - Rosé com pedras" data-price="380.00" data-image="https://tiffany.vtexassets.com/arquivos/ids/175755/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_1.jpg?v=638326424659030000">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://tiffany.vtexassets.com/arquivos/ids/169109/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_1.jpg?v=638285931573700000"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    alt="Bracelete Tiffany lock" onclick="openGallery('acessorio-tiffany-10')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Bracelete Tiffany Lock</h3>
+                <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Bracelete Tiffany Narrow - Rosé e cravejada em pedras" data-price="380.00" data-image="https://tiffany.vtexassets.com/arquivos/ids/169109/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_1.jpg?v=638285931573700000">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://tiffany.vtexassets.com/arquivos/ids/155562/bracelete-bone-pequeno-de-elsa-peretti-para-o-pulso-direito-em-prata-de-lei-69860303_1.jpg?v=638224350095870000"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    alt="Tiffany Knot" onclick="openGallery('acessorio-tiffany-4')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Bracelete Tiffany Bone</h3>
+                <p class="text-xl font-semibold mb-4">R$ 550,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Bracelete Tiffany Bone - Prata" data-price="550.00" data-image="https://tiffany.vtexassets.com/arquivos/ids/155562/bracelete-bone-pequeno-de-elsa-peretti-para-o-pulso-direito-em-prata-de-lei-69860303_1.jpg?v=638224350095870000">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://swarovski.vtexassets.com/arquivos/ids/193484-1200-auto?v=637814267934730000&width=1200&height=auto&aspect=true"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    alt="Pulseira Swarovski Una" onclick="openGallery('acessorio-swarovski-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Pulseira Swarovski Una</h3>
+                <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Pulseira Swarovski Una - prata" data-price="380.00" data-image="https://http2.mlstatic.com/D_Q_NP_610320-CBT106843540322_022026-O.webp">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://assets.hermes.com/is/image/hermesproduct/pulseira-clic-h--700001F%208A-worn-1-0-0-800-800_g.jpg"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    alt="Pulseira Hermes" onclick="openGallery('acessorio-hermes-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Pulseira Hermes</h3>
+                <p class="text-xl font-semibold mb-4">R$ 380,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Pulseira Hermes" data-price="380.00" data-image="https://assets.hermes.com/is/image/hermesproduct/pulseira-clic-h--700001F%208A-worn-1-0-0-800-800_g.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/459655.png"
+                     class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                     alt="Pulseira Serpenti Viper" onclick="openGallery('acessorio-bulgari-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Pulseira Serpenti Viper</h3>
+                <p class="text-xl font-semibold mb-4">R$ 550,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Pulseira Serpenti Viper - prata" data-price="550.00" data-image="https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/459655.png">Adicionar ao carrinho</button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-white py-10 text-center border-t border-gray-100">
+        <p class="text-[10px] text-gray-400 uppercase tracking-widest">© 2015 IMPORTS DE LUXO - Todos os direitos reservados</p>
+    </footer>
+
+<!-- MODAL GALERIA -->
+<div id="modalGallery" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
+    <div class="bg-white w-full max-w-5xl mx-4 rounded-lg shadow-2xl overflow-hidden">
+        <!-- Cabeçalho -->
+        <div class="bg-cyan-500 text-white px-6 py-4 flex justify-between items-center">
+            <span class="text-sm uppercase tracking-widest font-bold" id="imageCounter">1 / 3</span>
+            <button onclick="closeGallery()" class="text-2xl hover:text-red-500 transition">✕</button>
+        </div>
+        
+        <!-- Imagem Principal -->
+        <div class="relative bg-white flex items-center justify-center min-h-[70vh]">
+            <img id="mainGalleryImage" src="" class="max-w-full max-h-[70vh] object-contain">
+            
+            <!-- Botões de Navegação -->
+            <button onclick="prevImage()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-12 h-12 rounded-full flex items-center justify-center text-xl transition">
+                ❮
+            </button>
+            <button onclick="nextImage()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-12 h-12 rounded-full flex items-center justify-center text-xl transition">
+                ❯
+            </button>
+        </div>
+        
+        <!-- Thumbnails -->
+        <div class="bg-gray-50 px-6 py-4 flex gap-3 overflow-x-auto justify-center gallery-thumbs-container"></div>
+    </div>
+</div>
+
+<div id="galleryOverlay" class="fixed inset-0 bg-black/70 z-[65] hidden"></div>
+
+    <div id="cartSidebar" style="right:-400px;" class="fixed top-0 w-80 h-full bg-white shadow-2xl transition-all duration-500 z-50 p-6 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold font-serif">Seu Carrinho</h2>
+            <button onclick="toggleCart()" class="text-red-500 font-bold">X</button>
+        </div>
+        <div id="cartItems"></div>
+        <div class="mt-6 border-t pt-4">
+            <p class="text-lg font-bold mb-4">Total: <span id="cartTotal">R$ 0,00</span></p>
+            <button onclick="finalizarCompra()" class="bg-cyan-500 text-white w-full py-3 font-bold hover:bg-cyan-600 transition">Finalizar no WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleCart() {
+            const sidebar = document.getElementById("cartSidebar");
+            const isOpen = sidebar.style.right === "0px";
+            sidebar.style.right = isOpen ? "-400px" : "0px";
+            if (!isOpen) renderCart();
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cartCount").innerText = cart.length;
+        }
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartItems = document.getElementById("cartItems");
+            const cartTotal = document.getElementById("cartTotal");
+            cartItems.innerHTML = "";
+            let total = 0;
+            cart.forEach((product, index) => {
+                total += product.price;
+                cartItems.innerHTML += `
+                    <div class="flex items-center gap-4 mb-4 border-b pb-4">
+                        <img src="${product.image}" class="w-16 h-16 object-cover rounded">
+                        <div class="flex-1">
+                            <h3 class="text-[10px] font-bold uppercase">${product.name}</h3>
+                            <p class="text-sm font-semibold">${product.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+                        </div>
+                        <button onclick="removeItem(${index})" class="text-red-500 text-xs">Remover</button>
+                    </div>`;
+            });
+            cartTotal.innerText = total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+        }
+
+        function finalizarCompra() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        if (cart.length === 0) return alert("Seu carrinho está vazio!");
+
+        let total = 0;
+
+        // frase singular ou plural
+        let mensagem = cart.length === 1
+        ? "Olá! Gostaria de saber mais sobre este produto:\n\n"
+        : "Olá! Gostaria de saber mais sobre estes produtos:\n\n";
+
+        cart.forEach(item => {
+        mensagem += `- ${item.name} (R$ ${item.price.toFixed(2)})\n`;
+        total += item.price;
+    });
+
+    mensagem += `\n*Total: R$ ${total.toFixed(2)}*\n\n`;
+    mensagem += "Poderia me informar o prazo de entrega e as formas de pagamento?";
+
+        window.open(`https://wa.me/5544998214237?text=${encodeURIComponent(mensagem)}`, '_blank');
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            updateCartCount();
+            const buttons = document.querySelectorAll(".add-cart");
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const name = this.getAttribute("data-name");
+                    const price = parseFloat(this.getAttribute("data-price"));
+                    const image = this.getAttribute("data-image");
+                    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    cart.push({ name, price, image });
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    updateCartCount();
+                    toggleCart();
+                });
+            });
+        });
+
+        // GALERIA MODAL DE FOTOS
+        let currentImageIndex = 0;
+        let currentGallery = [];
+
+        // Dados das galerias de acessórios
+        const productGalleries = {
+            'acessorio-cartier-1': [
+                'https://cartier.vtexassets.com/arquivos/ids/211109/B6067517_2.png?v=638956120448730000',
+                'https://cartier.vtexassets.com/arquivos/ids/211058-1200-auto?v=637871166780400000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/211160-1200-auto?v=638956120448730000&width=1200&height=auto&aspect=true'
+            ],
+            'acessorio-cartier-2': [
+                'https://cartier.vtexassets.com/arquivos/ids/199718-1200-auto?v=637269792238100000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/200464-1200-auto?v=638841429044270000&width=1200&height=auto&aspect=true'
+            ],
+            'acessorio-tiffany-1': [
+                'https://tiffany.vtexassets.com/arquivos/ids/185691-1200-1200/pulseira-de-elos-medios-em-ouro-amarelo-com-diamantes-70751216_1.jpg?v=638969301659900000',
+                'https://tiffany.vtexassets.com/arquivos/ids/187078-1200-1200/pulseira-de-elos-medios-em-ouro-amarelo-com-diamantes-70751216_5.jpg?v=639059925871670000',
+                'https://tiffany.vtexassets.com/arquivos/ids/187270-1200-1200/pulseira-de-elos-medios-em-ouro-amarelo-com-diamantes-70751216_6.jpg?v=639059925871800000',
+                'https://tiffany.vtexassets.com/arquivos/ids/186107-1200-1200/pulseira-de-elos-medios-em-ouro-amarelo-com-diamantes-70751216_2.jpg?v=639059925871670000'
+            ],
+            'acessorio-tiffany-2': [
+                'https://press.tiffany.com/wp-content/uploads/69525881_BLT_H23_v1_TM_092023_RGB_ALT_4x5-1.jpg',
+                'https://frontrow.com.br/cdn/shop/files/4498364922073c4f781d9463951ce429.jpg?v=1753731948&width=3000',
+                'https://frontrow.com.br/cdn/shop/files/a7d0c3ac7198257160c52ecbc039cd35.jpg?v=1753731948&width=3000',
+                'https://frontrow.com.br/cdn/shop/files/082fadf47ec4b3fe2d3292a3e1dcfced.jpg?v=1753731948&width=3000'
+            ],
+            'acessorio-tiffany-3': [
+                'https://images.tcdn.com.br/img/img_prod/1346020/gargantilha_knot_com_diamantes_em_ouro_18k_2977_1_5d013b4469c391a88335d7f644ff89bf.png',
+                'https://media.tiffany.com/is/image/tco/68887216_PDT_ALT3X1?hei=615&wid=615&fmt=webp',
+                'https://media.tiffany.com/is/image/tco/68887216_PDT_ALT3X2?hei=615&wid=615&fmt=webp',
+            ],
+            'acessorio-tiffany-4': [
+                'https://tiffany.vtexassets.com/arquivos/ids/155562/bracelete-bone-pequeno-de-elsa-peretti-para-o-pulso-direito-em-prata-de-lei-69860303_1.jpg?v=638224350095870000',
+                'https://tiffany.vtexassets.com/arquivos/ids/156073/bracelete-bone-pequeno-de-elsa-peretti-para-o-pulso-direito-em-prata-de-lei-69860303_2.jpg?v=638224352233230000',
+                'https://tiffany.vtexassets.com/arquivos/ids/156573/bracelete-bone-pequeno-de-elsa-peretti-para-o-pulso-direito-em-prata-de-lei-69860303_3.jpg?v=638224354431130000',
+                'https://tiffany.vtexassets.com/arquivos/ids/157033/bracelete-bone-pequeno-de-elsa-peretti-para-o-pulso-direito-em-prata-de-lei-69860303_4.jpg?v=638224356465400000',
+                'https://tiffany.vtexassets.com/arquivos/ids/157430/bracelete-bone-pequeno-de-elsa-peretti-para-o-pulso-direito-em-prata-de-lei-69860303_5.jpg?v=638224358264370000'
+            ],
+            'acessorio-tiffany-5': [
+                'https://tiffany.vtexassets.com/arquivos/ids/179645/Bracelete-Narrow-em-Ouro-Amarelo-com-Diamantes-74363520_1.jpg?v=638844700307600000',
+                'https://tiffany.vtexassets.com/arquivos/ids/182219/Bracelete-Narrow-em-Ouro-Amarelo-com-Diamantes-74363520_4.jpg?v=638900251688030000',
+                'https://tiffany.vtexassets.com/arquivos/ids/182971/Bracelete-Narrow-em-Ouro-Amarelo-com-Diamantes-74363520_5.jpg?v=638900251688170000',
+                'https://tiffany.vtexassets.com/arquivos/ids/183549/Bracelete-Narrow-em-Ouro-Amarelo-com-Diamantes-74363520_6.jpg?v=638900251688170000',
+                'https://tiffany.vtexassets.com/arquivos/ids/183773/Bracelete-Narrow-em-Ouro-Amarelo-com-Diamantes-74363520_7.jpg?v=638900251688170000',
+                'https://tiffany.vtexassets.com/arquivos/ids/180519/Bracelete-Narrow-em-Ouro-Amarelo-com-Diamantes-74363520_2.jpg?v=638900251688030000'
+            ],
+            'acessorio-tiffany-6': [
+                'https://tiffany.vtexassets.com/arquivos/ids/174471/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70158205_1.jpg?v=638318772924000000',
+                'https://tiffany.vtexassets.com/arquivos/ids/174473/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70877759_2.jpg?v=638303946556400000',
+                'https://tiffany.vtexassets.com/arquivos/ids/174474/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70877759_3.jpg?v=638303946748600000',
+                'https://tiffany.vtexassets.com/arquivos/ids/174475/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70877759_4.jpg?v=638303946935000000',
+                'https://tiffany.vtexassets.com/arquivos/ids/174476/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70877759_5.jpg?v=638303947113070000',
+                'https://tiffany.vtexassets.com/arquivos/ids/174477/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70877759_6.jpg?v=638303947295470000',
+                'https://tiffany.vtexassets.com/arquivos/ids/174478/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70877759_7.jpg?v=638303947483130000'
+            ],
+            'acessorio-tiffany-7': [
+                'https://tiffany.vtexassets.com/arquivos/ids/179655/Bracelete-Narrow-em-Ouro-Branco-com-Diamantes-74363881_1.jpg?v=638844700341500000',
+                'https://tiffany.vtexassets.com/arquivos/ids/182229/Bracelete-Narrow-em-Ouro-Branco-com-Diamantes-74363881_4.jpg?v=638844712786000000',
+                'https://tiffany.vtexassets.com/arquivos/ids/182981/Bracelete-Narrow-em-Ouro-Branco-com-Diamantes-74363881_5.jpg?v=638844716298130000',
+                'https://tiffany.vtexassets.com/arquivos/ids/183559/Bracelete-Narrow-em-Ouro-Branco-com-Diamantes-74363881_6.jpg?v=638844719282470000',
+                'https://tiffany.vtexassets.com/arquivos/ids/183783/Bracelete-Narrow-em-Ouro-Branco-com-Diamantes-74363881_7.jpg?v=638844720761370000',
+                'https://tiffany.vtexassets.com/arquivos/ids/180529/Bracelete-Narrow-em-Ouro-Branco-com-Diamantes-74363881_2.jpg?v=638844704589470000'
+            ],
+            'acessorio-tiffany-8': [
+                'https://tiffany.vtexassets.com/arquivos/ids/168927/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_1.jpg?v=638285930767530000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168928/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_2.jpg?v=638285930770800000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168929/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_3.jpg?v=638285930774230000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168930/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_4.jpg?v=6382859307808000000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168931/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_5.jpg?v=638285930784300000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168932/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_6.jpg?v=638285930788170000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168933/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_7.jpg?v=638285930792900000'
+            ],
+            'acessorio-tiffany-9': [
+                'https://tiffany.vtexassets.com/arquivos/ids/175755/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_1.jpg?v=638326424659030000',
+                'https://tiffany.vtexassets.com/arquivos/ids/175756/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_2.jpg?v=638326424669700000',
+                'https://tiffany.vtexassets.com/arquivos/ids/175757/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_3.jpg?v=638326424677270000',
+                'https://tiffany.vtexassets.com/arquivos/ids/175758/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_4.jpg?v=638326424688200000',
+                'https://tiffany.vtexassets.com/arquivos/ids/175759/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_5.jpg?v=638326424698100000',
+                'https://tiffany.vtexassets.com/arquivos/ids/175760/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_6.jpg?v=638326424713930000',
+                'https://tiffany.vtexassets.com/arquivos/ids/175761/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_7.jpg?v=638326424720800000'
+            ],
+            'acessorio-tiffany-10': [
+                'https://tiffany.vtexassets.com/arquivos/ids/169109/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_1.jpg?v=638285931573700000',
+                'https://tiffany.vtexassets.com/arquivos/ids/169110/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_2.jpg?v=638285931577300000',
+                'https://tiffany.vtexassets.com/arquivos/ids/169111/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_3.jpg?v=638285931584830000',
+                'https://tiffany.vtexassets.com/arquivos/ids/169112/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_4.jpg?v=638285931588630000',
+                'https://tiffany.vtexassets.com/arquivos/ids/169113/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_5.jpg?v=638285931592400000',
+                'https://tiffany.vtexassets.com/arquivos/ids/169114/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_6.jpg?v=638285931595870000',
+                'https://tiffany.vtexassets.com/arquivos/ids/169115/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_7.jpg?v=638285931599930000'
+            ],
+            'acessorio-tiffany-11': [
+                'https://tiffany.vtexassets.com/arquivos/ids/168441/bracelete-tiffany-knot-de-duas-voltas-em-ouro-amarelo-68890217_2.jpg?v=638285928526100000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168440/bracelete-tiffany-knot-de-duas-voltas-em-ouro-amarelo-68890217_1.jpg?v=638285928522330000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168442/bracelete-tiffany-knot-de-duas-voltas-em-ouro-amarelo-68890217_3.jpg?v=638285928529700000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168443/bracelete-tiffany-knot-de-duas-voltas-em-ouro-amarelo-68890217_4.jpg?v=638285928535000000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168444/bracelete-tiffany-knot-de-duas-voltas-em-ouro-amarelo-68890217_5.jpg?v=638285928538770000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168445/bracelete-tiffany-knot-de-duas-voltas-em-ouro-amarelo-68890217_6.jpg?v=638285928542970000'
+            ],
+            'acessorio-tiffany-12': [
+                'https://tiffany.vtexassets.com/arquivos/ids/168465/bracelete-tiffany-knot-de-duas-voltas-em-ouro-branco-com-diamantes-70300486_2.jpg?v=638285928640630000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168464/bracelete-tiffany-knot-de-duas-voltas-em-ouro-branco-com-diamantes-70300486_1.jpg?v=638285928635930000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168466/bracelete-tiffany-knot-de-duas-voltas-em-ouro-branco-com-diamantes-70300486_3.jpg?v=638285928645400000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168467/bracelete-tiffany-knot-de-duas-voltas-em-ouro-branco-com-diamantes-70300486_4.jpg?v=638285928649300000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168468/bracelete-tiffany-knot-de-duas-voltas-em-ouro-branco-com-diamantes-70300486_5.jpg?v=638285928653500000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168469/bracelete-tiffany-knot-de-duas-voltas-em-ouro-branco-com-diamantes-70300486_6.jpg?v=638285928658500000'
+            ],
+            'acessorio-tiffany-13': [
+                'https://tiffany.vtexassets.com/arquivos/ids/168493/bracelete-tiffany-knot-de-duas-voltas-em-ouro-com-diamantes-69525911_2.jpg?v=639059877770500000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168492/bracelete-tiffany-knot-de-duas-voltas-em-ouro-com-diamantes-69525911_1.jpg?v=638285928754030000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168495/bracelete-tiffany-knot-de-duas-voltas-em-ouro-com-diamantes-69525911_4.jpg?v=639059877770670000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168496/bracelete-tiffany-knot-de-duas-voltas-em-ouro-com-diamantes-69525911_5.jpg?v=639059877770670000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168498/bracelete-tiffany-knot-de-duas-voltas-em-ouro-com-diamantes-69525911_7.jpg?v=639059877770670000'
+            ],
+            'acessorio-tiffany-14': [
+                'https://tiffany.vtexassets.com/arquivos/ids/168532/bracelete-tiffany-knot-de-duas-voltas-em-ouro-rosa-70152622_2.jpg?v=639059877987600000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168531/bracelete-tiffany-knot-de-duas-voltas-em-ouro-rosa-70152622_1.jpg?v=638285928922770000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168533/bracelete-tiffany-knot-de-duas-voltas-em-ouro-rosa-70152622_3.jpg?v=639059877987600000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168534/bracelete-tiffany-knot-de-duas-voltas-em-ouro-rosa-70152622_4.jpg?v=639059877987770000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168535/bracelete-tiffany-knot-de-duas-voltas-em-ouro-rosa-70152622_5.jpg?v=639059877987770000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168536/bracelete-tiffany-knot-de-duas-voltas-em-ouro-rosa-70152622_6.jpg?v=639059877987770000'
+            ],
+            'acessorio-swarovski-1': [
+                'https://http2.mlstatic.com/D_Q_NP_610320-CBT106843540322_022026-O.webp',
+                'https://cdn-images.farfetch-contents.com/31/84/11/76/31841176_62189544_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/31/84/11/76/31841176_62257607_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/31/84/11/76/31841176_62189506_1000.jpg',
+                'https://swarovski.vtexassets.com/arquivos/ids/193720-1200-auto?v=639080743856400000&width=1200&height=auto&aspect=true'
+            ],
+            'acessorio-hermes-1': [
+                'https://assets.hermes.com/is/image/hermesproduct/pulseira-clic-h--700001F%208A-worn-1-0-0-800-800_g.jpg',
+                'https://assets.voila.id/voila/images/product/hermes/2product-H700001F-1ZPM-Xms-2023-03-29T1237540700.jpeg',
+                'https://assets.hermes.com/is/image/hermesproduct/pulseira-clic-h--700001F%2001-front-wm-1-0-0-800-800_g.jpg',
+                'https://dptafza4tn3d0.cloudfront.net/cache/catalog/10252/6-750x937.jpg',
+                'https://assets.hermes.com/is/image/hermesproduct/pulseira-clic-h--700001FP01-front-wm-1-0-0-1000-1000_g.jpg',
+                'https://cdn.shopify.com/s/files/1/0557/3299/4112/files/bracelet-clic-h--700001FP31-worn-1-0-0-1600-1600-q99_g_2048x2048.heic?v=1708896619',
+                'https://assets.hermes.com/is/image/hermesproduct/pulseira-clic-h--700001FP8A-front-wm-1-0-0-800-800_g.jpg',
+                'https://assets.hermes.com/is/image/hermesproduct/pulseira-clic-h--700001FP1Z-front-wm-1-0-0-800-800_g.jpg'
+            ],
+            'acessorio-bulgari-1': [
+                'https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/459655.png',
+                'https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/459656.png',
+                'https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/459658.png'
+            ]
+        };
+
+        function openGallery(galleryId) {
+            if (productGalleries[galleryId]) {
+                currentGallery = productGalleries[galleryId];
+                currentImageIndex = 0;
+                
+                // Gera thumbnails dinamicamente
+                const thumbContainer = document.querySelector(".gallery-thumbs-container");
+                thumbContainer.innerHTML = '';
+                currentGallery.forEach((image, index) => {
+                    const thumb = document.createElement('img');
+                    thumb.className = 'gallery-thumb w-20 h-20 object-cover cursor-pointer border-2 border-gray-200 hover:border-cyan-500 transition';
+                    thumb.src = image;
+                    thumb.onclick = () => {
+                        currentImageIndex = index;
+                        updateGalleryImage();
+                    };
+                    thumbContainer.appendChild(thumb);
+                });
+                
+                document.getElementById("modalGallery").classList.remove("hidden");
+                document.getElementById("galleryOverlay").classList.remove("hidden");
+                updateGalleryImage();
+            }
+        }
+
+        function closeGallery() {
+            document.getElementById("modalGallery").classList.add("hidden");
+            document.getElementById("galleryOverlay").classList.add("hidden");
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % currentGallery.length;
+            updateGalleryImage();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + currentGallery.length) % currentGallery.length;
+            updateGalleryImage();
+        }
+
+        function toggleMobileMenu() {
+        const mobileNav = document.getElementById("mobileNav");
+        mobileNav.classList.toggle("hidden");
+        }
+
+        function updateGalleryImage() {
+            document.getElementById("mainGalleryImage").src = currentGallery[currentImageIndex];
+            document.getElementById("imageCounter").textContent = `${currentImageIndex + 1} / ${currentGallery.length}`;
+            
+            // Atualiza estilos dos thumbnails
+            document.querySelectorAll(".gallery-thumb").forEach((thumb, index) => {
+                thumb.classList.toggle("border-cyan-500", index === currentImageIndex);
+                thumb.classList.toggle("border-gray-200", index !== currentImageIndex);
+            });
+        }
+
+        // Fechar ao clicar no overlay
+        document.addEventListener("DOMContentLoaded", function() {
+            const overlay = document.getElementById("galleryOverlay");
+            if (overlay) {
+                overlay.addEventListener("click", closeGallery);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relógios Exclusivos | Imports de Luxo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-luxo: #FDFCFB;
+            --gold: #00CED1;
+            --black-soft: #1A1A1A;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-luxo); color: var(--black-soft); }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        .btn-gold { background-color: var(--gold); transition: all 0.4s ease; }
+        .btn-gold:hover { background-color: #008B8B; transform: scale(1.02); }
+    </style>
+</head>
+<body class="antialiased text-gray-900 pt-32">
+
+    <div class="fixed top-0 left-0 w-full z-50 bg-black text-white text-[10px] uppercase tracking-[0.3em] py-2 text-center">
+        Alta Relojoaria | acabamento premium
+    </div>
+
+    <header class="fixed top-8 left-0 w-full z-50 bg-white py-6 px-6 md:px-20 flex items-center justify-between border-b border-gray-100 shadow-sm">
+        <div class="text-2xl md:text-3xl font-serif font-bold tracking-tight">
+            <a href="index.html">IMPORTS <span class="italic font-light">de Luxo</span></a>
+        </div>
+
+        <!-- MOBILE MENU BUTTON -->
+        <button id="mobileMenuButton" onclick="toggleMobileMenu()" class="lg:hidden text-2xl p-2 text-gray-700 hover:text-cyan-500 transition" aria-label="Abrir menu">
+            ☰
+        </button>
+
+        <nav class="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center space-x-8 text-[13px] uppercase tracking-widest font-semibold">
+    <a href="index.html" class="hover:text-cyan-500 transition">Início</a>
+    <a href="bolsas.html" class="hover:text-cyan-500 transition">Bolsas</a>
+    <a href="relogios.html" class="hover:text-cyan-500 transition">Relógios</a>
+    <a href="oculos.html" class="hover:text-cyan-500 transition">Óculos</a>
+    <a href="calcados.html" class="hover:text-cyan-500 transition">Calçados</a>
+    <a href="acessorios.html" class="hover:text-cyan-500 transition">Acessórios</a>
+    <a href="cintos.html" class="hover:text-cyan-500 transition">Cintos</a>
+</nav>
+
+        <div class="flex items-center space-x-6 text-xl">
+            <button onclick="toggleCart()" class="relative hover:text-cyan-500 transition">
+                🛒
+                <span id="cartCount" class="absolute -top-2 -right-2 bg-cyan-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+            </button>
+        </div>
+    </header>
+
+        <div id="mobileNav" class="hidden fixed top-[110px] left-0 w-full bg-white z-40 border-b border-gray-100 md:hidden">
+    <nav class="flex flex-col p-6 space-y-4 text-[13px] uppercase tracking-[0.2em] font-bold">
+        <a href="index.html" class="hover:text-cyan-500 transition">Início</a>
+        
+        <a href="bolsas.html" class="hover:text-cyan-500 transition">Bolsas</a>
+        <a href="oculos.html" class="hover:text-cyan-500 transition">Óculos</a>
+        <a href="calcados.html" class="hover:text-cyan-500 transition">Calçados</a>
+        <a href="acessorios.html" class="hover:text-cyan-500 transition">Acessórios</a>
+        <a href="cintos.html" class="hover:text-cyan-500 transition">Cintos</a>
+    </nav>
+</div>
+
+    <section class="py-16 text-center bg-white border-b">
+        <h1 class="text-4xl md:text-6xl font-serif mb-4">Relógios</h1>
+        <p class="text-gray-500 uppercase tracking-widest text-xs">Precisão e Status em cada segundo</p>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-0 py-8"> 
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 md:gap-8">
+            
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cartier.vtexassets.com/arquivos/ids/184584/W4PN0007_1.jpg?v=636972722014970000" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Relógio Cartier" onclick="openGallery('relogio-cartier-panthe-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cartier Panthère</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Relógio Cartier Panthère - Aço com pedra" data-price="1590.00" data-image="https://cartier.vtexassets.com/arquivos/ids/184584/W4PN0007_1.jpg?v=636972722014970000">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cartier.vtexassets.com/arquivos/ids/244048-1200-auto?v=638842220855000000&width=1200&height=auto&aspect=true" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Relógio Cartier" onclick="openGallery('relogio-cartier-panthe-2')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cartier Panthère</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Relógio Cartier Panthère - Dourado" data-price="1590.00" data-image="https://cartier.vtexassets.com/arquivos/ids/244048-1200-auto?v=638842220855000000&width=1200&height=auto&aspect=true">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cartier.vtexassets.com/arquivos/ids/244043-1200-auto?v=638842220827470000&width=1200&height=auto&aspect=true" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Relógio Cartier" onclick="openGallery('relogio-cartier-panthe-3')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cartier Panthère</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Relógio Cartier Panthère -Aço prata e Dourado" data-price="1590.00" data-image="https://cartier.vtexassets.com/arquivos/ids/244043-1200-auto?v=638842220827470000&width=1200&height=auto&aspect=true">Adicionar ao carrinho</button>
+            </div>
+
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cartier.vtexassets.com/arquivos/ids/209273-1200-auto?v=637629229625000000&width=1200&height=auto&aspect=true" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Relógio Cartier Ballon prata" onclick="openGallery('relogio-cartier-ballon-prata')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cartier Ballon Bleu prata</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Relógio Cartier Ballon Bleu aço" data-price="1590.00" data-image="https://cartier.vtexassets.com/arquivos/ids/209273-1200-auto?v=637629229625000000&width=1200&height=auto&aspect=true">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cartier.vtexassets.com/arquivos/ids/184684/W69005Z2_1.jpg?v=636972723987500000" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Cartier Ballon Bleu dourado" onclick="openGallery('relogio-cartier-ballon-dourado')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cartier Ballon Bleu dourado</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Relógio Ballon Bleu dourado" data-price="1590.00" data-image="https://cartier.vtexassets.com/arquivos/ids/184684/W69005Z2_1.jpg?v=636972723987500000">Adicionar ao carrinho</button>
+            </div>
+
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cartier.vtexassets.com/arquivos/ids/242392-1200-auto?v=638762821313830000&width=1200&height=auto&aspect=true" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Cartier Baignoire" onclick="openGallery('relogio-cartier-baignoire')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cartier Baignoire</h3>
+                <p class="text-xl font-semibold mb-4">R$ 999,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Relógio Baignoire - dourado" data-price="999.00" data-image="https://cartier.vtexassets.com/arquivos/ids/242392-1200-auto?v=638762821313830000&width=1200&height=auto&aspect=true">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/1447968.png" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Relógio Bvlgari" onclick="openGallery('relogio-bulgari-serpenti')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Bvlgari Serpenti</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.790,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Relógio Bvlgari Serpenti - dourado e aço" data-price="1790.00" data-image="https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/1447968.png">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/484784.png" class="w-full h-40 md:h-64 object-cover mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Bvlgari Serpenti Seduttori" onclick="openGallery('relogio-bulgari-seductori')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Bvlgari Serpenti Seduttori</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Bvlgari Serpenti Seduttori - dourado com pedra" data-price="1590.00" data-image="https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/484784.png">Adicionar ao carrinho</button>
+            </div>
+
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1200/v1/catalogue/2025/upright-c/m128399tbr-0029" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Rolex Lady-Datejust prata e rose" onclick="openGallery('relogio-rolex-lady-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Rolex Lady-Datejust</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Rolex Lady-Datejust aço e rosé" data-price="1590.00" data-image="https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1200/v1/catalogue/2025/upright-c/m128399tbr-0029">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1200/v1/catalogue/2025/upright-c/m278383rbr-0029" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Rolex Lady-Datejust prata e rose" onclick="openGallery('relogio-rolex-lady-2')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Rolex Lady-Datejust</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Rolex Lady-Datejust - aço prata com dourado e pedras com fundo verde" data-price="1590.00" data-image="https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1200/v1/catalogue/2025/upright-c/m278383rbr-0029">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1920/v1/catalogue/2025/upright-c/m279173-0011.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Relógio Rolex" onclick="openGallery('relogio-rolex-lady-11')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Rolex Lady-Datejust</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Rolex Lady-Datejust - aço e rosé" data-price="1590.00" data-image="https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1920/v1/catalogue/2025/upright-c/m279173-0011.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1200/v1/catalogue/2025/upright-c/m279175-0009" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Relógio Rolex" onclick="openGallery('relogio-rolex-lady-12')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Rolex Lady-Datejust</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Rolex Lady-Datejust - bronze e fundo verde" data-price="1590.00" data-image="https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1200/v1/catalogue/2025/upright-c/m279175-0009">Adicionar ao carrinho</button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-white py-10 text-center border-t border-gray-100">
+        <p class="text-[10px] text-gray-400 uppercase tracking-widest">© 2015 IMPORTS DE LUXO - Todos os direitos reservados</p>
+    </footer>
+
+        <div id="cartSidebar" style="right:-400px;" class="fixed top-0 w-80 h-full bg-white shadow-2xl transition-all duration-500 z-50 p-6 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold font-serif">Seu Carrinho</h2>
+            <button onclick="toggleCart()" class="text-red-500 font-bold">X</button>
+        </div>
+        <div id="cartItems"></div>
+        <div class="mt-6 border-t pt-4">
+            <p class="text-lg font-bold mb-4">Total: <span id="cartTotal">R$ 0,00</span></p>
+            <button onclick="finalizarCompra()" class="bg-cyan-500 text-white w-full py-3 font-bold hover:bg-cyan-600 transition">Finalizar no WhatsApp</button>
+        </div>
+    </div>
+
+<!-- MODAL GALERIA -->
+<div id="modalGallery" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
+    <div class="bg-white w-full max-w-5xl mx-4 rounded-lg shadow-2xl overflow-hidden">
+        <!-- Cabeçalho -->
+        <div class="bg-cyan-500 text-white px-6 py-4 flex justify-between items-center">
+            <span class="text-sm uppercase tracking-widest font-bold" id="imageCounter">1 / 3</span>
+            <button onclick="closeGallery()" class="text-2xl hover:text-red-500 transition">✕</button>
+        </div>
+        
+        <!-- Imagem Principal -->
+        <div class="relative bg-white flex items-center justify-center min-h-[70vh]">
+            <img id="mainGalleryImage" src="" class="max-w-full max-h-[70vh] object-contain">
+            
+            <!-- Botões de Navegação -->
+            <button onclick="prevImage()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-12 h-12 rounded-full flex items-center justify-center text-xl transition">
+                ❮
+            </button>
+            <button onclick="nextImage()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-12 h-12 rounded-full flex items-center justify-center text-xl transition">
+                ❯
+            </button>
+        </div>
+        
+        <!-- Thumbnails -->
+        <div class="bg-gray-50 px-6 py-4 flex gap-3 overflow-x-auto justify-center gallery-thumbs-container">
+        </div>
+    </div>
+</div>
+
+<div id="galleryOverlay" class="fixed inset-0 bg-black/70 z-[65] hidden"></div>
+
+<script>
+        function toggleCart() {
+            const sidebar = document.getElementById("cartSidebar");
+            const isOpen = sidebar.style.right === "0px";
+            sidebar.style.right = isOpen ? "-400px" : "0px";
+            if (!isOpen) renderCart();
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cartCount").innerText = cart.length;
+        }
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartItems = document.getElementById("cartItems");
+            const cartTotal = document.getElementById("cartTotal");
+            cartItems.innerHTML = "";
+            let total = 0;
+
+            cart.forEach((product, index) => {
+                total += product.price;
+                cartItems.innerHTML += `
+                    <div class="flex items-center gap-4 mb-4 border-b pb-4">
+                        <img src="${product.image}" class="w-16 h-16 object-cover rounded">
+                        <div class="flex-1">
+                            <h3 class="text-[10px] font-bold uppercase">${product.name}</h3>
+                            <p class="text-sm font-semibold">${product.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+                        </div>
+                        <button onclick="removeItem(${index})" class="text-red-500 text-xs">Remover</button>
+                    </div>`;
+            });
+            cartTotal.innerText = total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+        }
+
+        function finalizarCompra() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        if (cart.length === 0) return alert("Seu carrinho está vazio!");
+
+        let total = 0;
+
+        // frase singular ou plural
+        let mensagem = cart.length === 1
+        ? "Olá! Gostaria de saber mais sobre este produto:\n\n"
+        : "Olá! Gostaria de saber mais sobre estes produtos:\n\n";
+
+        cart.forEach(item => {
+        mensagem += `- ${item.name} (R$ ${item.price.toFixed(2)})\n`;
+        total += item.price;
+    });
+        mensagem += `\n*Total: R$ ${total.toFixed(2)}*\n\n`;
+        mensagem += "Poderia me informar o prazo de entrega e as formas de pagamento?";
+
+        window.open(`https://wa.me/5544998214237?text=${encodeURIComponent(mensagem)}`, '_blank');
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            updateCartCount();
+            const buttons = document.querySelectorAll(".add-cart");
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const name = this.getAttribute("data-name");
+                    const price = parseFloat(this.getAttribute("data-price"));
+                    const image = this.getAttribute("data-image");
+                    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    cart.push({ name, price, image });
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    updateCartCount();
+                    toggleCart();
+                });
+            });
+        });
+
+        // GALERIA MODAL DE FOTOS
+        let currentImageIndex = 0;
+        let currentGallery = [];
+
+        // Dados das galerias apenas para produtos de relógios
+        const productGalleries = {
+            'relogio-cartier-panthe-1': [
+                'https://cartier.vtexassets.com/arquivos/ids/184584/W4PN0007_1.jpg?v=636972722014970000',
+                'https://cartier.vtexassets.com/arquivos/ids/242366-1200-auto?v=638762830400600000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242367-1200-auto?v=638762830400600000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242368-1200-auto?v=638762830400600000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/184585-1200-auto?v=636972722038270000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/184586-1200-auto?v=636972722053300000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242370-1200-auto?v=638762830400600000&width=1200&height=auto&aspect=true'
+            ],
+            'relogio-cartier-panthe-2': [
+                'https://cartier.vtexassets.com/arquivos/ids/244048-1200-auto?v=638842220855000000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/237204-1200-auto?v=638621984817530000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/237205-1200-auto?v=638621984822200000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/237206-1200-auto?v=638621984828300000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/237207-1200-auto?v=638621984834300000&width=1200&height=auto&aspect=true'
+            ],
+            'relogio-cartier-panthe-3': [
+                'https://cartier.vtexassets.com/arquivos/ids/244043-1200-auto?v=638842220827470000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/243754-1200-auto?v=638803385357730000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/243755-1200-auto?v=638803385357730000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/243756-1200-auto?v=638803385357730000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/243758-1200-auto?v=638803385357730000&width=1200&height=auto&aspect=true'
+            ],
+            'relogio-cartier-ballon-prata': [
+                'https://cartier.vtexassets.com/arquivos/ids/209273-1200-auto?v=637629229625000000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242561-1200-auto?v=638762828310670000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242562-1200-auto?v=638762828310670000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242564-1200-auto?v=638762828310670000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/209274-1200-auto?v=639017507818170000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/209275-1200-auto?v=639017507818170000&width=1200&height=auto&aspect=true'
+            ],
+            'relogio-cartier-ballon-dourado': [
+                'https://cartier.vtexassets.com/arquivos/ids/184684/W69005Z2_1.jpg?v=636972723987500000',
+                'https://www.cartier.com/dw/image/v2/BGTJ_PRD/on/demandware.static/-/Sites-cartier-master/default/dw0766440d/images/large/ac2f8fd318a95928b925f57f8d164de0.png?sw=750&sh=750&sm=fit&sfrm=png',
+                'https://www.cartier.com/dw/image/v2/BGTJ_PRD/on/demandware.static/-/Sites-cartier-master/default/dwe359af11/images/large/27b668258d8658daa0a7a3a9dc0f2021.png?sw=750&sh=750&sm=fit&sfrm=png',
+                'https://www.cartier.com/dw/image/v2/BGTJ_PRD/on/demandware.static/-/Sites-cartier-master/default/dw11e4683d/images/large/75f9f87adcaf5edfbedb91f81890104a.png?sw=750&sh=750&sm=fit&sfrm=png',
+                'https://www.cartier.com/dw/image/v2/BGTJ_PRD/on/demandware.static/-/Sites-cartier-master/default/dwf4dd257a/images/large/dbec8708dc6152eb910c5afba372fd31.png?sw=750&sh=750&sm=fit&sfrm=png',
+                'https://www.cartier.com/dw/image/v2/BGTJ_PRD/on/demandware.static/-/Sites-cartier-master/default/dw481f3b8b/images/large/5c1fab85f3435b71b78f30f00265254d.png?sw=750&sh=750&sm=fit&sfrm=png',
+                'https://www.cartier.com/dw/image/v2/BGTJ_PRD/on/demandware.static/-/Sites-cartier-master/default/dw5832a38a/images/large/59de99e3c56c54a1a6165edfd21381ed.png?sw=750&sh=750&sm=fit&sfrm=png'
+            ],
+            'relogio-cartier-baignoire': [
+                'https://lh3.googleusercontent.com/pw/AP1GczMLCtMxrfU2e-hkn1gDKVeoice-MeR9Tkw1-5RDRlaX5BDk0u-YpcSEjHeNQ0boxKpYjET8-gy3wqtpJ8OAw13HaSHdwSidXk738o7RtGozCMtER23GvJA-hV4KZO6hsNhyjM2VDd9UYnGIQadiz9l9Ww=w554-h554-s-no-gm?authuser=0',
+                'https://cartier.vtexassets.com/arquivos/ids/242393-1200-auto?v=638762832579400000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242394-1200-auto?v=638762832579400000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242395-1200-auto?v=638762832579400000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242394-1200-auto?v=638762832579400000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242397-1200-auto?v=638762832579400000&width=1200&height=auto&aspect=true'
+            ],
+            'relogio-bulgari-serpenti': [
+                'https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/1447968.png',
+                'https://media.bulgari.com/image/upload/c_pad,h_1124,w_1440/q_auto/f_auto/1447967.png',
+                'https://media.bulgari.com/image/upload/c_fill,h_1635,w_1090/q_auto/f_auto/1390539.png'
+            ],
+            'relogio-bulgari-seductori': [
+                'https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/484784.png',
+                'https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/1542872.png',
+                'https://media.bulgari.com/image/upload/c_fill,h_1635,w_1090/q_auto/f_auto/1475391.png'
+            ],
+            'relogio-rolex-lady-1': [
+                'https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1200/v1/catalogue/2025/upright-c/m128399tbr-0029',
+                'https://montecristo.com.br/cdn/shop/files/04_67f96baf-031a-4860-8c68-c8c5d155c8e2.webp?v=1756833651',
+                'https://montecristo.com.br/cdn/shop/files/02_e6ee5d16-8445-4be5-a22d-f26e3a7ee105.webp?v=1756833652'
+            ],
+            'relogio-rolex-lady-2': [
+                'https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1200/v1/catalogue/2025/upright-c/m278383rbr-0029',
+                'https://images.hbjo-online.com/images/rolex/v7/model_gallery_assets_landscape/Slide4_landscape/m278383rbr-0029.webp',
+                'https://images.hbjo-online.com/images/rolex/v7/model_gallery_assets_landscape/Slide2_landscape/m278383rbr-0029.webp'
+            ],
+            'relogio-rolex-lady-11': [
+                'https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1920/v1/catalogue/2025/upright-c/m279173-0011.jpg',
+                'https://www.sarajoias.com.br/rolex/fotos/d/slide4_landscape/m126333-0010.webp',
+                'https://www.sarajoias.com.br/rolex/fotos/d/slide2_landscape/m126333-0010.webp'
+            ],
+            'relogio-rolex-lady-12': [
+                'https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1200/v1/catalogue/2025/upright-c/m279175-0009',
+                'https://www.europewatch.com/media/catalog/product/cache/47d88dc55763f684a46aa73b92d883d3/m/2/m279175-0009_10.png',
+                'https://www.europewatch.com/media/catalog/product/cache/47d88dc55763f684a46aa73b92d883d3/m/2/m279175-0009_8.png'
+            ],
+        };
+
+        function openGallery(galleryId) {
+            if (productGalleries[galleryId]) {
+                currentGallery = productGalleries[galleryId];
+                currentImageIndex = 0;
+                
+                // Gera thumbnails dinamicamente
+                const thumbContainer = document.querySelector(".gallery-thumbs-container");
+                thumbContainer.innerHTML = '';
+                currentGallery.forEach((image, index) => {
+                    const thumb = document.createElement('img');
+                    thumb.className = 'gallery-thumb w-20 h-20 object-cover cursor-pointer border-2 border-gray-200 hover:border-cyan-500 transition';
+                    thumb.src = image;
+                    thumb.onclick = () => {
+                        currentImageIndex = index;
+                        updateGalleryImage();
+                    };
+                    thumbContainer.appendChild(thumb);
+                });
+                
+                document.getElementById("modalGallery").classList.remove("hidden");
+                document.getElementById("galleryOverlay").classList.remove("hidden");
+                updateGalleryImage();
+            }
+        }
+
+        function closeGallery() {
+            document.getElementById("modalGallery").classList.add("hidden");
+            document.getElementById("galleryOverlay").classList.add("hidden");
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % currentGallery.length;
+            updateGalleryImage();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + currentGallery.length) % currentGallery.length;
+            updateGalleryImage();
+        }
+
+        function toggleMobileMenu() {
+        const mobileNav = document.getElementById("mobileNav");
+        mobileNav.classList.toggle("hidden");
+        }
+
+        function updateGalleryImage() {
+            document.getElementById("mainGalleryImage").src = currentGallery[currentImageIndex];
+            document.getElementById("imageCounter").textContent = `${currentImageIndex + 1} / ${currentGallery.length}`;
+            
+            // Atualiza estilos dos thumbnails
+            document.querySelectorAll(".gallery-thumb").forEach((thumb, index) => {
+                thumb.classList.toggle("border-cyan-500", index === currentImageIndex);
+                thumb.classList.toggle("border-gray-200", index !== currentImageIndex);
+            });
+        }
+
+        // Fechar ao clicar no overlay
+        document.addEventListener("DOMContentLoaded", function() {
+            const overlay = document.getElementById("galleryOverlay");
+            if (overlay) {
+                overlay.addEventListener("click", closeGallery);
+            }
+        });
+    </script>
+</body>
+</html>
