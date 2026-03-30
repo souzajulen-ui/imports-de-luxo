@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados da Pesquisa | Imports de Luxo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #FDFCFB; }
+        h1, h2, .font-serif { font-family: 'Playfair Display', serif; }
+        #cartSidebar { transition: right 0.5s ease; }
+    </style>
+</head>
+
+<body class="antialiased text-gray-900 pt-32">
+
+    <div class="fixed top-0 left-0 w-full z-50 bg-black text-white text-[10px] uppercase tracking-[0.3em] py-2 text-center">
+        marcas Exclusivas | Frete para todo o Brasil
+    </div>
+
+    <header class="fixed top-8 left-0 w-full z-50 bg-white py-6 px-6 md:px-20 flex items-center justify-between border-b border-gray-100 shadow-sm">
+        <a href="index.html" class="text-2xl md:text-3xl font-serif font-bold tracking-tight">
+            IMPORTS <span class="italic font-light">de Luxo</span>
+        </a>
+
+        <nav class="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center space-x-8 text-[13px] uppercase tracking-widest font-semibold">
+            <a href="index.html" class="hover:text-cyan-500 transition">Início</a>
+            <a href="bolsas.html" class="hover:text-cyan-500 transition">Bolsas</a>
+            <a href="relogios.html" class="hover:text-cyan-500 transition">Relógios</a>
+            <a href="oculos.html" class="hover:text-cyan-500 transition">Óculos</a>
+            <a href="calcados.html" class="hover:text-cyan-500 transition">Calçados</a>
+            <a href="acessorios.html" class="hover:text-cyan-500 transition">Acessórios</a>
+            <a href="cintos.html" class="hover:text-cyan-500 transition">Cintos</a>
+        </nav>
+
+        <div class="flex items-center space-x-6">
+            <div class="flex items-center border border-gray-200 px-1 py-1">
+                <input type="text" id="searchInput" placeholder="Buscar..." class="text-sm focus:outline-none w-12 md:w-48">
+                <button onclick="realizarBusca()" class="hover:text-cyan-500 transition ml-2">🔍︎</button>
+            </div>
+            
+            <div class="relative cursor-pointer" onclick="toggleCart()">
+                <span class="text-2xl">🛒</span>
+                <span id="cartCount" class="absolute -top-2 -right-2 bg-cyan-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-10">
+        <h1 class="text-2xl font-serif mb-8 italic ml-3">Resultados para: <span id="searchLabel" class="text-cyan-600"></span></h1>
+        
+        <div id="results" class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10"></div>
+    </main>
+
+    <div id="cartSidebar" class="fixed top-0 right-[-400px] w-80 md:w-96 h-full bg-white shadow-2xl z-[60] p-6 flex flex-col">
+        <div class="flex justify-between items-center mb-8 border-b pb-4">
+            <h2 class="text-xl font-serif font-bold uppercase tracking-widest">Seu Carrinho</h2>
+            <button onclick="toggleCart()" class="text-2xl">✕</button>
+        </div>
+        <div id="cartItems" class="flex-grow overflow-y-auto space-y-4"></div>
+        <div class="border-t pt-6 mt-4">
+            <div class="flex justify-between text-lg font-bold mb-6">
+                <span>Total:</span>
+                <span id="cartTotal">R$ 0,00</span>
+            </div>
+            <button onclick="finalizarCompra()" class="w-full bg-cyan-500 text-white py-4 text-xs uppercase tracking-[0.2em] font-bold hover:bg-cyan-600 transition">Finalizar no WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+
+
+        // LISTA DE PRODUTOS (Resumida para o exemplo, mantenha a sua lista completa original)
+        const products = [
+           // BOLSAS
+           { id: "bolsa-valentino-garavani", name: "Bolsa Valentino Garavani", price: 2290.00, image: "https://cdn-images.farfetch-contents.com/19/44/63/85/19446385_43454593_1000.jpg" },
+           { id: "bolsa-chanel-small", name: "Bolsa Chanel Small 25", price: 2590.00, image: "https://www.chanel.com/images///f_auto//-9562336526366.jpg" },
+           { id: "bolsa-miu-miu-aventure", name: "Bolsa Miu Miu Aventure", price: 2590.00, image: "https://cdn-images.farfetch-contents.com/25/77/03/99/25770399_56379859_1000.jpg" },
+           { id: "bolsa-miu-miu-wander", name: "Bolsa Wander Miu Miu", price: 1990.00, image: "https://cdn-images.farfetch-contents.com/33/25/46/45/33254645_63880694_1000.jpg" },
+           { id: "bolsa-dior-book-tote", name: "Bolsa Dior Book Tote", price: 1990.00, image: "https://assets.christiandior.com/is/image/diorprod/M1324CZBBM928_SBG_E01?$r9x10_raw$&crop=0,0,4000,5000&wid=1850&hei=2000&scale=1&bfc=on&qlt=85" },
+           { id: "bolsa-louis-vuitton-keepall", name: "Bolsa Louis Vuitton Keepall", price: 2500.00, image: "https://bobags.com.br/assets-v2/products/mala-keepall-45-monogram-louis-vuitton-fce0a15ee49821668d4159b1cf9cbe8d32491498.jpeg?w=700&cache=d4b44564722748239b0dcf03249071f80c913&fm=webp&s=871013db783b9f9e6ce5a4cf992f7019" },
+           { id: "bolsa-ysl-sacola", name: "Bolsa YSL sacola", price: 2500.00, image: "https://saint-laurent.dam.kering.com/m/51e71777869b879/eCom-698651AAANG1000_A.jpg?v=11" },
+           { id: "bolsa-ysl-mini", name: "Bolsa YSL Míni Le 5 à 7", price: 1890.00, image: "https://cdn-images.farfetch-contents.com/18/42/95/06/18429506_54809843_1000.jpg" },
+           { id: "bolsa-saint-laurent-loulou-1", name: "bolsa Saint Laurent Loulou Preta - 30 cm", price: 2390.00, image: "https://saint-laurent.dam.kering.com/m/4a4b754485c4cb76/eCom-803541AAEAX1000_A.jpg?v=3" },
+           { id: "bolsa-saint-laurent-loulou-2", name: "Bolsa Saint Laurent Loulou Branca - 30 cm", price: 2390.00, image: "https://saint-laurent.dam.kering.com/m/5182f80e1603f7ae/Medium2-803541AAEAX9207_A.jpg?v=2" },
+           { id: "bolsa-saint-laurent-college", name: "Saint Laurent College", price: 2290.00, image: "https://lh3.googleusercontent.com/pw/AP1GczPsHcX6idJ5TIjn8VKzWS_XDKdYVUaMq6GNIgJESMbI2CJWYzKrQYvmhtapc7g42eSQrXk2PCn9DLyzHhu-mXHkHv_YxWjzRfTSNhhvaUSGHrbKSxRa7WEsLDKv5ODBcVn9ODZGjvF0F-onTvZ1C8pj3g=w809-h809-s-no-gm?authuser=0" },
+           { id: "bolsa-gucci-giglio", name: "Gucci Giglio Large", price: 3500.00, image: "https://cdn.endource.com/image/direct/f3a34eea54c1a75ddd9d9d7b6bd0afe067fa0c82/default.jpg?class=1600&optimizer=image" },
+           { id: "bolsa-gucci-dionysus", name: "Gucci Dionysus", price: 2290.00, image: "https://cdn-images.farfetch-contents.com/15/35/99/79/15359979_53139015_1000.jpg" },
+           { id: "bolsa-gucci-tiracolo", name: "Bolsa Gucci tiracolo GG", price: 1890.00, image: "https://cdn-images.farfetch-contents.com/12/56/23/29/12562329_55769738_2048.jpg" },
+
+            // RELÓGIOS
+            { id: "relogio-cartier-panthere-1", name: "Relógio Cartier Panthère - Aço", price: 1590.00, image: "https://cartier.vtexassets.com/arquivos/ids/184584/W4PN0007_1.jpg?v=636972722014970000" },
+            { id: "relogio-cartier-panthere-2", name: "Relógio Cartier Panthère - Dourado", price: 1590.00, image: "https://cartier.vtexassets.com/arquivos/ids/244048-1200-auto?v=638842220855000000&width=1200&height=auto&aspect=true" },
+            { id: "relogio-cartier-panthere-3", name: "Relógio Cartier Panthère - Aço e Dourado", price: 1590.00, image: "https://cartier.vtexassets.com/arquivos/ids/244043-1200-auto?v=638842220827470000&width=1200&height=auto&aspect=true" },
+            { id: "relogio-bulgari-serpenti", name: "Relógio Bvlgari Serpenti - Aço e Dourado", price: 1790.00, image: "https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/1447968.png" },
+            { id: "relogio-cartier-ballon-prata", name: "Relógio Cartier Ballon Bleu Aço", price: 1590.00, image: "https://cartier.vtexassets.com/arquivos/ids/209273-1200-auto?v=637629229625000000&width=1200&height=auto&aspect=true" },
+            { id: "relogio-bulgari-seductori", name: "relógio Bvlgari Serpenti Seduttori", price: 1590.00, image: "https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/484784.png" },
+            { id: "relogio-cartier-baignoire", name: "relógio Cartier Baignoire - Dourado", price: 999.00, image: "https://cartier.vtexassets.com/arquivos/ids/242392-1200-auto?v=638762821313830000" },
+            { id: "relogio-cartier-ballon-dourado", name: "Relógio Cartier Ballon Bleu Gold", price: 1590.00, image: "https://cartier.vtexassets.com/arquivos/ids/184684/W69005Z2_1.jpg?v=636972723987500000" },
+            { id: "relogio-rolex-lady-1", name: "Relógio Rolex Lady-Datejust - Aço e Rosé", price: 1590.00, image: "https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1200/v1/catalogue/2025/upright-c/m128399tbr-0029" },
+            { id: "relogio-rolex-lady-2", name: "Relógio Rolex Lady-Datejust - Aço e dourado ", price: 1590.00, image: "https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1200/v1/catalogue/2025/upright-c/m278383rbr-0029" },
+            { id: "relogio-rolex-lady-11", name: "Relógio Rolex Lady-Datejust - Gold", price: 1590.00, image: "https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1920/v1/catalogue/2025/upright-c/m279173-0011.jpg" },
+            { id: "relogio-rolex-lady-12", name: "Relógio Rolex Lady-Datejust - rosé", price: 1590.00, image: "https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1200/v1/catalogue/2025/upright-c/m279175-0009" },
+
+            // ÓCULOS
+{ id: "oculos-miu-miu-1", name: "óculos Miu Miu Regard", price: 890.00, image: "https://www.otticasm.com/media/catalog/product/cache/all/small_image/1200x800/9df78eab33525d08d6e5fb8d27136e95/m/i/miu-miu-mu-04zs-19p2z1.jpg" },
+{ id: "oculos-miu-miu-2", name: "óculos Miu Miu Glimpse Preto", price: 890.00, image: "https://cdn-images.farfetch-contents.com/18/34/35/34/18343534_39724254_1000.jpg" },
+{ id: "oculos-miu-miu-3", name: "óculos Miu Miu Eyewear Oval", price: 890.00, image: "https://cdn-images.farfetch-contents.com/23/19/26/10/23192610_53275039_1000.jpg" },
+{ id: "Miu Miu Aube", name: "óculos Miu Miu Aube Cinza", price: 890.00, image: "https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_SLR.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg" },
+{ id: "Miu Miu Aube-2", name: "óculos Miu Miu Aube Rosé", price: 890.00, image: "https://cdn-images.farfetch-contents.com/28/40/35/86/28403586_57802945_1000.jpg" },
+{ id: "Miu Miu Glimpse", name: "óculos Miu Miu Glimpse Tartaruga", price: 890.00, image: "https://cdn-images.farfetch-contents.com/30/04/69/79/30046979_59104928_1000.jpg" },
+{ id: "oculos-bottega-1", name: "óculos Bottega Veneta Sardine", price: 890.00, image: "https://pretavoir.us/cdn/shop/files/bottega-veneta-bv1305s-002-hd-1.jpg?v=1707301799" },
+{ id: "oculos-bottega-2", name: "óculos Bottega Veneta Angle Cat", price: 890.00, image: "https://bottega-veneta.dam.kering.com/m/420c1ddb34ebd4c5/Large-660165V23302819_A.jpg?v=6" },
+{ id: "Chanel Gatinho", name: "óculos Chanel Cat B&W", price: 890.00, image: "https://sunluxmx.com/cdn/shop/files/CHA_600x.jpg?v=1752012411" },
+{ id: "Chanel Gatinho-2", name: "óculos Chanel Cat Bege", price: 890.00, image: "https://www.chanel.com/images///t_fashioncommercial_trim,f_auto,q_auto:good,dpr_1.1/w_480/-9537978597406.jpg" },
+{ id: "oculos-cartier-1", name: "óculos Cartier Panthère Gold", price: 890.00, image: "https://lh3.googleusercontent.com/pw/AP1GczNs0wqwcWRiXTSrammCpEpPjQZpygFXkNrE2EwiQb5tOLkFCFty8wdEoaixdoHUZaAT5mmxkfSWQ3nXpGQdXjjC9jzgVzSQJC3OUYVqRNr_NZbBIYoIvTn4kR2icGwmPaY9JoiA_2trkBcQD_GGn8LWww=w945-h945-s-no-gm?authuser=0" },
+{ id: "Celine Triomphe", name: "óculos Celine Triomphe Tartaruga", price: 890.00, image: "https://asset.m-gs.kr/prod/1091811686/2/550" },
+{ id: "Gucci geométrico", name: "óculos Gucci Geométrico Cinza", price: 890.00, image: "https://cdn-images.farfetch-contents.com/28/55/34/00/28553400_58117955_1000.jpg" },
+{ id: "Prada Symbole oversized", name: "óculos Prada Symbole Oversized", price: 890.00, image: "https://cdn-images.farfetch-contents.com/16/51/27/25/16512725_32103692_1000.jpg" },
+{ id: "oculos-tom-ford-1", name: "óculos Tom Ford Falconer", price: 890.00, image: "https://wanny.vteximg.com.br/arquivos/ids/192203-500-500/Produto.jpg?v=638803667335270000" },
+{ id: "oculos-tom-ford-2", name: "óculos Tom Ford Icon Pilot", price: 890.00, image: "https://cdn.media.amplience.net/i/tom_ford/FT1225_01E_59MM_A?w=3000" },
+{ id: "oculos-treasure-1", name: "óculos Dior Treasure Black", price: 890.00, image: "https://lh3.googleusercontent.com/pw/AP1GczNEgJMvZuoXN3PFbg0jItje90IxcUX-zp0JppecjusUDhw1bt4bM_SHrMOoY2cSLlYdZLtfsw2-3FKhf5g9vAaMQhiXfLOY2D6wOlXK1hbiPioShw-mEEMBTIp62b3XRNJGXsh9lBFVzD1EAX2Xqj0OrA=w945-h945-s-no-gm?authuser=0" },
+{ id: "oculos-valentino-1", name: "óculos Valentino Geométrico", price: 890.00, image: "https://wanny.vteximg.com.br/arquivos/ids/179938-750-750/Produto.jpg?v=638024365385500000" },
+{ id: "oculos-YSL-1", name: "óculos Saint Laurent SL Black", price: 890.00, image: "https://saint-laurent.dam.kering.com/m/1370273f34b71b83/Medium2-671762Y99011000_A.jpg?v=10" },
+
+            // CALÇADOS
+{ id: "calcado-valentino-1", name: "Sandália Valentino Rockstud", price: 1199.00, image: "https://valentino-cdn.thron.com/delivery/public/image/valentino/17de05d5-f3a9-4f38-a500-5d3465082691/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80" },
+{ id: "calcado-saint-laurent-1", name: "Salto Saint Laurent Classic", price: 1590.00, image: "https://saint-laurent.dam.kering.com/m/421f6e40d816a64/eCom-800164AADX21000_B.jpg?v=5" },
+{ id: "calcado-chanel-1", name: "Sapatilha Chanel Clássica", price: 1390.00, image: "https://images.tcdn.com.br/img/img_prod/90552/sapatilha_chanel_ballerina_flat_outlet_7802_1_9ea74843537ce63374f0a5d6fba7cb10_20220223104615.jpg" },
+{ id: "calcado-saint-laurent-2", name: "Scarpin Saint Laurent", price: 1590.00, image: "https://saint-laurent.dam.kering.com/m/50884b56d09b25ee/eCom-806685AADF12526_B.jpg?v=5" },
+{ id: "calcado-saint-laurent-3", name: "Sandália Saint Laurent Opyum", price: 1590.00, image: "https://cdn-images.farfetch-contents.com/21/99/29/60/21992960_65046420_1000.jpg" },
+{ id: "calcado-dolce-1", name: "Sandália D&G Keira", price: 1590.00, image: "https://cdn-images.farfetch-contents.com/15/61/99/66/15619966_28278650_1000.jpg" },
+{ id: "calcado-caovilla-1", name: "Sandália René Caovilla Cleo", price: 990.00, image: "https://cdn-images.farfetch-contents.com/30/64/98/21/30649821_59680088_1000.jpg" },
+{ id: "calcado-gucci-1", name: "Tênis Gucci Screener Original", price: 1390.00, image: "https://cdn-images.farfetch-contents.com/29/84/62/21/29846221_58892503_1000.jpg" },
+{ id: "calcado-gucci-2", name: "Tênis Gucci Screener Branco", price: 1590.00, image: "https://www.mytheresa.com/image/1094/1238/100/6f/P00938106.jpg" },
+{ id: "calcado-dior-1", name: "Tênis Christian Dior Walk'n'D", price: 1390.00, image: "https://midonstore.com/cdn/shop/products/1_dd11b3ac-3904-4132-aa34-04a88ba13a28.png?v=1744869447&width=2048" },
+{ id: "calcado-newbalance-1", name: "Tênis New Balance X Miu Miu", price: 1790.00, image: "https://cdn.myikas.com/images/28864072-1728-4c41-a60f-7e46390d0b7c/3b98d071-d043-4c48-a1c1-feb690d10eff/image_1080.jpg" },
+
+            // ACESSÓRIOS
+{ id: "acessorio-cartier-1", name: "Pulseira Cartier Love", price: 380.00, image: "https://cartier.vtexassets.com/arquivos/ids/211109/B6067517_2.png?v=638956120448730000" },
+{ id: "acessorio-cartier-2", name: "Pulseira Cartier Juste un Clou", price: 380.00, image: "https://cartier.vtexassets.com/arquivos/ids/199718-1200-auto?v=637269792238100000" },
+{ id: "acessorio-tiffany-1", name: "Pulseira Tiffany HardWear", price: 380.00, image: "https://tiffany.vtexassets.com/arquivos/ids/185691-1200-1200/pulseira-de-elos-medios-em-ouro-amarelo-com-diamantes-70751216_1.jpg?v=638969301659900000" },
+{ id: "acessorio-tiffany-2", name: "Tiffany Knot - Ouro com Pedra", price: 380.00, image: "https://frontrow.com.br/cdn/shop/files/4498364922073c4f781d9463951ce429.jpg?v=1753731948&width=3000" },
+{ id: "acessorio-tiffany-11", name: "Tiffany Knot - Ouro Amarelo", price: 380.00, image: "https://tiffany.vtexassets.com/arquivos/ids/168441/bracelete-tiffany-knot-de-duas-voltas-em-ouro-amarelo-68890217_2.jpg?v=638285928526100000" },
+{ id: "acessorio-tiffany-12", name: "Tiffany Knot - Prata com Pedra", price: 380.00, image: "https://tiffany.vtexassets.com/arquivos/ids/168465/bracelete-tiffany-knot-de-duas-voltas-em-ouro-branco-com-diamantes-70300486_2.jpg?v=638285928640630000" },
+{ id: "acessorio-tiffany-13", name: "Tiffany Knot - Rosé com Pedra", price: 380.00, image: "https://tiffany.vtexassets.com/arquivos/ids/168493/bracelete-tiffany-knot-de-duas-voltas-em-ouro-com-diamantes-69525911_2.jpg?v=639059877770500000" },
+{ id: "acessorio-tiffany-14", name: "Tiffany Knot - Rosé", price: 380.00, image: "https://tiffany.vtexassets.com/arquivos/ids/168532/bracelete-tiffany-knot-de-duas-voltas-em-ouro-rosa-70152622_2.jpg?v=639059877987600000" },
+{ id: "acessorio-tiffany-3", name: "Colar Tiffany Laço", price: 450.00, image: "https://images.tcdn.com.br/img/img_prod/1346020/gargantilha_knot_com_diamantes_em_ouro_18k_2977_1_5d013b4469c391a88335d7f644ff89bf.png" },
+{ id: "acessorio-tiffany-5", name: "Bracelete Tiffany Lock - Ouro Amarelo", price: 380.00, image: "https://tiffany.vtexassets.com/arquivos/ids/179645/Bracelete-Narrow-em-Ouro-Amarelo-com-Diamantes-74363520_1.jpg?v=638844700307600000" },
+{ id: "acessorio-tiffany-6", name: "Bracelete Tiffany Lock - Ouro Cravejado", price: 380.00, image: "https://tiffany.vtexassets.com/arquivos/ids/174471/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70158205_1.jpg?v=638318772924000000" },
+{ id: "acessorio-tiffany-7", name: "Bracelete Tiffany Lock - Prata", price: 380.00, image: "https://tiffany.vtexassets.com/arquivos/ids/179655/Bracelete-Narrow-em-Ouro-Branco-com-Diamantes-74363881_1.jpg?v=638844700341500000" },
+{ id: "acessorio-tiffany-8", name: "Bracelete Tiffany Lock - Prata Cravejado", price: 380.00, image: "https://tiffany.vtexassets.com/arquivos/ids/168927/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_1.jpg?v=638285930767530000" },
+{ id: "acessorio-tiffany-9", name: "Bracelete Tiffany Lock - Rosé", price: 380.00, image: "https://tiffany.vtexassets.com/arquivos/ids/175755/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_1.jpg?v=638326424659030000" },
+{ id: "acessorio-tiffany-10", name: "Bracelete Tiffany Lock - Rosé Cravejado", price: 380.00, image: "https://tiffany.vtexassets.com/arquivos/ids/169109/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_1.jpg?v=638285931573700000" },
+{ id: "acessorio-tiffany-4", name: "Bracelete Tiffany Bone Elsa Peretti", price: 550.00, image: "https://tiffany.vtexassets.com/arquivos/ids/155562/bracelete-bone-pequeno-de-elsa-peretti-para-o-pulso-direito-em-prata-de-lei-69860303_1.jpg?v=638224350095870000" },
+{ id: "acessorio-swarovski-1", name: "Pulseira Swarovski Una", price: 380.00, image: "https://swarovski.vtexassets.com/arquivos/ids/193484-1200-auto?v=637814267934730000" },
+{ id: "acessorio-hermes-1", name: "Pulseira Hermès Clic H", price: 380.00, image: "https://assets.hermes.com/is/image/hermesproduct/pulseira-clic-h--700001F%208A-worn-1-0-0-800-800_g.jpg" },
+{ id: "acessorio-bulgari-1", name: "Pulseira Bulgari Serpenti Viper", price: 550.00, image: "https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/459655.png" },
+            
+            // CINTOS
+        { id: "cinto-chloe", name: "Cinto Chloé - Marrom", price: 650.00, image: "https://cdn-images.farfetch-contents.com/32/88/47/04/32884704_63328413_1000.jpg" },
+        { id: "cinto-gucci-preto", name: "Cinto Gucci Double G - Preto", price: 650.00, image: "https://cdn-images.farfetch-contents.com/15/16/50/27/15165027_56058889_1000.jpg" },
+        { id: "cinto-gucci-rosa", name: "Cinto Gucci Double G - Rosa", price: 650.00, image: "https://cdn.sistemawbuy.com.br/arquivos/1f3d59f170f93f0b98c48787c6c34f03/produtos/661556e4458bc/sem-ta-tulo-2prancheta-1-copiar-4prancheta-1-copiar-13-661556e48c764.jpg" },
+        { id: "cinto-valentino-preto", name: "Cinto Valentino Garavani - Preto", price: 650.00, image: "https://cintosjulioalmeida.com.br/wp-content/uploads/2020/03/13898886_17705319_480.jpg" },
+        { id: "cinto-valentino-branco", name: "Cinto Valentino Garavani - Branco", price: 650.00, image: "https://cdn-images.farfetch-contents.com/18/03/36/24/18033624_40268054_1000.jpg" },
+        { id: "cinto-lv-tradicional", name: "Cinto Louis Vuitton - tradicional", price: 450.00, image: "https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-30-mm--M0322U_PM1_Closeup%20view.jpg" },
+        { id: "cinto-lv-preto", name: "Cinto Louis Vuitton - Preto", price: 450.00, image: "https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-lv-initiales-reversivel-40mm---M9043U_PM1_Closeup%20view.jpg" },
+        { id: "cinto-lv-preto-quadriculado", name: "Cinto Louis Vuitton - Damier Graphite", price: 450.00, image: "https://www.brogueshopbr.com/cdn/shop/files/cinto-lv-preto-azul--02.jpg?v=1731847382&width=300" },
+        { id: "cinto-hermes-branco", name: "Cinto Hermès Kelly - Branco", price: 650.00, image: "https://assets.hermes.cn/is/image/hermesproduct/kelly-18-belt--069853CC01-worn-1-0-0-800-800_g.jpg" },
+        { id: "cinto-hermes-preto", name: "Cinto Hermès Kelly - Preto", price: 650.00, image: "https://assets.hermes.com/is/image/hermesproduct/cinto-kelly-18--069853CC89-worn-1-0-0-800-800_g.jpg" },
+        { id: "cinto-gucci-branco", name: "Cinto Gucci Double G - Branco", price: 650.00, image: "https://lh3.googleusercontent.com/pw/AP1GczOBjEOrZ55ABpomSFTncWlxggU0FOAmuX48OoIYOw2aTWhaG_bcqWnwivmrbNuvgDi1Iq2jMIrDuJs4imPXSrqtNgAIwHv84UMSRVU113TssRKFOBcgJVgPj6bOHPZZGnvdTc0cm5QoMjdwWHNLd4-TYw=w800-h800-s-no-gm?authuser=0" },
+        { id: "cinto-dior-montaigne", name: "Cinto Dior 30 Montaigne", price: 650.00, image: "https://assets.christiandior.com/is/image/diorprod/B0447UWEOM928_SBG_E01?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85" },
+        { id: "cinto-dior-saddle", name: "Cinto Dior Saddle - Branco", price: 650.00, image: "https://assets.levelshoes.com/cdn-cgi/image/width=1500,height=2100,quality=95,format=webp/media/catalog/product/p/l/pl456109_1.jpg?ts=20250225043051" },
+        { id: "cinto-ysl", name: "Cinto Yves Saint Laurent - Preto", price: 650.00, image: "https://cdn-images.farfetch-contents.com/13/51/26/34/13512634_54213856_1000.jpg" },
+        ];
+
+        // LÓGICA DE PESQUISA (URL)
+        const params = new URLSearchParams(window.location.search);
+        const searchTerm = params.get("q")?.toLowerCase() || "";
+        document.getElementById("searchLabel").innerText = searchTerm || "Todos";
+
+        const container = document.getElementById("results");
+        const filtered = products.filter(p => p.name.toLowerCase().includes(searchTerm));
+
+        function renderProducts() {
+    if (filtered.length === 0) {
+        container.innerHTML = "<p class='col-span-full text-center py-20 text-gray-400 uppercase tracking-widest'>Nenhum item encontrado.</p>";
+        return;
+    }
+    
+    container.innerHTML = ""; // Limpa antes de renderizar
+
+    filtered.forEach(p => {
+        // Se o produto tiver ID, ele pode abrir a galeria, senão apenas mostra a imagem
+        const clickAction = p.id ? `onclick="openGallery('${p.id}')"` : "";
+        const cursorClass = p.id ? "cursor-pointer" : "";
+
+        container.innerHTML += `
+            <div class="bg-white border border-gray-100 p-2 md:p-6 shadow-sm hover:shadow-md transition text-center group">
+                <div class="relative overflow-hidden mb-4 ${cursorClass}" ${clickAction}>
+                    <img src="${p.image}" class="w-full h-40 md:h-64 object-contain group-hover:scale-105 transition duration-500">
+                    ${p.id ? '<div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"><span class="bg-white/90 px-2 py-1 text-[9px] uppercase font-bold tracking-widest shadow-sm">Ver Detalhes</span></div>' : ''}
+                </div>
+                <h3 class="font-serif text-sm md:text-lg mb-1 h-12 overflow-hidden">${p.name}</h3>
+                <p class="text-base md:text-xl font-bold mb-4 text-gray-800">R$ ${p.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+                <button onclick="addToCart('${p.name}', ${p.price}, '${p.image}')" 
+                        class="w-full bg-cyan-500 text-white py-2 md:py-3 text-[10px] md:text-xs uppercase tracking-widest font-bold hover:bg-black transition">
+                    Adicionar ao carrinho
+                </button>
+            </div>
+        `;
+    });
+}
+
+        // FUNÇÃO PARA A LUPA FUNCIONAR
+        function realizarBusca() {
+            const input = document.getElementById("searchInput");
+            const query = input.value.trim();
+            if (query !== "") {
+                window.location.href = `pesquisa.html?q=${encodeURIComponent(query)}`;
+            }
+        }
+
+        // ENTER NO TECLADO TAMBÉM ACIONA A BUSCA
+        document.getElementById("searchInput").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") realizarBusca();
+        });
+
+        // CARRINHO (Funções Básicas)
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        function updateCartCount() { document.getElementById("cartCount").innerText = cart.length; }
+        function toggleCart() {
+            const sidebar = document.getElementById("cartSidebar");
+            const isOpen = sidebar.style.right === "0px";
+            sidebar.style.right = isOpen ? "-400px" : "0px";
+            if (!isOpen) renderCart();
+        }
+
+        // ADICIONE ESTA FUNÇÃO:
+function addToCart(name, price, image) {
+    // 1. Pega o carrinho atual do LocalStorage
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    
+    // 2. Adiciona o novo produto ao array
+    cart.push({ name, price, image });
+    
+    // 3. Salva de volta no LocalStorage
+    localStorage.setItem("cart", JSON.stringify(cart));
+    
+    // 4. Atualiza o número do ícone e abre o carrinho para mostrar que funcionou
+    updateCartCount();
+    toggleCart(); 
+}
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cartCount").innerText = cart.length;
+        }
+
+        function renderCart() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+    cartItems.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((product, index) => {
+        total += product.price;
+        cartItems.innerHTML += `
+            <div class="flex items-center gap-4 mb-4 border-b border-gray-100 pb-4">
+                <img src="${product.image}" class="w-16 h-16 object-contain bg-gray-50 rounded">
+                <div class="flex-1">
+                    <h3 class="text-[10px] font-bold uppercase tracking-tight leading-tight">${product.name}</h3>
+                    <p class="text-sm font-semibold text-gray-700">${product.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+                </div>
+                <button onclick="removeItem(${index})" 
+                        class="text-[10px] uppercase tracking-widest font-bold text-gray-400 hover:text-red-600 transition-colors duration-300">
+                    Remover
+                </button>
+            </div>`;
+    });
+    cartTotal.innerText = total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+}
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+        }
+
+        function finalizarCompra() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        if (cart.length === 0) return alert("Seu carrinho está vazio!");
+
+        let total = 0;
+
+        // frase singular ou plural
+        let mensagem = cart.length === 1
+        ? "Olá! Gostaria de saber mais sobre este produto:\n\n"
+        : "Olá! Gostaria de saber mais sobre estes produtos:\n\n";
+
+        cart.forEach(item => {
+        mensagem += `- ${item.name} (R$ ${item.price.toFixed(2)})\n`;
+        total += item.price;
+    });
+        mensagem += `\n*Total: R$ ${total.toFixed(2)}*\n\n`;
+        mensagem += "Poderia me informar o prazo de entrega e as formas de pagamento?";
+
+        window.open(`https://wa.me/5544998214237?text=${encodeURIComponent(mensagem)}`, '_blank');
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderProducts();
+            updateCartCount();
+        });
+
+        // GALERIA MODAL DE FOTOS
+        let currentImageIndex = 0;
+        let currentGallery = [];
+
+        // Dados das galerias apenas para produtos de bolsas
+        const productGalleries = {
+            'bolsa-valentino-garavani': [
+                'https://cdn-images.farfetch-contents.com/19/44/63/85/19446385_43454593_1000.jpg',
+                'https://ounass-kw.atgcdn.ae/small_light(p=zoom,of=webp,q=65)/pub/media/catalog/product/2/1/217249943_black_e2.jpg?ts=1713862805.2459',
+                'https://valentino-cdn.thron.com/delivery/public/image/valentino/c927b7eb-d182-4ced-ad31-c0c41b4e8e34/ihqstx/std/2000x0/Valentino-Garavani-Loc%C3%B2-Small-Shoulder-Bag-In-Calfskin?quality=80&size=35&format=auto'
+            ],
+            'bolsa-chanel-small': [
+                'https://www.chanel.com/images///f_auto//-9562336526366.jpg',
+                'https://www.manfrimstore.com.br/cdn/shop/files/041b548c.jpg?v=1765833954&width=1600',
+                'https://www.manfrimstore.com.br/cdn/shop/files/84482c67.jpg?v=1765833954&width=1600',
+                'https://www.manfrimstore.com.br/cdn/shop/files/27efe14b.jpg?v=1765833954&width=1600'
+            ],
+            'bolsa-miu-miu-aventure': [
+                'https://cdn-images.farfetch-contents.com/25/77/03/99/25770399_56379859_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/25/77/03/99/25770399_56379860_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/25/77/03/99/25770399_56379857_1000.jpg'
+            ],
+            'bolsa-miu-miu-wander': [
+                'https://cdn-images.farfetch-contents.com/33/25/46/45/33254645_63880694_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/33/25/46/45/33254645_63880696_1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/5/5BP/5BP078/AN88F0009/5BP078_AN88_F0009_V_OOO_SLR.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/5/5BP/5BP078/AN88F0009/5BP078_AN88_F0009_V_OOO_SLO.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/5/5BP/5BP078/AN88F0009/5BP078_AN88_F0009_V_OOO_MDLA.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/5/5BP/5BP078/AN88F0009/5BP078_AN88_F0009_V_OOO_MDL.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg'
+            ],
+            'bolsa-dior-book-tote': [
+                'https://assets.christiandior.com/is/image/diorprod/M1324CZBBM928_SBG_E01?$r9x10_raw$&crop=0,0,4000,5000&wid=1850&hei=2000&scale=1&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/M1324CZBBM928_SBG_E07-1?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/M1324CZBBM928_SBG_E03?$r9x10_raw$&crop=0,0,4000,5000&wid=1850&hei=2000&scale=1&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/M1324CZBBM928_SBG_E06?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/M1324CZBBM928_SBG_E09?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85'
+            ],
+            'bolsa-louis-vuitton-keepall': [
+                'https://bobags.com.br/assets-v2/products/mala-keepall-45-monogram-louis-vuitton-fce0a15ee49821668d4159b1cf9cbe8d32491498.jpeg?w=700&cache=d4b44564722748239b0dcf03249071f80c913&fm=webp&s=871013db783b9f9e6ce5a4cf992f7019',
+                'https://gringa.com.br/cdn/shop/products/Bolsa-Louis-Vuitton-Monogram-Keepall-45-Bandouliere-Marrom-Original-19149l.png?v=1657704297&width=960',
+                'https://gringa.com.br/cdn/shop/products/Bolsa-Louis-Vuitton-Monogram-Keepall-45-Bandouliere-Marrom-Original-19149fu.png?v=1657704303&width=960',
+                'https://gringa.com.br/cdn/shop/products/Bolsa-Louis-Vuitton-Monogram-Keepall-45-Bandouliere-Marrom-Original-19149d.png?v=1657704326&width=960'
+            ],
+            'bolsa-ysl-sacola': [
+                'https://saint-laurent.dam.kering.com/m/51e71777869b879/eCom-698651AAANG1000_A.jpg?v=11',
+                'https://saint-laurent.dam.kering.com/m/612c1e5a18de9272/Medium2-698651AAANG1000_B.jpg?v=14',
+                'https://saint-laurent.dam.kering.com/m/3bbd626a6f7eb79a/Medium2-698651AAANG1000_C.jpg?v=7',
+                'https://saint-laurent.dam.kering.com/m/380d7df95dd4be40/Medium2-698651AAANG1000_D.jpg?v=6',
+                'https://saint-laurent.dam.kering.com/m/43503ac24e0816f9/Medium2-698651AAANG1000_F.jpg?v=7',
+                'https://saint-laurent.dam.kering.com/m/34464a891ea600c8/Medium2-698651AAANG1000_E.jpg?v=6'
+            ],
+            'bolsa-ysl-mini': [
+                'https://cdn-images.farfetch-contents.com/18/42/95/06/18429506_54809843_1000.jpg',
+                'https://saint-laurent.dam.kering.com/m/4852edc301debd9c/eCom-7103182R20W1000_B.jpg?v=3',
+                'https://saint-laurent.dam.kering.com/m/1f27d673eea7c987/eCom-7103182R20W1000_C.jpg?v=3',
+                'https://saint-laurent.dam.kering.com/m/2ca30fd032e3c5c1/eCom-7103182R20W1000_D.jpg?v=3'
+            ],
+            'bolsa-saint-laurent-loulou-1': [
+                'https://saint-laurent.dam.kering.com/m/4a4b754485c4cb76/eCom-803541AAEAX1000_A.jpg?v=3',
+                'https://saint-laurent.dam.kering.com/m/1c8780bbde56c349/Medium2-803541AAEAX1000_B.jpg?v=3',
+                'https://saint-laurent.dam.kering.com/m/778b72f14705dd53/Medium2-803541AAEAX1000_D.jpg?v=1',
+                'https://saint-laurent.dam.kering.com/m/69b19fb5f6a0a2e/Medium2-803541AAEAX1000_E.jpg?v=1',
+                'https://saint-laurent.dam.kering.com/m/1d2307d252fd4b2b/Medium2-803541AAEAX1000_F.jpg?v=1'
+            ],
+            'bolsa-saint-laurent-loulou-2': [
+                'https://saint-laurent.dam.kering.com/m/5182f80e1603f7ae/Medium2-803541AAEAX9207_A.jpg?v=2',
+                'https://saint-laurent.dam.kering.com/m/501e20ec1e0e5f4f/Medium2-803541AAEAX9207_B.jpg?v=2',
+                'https://saint-laurent.dam.kering.com/m/62220c909381e23/Medium2-803541AAEAX9207_E.jpg?v=2'
+            ],
+            'bolsa-saint-laurent-college': [
+                'https://lh3.googleusercontent.com/pw/AP1GczPsHcX6idJ5TIjn8VKzWS_XDKdYVUaMq6GNIgJESMbI2CJWYzKrQYvmhtapc7g42eSQrXk2PCn9DLyzHhu-mXHkHv_YxWjzRfTSNhhvaUSGHrbKSxRa7WEsLDKv5ODBcVn9ODZGjvF0F-onTvZ1C8pj3g=w809-h809-s-no-gm?authuser=0',
+                'https://toptoptop1.com/wp-content/uploads/2025/04/wsxc1744900540655_1.jpg',
+                'https://toptoptop1.com/wp-content/uploads/2025/04/wsxc1744900540711_2-700x700.jpg',
+            ],    
+            'bolsa-gucci-giglio': [
+                'https://cdn.endource.com/image/direct/f3a34eea54c1a75ddd9d9d7b6bd0afe067fa0c82/default.jpg?class=1600&optimizer=image',
+                'https://www.net-a-porter.com/variants/images/46376663163012553/e1/w2000_q60.jpg',
+                'https://www.net-a-porter.com/variants/images/46376663163012553/e2/w2000_q60.jpg',
+                'https://www.net-a-porter.com/variants/images/46376663163012553/fr/w2000_q60.jpg'
+            ],
+            'bolsa-gucci-dionysus': [
+                'https://cdn-images.farfetch-contents.com/15/35/99/79/15359979_53139015_1000.jpg',
+                'https://gringa.com.br/cdn/shop/products/Bolsa-Gucci-Small-GG-Supreme-Dionysus-Bege-Original-17231l.png?v=1652909462&width=960',
+                'https://gringa.com.br/cdn/shop/products/Bolsa-Gucci-Small-GG-Supreme-Dionysus-Bege-Original-17231d.png?v=1652909485&width=960',
+                'https://cdn-images.farfetch-contents.com/15/35/99/79/15359979_53139017_1000.jpg',
+                'https://gringa.com.br/cdn/shop/products/Bolsa-Gucci-Small-GG-Supreme-Dionysus-Bege-Original-17231fu.png?v=1652909490&width=960'
+            ],
+            'bolsa-gucci-tiracolo': [
+                'https://cdn-images.farfetch-contents.com/12/56/23/29/12562329_55769738_2048.jpg',
+                'https://cdn-images.farfetch-contents.com/12/56/23/29/12562329_55769732_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/12/56/23/29/12562329_55769731_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/12/56/23/29/12562329_55769746_1000.jpg'
+            ],
+
+            //relogio
+            'relogio-cartier-panthere-1': [
+                'https://cartier.vtexassets.com/arquivos/ids/184584/W4PN0007_1.jpg?v=636972722014970000',
+                'https://cartier.vtexassets.com/arquivos/ids/242366-1200-auto?v=638762830400600000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242367-1200-auto?v=638762830400600000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242368-1200-auto?v=638762830400600000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/184585-1200-auto?v=636972722038270000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/184586-1200-auto?v=636972722053300000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242370-1200-auto?v=638762830400600000&width=1200&height=auto&aspect=true'
+            ],
+            'relogio-cartier-panthere-2': [
+                'https://cartier.vtexassets.com/arquivos/ids/244048-1200-auto?v=638842220855000000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/237204-1200-auto?v=638621984817530000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/237205-1200-auto?v=638621984822200000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/237206-1200-auto?v=638621984828300000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/237207-1200-auto?v=638621984834300000&width=1200&height=auto&aspect=true'
+            ],
+            'relogio-cartier-panthere-3': [
+                'https://cartier.vtexassets.com/arquivos/ids/244043-1200-auto?v=638842220827470000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/243754-1200-auto?v=638803385357730000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/243755-1200-auto?v=638803385357730000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/243756-1200-auto?v=638803385357730000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/243758-1200-auto?v=638803385357730000&width=1200&height=auto&aspect=true'
+            ],
+            'relogio-cartier-ballon-prata': [
+                'https://cartier.vtexassets.com/arquivos/ids/209273-1200-auto?v=637629229625000000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242561-1200-auto?v=638762828310670000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242562-1200-auto?v=638762828310670000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242564-1200-auto?v=638762828310670000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/209274-1200-auto?v=639017507818170000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/209275-1200-auto?v=639017507818170000&width=1200&height=auto&aspect=true'
+            ],
+            'relogio-cartier-ballon-dourado': [
+                'https://cartier.vtexassets.com/arquivos/ids/184684/W69005Z2_1.jpg?v=636972723987500000',
+                'https://www.cartier.com/dw/image/v2/BGTJ_PRD/on/demandware.static/-/Sites-cartier-master/default/dw0766440d/images/large/ac2f8fd318a95928b925f57f8d164de0.png?sw=750&sh=750&sm=fit&sfrm=png',
+                'https://www.cartier.com/dw/image/v2/BGTJ_PRD/on/demandware.static/-/Sites-cartier-master/default/dwe359af11/images/large/27b668258d8658daa0a7a3a9dc0f2021.png?sw=750&sh=750&sm=fit&sfrm=png',
+                'https://www.cartier.com/dw/image/v2/BGTJ_PRD/on/demandware.static/-/Sites-cartier-master/default/dw11e4683d/images/large/75f9f87adcaf5edfbedb91f81890104a.png?sw=750&sh=750&sm=fit&sfrm=png',
+                'https://www.cartier.com/dw/image/v2/BGTJ_PRD/on/demandware.static/-/Sites-cartier-master/default/dwf4dd257a/images/large/dbec8708dc6152eb910c5afba372fd31.png?sw=750&sh=750&sm=fit&sfrm=png',
+                'https://www.cartier.com/dw/image/v2/BGTJ_PRD/on/demandware.static/-/Sites-cartier-master/default/dw481f3b8b/images/large/5c1fab85f3435b71b78f30f00265254d.png?sw=750&sh=750&sm=fit&sfrm=png',
+                'https://www.cartier.com/dw/image/v2/BGTJ_PRD/on/demandware.static/-/Sites-cartier-master/default/dw5832a38a/images/large/59de99e3c56c54a1a6165edfd21381ed.png?sw=750&sh=750&sm=fit&sfrm=png'
+            ],
+            'relogio-cartier-baignoire': [
+                'https://lh3.googleusercontent.com/pw/AP1GczMLCtMxrfU2e-hkn1gDKVeoice-MeR9Tkw1-5RDRlaX5BDk0u-YpcSEjHeNQ0boxKpYjET8-gy3wqtpJ8OAw13HaSHdwSidXk738o7RtGozCMtER23GvJA-hV4KZO6hsNhyjM2VDd9UYnGIQadiz9l9Ww=w554-h554-s-no-gm?authuser=0',
+                'https://cartier.vtexassets.com/arquivos/ids/242393-1200-auto?v=638762832579400000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242394-1200-auto?v=638762832579400000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242395-1200-auto?v=638762832579400000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242394-1200-auto?v=638762832579400000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/242397-1200-auto?v=638762832579400000&width=1200&height=auto&aspect=true'
+            ],
+            'relogio-bulgari-serpenti': [
+                'https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/1447968.png',
+                'https://media.bulgari.com/image/upload/c_pad,h_1124,w_1440/q_auto/f_auto/1447967.png',
+                'https://media.bulgari.com/image/upload/c_fill,h_1635,w_1090/q_auto/f_auto/1390539.png'
+            ],
+            'relogio-bulgari-seductori': [
+                'https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/484784.png',
+                'https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/1542872.png',
+                'https://media.bulgari.com/image/upload/c_fill,h_1635,w_1090/q_auto/f_auto/1475391.png'
+            ],
+            'relogio-rolex-lady-1': [
+                'https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1200/v1/catalogue/2025/upright-c/m128399tbr-0029',
+                'https://montecristo.com.br/cdn/shop/files/04_67f96baf-031a-4860-8c68-c8c5d155c8e2.webp?v=1756833651',
+                'https://montecristo.com.br/cdn/shop/files/02_e6ee5d16-8445-4be5-a22d-f26e3a7ee105.webp?v=1756833652'
+            ],
+            'relogio-rolex-lady-2': [
+                'https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1200/v1/catalogue/2025/upright-c/m278383rbr-0029',
+                'https://images.hbjo-online.com/images/rolex/v7/model_gallery_assets_landscape/Slide4_landscape/m278383rbr-0029.webp',
+                'https://images.hbjo-online.com/images/rolex/v7/model_gallery_assets_landscape/Slide2_landscape/m278383rbr-0029.webp'
+            ],
+            'relogio-rolex-lady-11': [
+                'https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1920/v1/catalogue/2025/upright-c/m279173-0011.jpg',
+                'https://www.sarajoias.com.br/rolex/fotos/d/slide4_landscape/m126333-0010.webp',
+                'https://www.sarajoias.com.br/rolex/fotos/d/slide2_landscape/m126333-0010.webp'
+            ],
+            'relogio-rolex-lady-12': [
+                'https://media.rolex.com/image/upload/q_auto:eco/f_auto/t_v7-majesty/c_limit,w_1200/v1/catalogue/2025/upright-c/m279175-0009',
+                'https://www.europewatch.com/media/catalog/product/cache/47d88dc55763f684a46aa73b92d883d3/m/2/m279175-0009_10.png',
+                'https://www.europewatch.com/media/catalog/product/cache/47d88dc55763f684a46aa73b92d883d3/m/2/m279175-0009_8.png'
+            ],
+
+
+            //óculos
+            'oculos-miu-miu-1': [
+                'https://www.otticasm.com/media/catalog/product/cache/all/small_image/1200x800/9df78eab33525d08d6e5fb8d27136e95/m/i/miu-miu-mu-04zs-19p2z1.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU04Z/E19PF02Z1/SMU04Z_E19P_F02Z1_C_050_SLS.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU04Z/E19PF02Z1/SMU04Z_E19P_F02Z1_C_050_MDL.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg'
+            ],
+            'oculos-tom-ford-1': [
+                'https://wanny.vteximg.com.br/arquivos/ids/192203-500-500/Produto.jpg?v=638803667335270000',
+                'https://wanny.vteximg.com.br/arquivos/ids/192204-500-500/Produto.jpg?v=638803667335270000',
+                'https://wanny.vteximg.com.br/arquivos/ids/192205-500-500/Produto.jpg?v=638803667335270000'
+            ],
+            'oculos-tom-ford-2': [
+                'https://cdn.media.amplience.net/i/tom_ford/FT1225_01E_59MM_A?w=3000',
+                'https://cdn.media.amplience.net/i/tom_ford/FT1225_01E_59MM_B?w=3000',
+                'https://cdn.media.amplience.net/i/tom_ford/FT1225_01E_59MM_C?w=3000'
+            ],
+            'oculos-valentino-1': [
+                'https://wanny.vteximg.com.br/arquivos/ids/179938-750-750/Produto.jpg?v=638024365385500000',
+                'https://wanny.vteximg.com.br/arquivos/ids/179939-750-750/Produto.jpg?v=638024365385500000',
+                'https://wanny.vteximg.com.br/arquivos/ids/179940-750-750/Produto.jpg?v=638024365385500000'
+            ],
+            'oculos-bottega-1': [
+                'https://pretavoir.us/cdn/shop/files/bottega-veneta-bv1305s-002-hd-1.jpg?v=1707301799',
+                'https://pretavoir.us/cdn/shop/files/bottega-veneta-bv1305s-002-hd-2.jpg?v=1707301799',
+                'https://pretavoir.us/cdn/shop/files/bottega-veneta-bv1305s-002-hd-3.jpg?v=1707301799'
+            ],
+            'oculos-miu-miu-2': [
+                'https://cdn-images.farfetch-contents.com/18/34/35/34/18343534_39724254_1000.jpg',
+                'https://m.media-amazon.com/images/I/61RUXuVo-pL._AC_SX679_.jpg',
+                'https://m.media-amazon.com/images/I/610qsQ18t8L._AC_SX679_.jpg',
+                'https://m.media-amazon.com/images/I/61BqMA2E5VL._AC_SX679_.jpg'
+            ],
+            'oculos-treasure-1': [
+                'https://assets.christiandior.com/is/image/diorprod/DTRER1FSR10A0_SBG_E03?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/DTRER1FSR10A0_SBG_E02?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/DTRER1FSR10A0_SBG_E01?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/DTRER1FSR10A0_SBG_E09?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/LOOK_F_26_1_LOOK_334_E07?$lookDefault_GH-GHC$&crop=568,0,1864,2000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85'
+            ],
+            'oculos-miu-miu-3': [
+                'https://cdn-images.farfetch-contents.com/23/19/26/10/23192610_53275039_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/24/26/70/02/24267002_54567807_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/24/26/70/02/24267002_54567094_1000.jpg'
+            ],
+            'oculos-cartier-1': [
+                'https://lh3.googleusercontent.com/pw/AP1GczNs0wqwcWRiXTSrammCpEpPjQZpygFXkNrE2EwiQb5tOLkFCFty8wdEoaixdoHUZaAT5mmxkfSWQ3nXpGQdXjjC9jzgVzSQJC3OUYVqRNr_NZbBIYoIvTn4kR2icGwmPaY9JoiA_2trkBcQD_GGn8LWww=w945-h945-s-no-gm?authuser=0',
+                'https://img4.dhresource.com/webp/m/0x0/f3/albu/ys/n/24/82b7b8bb-ad1d-474e-9568-547f71c2332a.jpg',
+            ],
+            'Miu Miu Aube': [
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_SLR.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_SLS.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_SLT.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_MDR.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_SLF.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_MDF.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_MDL.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg'
+            ],
+            'Miu Miu Aube-2': [
+                'https://cdn-images.farfetch-contents.com/28/40/35/86/28403586_57802945_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/28/40/35/86/28403586_57802952_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/28/40/35/86/28403586_57802937_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/28/40/35/86/28403586_57802949_1000.jpg'
+            ],
+            'Miu Miu Glimpse': [
+                'https://cdn-images.farfetch-contents.com/30/04/69/79/30046979_59104928_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/30/04/69/79/30046979_59104913_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/30/04/69/79/30046979_59104923_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/30/04/69/79/30046979_59104921_1000.jpg'
+            ],
+            'Prada Symbole oversized': [
+                'https://cdn-images.farfetch-contents.com/16/51/27/25/16512725_32103692_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/16/51/27/25/16512725_32103694_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/16/51/27/25/16512725_32103690_1000.jpg'
+            ],
+            'Gucci geométrico': [
+                'https://cdn-images.farfetch-contents.com/28/55/34/00/28553400_58117955_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/28/55/34/00/28553400_58117958_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/28/55/34/00/28553400_58117951_1000.jpg'
+            ],
+            'Celine Triomphe': [
+                'https://asset.m-gs.kr/prod/1091811686/2/550',
+                'https://image.celine.com/a2c8d88ab703689/original/4S282CPLB-19TR_3_SS24_W.jpg?im=Resize=(2000)',
+                'https://image.celine.com/1006beed20e2d877/original/4S282CPLB-19TR_4_SS24_W.jpg?im=Resize=(2000)',
+                'https://image.celine.com/54753bee51926621/original/4S282CPLB-19TR_1_SS24_W.jpg?im=Resize=(2000)',
+                'https://image.celine.com/6189ea1c85971e64/original/4S282CPLB-19TR_2_SS24_W.jpg?im=Resize=(2000)'
+            ],
+            'Chanel Gatinho': [
+                'https://sunluxmx.com/cdn/shop/files/CHA_600x.jpg?v=1752012411',
+                'https://sunluxmx.com/cdn/shop/files/CHA_2_600x.jpg?v=1752012411',
+                'https://sunluxmx.com/cdn/shop/files/CHA_3_600x.jpg?v=1752012411'
+            ],
+            'Chanel Gatinho-2': [
+                'https://www.chanel.com/images///t_fashioncommercial_trim,f_auto,q_auto:good,dpr_1.1/w_480/-9537978597406.jpg',
+                'https://www.chanel.com/images///t_fashioncommercial_trim,f_auto,q_auto:good,dpr_1.1/w_960/-9540996890654.jpg',
+                'https://www.chanel.com/images///t_fashioncommercial_trim,f_auto,q_auto:good,dpr_1.1/w_960/-9540997316638.jpg',
+                'https://www.chanel.com/images///t_fashioncommercial_trim,f_auto,q_auto:good,dpr_1.1/w_1600/-9540995809310.jpg'
+            ],
+            'oculos-bottega-2': [
+                'https://bottega-veneta.dam.kering.com/m/420c1ddb34ebd4c5/Large-660165V23302819_A.jpg?v=6',
+                'https://bottega-veneta.dam.kering.com/m/63154978d0ccba3c/Large-660165V23302819_C.jpg?v=6',
+                'https://bottega-veneta.dam.kering.com/m/d413bd37db00687/Large-660165V23302819_D.jpg?v=6'
+            ],
+            'oculos-YSL-1': [
+                'https://saint-laurent.dam.kering.com/m/1370273f34b71b83/Medium2-671762Y99011000_A.jpg?v=10',
+                'https://saint-laurent.dam.kering.com/m/1ccd2dc38e4b6588/Medium2-671762Y99011000_B.jpg?v=9'
+            ],
+
+            //calcados
+            'calcado-valentino-1': [
+                'https://valentino-cdn.thron.com/delivery/public/image/valentino/17de05d5-f3a9-4f38-a500-5d3465082691/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80&size=35&format=auto',
+                'https://valentino-cdn.thron.com/delivery/public/image/valentino/6098f4c7-9e68-485e-8793-fa5475face8b/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80&size=35&format=auto',
+                'https://valentino-cdn.thron.com/delivery/public/image/valentino/81e8f894-4b4c-4e1c-b97e-e0263a7d7f39/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80&size=35&format=auto',
+                'https://valentino-cdn.thron.com/delivery/public/image/valentino/402d2558-3a2f-4039-a649-4359e22c6c0b/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80&size=35&format=auto'
+            ],
+            'calcado-saint-laurent-1': [
+                'https://saint-laurent.dam.kering.com/m/421f6e40d816a64/eCom-800164AADX21000_B.jpg?v=5',
+                'https://saint-laurent.dam.kering.com/m/6829a97f4319d275/Medium2-800164AADX21000_A.jpg?v=6',
+                'https://saint-laurent.dam.kering.com/m/42b550946231ccfc/Medium2-800164AADX21000_C.jpg?v=3'
+            ],
+            'calcado-chanel-1': [
+                'https://cdn.vnda.com.br/1000x/asecondchance/2023/10/10/14_56_08_903_14_10_7_793_whatsapp20image202023101020at20132739201.jpeg?v=1696960654',
+                'https://www.chanel.com/images///f_auto,q_auto:good,dpr_1.1/w_960/-9543237795870.jpg',
+                'https://www.chanel.com/images///f_auto,q_auto:good,dpr_1.1/w_960/-9543237959710.jpg'
+            ],
+            'calcado-saint-laurent-2': [
+                'https://saint-laurent.dam.kering.com/m/50884b56d09b25ee/eCom-806685AADF12526_B.jpg?v=5',
+                'https://saint-laurent.dam.kering.com/m/5d2e6ff48ffeac80/Medium2-806685AADF12526_A.jpg?v=6',
+                'https://saint-laurent.dam.kering.com/m/2db9a6f7062a7e79/Medium2-806685AADF12526_C.jpg?v=3'
+            ],
+            'calcado-saint-laurent-3': [
+                'https://cdn-images.farfetch-contents.com/21/99/29/60/21992960_65046420_1000.jpg',
+                'https://saint-laurent.dam.kering.com/m/7eda317a53cfb50/Medium2-5576621TV1A1000_D.jpg?v=4',
+                'https://saint-laurent.dam.kering.com/m/54b9ffd2b0cbc0c6/Medium2-5576621TV1A1000_C.jpg?v=4',
+                'https://saint-laurent.dam.kering.com/m/34fa6194a94961d2/Medium2-5576621TV1A1000_B.jpg?v=4'
+            ],
+            'calcado-dolce-1': [
+                'https://cdn-images.farfetch-contents.com/15/61/99/66/15619966_28278650_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/15/61/99/66/15619966_28278651_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/15/61/99/66/15619966_28278653_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/15/61/99/66/15619966_28278652_1000.jpg'
+            ],
+            'calcado-caovilla-1': [
+                'https://cdn-images.farfetch-contents.com/30/64/98/21/30649821_59680088_1000.jpg',
+                'https://www.pegueibode.com.br/cdn/shop/files/WhatsAppImage2026-01-21at13.52.56_2.jpg?v=1769014480&width=990',
+                'https://www.pegueibode.com.br/cdn/shop/files/WhatsAppImage2026-01-21at13.52.56_1.jpg?v=1769014498&width=990'
+            ],
+            'calcado-gucci-1': [
+                'https://cdn-images.farfetch-contents.com/29/84/62/21/29846221_58892503_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/29/84/62/21/29846221_58892487_1000.jpg',
+                'https://www.jdmgrifes.com.br/wp-content/uploads/2024/01/Imagem-do-WhatsApp-de-2024-01-24-as-15.44.21_80a4eefe.jpg'
+            ],
+            'calcado-gucci-2': [
+                'https://www.mytheresa.com/image/1094/1238/100/6f/P00938106.jpg',
+                'https://cdn-images.italist.com/image/upload/t_medium_dpr_2_q_auto_v_2,f_auto/66a3ec4de2dd8c587a89a7acc5b75de1.jpg',
+                'https://www.mytheresa.com/image/1094/1238/100/6f/P00938106_d2.jpg',
+                'https://www.mytheresa.com/image/1094/1238/100/6f/P00938106_d4.jpg',
+                'https://www.mytheresa.com/image/1094/1238/100/6f/P00938106_d1.jpg'
+            ],
+            'calcado-dior-1': [
+                'https://midonstore.com/cdn/shop/products/1_dd11b3ac-3904-4132-aa34-04a88ba13a28.png?v=1744869447&width=2048',
+                'https://midonstore.com/cdn/shop/products/2_a3afb30b-9069-4bc4-b28a-6db12d8434cd.png?v=1744869447&width=2048',
+                'https://midonstore.com/cdn/shop/products/8_39b2842f-3808-4b90-b392-d364f08e8b44.png?v=1744869447&width=2048',
+                'https://midonstore.com/cdn/shop/products/3_ec8d4c08-05fd-41a5-bc4c-407215c56a95.png?v=1744869447&width=2048'
+            ],
+            'calcado-newbalance-1': [
+                'https://cdn.myikas.com/images/28864072-1728-4c41-a60f-7e46390d0b7c/3b98d071-d043-4c48-a1c1-feb690d10eff/image_1080.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/5/5E1/5E165E/3D8CF0009/5E165E_3D8C_F0009_F_BD05_SLR.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/5/5E1/5E165E/3D8CF0009/5E165E_3D8C_F0009_F_BD05_SLS.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/5/5E1/5E165E/3D8CF0009/5E165E_3D8C_F0009_F_BD05_SLQ.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/5/5E1/5E165E/3D8CF0009/5E165E_3D8C_F0009_F_BD05_SLT.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg'
+            ],
+            'acessorio-cartier-1': [
+                'https://cartier.vtexassets.com/arquivos/ids/211109/B6067517_2.png?v=638956120448730000',
+                'https://cartier.vtexassets.com/arquivos/ids/211058-1200-auto?v=637871166780400000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/211160-1200-auto?v=638956120448730000&width=1200&height=auto&aspect=true'
+            ],
+            'acessorio-cartier-2': [
+                'https://cartier.vtexassets.com/arquivos/ids/199718-1200-auto?v=637269792238100000&width=1200&height=auto&aspect=true',
+                'https://cartier.vtexassets.com/arquivos/ids/200464-1200-auto?v=638841429044270000&width=1200&height=auto&aspect=true'
+            ],
+            'acessorio-tiffany-1': [
+                'https://tiffany.vtexassets.com/arquivos/ids/185691-1200-1200/pulseira-de-elos-medios-em-ouro-amarelo-com-diamantes-70751216_1.jpg?v=638969301659900000',
+                'https://tiffany.vtexassets.com/arquivos/ids/187078-1200-1200/pulseira-de-elos-medios-em-ouro-amarelo-com-diamantes-70751216_5.jpg?v=639059925871670000',
+                'https://tiffany.vtexassets.com/arquivos/ids/187270-1200-1200/pulseira-de-elos-medios-em-ouro-amarelo-com-diamantes-70751216_6.jpg?v=639059925871800000',
+                'https://tiffany.vtexassets.com/arquivos/ids/186107-1200-1200/pulseira-de-elos-medios-em-ouro-amarelo-com-diamantes-70751216_2.jpg?v=639059925871670000'
+            ],
+            'acessorio-tiffany-2': [
+                'https://press.tiffany.com/wp-content/uploads/69525881_BLT_H23_v1_TM_092023_RGB_ALT_4x5-1.jpg',
+                'https://frontrow.com.br/cdn/shop/files/4498364922073c4f781d9463951ce429.jpg?v=1753731948&width=3000',
+                'https://frontrow.com.br/cdn/shop/files/a7d0c3ac7198257160c52ecbc039cd35.jpg?v=1753731948&width=3000',
+                'https://frontrow.com.br/cdn/shop/files/082fadf47ec4b3fe2d3292a3e1dcfced.jpg?v=1753731948&width=3000'
+            ],
+            'acessorio-tiffany-3': [
+                'https://images.tcdn.com.br/img/img_prod/1346020/gargantilha_knot_com_diamantes_em_ouro_18k_2977_1_5d013b4469c391a88335d7f644ff89bf.png',
+                'https://media.tiffany.com/is/image/tco/68887216_PDT_ALT3X1?hei=615&wid=615&fmt=webp',
+                'https://media.tiffany.com/is/image/tco/68887216_PDT_ALT3X2?hei=615&wid=615&fmt=webp',
+            ],
+            'acessorio-tiffany-4': [
+                'https://tiffany.vtexassets.com/arquivos/ids/155562/bracelete-bone-pequeno-de-elsa-peretti-para-o-pulso-direito-em-prata-de-lei-69860303_1.jpg?v=638224350095870000',
+                'https://tiffany.vtexassets.com/arquivos/ids/156073/bracelete-bone-pequeno-de-elsa-peretti-para-o-pulso-direito-em-prata-de-lei-69860303_2.jpg?v=638224352233230000',
+                'https://tiffany.vtexassets.com/arquivos/ids/156573/bracelete-bone-pequeno-de-elsa-peretti-para-o-pulso-direito-em-prata-de-lei-69860303_3.jpg?v=638224354431130000',
+                'https://tiffany.vtexassets.com/arquivos/ids/157033/bracelete-bone-pequeno-de-elsa-peretti-para-o-pulso-direito-em-prata-de-lei-69860303_4.jpg?v=638224356465400000',
+                'https://tiffany.vtexassets.com/arquivos/ids/157430/bracelete-bone-pequeno-de-elsa-peretti-para-o-pulso-direito-em-prata-de-lei-69860303_5.jpg?v=638224358264370000'
+            ],
+            'acessorio-tiffany-5': [
+                'https://tiffany.vtexassets.com/arquivos/ids/179645/Bracelete-Narrow-em-Ouro-Amarelo-com-Diamantes-74363520_1.jpg?v=638844700307600000',
+                'https://tiffany.vtexassets.com/arquivos/ids/182219/Bracelete-Narrow-em-Ouro-Amarelo-com-Diamantes-74363520_4.jpg?v=638900251688030000',
+                'https://tiffany.vtexassets.com/arquivos/ids/182971/Bracelete-Narrow-em-Ouro-Amarelo-com-Diamantes-74363520_5.jpg?v=638900251688170000',
+                'https://tiffany.vtexassets.com/arquivos/ids/183549/Bracelete-Narrow-em-Ouro-Amarelo-com-Diamantes-74363520_6.jpg?v=638900251688170000',
+                'https://tiffany.vtexassets.com/arquivos/ids/183773/Bracelete-Narrow-em-Ouro-Amarelo-com-Diamantes-74363520_7.jpg?v=638900251688170000',
+                'https://tiffany.vtexassets.com/arquivos/ids/180519/Bracelete-Narrow-em-Ouro-Amarelo-com-Diamantes-74363520_2.jpg?v=638900251688030000'
+            ],
+            'acessorio-tiffany-6': [
+                'https://tiffany.vtexassets.com/arquivos/ids/174471/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70158205_1.jpg?v=638318772924000000',
+                'https://tiffany.vtexassets.com/arquivos/ids/174473/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70877759_2.jpg?v=638303946556400000',
+                'https://tiffany.vtexassets.com/arquivos/ids/174474/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70877759_3.jpg?v=638303946748600000',
+                'https://tiffany.vtexassets.com/arquivos/ids/174475/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70877759_4.jpg?v=638303946935000000',
+                'https://tiffany.vtexassets.com/arquivos/ids/174476/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70877759_5.jpg?v=638303947113070000',
+                'https://tiffany.vtexassets.com/arquivos/ids/174477/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70877759_6.jpg?v=638303947295470000',
+                'https://tiffany.vtexassets.com/arquivos/ids/174478/bracelete-tiffany-lock-em-ouro-amarelo-com-pave-diamantes-70877759_7.jpg?v=638303947483130000'
+            ],
+            'acessorio-tiffany-7': [
+                'https://tiffany.vtexassets.com/arquivos/ids/179655/Bracelete-Narrow-em-Ouro-Branco-com-Diamantes-74363881_1.jpg?v=638844700341500000',
+                'https://tiffany.vtexassets.com/arquivos/ids/182229/Bracelete-Narrow-em-Ouro-Branco-com-Diamantes-74363881_4.jpg?v=638844712786000000',
+                'https://tiffany.vtexassets.com/arquivos/ids/182981/Bracelete-Narrow-em-Ouro-Branco-com-Diamantes-74363881_5.jpg?v=638844716298130000',
+                'https://tiffany.vtexassets.com/arquivos/ids/183559/Bracelete-Narrow-em-Ouro-Branco-com-Diamantes-74363881_6.jpg?v=638844719282470000',
+                'https://tiffany.vtexassets.com/arquivos/ids/183783/Bracelete-Narrow-em-Ouro-Branco-com-Diamantes-74363881_7.jpg?v=638844720761370000',
+                'https://tiffany.vtexassets.com/arquivos/ids/180529/Bracelete-Narrow-em-Ouro-Branco-com-Diamantes-74363881_2.jpg?v=638844704589470000'
+            ],
+            'acessorio-tiffany-8': [
+                'https://tiffany.vtexassets.com/arquivos/ids/168927/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_1.jpg?v=638285930767530000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168928/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_2.jpg?v=638285930770800000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168929/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_3.jpg?v=638285930774230000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168930/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_4.jpg?v=6382859307808000000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168931/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_5.jpg?v=638285930784300000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168932/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_6.jpg?v=638285930788170000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168933/bracelete-tiffany-lock-em-ouro-branco-com-pave-diamantes-70424932_7.jpg?v=638285930792900000'
+            ],
+            'acessorio-tiffany-9': [
+                'https://tiffany.vtexassets.com/arquivos/ids/175755/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_1.jpg?v=638326424659030000',
+                'https://tiffany.vtexassets.com/arquivos/ids/175756/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_2.jpg?v=638326424669700000',
+                'https://tiffany.vtexassets.com/arquivos/ids/175757/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_3.jpg?v=638326424677270000',
+                'https://tiffany.vtexassets.com/arquivos/ids/175758/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_4.jpg?v=638326424688200000',
+                'https://tiffany.vtexassets.com/arquivos/ids/175759/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_5.jpg?v=638326424698100000',
+                'https://tiffany.vtexassets.com/arquivos/ids/175760/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_6.jpg?v=638326424713930000',
+                'https://tiffany.vtexassets.com/arquivos/ids/175761/pulseira-tiffany-lock-em-ouro-rosa-e-ouro-branco-com-diamantes-70158337_7.jpg?v=638326424720800000'
+            ],
+            'acessorio-tiffany-10': [
+                'https://tiffany.vtexassets.com/arquivos/ids/169109/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_1.jpg?v=638285931573700000',
+                'https://tiffany.vtexassets.com/arquivos/ids/169110/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_2.jpg?v=638285931577300000',
+                'https://tiffany.vtexassets.com/arquivos/ids/169111/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_3.jpg?v=638285931584830000',
+                'https://tiffany.vtexassets.com/arquivos/ids/169112/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_4.jpg?v=638285931588630000',
+                'https://tiffany.vtexassets.com/arquivos/ids/169113/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_5.jpg?v=638285931592400000',
+                'https://tiffany.vtexassets.com/arquivos/ids/169114/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_6.jpg?v=638285931595870000',
+                'https://tiffany.vtexassets.com/arquivos/ids/169115/bracelete-tiffany-lock-em-ouro-rosa-com-pave-diamantes-70877732_7.jpg?v=638285931599930000'
+            ],
+            'acessorio-tiffany-11': [
+                'https://tiffany.vtexassets.com/arquivos/ids/168441/bracelete-tiffany-knot-de-duas-voltas-em-ouro-amarelo-68890217_2.jpg?v=638285928526100000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168440/bracelete-tiffany-knot-de-duas-voltas-em-ouro-amarelo-68890217_1.jpg?v=638285928522330000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168442/bracelete-tiffany-knot-de-duas-voltas-em-ouro-amarelo-68890217_3.jpg?v=638285928529700000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168443/bracelete-tiffany-knot-de-duas-voltas-em-ouro-amarelo-68890217_4.jpg?v=638285928535000000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168444/bracelete-tiffany-knot-de-duas-voltas-em-ouro-amarelo-68890217_5.jpg?v=638285928538770000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168445/bracelete-tiffany-knot-de-duas-voltas-em-ouro-amarelo-68890217_6.jpg?v=638285928542970000'
+            ],
+            'acessorio-tiffany-12': [
+                'https://tiffany.vtexassets.com/arquivos/ids/168465/bracelete-tiffany-knot-de-duas-voltas-em-ouro-branco-com-diamantes-70300486_2.jpg?v=638285928640630000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168464/bracelete-tiffany-knot-de-duas-voltas-em-ouro-branco-com-diamantes-70300486_1.jpg?v=638285928635930000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168466/bracelete-tiffany-knot-de-duas-voltas-em-ouro-branco-com-diamantes-70300486_3.jpg?v=638285928645400000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168467/bracelete-tiffany-knot-de-duas-voltas-em-ouro-branco-com-diamantes-70300486_4.jpg?v=638285928649300000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168468/bracelete-tiffany-knot-de-duas-voltas-em-ouro-branco-com-diamantes-70300486_5.jpg?v=638285928653500000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168469/bracelete-tiffany-knot-de-duas-voltas-em-ouro-branco-com-diamantes-70300486_6.jpg?v=638285928658500000'
+            ],
+            'acessorio-tiffany-13': [
+                'https://tiffany.vtexassets.com/arquivos/ids/168493/bracelete-tiffany-knot-de-duas-voltas-em-ouro-com-diamantes-69525911_2.jpg?v=639059877770500000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168492/bracelete-tiffany-knot-de-duas-voltas-em-ouro-com-diamantes-69525911_1.jpg?v=638285928754030000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168495/bracelete-tiffany-knot-de-duas-voltas-em-ouro-com-diamantes-69525911_4.jpg?v=639059877770670000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168496/bracelete-tiffany-knot-de-duas-voltas-em-ouro-com-diamantes-69525911_5.jpg?v=639059877770670000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168498/bracelete-tiffany-knot-de-duas-voltas-em-ouro-com-diamantes-69525911_7.jpg?v=639059877770670000'
+            ],
+            'acessorio-tiffany-14': [
+                'https://tiffany.vtexassets.com/arquivos/ids/168532/bracelete-tiffany-knot-de-duas-voltas-em-ouro-rosa-70152622_2.jpg?v=639059877987600000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168531/bracelete-tiffany-knot-de-duas-voltas-em-ouro-rosa-70152622_1.jpg?v=638285928922770000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168533/bracelete-tiffany-knot-de-duas-voltas-em-ouro-rosa-70152622_3.jpg?v=639059877987600000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168534/bracelete-tiffany-knot-de-duas-voltas-em-ouro-rosa-70152622_4.jpg?v=639059877987770000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168535/bracelete-tiffany-knot-de-duas-voltas-em-ouro-rosa-70152622_5.jpg?v=639059877987770000',
+                'https://tiffany.vtexassets.com/arquivos/ids/168536/bracelete-tiffany-knot-de-duas-voltas-em-ouro-rosa-70152622_6.jpg?v=639059877987770000'
+            ],
+            'acessorio-swarovski-1': [
+                'https://http2.mlstatic.com/D_Q_NP_610320-CBT106843540322_022026-O.webp',
+                'https://cdn-images.farfetch-contents.com/31/84/11/76/31841176_62189544_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/31/84/11/76/31841176_62257607_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/31/84/11/76/31841176_62189506_1000.jpg',
+                'https://swarovski.vtexassets.com/arquivos/ids/193720-1200-auto?v=639080743856400000&width=1200&height=auto&aspect=true'
+            ],
+            'acessorio-hermes-1': [
+                'https://assets.hermes.com/is/image/hermesproduct/pulseira-clic-h--700001F%208A-worn-1-0-0-800-800_g.jpg',
+                'https://assets.voila.id/voila/images/product/hermes/2product-H700001F-1ZPM-Xms-2023-03-29T1237540700.jpeg',
+                'https://assets.hermes.com/is/image/hermesproduct/pulseira-clic-h--700001F%2001-front-wm-1-0-0-800-800_g.jpg',
+                'https://dptafza4tn3d0.cloudfront.net/cache/catalog/10252/6-750x937.jpg',
+                'https://assets.hermes.com/is/image/hermesproduct/pulseira-clic-h--700001FP01-front-wm-1-0-0-1000-1000_g.jpg',
+                'https://cdn.shopify.com/s/files/1/0557/3299/4112/files/bracelet-clic-h--700001FP31-worn-1-0-0-1600-1600-q99_g_2048x2048.heic?v=1708896619',
+                'https://assets.hermes.com/is/image/hermesproduct/pulseira-clic-h--700001FP8A-front-wm-1-0-0-800-800_g.jpg',
+                'https://assets.hermes.com/is/image/hermesproduct/pulseira-clic-h--700001FP1Z-front-wm-1-0-0-800-800_g.jpg'
+            ],
+            'acessorio-bulgari-1': [
+                'https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/459655.png',
+                'https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/459656.png',
+                'https://media.bulgari.com/image/upload/c_pad,h_851,w_1090/q_auto/f_auto/459658.png'
+            ],
+            'cinto-chloe': [
+                'https://cdn-images.farfetch-contents.com/32/88/47/04/32884704_63328413_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/32/88/47/04/32884704_63327152_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/32/88/47/04/32884704_63265415_1000.jpg'
+            ],
+            'cinto-gucci-preto': [
+                'https://cdn-images.farfetch-contents.com/15/16/50/27/15165027_56058889_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/15/36/99/43/15369943_54741546_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/15/36/99/43/15369943_54741545_1000.jpg'
+            ],
+            'cinto-gucci-rosa': [
+                'https://cdn.sistemawbuy.com.br/arquivos/1f3d59f170f93f0b98c48787c6c34f03/produtos/661556e4458bc/sem-ta-tulo-2prancheta-1-copiar-4prancheta-1-copiar-13-661556e48c764.jpg',
+                'https://cdn-images.farfetch-contents.com/22/13/06/10/22130610_53139487_1000.jpg'
+            ],
+            'cinto-valentino-preto': [
+                'https://cintosjulioalmeida.com.br/wp-content/uploads/2020/03/13898886_17705319_480.jpg',
+                'https://cintosjulioalmeida.com.br/wp-content/uploads/2020/03/13898886_17705322_480.jpg'
+            ],
+            'cinto-valentino-branco': [
+                'https://valentino-cdn.thron.com/delivery/public/thumbnail/valentino/9cf8a8cf-617c-4c99-9302-2df341e8a8ac/ihqstx/std/578x0/Reversible-Vlogo-Signature-Belt-In-Glossy-Calfskin-40-Mm?quality=80&size=35&format=auto',
+                'https://valentino-cdn.thron.com/delivery/public/image/valentino/2425ea50-4e0f-4249-90e7-d8f01e5e2be3/ihqstx/std/2000x0/Reversible-Vlogo-Signature-Belt-In-Glossy-Calfskin-40-Mm?quality=80&size=35&format=auto',
+                'https://valentino-cdn.thron.com/delivery/public/thumbnail/valentino/65bed0d5-6462-4965-9ee6-6aebca0f427f/ihqstx/std/578x0/Reversible-Vlogo-Signature-Belt-In-Glossy-Calfskin-40-Mm?quality=80&size=35&format=auto'
+            ],
+            'cinto-lv-tradicional': [
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-30-mm--M0322U_PM1_Closeup%20view.jpg',
+                'https://gringa.com.br/cdn/shop/files/CINTO-LOUIS-VUITTON-MONOGRAM-LV-INITIALES-REVERSIBLE-BELT-80-PRETO-ORIGINAL-00053779c.png?v=1687815913&width=960',
+                'https://gringa.com.br/cdn/shop/files/CINTO-LOUIS-VUITTON-MONOGRAM-LV-INITIALES-REVERSIBLE-BELT-80-PRETO-ORIGINAL-00053779m.png?v=1687815913&width=960'
+            ],
+            'cinto-lv-preto': [
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-lv-initiales-reversivel-40mm---M9043U_PM1_Closeup%20view.jpg',
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-35-mm--M0450U_PM2_Front%20view.png?wid=1090&hei=1090',
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-35-mm--M0450U_PM1_Back%20view.png?wid=1090&hei=1090',
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-35-mm--M0450U_PM1_Worn%20view.png?wid=1090&hei=1090'
+            ],
+            'cinto-lv-preto-quadriculado': [
+                'https://www.brogueshopbr.com/cdn/shop/files/cinto-lv-preto-azul--02.jpg?v=1731847382&width=300',
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-40mm--M0213U_PM1_Worn%20view.png?wid=1090&hei=1090',
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-40mm--M0213U_PM1_Detail%20view.png?wid=1090&hei=1090',
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-40mm--M0213U_PM1_Other%20view.png?wid=1090&hei=1090',
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-40mm--M0213U_PM1_Cropped%20worn%20view.png?wid=1090&hei=1090'
+            ],
+            'cinto-hermes-branco': [
+                'https://assets.hermes.cn/is/image/hermesproduct/kelly-18-belt--069853CC01-worn-1-0-0-800-800_g.jpg',
+                'https://assets.hermes.cn/is/image/hermesproduct/kelly-18-belt--069853CC01-worn-2-0-0-800-800_g.jpg'
+            ],
+            'cinto-hermes-preto': [
+                'https://assets.hermes.com/is/image/hermesproduct/cinto-kelly-18--069853CC89-worn-1-0-0-800-800_g.jpg',
+                'https://assets.hermes.cn/is/image/hermesproduct/kelly-18-belt--069853CD89-worn-2-0-0-800-800_g.jpg'
+            ],
+            'cinto-gucci-branco': [
+                'https://lh3.googleusercontent.com/pw/AP1GczOBjEOrZ55ABpomSFTncWlxggU0FOAmuX48OoIYOw2aTWhaG_bcqWnwivmrbNuvgDi1Iq2jMIrDuJs4imPXSrqtNgAIwHv84UMSRVU113TssRKFOBcgJVgPj6bOHPZZGnvdTc0cm5QoMjdwWHNLd4-TYw=w800-h800-s-no-gm?authuser=0',
+                'https://gringa.com.br/cdn/shop/files/Capa_f163dcc4-269b-4fcd-affc-aad781a844a9.png?v=1768252548&width=960',
+                'https://gringa.com.br/cdn/shop/files/Fivela_7e99d1eb-3562-4036-bc24-f8f7fda40b60.png?v=1768252615&width=960',
+                'https://gringa.com.br/cdn/shop/files/modelo_f26fd0d6-97bf-4324-b3e5-0a78aad288b0.png?v=1768252615&width=960'
+            ],
+            'cinto-dior-montaigne': [
+                'https://assets.christiandior.com/is/image/diorprod/B0447UWEOM928_SBG_E01?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/B0447UWEOM928_SBG_E03?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/B0447UWEOM928_SBG_E06?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/B0447UWEOM928_SBG_E07?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/B0447UWEOM928_SBG_E09?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85'
+            ],
+            'cinto-dior-saddle': [
+                'https://assets.levelshoes.com/cdn-cgi/image/width=1500,height=2100,quality=95,format=webp/media/catalog/product/p/l/pl456109_1.jpg?ts=20250225043051',
+                'https://assets.levelshoes.com/cdn-cgi/image/width=720,height=1008,quality=85,format=webp/media/catalog/product/p/l/pl456109_4.jpg?ts=20250225043051',
+                'https://assets.levelshoes.com/cdn-cgi/image/width=720,height=1008,quality=85,format=webp/media/catalog/product/p/l/pl456109_5.jpg?ts=20250225043051'
+            ],
+            'cinto-ysl': [
+                'https://cdn-images.farfetch-contents.com/13/51/26/34/13512634_54213856_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/17/55/58/66/17555866_54381613_1000.jpg'
+            ]
+        };
+
+        function openGallery(galleryId) {
+            if (productGalleries[galleryId]) {
+                currentGallery = productGalleries[galleryId];
+                currentImageIndex = 0;
+                
+                // Gera thumbnails dinamicamente
+                const thumbContainer = document.querySelector(".gallery-thumbs-container");
+                thumbContainer.innerHTML = '';
+                currentGallery.forEach((image, index) => {
+                    const thumb = document.createElement('img');
+                    thumb.className = 'gallery-thumb w-20 h-20 object-cover cursor-pointer border-2 border-gray-200 hover:border-cyan-500 transition';
+                    thumb.src = image;
+                    thumb.onclick = () => {
+                        currentImageIndex = index;
+                        updateGalleryImage();
+                    };
+                    thumbContainer.appendChild(thumb);
+                });
+                
+                document.getElementById("modalGallery").classList.remove("hidden");
+                document.getElementById("galleryOverlay").classList.remove("hidden");
+                updateGalleryImage();
+            }
+        }
+
+        function closeGallery() {
+            document.getElementById("modalGallery").classList.add("hidden");
+            document.getElementById("galleryOverlay").classList.add("hidden");
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % currentGallery.length;
+            updateGalleryImage();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + currentGallery.length) % currentGallery.length;
+            updateGalleryImage();
+        }
+
+        function updateGalleryImage() {
+            document.getElementById("mainGalleryImage").src = currentGallery[currentImageIndex];
+            document.getElementById("imageCounter").textContent = `${currentImageIndex + 1} / ${currentGallery.length}`;
+            
+            // Atualiza estilos dos thumbnails
+            document.querySelectorAll(".gallery-thumb").forEach((thumb, index) => {
+                thumb.classList.toggle("border-cyan-500", index === currentImageIndex);
+                thumb.classList.toggle("border-gray-200", index !== currentImageIndex);
+            });
+        }
+    </script>
+
+    <!-- MODAL GALERIA -->
+<div id="modalGallery" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
+    <div class="bg-white w-full max-w-5xl mx-4 rounded-lg shadow-2xl overflow-hidden">
+        <!-- Cabeçalho -->
+        <div class="bg-cyan-500 text-white px-6 py-4 flex justify-between items-center">
+            <span class="text-sm uppercase tracking-widest font-bold" id="imageCounter">1 / 3</span>
+            <button onclick="closeGallery()" class="text-2xl hover:text-red-500 transition">✕</button>
+        </div>
+        
+        <!-- Imagem Principal -->
+        <div class="relative bg-white flex items-center justify-center min-h-[70vh]">
+            <img id="mainGalleryImage" src="" class="max-w-full max-h-[70vh] object-contain">
+            
+            <!-- Botões de Navegação -->
+            <button onclick="prevImage()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-12 h-12 rounded-full flex items-center justify-center text-xl transition">
+                ❮
+            </button>
+            <button onclick="nextImage()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-12 h-12 rounded-full flex items-center justify-center text-xl transition">
+                ❯
+            </button>
+        </div>
+        
+        <!-- Thumbnails -->
+        <div class="bg-gray-50 px-6 py-4 flex gap-3 overflow-x-auto justify-center gallery-thumbs-container">
+        </div>
+    </div>
+</div>
+
+<div id="galleryOverlay" class="fixed inset-0 bg-black/70 z-[65] hidden"></div>
+
+</body>
+</html>

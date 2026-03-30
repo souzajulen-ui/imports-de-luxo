@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calçados de Luxo | Imports de Luxo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-luxo: #FDFCFB;
+            --gold: #00CED1;
+            --black-soft: #1A1A1A;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-luxo); color: var(--black-soft); }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="antialiased text-gray-900 pt-32">
+
+    <div class="fixed top-0 left-0 w-full z-50 bg-black text-white text-[10px] uppercase tracking-[0.3em] py-2 text-center">
+        Passos de Elegância | Curadoria Exclusiva
+    </div>
+
+    <header class="fixed top-8 left-0 w-full z-50 bg-white py-6 px-6 md:px-20 flex items-center justify-between border-b border-gray-100 shadow-sm">
+        <div class="text-2xl md:text-3xl font-serif font-bold tracking-tight">
+            <a href="index.html">IMPORTS <span class="italic font-light">de Luxo</span></a>
+        </div>
+        
+        <!-- MOBILE MENU BUTTON -->
+        <button id="mobileMenuButton" onclick="toggleMobileMenu()" class="lg:hidden text-2xl p-2 text-gray-700 hover:text-cyan-500 transition" aria-label="Abrir menu">
+            ☰
+        </button>
+
+        <nav class="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center space-x-8 text-[13px] uppercase tracking-widest font-semibold">
+    <a href="index.html" class="hover:text-cyan-500 transition">Início</a>
+    <a href="bolsas.html" class="hover:text-cyan-500 transition">Bolsas</a>
+    <a href="relogios.html" class="hover:text-cyan-500 transition">Relógios</a>
+    <a href="oculos.html" class="hover:text-cyan-500 transition">Óculos</a>
+    <a href="calcados.html" class="hover:text-cyan-500 transition">Calçados</a>
+    <a href="acessorios.html" class="hover:text-cyan-500 transition">Acessórios</a>
+    <a href="cintos.html" class="hover:text-cyan-500 transition">Cintos</a>
+</nav>
+
+        <div class="flex items-center space-x-6 text-xl">
+            <button onclick="toggleCart()" class="relative hover:text-cyan-500 transition">
+                🛒
+                <span id="cartCount" class="absolute -top-2 -right-2 bg-cyan-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+            </button>
+        </div>
+    </header>
+
+        <div id="mobileNav" class="hidden fixed top-[110px] left-0 w-full bg-white z-40 border-b border-gray-100 md:hidden">
+    <nav class="flex flex-col p-6 space-y-4 text-[13px] uppercase tracking-[0.2em] font-bold">
+        <a href="index.html" class="hover:text-cyan-500 transition">Início</a>
+        
+        <a href="bolsas.html" class="hover:text-cyan-500 transition">Bolsas</a>
+        <a href="relogios.html" class="hover:text-cyan-500 transition">Relógios</a>
+        <a href="oculos.html" class="hover:text-cyan-500 transition">Óculos</a>
+        <a href="acessorios.html" class="hover:text-cyan-500 transition">Acessórios</a>
+        <a href="cintos.html" class="hover:text-cyan-500 transition">Cintos</a>
+    </nav>
+</div>
+
+    <section class="py-16 text-center bg-white border-b">
+        <h1 class="text-4xl md:text-6xl font-serif mb-4">Calçados</h1>
+        <p class="text-gray-500 uppercase tracking-widest text-xs">Onde o conforto encontra o design de alta costura</p>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-0 py-8"> 
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 md:gap-8">
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://valentino-cdn.thron.com/delivery/public/image/valentino/17de05d5-f3a9-4f38-a500-5d3465082691/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80&size=35&format=auto"
+                     class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                     alt="Sandália Valentino rasteira Rockstud" onclick="openGallery('calcado-valentino-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Sandália Valentino Rockstud</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.199,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Sandália Valentino Rockstud" data-price="1199.00" data-image="https://valentino-cdn.thron.com/delivery/public/image/valentino/17de05d5-f3a9-4f38-a500-5d3465082691/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80&size=35&format=auto">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://saint-laurent.dam.kering.com/m/421f6e40d816a64/eCom-800164AADX21000_B.jpg?v=5"
+                     class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                     alt="salto Saint Laurent" onclick="openGallery('calcado-saint-laurent-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Salto Saint Laurent</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Salto Saint Laurent" data-price="1590.00" data-image="https://saint-laurent.dam.kering.com/m/421f6e40d816a64/eCom-800164AADX21000_B.jpg?v=5">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://images.tcdn.com.br/img/img_prod/90552/sapatilha_chanel_ballerina_flat_outlet_7802_1_9ea74843537ce63374f0a5d6fba7cb10_20220223104615.jpg"
+                     class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                     alt="sapatilha Chanel" onclick="openGallery('calcado-chanel-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Sapatilha Chanel Clássica</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.390,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Sapatilha Chanel - Bege e preta" data-price="1390.00" data-image="https://images.tcdn.com.br/img/img_prod/90552/sapatilha_chanel_ballerina_flat_outlet_7802_1_9ea74843537ce63374f0a5d6fba7cb10_20220223104615.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://saint-laurent.dam.kering.com/m/50884b56d09b25ee/eCom-806685AADF12526_B.jpg?v=5"
+                     class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                     alt="salto Saint Laurent Scarpin" onclick="openGallery('calcado-saint-laurent-2')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Scarpin Saint Laurent</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Scarpin Saint Laurent" data-price="1590.00" data-image="https://saint-laurent.dam.kering.com/m/50884b56d09b25ee/eCom-806685AADF12526_B.jpg?v=5">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/21/99/29/60/21992960_65046420_1000.jpg"
+                     class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                     alt="sandália Saint Laurent" onclick="openGallery('calcado-saint-laurent-3')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">sandália Yves Saint Laurent Opyum</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Sandália Yves Saint Laurent Opyum - Couro Envernizado" data-price="1590.00" data-image="https://cdn-images.farfetch-contents.com/21/99/29/60/21992960_65046420_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/15/61/99/66/15619966_28278650_1000.jpg"
+                     class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                     alt="Sandália Dolce & Gabbana Keira" onclick="openGallery('calcado-dolce-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Sandália Dolce & Gabbana Keira</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Sandália Dolce & Gabbana Keira Com Logo Barroco Dourado " data-price="1590.00" data-image="https://cdn-images.farfetch-contents.com/15/61/99/66/15619966_28278650_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/30/64/98/21/30649821_59680088_1000.jpg"
+                     class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                     alt="Sandália René Caovilla Cleo com salto" onclick="openGallery('calcado-caovilla-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Sandália René Caovilla Cleo</h3>
+                <p class="text-sm text-gray-400 line-through">R$ 1.590,00</p>
+                <p class="text-xl font-semibold mb-4">R$ 990,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Sandália René Caovilla Cleo com salto - Bege" data-price="1590.00" data-image="https://cdn-images.farfetch-contents.com/30/64/98/21/30649821_59680088_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/29/84/62/21/29846221_58892503_1000.jpg"
+                     class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                     alt=" Tênis Gucci Screener" onclick="openGallery('calcado-gucci-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto"> Tênis Gucci Screener</h3>
+                <p class="text-sm text-gray-400 line-through">R$ 1.790,00</p>
+                <p class="text-xl font-semibold mb-4">R$ 1.390,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name=" Tênis Gucci Screener - Tradicional" data-price="1390.00" data-image="https://cdn-images.farfetch-contents.com/29/84/62/21/29846221_58892503_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://www.mytheresa.com/image/1094/1238/100/6f/P00938106.jpg"
+                     class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                     alt="Gucci Tênis Screener" onclick="openGallery('calcado-gucci-2')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Tênis Gucci Screener</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.590,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Gucci Tênis Screener - branco" data-price="1590.00" data-image="https://www.mytheresa.com/image/1094/1238/100/6f/P00938106.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://midonstore.com/cdn/shop/products/1_dd11b3ac-3904-4132-aa34-04a88ba13a28.png?v=1744869447&width=2048"
+                     class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                     alt="Tênis Christian Dior" onclick="openGallery('calcado-dior-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Tênis Christian Dior</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.390,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Tênis Christian Dior" data-price="1390.00" data-image="https://midonstore.com/cdn/shop/products/1_dd11b3ac-3904-4132-aa34-04a88ba13a28.png?v=1744869447&width=2048">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn.myikas.com/images/28864072-1728-4c41-a60f-7e46390d0b7c/3b98d071-d043-4c48-a1c1-feb690d10eff/image_1080.jpg"
+                     class="w-full h-40 md:h-64 object-cover mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                     alt="Tênis New Balance X Miu Miu" onclick="openGallery('calcado-newbalance-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Tênis New Balance X Miu Miu</h3>
+                <p class="text-xl font-semibold mb-4">R$ 1.790,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Tênis New Balance X Miu Miu - branco " data-price="1790.00" data-image="https://cdn.myikas.com/images/28864072-1728-4c41-a60f-7e46390d0b7c/3b98d071-d043-4c48-a1c1-feb690d10eff/image_1080.jpg">Adicionar ao carrinho</button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-white py-10 text-center border-t border-gray-100">
+        <p class="text-[10px] text-gray-400 uppercase tracking-widest">© 2015 IMPORTS DE LUXO - Todos os direitos reservados</p>
+    </footer>
+
+<!-- MODAL GALERIA -->
+<div id="modalGallery" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
+    <div class="bg-white w-full max-w-5xl mx-4 rounded-lg shadow-2xl overflow-hidden">
+        <!-- Cabeçalho -->
+        <div class="bg-cyan-500 text-white px-6 py-4 flex justify-between items-center">
+            <span class="text-sm uppercase tracking-widest font-bold" id="imageCounter">1 / 3</span>
+            <button onclick="closeGallery()" class="text-2xl hover:text-red-500 transition">✕</button>
+        </div>
+        
+        <!-- Imagem Principal -->
+        <div class="relative bg-white flex items-center justify-center min-h-[70vh]">
+            <img id="mainGalleryImage" src="" class="max-w-full max-h-[70vh] object-contain">
+            
+            <!-- Botões de Navegação -->
+            <button onclick="prevImage()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-12 h-12 rounded-full flex items-center justify-center text-xl transition">
+                ❮
+            </button>
+            <button onclick="nextImage()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-12 h-12 rounded-full flex items-center justify-center text-xl transition">
+                ❯
+            </button>
+        </div>
+        
+        <!-- Thumbnails -->
+        <div class="bg-gray-50 px-6 py-4 flex gap-3 overflow-x-auto justify-center gallery-thumbs-container">
+        </div>
+    </div>
+</div>
+
+<div id="galleryOverlay" class="fixed inset-0 bg-black/70 z-[65] hidden"></div>
+
+    <div id="cartSidebar" style="right:-400px;" class="fixed top-0 w-80 h-full bg-white shadow-2xl transition-all duration-500 z-50 p-6 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold font-serif">Seu Carrinho</h2>
+            <button onclick="toggleCart()" class="text-red-500 font-bold">X</button>
+        </div>
+        <div id="cartItems"></div>
+        <div class="mt-6 border-t pt-4">
+            <p class="text-lg font-bold mb-4">Total: <span id="cartTotal">R$ 0,00</span></p>
+            <button onclick="finalizarCompra()" class="bg-cyan-500 text-white w-full py-3 font-bold hover:bg-cyan-600 transition">Finalizar no WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleCart() {
+            const sidebar = document.getElementById("cartSidebar");
+            const isOpen = sidebar.style.right === "0px";
+            sidebar.style.right = isOpen ? "-400px" : "0px";
+            if (!isOpen) renderCart();
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cartCount").innerText = cart.length;
+        }
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartItems = document.getElementById("cartItems");
+            const cartTotal = document.getElementById("cartTotal");
+            cartItems.innerHTML = "";
+            let total = 0;
+            cart.forEach((product, index) => {
+                total += product.price;
+                cartItems.innerHTML += `
+                    <div class="flex items-center gap-4 mb-4 border-b pb-4">
+                        <img src="${product.image}" class="w-16 h-16 object-cover rounded">
+                        <div class="flex-1">
+                            <h3 class="text-[10px] font-bold uppercase">${product.name}</h3>
+                            <p class="text-sm font-semibold">${product.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+                        </div>
+                        <button onclick="removeItem(${index})" class="text-red-500 text-xs">Remover</button>
+                    </div>`;
+            });
+            cartTotal.innerText = total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+        }
+
+        function finalizarCompra() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    if (cart.length === 0) return alert("Seu carrinho está vazio!");
+
+    let total = 0;
+
+    // frase singular ou plural
+    let mensagem = cart.length === 1
+        ? "Olá! Gostaria de saber mais sobre este produto:\n\n"
+        : "Olá! Gostaria de saber mais sobre estes produtos:\n\n";
+
+    cart.forEach(item => {
+        mensagem += `- ${item.name} (R$ ${item.price.toFixed(2)})\n`;
+        total += item.price;
+    });
+
+    mensagem += `\n*Total: R$ ${total.toFixed(2)}*\n\n`;
+    mensagem += "Poderia me informar o prazo de entrega e as formas de pagamento?";
+
+    window.open(`https://wa.me/5544998214237?text=${encodeURIComponent(mensagem)}`, '_blank');
+}
+
+        document.addEventListener("DOMContentLoaded", function () {
+            updateCartCount();
+            const buttons = document.querySelectorAll(".add-cart");
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const name = this.getAttribute("data-name");
+                    const price = parseFloat(this.getAttribute("data-price"));
+                    const image = this.getAttribute("data-image");
+                    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    cart.push({ name, price, image });
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    updateCartCount();
+                    toggleCart();
+                });
+            });
+        });
+
+        // GALERIA MODAL DE FOTOS
+        let currentImageIndex = 0;
+        let currentGallery = [];
+
+        // Dados das galerias de calçados
+        const productGalleries = {
+            'calcado-valentino-1': [
+                'https://valentino-cdn.thron.com/delivery/public/image/valentino/17de05d5-f3a9-4f38-a500-5d3465082691/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80&size=35&format=auto',
+                'https://valentino-cdn.thron.com/delivery/public/image/valentino/6098f4c7-9e68-485e-8793-fa5475face8b/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80&size=35&format=auto',
+                'https://valentino-cdn.thron.com/delivery/public/image/valentino/81e8f894-4b4c-4e1c-b97e-e0263a7d7f39/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80&size=35&format=auto',
+                'https://valentino-cdn.thron.com/delivery/public/image/valentino/402d2558-3a2f-4039-a649-4359e22c6c0b/ihqstx/std/2000x0/Rockstud-Calfskin-Leather-Slide-Sandal-60-Mm?quality=80&size=35&format=auto'
+            ],
+            'calcado-saint-laurent-1': [
+                'https://saint-laurent.dam.kering.com/m/421f6e40d816a64/eCom-800164AADX21000_B.jpg?v=5',
+                'https://saint-laurent.dam.kering.com/m/6829a97f4319d275/Medium2-800164AADX21000_A.jpg?v=6',
+                'https://saint-laurent.dam.kering.com/m/42b550946231ccfc/Medium2-800164AADX21000_C.jpg?v=3'
+            ],
+            'calcado-chanel-1': [
+                'https://images.tcdn.com.br/img/img_prod/90552/sapatilha_chanel_ballerina_flat_outlet_7802_1_9ea74843537ce63374f0a5d6fba7cb10_20220223104615.jpg',
+                'https://www.chanel.com/images///f_auto,q_auto:good,dpr_1.1/w_960/-9543237795870.jpg',
+                'https://www.chanel.com/images///f_auto,q_auto:good,dpr_1.1/w_960/-9543237959710.jpg'
+            ],
+            'calcado-saint-laurent-2': [
+                'https://saint-laurent.dam.kering.com/m/50884b56d09b25ee/eCom-806685AADF12526_B.jpg?v=5',
+                'https://saint-laurent.dam.kering.com/m/5d2e6ff48ffeac80/Medium2-806685AADF12526_A.jpg?v=6',
+                'https://saint-laurent.dam.kering.com/m/2db9a6f7062a7e79/Medium2-806685AADF12526_C.jpg?v=3'
+            ],
+            'calcado-saint-laurent-3': [
+                'https://cdn-images.farfetch-contents.com/21/99/29/60/21992960_65046420_1000.jpg',
+                'https://saint-laurent.dam.kering.com/m/7eda317a53cfb50/Medium2-5576621TV1A1000_D.jpg?v=4',
+                'https://saint-laurent.dam.kering.com/m/54b9ffd2b0cbc0c6/Medium2-5576621TV1A1000_C.jpg?v=4',
+                'https://saint-laurent.dam.kering.com/m/34fa6194a94961d2/Medium2-5576621TV1A1000_B.jpg?v=4'
+            ],
+            'calcado-dolce-1': [
+                'https://cdn-images.farfetch-contents.com/15/61/99/66/15619966_28278650_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/15/61/99/66/15619966_28278651_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/15/61/99/66/15619966_28278653_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/15/61/99/66/15619966_28278652_1000.jpg'
+            ],
+            'calcado-caovilla-1': [
+                'https://cdn-images.farfetch-contents.com/30/64/98/21/30649821_59680088_1000.jpg',
+                'https://www.pegueibode.com.br/cdn/shop/files/WhatsAppImage2026-01-21at13.52.56_2.jpg?v=1769014480&width=990',
+                'https://www.pegueibode.com.br/cdn/shop/files/WhatsAppImage2026-01-21at13.52.56_1.jpg?v=1769014498&width=990'
+            ],
+            'calcado-gucci-1': [
+                'https://cdn-images.farfetch-contents.com/29/84/62/21/29846221_58892503_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/29/84/62/21/29846221_58892487_1000.jpg',
+                'https://www.jdmgrifes.com.br/wp-content/uploads/2024/01/Imagem-do-WhatsApp-de-2024-01-24-as-15.44.21_80a4eefe.jpg'
+            ],
+            'calcado-gucci-2': [
+                'https://www.mytheresa.com/image/1094/1238/100/6f/P00938106.jpg',
+                'https://cdn-images.italist.com/image/upload/t_medium_dpr_2_q_auto_v_2,f_auto/66a3ec4de2dd8c587a89a7acc5b75de1.jpg',
+                'https://www.mytheresa.com/image/1094/1238/100/6f/P00938106_d2.jpg',
+                'https://www.mytheresa.com/image/1094/1238/100/6f/P00938106_d4.jpg',
+                'https://www.mytheresa.com/image/1094/1238/100/6f/P00938106_d1.jpg'
+            ],
+            'calcado-dior-1': [
+                'https://midonstore.com/cdn/shop/products/1_dd11b3ac-3904-4132-aa34-04a88ba13a28.png?v=1744869447&width=2048',
+                'https://midonstore.com/cdn/shop/products/2_a3afb30b-9069-4bc4-b28a-6db12d8434cd.png?v=1744869447&width=2048',
+                'https://midonstore.com/cdn/shop/products/8_39b2842f-3808-4b90-b392-d364f08e8b44.png?v=1744869447&width=2048',
+                'https://midonstore.com/cdn/shop/products/3_ec8d4c08-05fd-41a5-bc4c-407215c56a95.png?v=1744869447&width=2048'
+            ],
+            'calcado-newbalance-1': [
+                'https://cdn.myikas.com/images/28864072-1728-4c41-a60f-7e46390d0b7c/3b98d071-d043-4c48-a1c1-feb690d10eff/image_1080.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/5/5E1/5E165E/3D8CF0009/5E165E_3D8C_F0009_F_BD05_SLR.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/5/5E1/5E165E/3D8CF0009/5E165E_3D8C_F0009_F_BD05_SLS.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/5/5E1/5E165E/3D8CF0009/5E165E_3D8C_F0009_F_BD05_SLQ.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/5/5E1/5E165E/3D8CF0009/5E165E_3D8C_F0009_F_BD05_SLT.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg'
+            ]
+        };
+
+        function openGallery(galleryId) {
+            if (productGalleries[galleryId]) {
+                currentGallery = productGalleries[galleryId];
+                currentImageIndex = 0;
+                
+                // Gera thumbnails dinamicamente
+                const thumbContainer = document.querySelector(".gallery-thumbs-container");
+                thumbContainer.innerHTML = '';
+                currentGallery.forEach((image, index) => {
+                    const thumb = document.createElement('img');
+                    thumb.className = 'gallery-thumb w-20 h-20 object-cover cursor-pointer border-2 border-gray-200 hover:border-cyan-500 transition';
+                    thumb.src = image;
+                    thumb.onclick = () => {
+                        currentImageIndex = index;
+                        updateGalleryImage();
+                    };
+                    thumbContainer.appendChild(thumb);
+                });
+                
+                document.getElementById("modalGallery").classList.remove("hidden");
+                document.getElementById("galleryOverlay").classList.remove("hidden");
+                updateGalleryImage();
+            }
+        }
+
+        function closeGallery() {
+            document.getElementById("modalGallery").classList.add("hidden");
+            document.getElementById("galleryOverlay").classList.add("hidden");
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % currentGallery.length;
+            updateGalleryImage();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + currentGallery.length) % currentGallery.length;
+            updateGalleryImage();
+        }
+
+        function toggleMobileMenu() {
+        const mobileNav = document.getElementById("mobileNav");
+        mobileNav.classList.toggle("hidden");
+        }
+
+        function updateGalleryImage() {
+            document.getElementById("mainGalleryImage").src = currentGallery[currentImageIndex];
+            document.getElementById("imageCounter").textContent = `${currentImageIndex + 1} / ${currentGallery.length}`;
+            
+            // Atualiza estilos dos thumbnails
+            document.querySelectorAll(".gallery-thumb").forEach((thumb, index) => {
+                thumb.classList.toggle("border-cyan-500", index === currentImageIndex);
+                thumb.classList.toggle("border-gray-200", index !== currentImageIndex);
+            });
+        }
+
+        // Fechar ao clicar no overlay
+        document.addEventListener("DOMContentLoaded", function() {
+            const overlay = document.getElementById("galleryOverlay");
+            if (overlay) {
+                overlay.addEventListener("click", closeGallery);
+            }
+        });
+    </script>
+</body>
+</html>

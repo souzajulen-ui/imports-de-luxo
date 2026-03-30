@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cintos elegante | Imports de Luxo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-luxo: #FDFCFB;
+            --gold: #00CED1;
+            --black-soft: #1A1A1A;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-luxo); color: var(--black-soft); }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="antialiased text-gray-900 pt-32">
+
+    <div class="fixed top-0 left-0 w-full z-50 bg-black text-white text-[10px] uppercase tracking-[0.3em] py-2 text-center">
+    O Toque Final | material Premium
+    </div>
+
+    <header class="fixed top-8 left-0 w-full z-50 bg-white py-6 px-6 md:px-20 flex items-center justify-between border-b border-gray-100 shadow-sm">
+        <div class="text-2xl md:text-3xl font-serif font-bold tracking-tight">
+            <a href="index.html">IMPORTS <span class="italic font-light">de Luxo</span></a>
+        </div>
+
+        <!-- MOBILE MENU BUTTON -->
+        <button id="mobileMenuButton" onclick="toggleMobileMenu()" class="lg:hidden text-2xl p-2 text-gray-700 hover:text-cyan-500 transition" aria-label="Abrir menu">
+            ☰
+        </button>
+
+        <nav class="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center space-x-8 text-[13px] uppercase tracking-widest font-semibold">
+    <a href="index.html" class="hover:text-cyan-500 transition">Início</a>
+    <a href="bolsas.html" class="hover:text-cyan-500 transition">Bolsas</a>
+    <a href="relogios.html" class="hover:text-cyan-500 transition">Relógios</a>
+    <a href="oculos.html" class="hover:text-cyan-500 transition">Óculos</a>
+    <a href="calcados.html" class="hover:text-cyan-500 transition">Calçados</a>
+    <a href="acessorios.html" class="hover:text-cyan-500 transition">Acessórios</a>
+    <a href="cintos.html" class="hover:text-cyan-500 transition">Cintos</a>
+</nav>
+
+        <div class="flex items-center space-x-6 text-xl">
+            <button onclick="toggleCart()" class="relative hover:text-cyan-500 transition">
+                🛒
+                <span id="cartCount" class="absolute -top-2 -right-2 bg-cyan-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+            </button>
+        </div>
+    </header>
+
+<div id="mobileNav" class="hidden fixed top-[110px] left-0 w-full bg-white z-40 border-b border-gray-100 md:hidden">
+    <nav class="flex flex-col p-6 space-y-4 text-[13px] uppercase tracking-[0.2em] font-bold">
+        <a href="index.html" class="hover:text-cyan-500 transition">Início</a>
+        
+        <a href="bolsas.html" class="hover:text-cyan-500 transition">Bolsas</a>
+        <a href="relogios.html" class="hover:text-cyan-500 transition">Relógios</a>
+        <a href="oculos.html" class="hover:text-cyan-500 transition">Óculos</a>
+        <a href="calcados.html" class="hover:text-cyan-500 transition">Calçados</a>
+        <a href="acessorios.html" class="hover:text-cyan-500 transition">Acessórios</a>
+    </nav>
+</div>
+
+    <section class="py-16 text-center bg-white border-b">
+        <h1 class="text-4xl md:text-6xl font-serif mb-4">Cintos</h1>
+        <p class="text-gray-500 uppercase tracking-widest text-xs">A Elegância na sua cintura</p>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-0 py-8"> 
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 md:gap-8">
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/32/88/47/04/32884704_63328413_1000.jpg"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    onclick="openGallery('cinto-chloe')"
+                     alt="Cinto Chloé">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cinto Chloé</h3>
+                <p class="text-xl font-semibold mb-4">R$ 650,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Cinto Chloé - Marrom" data-price="650.00" data-image="https://cdn-images.farfetch-contents.com/32/88/47/04/32884704_63328413_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/15/16/50/27/15165027_56058889_1000.jpg"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    onclick="openGallery('cinto-gucci-preto')"
+                    alt="Cinto Gucci">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cinto Gucci</h3>
+                <p class="text-xl font-semibold mb-4">R$ 650,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Cinto Gucci - preto" data-price="650.00" data-image="https://cdn-images.farfetch-contents.com/15/16/50/27/15165027_56058889_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn.sistemawbuy.com.br/arquivos/1f3d59f170f93f0b98c48787c6c34f03/produtos/661556e4458bc/sem-ta-tulo-2prancheta-1-copiar-4prancheta-1-copiar-13-661556e48c764.jpg"
+                    class="w-full h-40 md:h-64 object-cover mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    onclick="openGallery('cinto-gucci-rosa')"
+                    alt="Cinto Gucci">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cinto Gucci</h3>
+                <p class="text-xl font-semibold mb-4">R$ 650,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Cinto Gucci - Rosa claro" data-price="650.00" data-image="https://cdn.sistemawbuy.com.br/arquivos/1f3d59f170f93f0b98c48787c6c34f03/produtos/661556e4458bc/sem-ta-tulo-2prancheta-1-copiar-4prancheta-1-copiar-13-661556e48c764.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cintosjulioalmeida.com.br/wp-content/uploads/2020/03/13898886_17705319_480.jpg"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    onclick="openGallery('cinto-valentino-preto')"
+                    alt="Cinto Valentino Garavani">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cinto Valentino Garavani</h3>
+                <p class="text-xl font-semibold mb-4">R$ 650,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Cinto Valentino Garavani - preto e logo dourada" data-price="650.00" data-image="https://cintosjulioalmeida.com.br/wp-content/uploads/2020/03/13898886_17705319_480.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/18/03/36/24/18033624_40268054_1000.jpg"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    onclick="openGallery('cinto-valentino-branco')"
+                    alt="Cinto Valentino Garavani">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cinto Valentino Garavani</h3>
+                <p class="text-xl font-semibold mb-4">R$ 650,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Cinto Valentino Garavani - Branco e rosé com logo dourada" data-price="650.00" data-image="https://cdn-images.farfetch-contents.com/18/03/36/24/18033624_40268054_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-30-mm--M0322U_PM1_Closeup%20view.jpg"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    onclick="openGallery('cinto-lv-tradicional')"
+                    alt="Cinto Louis Vuitton">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cinto Louis Vuitton</h3>
+                <p class="text-xl font-semibold mb-4">R$ 450,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Cinto Louis Vuitton - Tradicional" data-price="450.00" data-image="https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-30-mm--M0322U_PM1_Closeup%20view.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-lv-initiales-reversivel-40mm---M9043U_PM1_Closeup%20view.jpg"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    onclick="openGallery('cinto-lv-preto')"
+                    alt="Cinto Louis Vuitton">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cinto Louis Vuitton</h3>
+                <p class="text-xl font-semibold mb-4">R$ 450,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Cinto Louis Vuitton - Preto" data-price="450.00" data-image="https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-lv-initiales-reversivel-40mm---M9043U_PM1_Closeup%20view.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://www.brogueshopbr.com/cdn/shop/files/cinto-lv-preto-azul--02.jpg?v=1731847382&width=300"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    onclick="openGallery('cinto-lv-preto-quadriculado')"
+                    alt="Cinto Louis Vuitton">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cinto Louis Vuitton</h3>
+                <p class="text-xl font-semibold mb-4">R$ 450,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Cinto Louis Vuitton - Preto , Quadriculado e Logo Prata" data-price="450.00" data-image="https://www.brogueshopbr.com/cdn/shop/files/cinto-lv-preto-azul--02.jpg?v=1731847382&width=300">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://assets.hermes.cn/is/image/hermesproduct/kelly-18-belt--069853CC01-worn-1-0-0-800-800_g.jpg"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    onclick="openGallery('cinto-hermes-branco')"
+                    alt="Cinto Hermes Kelly">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cinto Hermes Kelly</h3>
+                <p class="text-xl font-semibold mb-4">R$ 650,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Cinto Hermes Kelly - Branco" data-price="650.00" data-image="https://assets.hermes.cn/is/image/hermesproduct/kelly-18-belt--069853CC01-worn-1-0-0-800-800_g.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://assets.hermes.com/is/image/hermesproduct/cinto-kelly-18--069853CC89-worn-1-0-0-800-800_g.jpg"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    onclick="openGallery('cinto-hermes-preto')"
+                    alt="Cinto Hermes Kelly">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cinto Hermes Kelly</h3>
+                <p class="text-xl font-semibold mb-4">R$ 650,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Cinto Hermes Kelly - Preto" data-price="650.00" data-image="https://assets.hermes.com/is/image/hermesproduct/cinto-kelly-18--069853CC89-worn-1-0-0-800-800_g.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://lh3.googleusercontent.com/pw/AP1GczOBjEOrZ55ABpomSFTncWlxggU0FOAmuX48OoIYOw2aTWhaG_bcqWnwivmrbNuvgDi1Iq2jMIrDuJs4imPXSrqtNgAIwHv84UMSRVU113TssRKFOBcgJVgPj6bOHPZZGnvdTc0cm5QoMjdwWHNLd4-TYw=w800-h800-s-no-gm?authuser=0"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    onclick="openGallery('cinto-gucci-branco')"
+                    alt="Cinto Gucci Branco">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cinto Gucci Double G</h3>
+                <p class="text-xl font-semibold mb-4">R$ 650,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Cinto Gucci Double G - Branco" data-price="650.00" data-image="https://lh3.googleusercontent.com/pw/AP1GczOBjEOrZ55ABpomSFTncWlxggU0FOAmuX48OoIYOw2aTWhaG_bcqWnwivmrbNuvgDi1Iq2jMIrDuJs4imPXSrqtNgAIwHv84UMSRVU113TssRKFOBcgJVgPj6bOHPZZGnvdTc0cm5QoMjdwWHNLd4-TYw=w800-h800-s-no-gm?authuser=0">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://assets.christiandior.com/is/image/diorprod/B0447UWEOM928_SBG_E01?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85"
+                     class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                     onclick="openGallery('cinto-dior-montaigne')"
+                     alt="Cinto Dior Montaigne reversível">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Christian Dior Montaigne</h3>
+                <p class="text-xl font-semibold mb-4">R$ 650,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Cinto Dior Montaigne reversível" data-price="650.00" data-image="https://assets.christiandior.com/is/image/diorprod/B0447UWEOM928_SBG_E01?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://assets.levelshoes.com/cdn-cgi/image/width=1500,height=2100,quality=95,format=webp/media/catalog/product/p/l/pl456109_1.jpg?ts=20250225043051"
+                     class="w-full h-40 md:h-64 object-cover mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                     onclick="openGallery('cinto-dior-saddle')"
+                     alt="Christian Dior Saddle">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Christian Dior Saddle</h3>
+                <p class="text-xl font-semibold mb-4">R$ 650,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Cinto Christian Dior Saddle - Branco e logo dourada" data-price="650.00" data-image="https://assets.levelshoes.com/cdn-cgi/image/width=1500,height=2100,quality=95,format=webp/media/catalog/product/p/l/pl456109_1.jpg?ts=20250225043051">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/13/51/26/34/13512634_54213856_1000.jpg"
+                    class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer"
+                    onclick="openGallery('cinto-ysl')"
+                    alt="Cinto YSL">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cinto YSL</h3>
+                <p class="text-xl font-semibold mb-4">R$ 650,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition"
+                    data-name="Cinto YSL - Preto com logo dourada" data-price="650.00" data-image="https://cdn-images.farfetch-contents.com/13/51/26/34/13512634_54213856_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-white py-10 text-center border-t border-gray-100">
+        <p class="text-[10px] text-gray-400 uppercase tracking-widest">© 2015 IMPORTS DE LUXO - Todos os direitos reservados</p>
+    </footer>
+
+    <!-- GALERIA MODAL -->
+    <div id="modalGallery" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
+        <div class="bg-white w-full max-w-5xl mx-4 rounded-lg shadow-2xl overflow-hidden">
+            <!-- Cabeçalho -->
+            <div class="bg-cyan-500 text-white px-6 py-4 flex justify-between items-center">
+                <span class="text-sm uppercase tracking-widest font-bold" id="imageCounter">1 / 3</span>
+                <button onclick="closeGallery()" class="text-2xl hover:text-red-500 transition">✕</button>
+            </div>
+            
+            <!-- Imagem Principal -->
+            <div class="relative bg-white flex items-center justify-center min-h-[70vh]">
+                <img id="mainGalleryImage" src="" class="max-w-full max-h-[70vh] object-contain">
+                
+                <!-- Botões de Navegação -->
+                <button onclick="prevImage()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-12 h-12 rounded-full flex items-center justify-center text-xl transition">
+                    ❮
+                </button>
+                <button onclick="nextImage()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-12 h-12 rounded-full flex items-center justify-center text-xl transition">
+                    ❯
+                </button>
+            </div>
+            
+            <!-- Thumbnails -->
+            <div class="bg-gray-50 px-6 py-4 flex gap-3 overflow-x-auto justify-center gallery-thumbs-container">
+                <!-- built dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <div id="galleryOverlay" class="fixed inset-0 bg-black/70 z-[65] hidden"></div>
+
+    <div id="cartSidebar" style="right:-400px;" class="fixed top-0 w-80 h-full bg-white shadow-2xl transition-all duration-500 z-50 p-6 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold font-serif">Seu Carrinho</h2>
+            <button onclick="toggleCart()" class="text-red-500 font-bold">X</button>
+        </div>
+        <div id="cartItems"></div>
+        <div class="mt-6 border-t pt-4">
+            <p class="text-lg font-bold mb-4">Total: <span id="cartTotal">R$ 0,00</span></p>
+            <button onclick="finalizarCompra()" class="bg-cyan-500 text-white w-full py-3 font-bold hover:bg-cyan-600 transition">Finalizar no WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleCart() {
+            const sidebar = document.getElementById("cartSidebar");
+            const isOpen = sidebar.style.right === "0px";
+            sidebar.style.right = isOpen ? "-400px" : "0px";
+            if (!isOpen) renderCart();
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cartCount").innerText = cart.length;
+        }
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartItems = document.getElementById("cartItems");
+            const cartTotal = document.getElementById("cartTotal");
+            cartItems.innerHTML = "";
+            let total = 0;
+            cart.forEach((product, index) => {
+                total += product.price;
+                cartItems.innerHTML += `
+                    <div class="flex items-center gap-4 mb-4 border-b pb-4">
+                        <img src="${product.image}" class="w-16 h-16 object-cover rounded">
+                        <div class="flex-1">
+                            <h3 class="text-[10px] font-bold uppercase">${product.name}</h3>
+                            <p class="text-sm font-semibold">${product.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+                        </div>
+                        <button onclick="removeItem(${index})" class="text-red-500 text-xs">Remover</button>
+                    </div>`;
+            });
+            cartTotal.innerText = total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+        }
+
+        function finalizarCompra() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        if (cart.length === 0) return alert("Seu carrinho está vazio!");
+
+        let total = 0;
+
+        // frase singular ou plural
+        let mensagem = cart.length === 1
+        ? "Olá! Gostaria de saber mais sobre este produto:\n\n"
+        : "Olá! Gostaria de saber mais sobre estes produtos:\n\n";
+
+        cart.forEach(item => {
+        mensagem += `- ${item.name} (R$ ${item.price.toFixed(2)})\n`;
+        total += item.price;
+    });
+
+    mensagem += `\n*Total: R$ ${total.toFixed(2)}*\n\n`;
+    mensagem += "Poderia me informar o prazo de entrega e as formas de pagamento?";
+
+        window.open(`https://wa.me/5544998214237?text=${encodeURIComponent(mensagem)}`, '_blank');
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            updateCartCount();
+            const buttons = document.querySelectorAll(".add-cart");
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const name = this.getAttribute("data-name");
+                    const price = parseFloat(this.getAttribute("data-price"));
+                    const image = this.getAttribute("data-image");
+                    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    cart.push({ name, price, image });
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    updateCartCount();
+                    toggleCart();
+                });
+            });
+        });
+
+        // GALERIA MODAL DE FOTOS
+        let currentImageIndex = 0;
+        let currentGallery = [];
+
+        const productGalleries = {
+            'cinto-chloe': [
+                'https://cdn-images.farfetch-contents.com/32/88/47/04/32884704_63328413_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/32/88/47/04/32884704_63327152_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/32/88/47/04/32884704_63265415_1000.jpg'
+            ],
+            'cinto-gucci-preto': [
+                'https://cdn-images.farfetch-contents.com/15/16/50/27/15165027_56058889_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/15/36/99/43/15369943_54741546_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/15/36/99/43/15369943_54741545_1000.jpg'
+            ],
+            'cinto-gucci-rosa': [
+                'https://cdn.sistemawbuy.com.br/arquivos/1f3d59f170f93f0b98c48787c6c34f03/produtos/661556e4458bc/sem-ta-tulo-2prancheta-1-copiar-4prancheta-1-copiar-13-661556e48c764.jpg',
+                'https://cdn-images.farfetch-contents.com/22/13/06/10/22130610_53139487_1000.jpg'
+            ],
+            'cinto-valentino-preto': [
+                'https://cintosjulioalmeida.com.br/wp-content/uploads/2020/03/13898886_17705319_480.jpg',
+                'https://cintosjulioalmeida.com.br/wp-content/uploads/2020/03/13898886_17705322_480.jpg'
+            ],
+            'cinto-valentino-branco': [
+                'https://valentino-cdn.thron.com/delivery/public/thumbnail/valentino/9cf8a8cf-617c-4c99-9302-2df341e8a8ac/ihqstx/std/578x0/Reversible-Vlogo-Signature-Belt-In-Glossy-Calfskin-40-Mm?quality=80&size=35&format=auto',
+                'https://valentino-cdn.thron.com/delivery/public/image/valentino/2425ea50-4e0f-4249-90e7-d8f01e5e2be3/ihqstx/std/2000x0/Reversible-Vlogo-Signature-Belt-In-Glossy-Calfskin-40-Mm?quality=80&size=35&format=auto',
+                'https://valentino-cdn.thron.com/delivery/public/thumbnail/valentino/65bed0d5-6462-4965-9ee6-6aebca0f427f/ihqstx/std/578x0/Reversible-Vlogo-Signature-Belt-In-Glossy-Calfskin-40-Mm?quality=80&size=35&format=auto'
+            ],
+            'cinto-lv-tradicional': [
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-30-mm--M0322U_PM1_Closeup%20view.jpg',
+                'https://gringa.com.br/cdn/shop/files/CINTO-LOUIS-VUITTON-MONOGRAM-LV-INITIALES-REVERSIBLE-BELT-80-PRETO-ORIGINAL-00053779c.png?v=1687815913&width=960',
+                'https://gringa.com.br/cdn/shop/files/CINTO-LOUIS-VUITTON-MONOGRAM-LV-INITIALES-REVERSIBLE-BELT-80-PRETO-ORIGINAL-00053779m.png?v=1687815913&width=960'
+            ],
+            'cinto-lv-preto': [
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-lv-initiales-reversivel-40mm---M9043U_PM1_Closeup%20view.jpg',
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-35-mm--M0450U_PM2_Front%20view.png?wid=1090&hei=1090',
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-35-mm--M0450U_PM1_Back%20view.png?wid=1090&hei=1090',
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-35-mm--M0450U_PM1_Worn%20view.png?wid=1090&hei=1090'
+            ],
+            'cinto-lv-preto-quadriculado': [
+                'https://www.brogueshopbr.com/cdn/shop/files/cinto-lv-preto-azul--02.jpg?v=1731847382&width=300',
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-40mm--M0213U_PM1_Worn%20view.png?wid=1090&hei=1090',
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-40mm--M0213U_PM1_Detail%20view.png?wid=1090&hei=1090',
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-40mm--M0213U_PM1_Other%20view.png?wid=1090&hei=1090',
+                'https://br.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-cinto-reversivel-lv-initiales-40mm--M0213U_PM1_Cropped%20worn%20view.png?wid=1090&hei=1090'
+            ],
+            'cinto-hermes-branco': [
+                'https://assets.hermes.cn/is/image/hermesproduct/kelly-18-belt--069853CC01-worn-1-0-0-800-800_g.jpg',
+                'https://assets.hermes.cn/is/image/hermesproduct/kelly-18-belt--069853CC01-worn-2-0-0-800-800_g.jpg'
+            ],
+            'cinto-hermes-preto': [
+                'https://assets.hermes.com/is/image/hermesproduct/cinto-kelly-18--069853CC89-worn-1-0-0-800-800_g.jpg',
+                'https://assets.hermes.cn/is/image/hermesproduct/kelly-18-belt--069853CD89-worn-2-0-0-800-800_g.jpg'
+            ],
+            'cinto-gucci-branco': [
+                'https://lh3.googleusercontent.com/pw/AP1GczOBjEOrZ55ABpomSFTncWlxggU0FOAmuX48OoIYOw2aTWhaG_bcqWnwivmrbNuvgDi1Iq2jMIrDuJs4imPXSrqtNgAIwHv84UMSRVU113TssRKFOBcgJVgPj6bOHPZZGnvdTc0cm5QoMjdwWHNLd4-TYw=w800-h800-s-no-gm?authuser=0',
+                'https://gringa.com.br/cdn/shop/files/Capa_f163dcc4-269b-4fcd-affc-aad781a844a9.png?v=1768252548&width=960',
+                'https://gringa.com.br/cdn/shop/files/Fivela_7e99d1eb-3562-4036-bc24-f8f7fda40b60.png?v=1768252615&width=960',
+                'https://gringa.com.br/cdn/shop/files/modelo_f26fd0d6-97bf-4324-b3e5-0a78aad288b0.png?v=1768252615&width=960'
+            ],
+            'cinto-dior-montaigne': [
+                'https://assets.christiandior.com/is/image/diorprod/B0447UWEOM928_SBG_E01?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/B0447UWEOM928_SBG_E03?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/B0447UWEOM928_SBG_E06?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/B0447UWEOM928_SBG_E07?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/B0447UWEOM928_SBG_E09?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85'
+            ],
+            'cinto-dior-saddle': [
+                'https://assets.levelshoes.com/cdn-cgi/image/width=1500,height=2100,quality=95,format=webp/media/catalog/product/p/l/pl456109_1.jpg?ts=20250225043051',
+                'https://assets.levelshoes.com/cdn-cgi/image/width=720,height=1008,quality=85,format=webp/media/catalog/product/p/l/pl456109_4.jpg?ts=20250225043051',
+                'https://assets.levelshoes.com/cdn-cgi/image/width=720,height=1008,quality=85,format=webp/media/catalog/product/p/l/pl456109_5.jpg?ts=20250225043051'
+            ],
+            'cinto-ysl': [
+                'https://cdn-images.farfetch-contents.com/13/51/26/34/13512634_54213856_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/17/55/58/66/17555866_54381613_1000.jpg'
+            ]
+        };
+
+        function openGallery(galleryId) {
+            if (productGalleries[galleryId]) {
+                currentGallery = productGalleries[galleryId];
+                currentImageIndex = 0;
+                
+                // Gera thumbnails dinamicamente
+                const thumbContainer = document.querySelector(".gallery-thumbs-container");
+                thumbContainer.innerHTML = '';
+                currentGallery.forEach((image, index) => {
+                    const thumb = document.createElement('img');
+                    thumb.className = 'gallery-thumb w-20 h-20 object-cover cursor-pointer border-2 border-gray-200 hover:border-cyan-500 transition';
+                    thumb.src = image;
+                    thumb.onclick = () => {
+                        currentImageIndex = index;
+                        updateGalleryImage();
+                    };
+                    thumbContainer.appendChild(thumb);
+                });
+                
+                document.getElementById("modalGallery").classList.remove("hidden");
+                document.getElementById("galleryOverlay").classList.remove("hidden");
+                updateGalleryImage();
+            }
+        }
+
+        function closeGallery() {
+            document.getElementById("modalGallery").classList.add("hidden");
+            document.getElementById("galleryOverlay").classList.add("hidden");
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % currentGallery.length;
+            updateGalleryImage();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + currentGallery.length) % currentGallery.length;
+            updateGalleryImage();
+        }
+
+        function toggleMobileMenu() {
+        const mobileNav = document.getElementById("mobileNav");
+        mobileNav.classList.toggle("hidden");
+        }
+
+        function updateGalleryImage() {
+            document.getElementById("mainGalleryImage").src = currentGallery[currentImageIndex];
+            document.getElementById("imageCounter").textContent = `${currentImageIndex + 1} / ${currentGallery.length}`;
+            
+            // Atualiza estilos dos thumbnails
+            document.querySelectorAll(".gallery-thumb").forEach((thumb, index) => {
+                thumb.classList.toggle("border-cyan-500", index === currentImageIndex);
+                thumb.classList.toggle("border-gray-200", index !== currentImageIndex);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const overlay = document.getElementById("galleryOverlay");
+            if (overlay) {
+                overlay.addEventListener("click", closeGallery);
+            }
+        });
+    </script>
+</body>
+</html>

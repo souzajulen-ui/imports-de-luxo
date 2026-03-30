@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Óculos de Sol Premium | Imports de Luxo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-luxo: #FDFCFB;
+            --gold: #00CED1;
+            --black-soft: #1A1A1A;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-luxo); color: var(--black-soft); }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        .btn-gold { background-color: var(--gold); transition: all 0.4s ease; }
+        .btn-gold:hover { background-color: #008B8B; transform: scale(1.02); }
+    </style>
+</head>
+<body class="antialiased text-gray-900 pt-32">
+
+    <div class="fixed top-0 left-0 w-full z-50 bg-black text-white text-[10px] uppercase tracking-[0.3em] py-2 text-center">
+        Proteção UV400 | Acetato Italiano
+    </div>
+
+    <header class="fixed top-8 left-0 w-full z-50 bg-white py-6 px-6 md:px-20 flex items-center justify-between border-b border-gray-100 shadow-sm">
+        <div class="text-2xl md:text-3xl font-serif font-bold tracking-tight">
+            <a href="index.html">IMPORTS <span class="italic font-light">de Luxo</span></a>
+        </div>
+
+        <!-- MOBILE MENU BUTTON -->
+        <button id="mobileMenuButton" onclick="toggleMobileMenu()" class="lg:hidden text-2xl p-2 text-gray-700 hover:text-cyan-500 transition" aria-label="Abrir menu">
+            ☰
+        </button>
+
+        <nav class="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center space-x-8 text-[13px] uppercase tracking-widest font-semibold">
+    <a href="index.html" class="hover:text-cyan-500 transition">Início</a>
+    <a href="bolsas.html" class="hover:text-cyan-500 transition">Bolsas</a>
+    <a href="relogios.html" class="hover:text-cyan-500 transition">Relógios</a>
+    <a href="oculos.html" class="hover:text-cyan-500 transition">Óculos</a>
+    <a href="calcados.html" class="hover:text-cyan-500 transition">Calçados</a>
+    <a href="acessorios.html" class="hover:text-cyan-500 transition">Acessórios</a>
+    <a href="cintos.html" class="hover:text-cyan-500 transition">Cintos</a>
+</nav>
+
+        <div class="flex items-center space-x-6 text-xl">
+            <button onclick="toggleCart()" class="relative hover:text-cyan-500 transition">
+                🛒
+                <span id="cartCount" class="absolute -top-2 -right-2 bg-cyan-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+            </button>
+        </div>
+    </header>
+
+        <div id="mobileNav" class="hidden fixed top-[110px] left-0 w-full bg-white z-40 border-b border-gray-100 md:hidden">
+    <nav class="flex flex-col p-6 space-y-4 text-[13px] uppercase tracking-[0.2em] font-bold">
+        <a href="index.html" class="hover:text-cyan-500 transition">Início</a>
+        
+        <a href="bolsas.html" class="hover:text-cyan-500 transition">Bolsas</a>
+        <a href="relogios.html" class="hover:text-cyan-500 transition">Relógios</a>
+        <a href="calcados.html" class="hover:text-cyan-500 transition">Calçados</a>
+        <a href="acessorios.html" class="hover:text-cyan-500 transition">Acessórios</a>
+        <a href="cintos.html" class="hover:text-cyan-500 transition">Cintos</a>
+    </nav>
+</div>
+
+    <section class="py-16 text-center bg-white border-b">
+        <h1 class="text-4xl md:text-6xl font-serif mb-4">Óculos</h1>
+        <p class="text-gray-500 uppercase tracking-widest text-xs">O toque final da elegância moderna</p>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-0 py-8"> 
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 md:gap-8">
+            
+            <!-- MIU MIU  -->
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://www.otticasm.com/media/catalog/product/cache/all/small_image/1200x800/9df78eab33525d08d6e5fb8d27136e95/m/i/miu-miu-mu-04zs-19p2z1.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Óculos Miu Miu" onclick="openGallery('oculos-miu-miu-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Miu Miu regard</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Óculos Miu Miu Oval tartaruga - Lentes Marrom" data-price="890.00" data-image="https://www.otticasm.com/media/catalog/product/cache/all/small_image/1200x800/9df78eab33525d08d6e5fb8d27136e95/m/i/miu-miu-mu-04zs-19p2z1.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/18/34/35/34/18343534_39724254_1000.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="óculos Miu Miu preto" onclick="openGallery('oculos-miu-miu-2')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Miu Miu Glimpse</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="óculos Miu Miu Glimpse - preto e logo dourada" data-price="890.00" data-image="https://cdn-images.farfetch-contents.com/18/34/35/34/18343534_39724254_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/23/19/26/10/23192610_53275039_1000.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Miu Miu Eyewear - Oval com Logo em Metal Dourado" onclick="openGallery('oculos-miu-miu-3')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Miu Miu Eyewear</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="óculos Miu Miu Eyewear - Oval com Logo em Metal Dourado" data-price="890.00" data-image="https://cdn-images.farfetch-contents.com/23/19/26/10/23192610_53275039_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_SLR.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Miu Miu Aube" onclick="openGallery('Miu Miu Aube')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Miu Miu Aube</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="óculos Miu Miu Aube - Lente cinza" data-price="890.00" data-image="https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_SLR.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/28/40/35/86/28403586_57802945_1000.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Miu Miu Aube" onclick="openGallery('Miu Miu Aube-2')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Miu Miu Aube Rosé</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="óculos Miu Miu Aube - Lente rosé" data-price="890.00" data-image="https://cdn-images.farfetch-contents.com/28/40/35/86/28403586_57802945_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/30/04/69/79/30046979_59104928_1000.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Miu Miu Glimpse" onclick="openGallery('Miu Miu Glimpse')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Miu Miu Glimpse</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="óculos Miu Miu Glimpse - Tartaruga" data-price="890.00" data-image="https://cdn-images.farfetch-contents.com/30/04/69/79/30046979_59104928_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <!-- BOTTEGA VENETA  -->
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://pretavoir.us/cdn/shop/files/bottega-veneta-bv1305s-002-hd-1.jpg?v=1707301799" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Óculos Bottega Veneta" onclick="openGallery('oculos-bottega-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Bottega Veneta Sardine</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Óculos de Sol Bottega Veneta Sardine Aviator - Dourado e lente chá" data-price="890.00" data-image="https://pretavoir.us/cdn/shop/files/bottega-veneta-bv1305s-002-hd-1.jpg?v=1707301799">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://bottega-veneta.dam.kering.com/m/420c1ddb34ebd4c5/Large-660165V23302819_A.jpg?v=6" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Óculos Bottega Veneta" onclick="openGallery('oculos-bottega-2')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Bottega Veneta Angle Cat</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Óculos de Sol Bottega Veneta Angle Cat - Marrom" data-price="890.00" data-image="https://bottega-veneta.dam.kering.com/m/420c1ddb34ebd4c5/Large-660165V23302819_A.jpg?v=6">Adicionar ao carrinho</button>
+            </div>
+
+            <!-- CHANEL -->
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://sunluxmx.com/cdn/shop/files/CHA_600x.jpg?v=1752012411" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Chanel Gatinho" onclick="openGallery('Chanel Gatinho')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Chanel Cat</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="óculos Chanel Gatinho - preto e branco" data-price="890.00" data-image="https://sunluxmx.com/cdn/shop/files/CHA_600x.jpg?v=1752012411">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://www.chanel.com/images///t_fashioncommercial_trim,f_auto,q_auto:good,dpr_1.1/w_480/-9537978597406.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Chanel Gatinho" onclick="openGallery('Chanel Gatinho-2')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Chanel Cat</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="óculos Chanel Gatinho - preto e Bege" data-price="890.00" data-image="https://www.chanel.com/images///t_fashioncommercial_trim,f_auto,q_auto:good,dpr_1.1/w_480/-9537978597406.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <!-- CARTIER -->
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://lh3.googleusercontent.com/pw/AP1GczNs0wqwcWRiXTSrammCpEpPjQZpygFXkNrE2EwiQb5tOLkFCFty8wdEoaixdoHUZaAT5mmxkfSWQ3nXpGQdXjjC9jzgVzSQJC3OUYVqRNr_NZbBIYoIvTn4kR2icGwmPaY9JoiA_2trkBcQD_GGn8LWww=w945-h945-s-no-gm?authuser=0" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="óculos Panthère com Acabamento Dourado" onclick="openGallery('oculos-cartier-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Cartier Panthère</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="óculos Cartier Panthère - Lente cinza e Acabamento Dourado" data-price="890.00" data-image="https://lh3.googleusercontent.com/pw/AP1GczNs0wqwcWRiXTSrammCpEpPjQZpygFXkNrE2EwiQb5tOLkFCFty8wdEoaixdoHUZaAT5mmxkfSWQ3nXpGQdXjjC9jzgVzSQJC3OUYVqRNr_NZbBIYoIvTn4kR2icGwmPaY9JoiA_2trkBcQD_GGn8LWww=w945-h945-s-no-gm?authuser=0">Adicionar ao carrinho</button>
+            </div>
+
+            <!-- CELINE  -->
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://asset.m-gs.kr/prod/1091811686/2/550" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Celine Triomphe" onclick="openGallery('Celine Triomphe')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Celine Triomphe</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="óculos Celine Triomphe - Tartaruga" data-price="890.00" data-image="https://asset.m-gs.kr/prod/1091811686/2/550">Adicionar ao carrinho</button>
+            </div>
+
+            <!-- GUCCI  -->
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/28/55/34/00/28553400_58117955_1000.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Gucci geométrico" onclick="openGallery('Gucci geométrico')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Gucci Geométrico</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="óculos Gucci geométrico - Lente cinza" data-price="890.00" data-image="https://cdn-images.farfetch-contents.com/28/55/34/00/28553400_58117955_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <!-- PRADA  -->
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn-images.farfetch-contents.com/16/51/27/25/16512725_32103692_1000.jpg" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Prada Symbole oversized" onclick="openGallery('Prada Symbole oversized')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Prada Symbole oversized</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="óculos Prada Symbole oversized - preto" data-price="890.00" data-image="https://cdn-images.farfetch-contents.com/16/51/27/25/16512725_32103692_1000.jpg">Adicionar ao carrinho</button>
+            </div>
+
+            <!-- TOM FORD  -->
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://wanny.vteximg.com.br/arquivos/ids/192203-500-500/Produto.jpg?v=638803667335270000" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Óculos Tom Ford" onclick="openGallery('oculos-tom-ford-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Tom Ford Falconer</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Óculos Tom Ford Falconer tartaruga - lente Marrom" data-price="890.00" data-image="https://wanny.vteximg.com.br/arquivos/ids/192203-500-500/Produto.jpg?v=638803667335270000">Adicionar ao carrinho</button>
+            </div>
+
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://cdn.media.amplience.net/i/tom_ford/FT1225_01E_59MM_A?w=3000" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Óculos Tom Ford ICON PILOT" onclick="openGallery('oculos-tom-ford-2')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Tom Ford ICON PILOT</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Óculos Tom Ford ICON PILOT - preto" data-price="890.00" data-image="https://cdn.media.amplience.net/i/tom_ford/FT1225_01E_59MM_A?w=3000">Adicionar ao carrinho</button>
+            </div>
+
+            <!-- Dior -->
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://lh3.googleusercontent.com/pw/AP1GczNEgJMvZuoXN3PFbg0jItje90IxcUX-zp0JppecjusUDhw1bt4bM_SHrMOoY2cSLlYdZLtfsw2-3FKhf5g9vAaMQhiXfLOY2D6wOlXK1hbiPioShw-mEEMBTIp62b3XRNJGXsh9lBFVzD1EAX2Xqj0OrA=w945-h945-s-no-gm?authuser=0" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="óculos Treasure preto" onclick="openGallery('oculos-treasure-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Dior Treasure</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="óculos DiorTreasure preto" data-price="890.00" data-image="https://lh3.googleusercontent.com/pw/AP1GczNEgJMvZuoXN3PFbg0jItje90IxcUX-zp0JppecjusUDhw1bt4bM_SHrMOoY2cSLlYdZLtfsw2-3FKhf5g9vAaMQhiXfLOY2D6wOlXK1hbiPioShw-mEEMBTIp62b3XRNJGXsh9lBFVzD1EAX2Xqj0OrA=w945-h945-s-no-gm?authuser=0">Adicionar ao carrinho</button>
+            </div>
+
+            <!-- VALENTINO  -->
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://wanny.vteximg.com.br/arquivos/ids/179938-750-750/Produto.jpg?v=638024365385500000" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Óculos Valentino" onclick="openGallery('oculos-valentino-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Valentino Geométrico</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Óculos de Sol Valentino Geométrico com Corrente V-Logo" data-price="890.00" data-image="https://wanny.vteximg.com.br/arquivos/ids/179938-750-750/Produto.jpg?v=638024365385500000">Adicionar ao carrinho</button>
+            </div>
+
+            <!-- YSL  -->
+            <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
+                <img src="https://saint-laurent.dam.kering.com/m/1370273f34b71b83/Medium2-671762Y99011000_A.jpg?v=10" class="w-full h-40 md:h-64 object-cover mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="Óculos YSL" onclick="openGallery('oculos-YSL-1')">
+                <h3 class="font-serif text-lg mb-2 h-14 md:h-auto">Saint Laurent SL</h3>
+                <p class="text-xl font-semibold mb-4">R$ 890,00</p>
+                <button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" 
+                    data-name="Óculos de Sol Saint Laurent SL - preto" data-price="890.00" data-image="https://saint-laurent.dam.kering.com/m/1370273f34b71b83/Medium2-671762Y99011000_A.jpg?v=10">Adicionar ao carrinho</button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-white py-10 text-center border-t border-gray-100">
+        <p class="text-[10px] text-gray-400 uppercase tracking-widest">© 2015 IMPORTS DE LUXO - Todos os direitos reservados</p>
+    </footer>
+
+<!-- MODAL GALERIA -->
+<div id="modalGallery" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
+    <div class="bg-white w-full max-w-5xl mx-4 rounded-lg shadow-2xl overflow-hidden">
+        <!-- Cabeçalho -->
+        <div class="bg-cyan-500 text-white px-6 py-4 flex justify-between items-center">
+            <span class="text-sm uppercase tracking-widest font-bold" id="imageCounter">1 / 3</span>
+            <button onclick="closeGallery()" class="text-2xl hover:text-red-500 transition">✕</button>
+        </div>
+        
+        <!-- Imagem Principal -->
+        <div class="relative bg-white flex items-center justify-center min-h-[70vh]">
+            <img id="mainGalleryImage" src="" class="max-w-full max-h-[70vh] object-contain">
+            
+            <!-- Botões de Navegação -->
+            <button onclick="prevImage()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-12 h-12 rounded-full flex items-center justify-center text-xl transition">
+                ❮
+            </button>
+            <button onclick="nextImage()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black w-12 h-12 rounded-full flex items-center justify-center text-xl transition">
+                ❯
+            </button>
+        </div>
+        
+        <!-- Thumbnails -->
+        <div class="bg-gray-50 px-6 py-4 flex gap-3 overflow-x-auto justify-center gallery-thumbs-container">
+        </div>
+    </div>
+</div>
+
+<div id="galleryOverlay" class="fixed inset-0 bg-black/70 z-[65] hidden"></div>
+
+    <div id="cartSidebar" style="right:-400px;" class="fixed top-0 w-80 h-full bg-white shadow-2xl transition-all duration-500 z-50 p-6 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold font-serif">Seu Carrinho</h2>
+            <button onclick="toggleCart()" class="text-red-500 font-bold">X</button>
+        </div>
+        <div id="cartItems"></div>
+        <div class="mt-6 border-t pt-4">
+            <p class="text-lg font-bold mb-4">Total: <span id="cartTotal">R$ 0,00</span></p>
+            <button onclick="finalizarCompra()" class="bg-cyan-500 text-white w-full py-3 font-bold hover:bg-cyan-600 transition">Finalizar no WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleCart() {
+            const sidebar = document.getElementById("cartSidebar");
+            const isOpen = sidebar.style.right === "0px";
+            sidebar.style.right = isOpen ? "-400px" : "0px";
+            if (!isOpen) renderCart();
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cartCount").innerText = cart.length;
+        }
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartItems = document.getElementById("cartItems");
+            const cartTotal = document.getElementById("cartTotal");
+            cartItems.innerHTML = "";
+            let total = 0;
+            cart.forEach((product, index) => {
+                total += product.price;
+                cartItems.innerHTML += `
+                    <div class="flex items-center gap-4 mb-4 border-b pb-4">
+                        <img src="${product.image}" class="w-16 h-16 object-cover rounded">
+                        <div class="flex-1">
+                            <h3 class="text-[10px] font-bold uppercase">${product.name}</h3>
+                            <p class="text-sm font-semibold">${product.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+                        </div>
+                        <button onclick="removeItem(${index})" class="text-red-500 text-xs">Remover</button>
+                    </div>`;
+            });
+            cartTotal.innerText = total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+        }
+
+        function finalizarCompra() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    if (cart.length === 0) return alert("Seu carrinho está vazio!");
+
+    let total = 0;
+
+    // frase singular ou plural
+    let mensagem = cart.length === 1
+        ? "Olá! Gostaria de saber mais sobre este produto:\n\n"
+        : "Olá! Gostaria de saber mais sobre estes produtos:\n\n";
+
+    cart.forEach(item => {
+        mensagem += `- ${item.name} (R$ ${item.price.toFixed(2)})\n`;
+        total += item.price;
+    });
+
+    mensagem += `\n*Total: R$ ${total.toFixed(2)}*\n\n`;
+    mensagem += "Poderia me informar o prazo de entrega e as formas de pagamento?";
+    
+    window.open(`https://wa.me/5544998214237?text=${encodeURIComponent(mensagem)}`, '_blank');
+}
+        document.addEventListener("DOMContentLoaded", function () {
+            updateCartCount();
+            const buttons = document.querySelectorAll(".add-cart");
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const name = this.getAttribute("data-name");
+                    const price = parseFloat(this.getAttribute("data-price"));
+                    const image = this.getAttribute("data-image");
+                    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    cart.push({ name, price, image });
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    updateCartCount();
+                    toggleCart();
+                });
+            });
+        });
+
+        // GALERIA MODAL DE FOTOS
+        let currentImageIndex = 0;
+        let currentGallery = [];
+
+        // Dados das galerias de óculos
+        const productGalleries = {
+            'oculos-miu-miu-1': [
+                'https://www.otticasm.com/media/catalog/product/cache/all/small_image/1200x800/9df78eab33525d08d6e5fb8d27136e95/m/i/miu-miu-mu-04zs-19p2z1.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU04Z/E19PF02Z1/SMU04Z_E19P_F02Z1_C_050_SLS.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU04Z/E19PF02Z1/SMU04Z_E19P_F02Z1_C_050_MDL.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg'
+            ],
+            'oculos-tom-ford-1': [
+                'https://wanny.vteximg.com.br/arquivos/ids/192203-500-500/Produto.jpg?v=638803667335270000',
+                'https://wanny.vteximg.com.br/arquivos/ids/192204-500-500/Produto.jpg?v=638803667335270000',
+                'https://wanny.vteximg.com.br/arquivos/ids/192205-500-500/Produto.jpg?v=638803667335270000'
+            ],
+            'oculos-tom-ford-2': [
+                'https://cdn.media.amplience.net/i/tom_ford/FT1225_01E_59MM_A?w=3000',
+                'https://cdn.media.amplience.net/i/tom_ford/FT1225_01E_59MM_B?w=3000',
+                'https://cdn.media.amplience.net/i/tom_ford/FT1225_01E_59MM_C?w=3000'
+            ],
+            'oculos-valentino-1': [
+                'https://wanny.vteximg.com.br/arquivos/ids/179938-750-750/Produto.jpg?v=638024365385500000',
+                'https://wanny.vteximg.com.br/arquivos/ids/179939-750-750/Produto.jpg?v=638024365385500000',
+                'https://wanny.vteximg.com.br/arquivos/ids/179940-750-750/Produto.jpg?v=638024365385500000'
+            ],
+            'oculos-bottega-1': [
+                'https://pretavoir.us/cdn/shop/files/bottega-veneta-bv1305s-002-hd-1.jpg?v=1707301799',
+                'https://pretavoir.us/cdn/shop/files/bottega-veneta-bv1305s-002-hd-2.jpg?v=1707301799',
+                'https://pretavoir.us/cdn/shop/files/bottega-veneta-bv1305s-002-hd-3.jpg?v=1707301799'
+            ],
+            'oculos-miu-miu-2': [
+                'https://cdn-images.farfetch-contents.com/18/34/35/34/18343534_39724254_1000.jpg',
+                'https://m.media-amazon.com/images/I/61RUXuVo-pL._AC_SX679_.jpg',
+                'https://m.media-amazon.com/images/I/610qsQ18t8L._AC_SX679_.jpg',
+                'https://m.media-amazon.com/images/I/61BqMA2E5VL._AC_SX679_.jpg'
+            ],
+            'oculos-treasure-1': [
+                'https://assets.christiandior.com/is/image/diorprod/DTRER1FSR10A0_SBG_E03?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/DTRER1FSR10A0_SBG_E02?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/DTRER1FSR10A0_SBG_E01?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/DTRER1FSR10A0_SBG_E09?$r9x10_raw$&crop=0,0,4000,5000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85',
+                'https://assets.christiandior.com/is/image/diorprod/LOOK_F_26_1_LOOK_334_E07?$lookDefault_GH-GHC$&crop=568,0,1864,2000&wid=1024&hei=1107&scale=0.5535&bfc=on&qlt=85'
+            ],
+            'oculos-miu-miu-3': [
+                'https://cdn-images.farfetch-contents.com/23/19/26/10/23192610_53275039_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/24/26/70/02/24267002_54567807_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/24/26/70/02/24267002_54567094_1000.jpg'
+            ],
+            'oculos-cartier-1': [
+                'https://lh3.googleusercontent.com/pw/AP1GczNs0wqwcWRiXTSrammCpEpPjQZpygFXkNrE2EwiQb5tOLkFCFty8wdEoaixdoHUZaAT5mmxkfSWQ3nXpGQdXjjC9jzgVzSQJC3OUYVqRNr_NZbBIYoIvTn4kR2icGwmPaY9JoiA_2trkBcQD_GGn8LWww=w945-h945-s-no-gm?authuser=0',
+                'https://img4.dhresource.com/webp/m/0x0/f3/albu/ys/n/24/82b7b8bb-ad1d-474e-9568-547f71c2332a.jpg',
+            ],
+            'Miu Miu Aube': [
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_SLR.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_SLS.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_SLT.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_MDR.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_SLF.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_MDF.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg',
+                'https://www.miumiu.com/content/dam/miumiubkg_products/S/SMU/SMU54Y/E5AKFE30B/SMU54Y_E5AK_FE30B_C_080_MDL.jpg/_jcr_content/renditions/cq5dam.web.hE7E3DA.1000.1000.jpg'
+            ],
+            'Miu Miu Aube-2': [
+                'https://cdn-images.farfetch-contents.com/28/40/35/86/28403586_57802945_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/28/40/35/86/28403586_57802952_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/28/40/35/86/28403586_57802937_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/28/40/35/86/28403586_57802949_1000.jpg'
+            ],
+            'Miu Miu Glimpse': [
+                'https://cdn-images.farfetch-contents.com/30/04/69/79/30046979_59104928_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/30/04/69/79/30046979_59104913_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/30/04/69/79/30046979_59104923_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/30/04/69/79/30046979_59104921_1000.jpg'
+            ],
+            'Prada Symbole oversized': [
+                'https://cdn-images.farfetch-contents.com/16/51/27/25/16512725_32103692_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/16/51/27/25/16512725_32103694_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/16/51/27/25/16512725_32103690_1000.jpg'
+            ],
+            'Gucci geométrico': [
+                'https://cdn-images.farfetch-contents.com/28/55/34/00/28553400_58117955_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/28/55/34/00/28553400_58117958_1000.jpg',
+                'https://cdn-images.farfetch-contents.com/28/55/34/00/28553400_58117951_1000.jpg'
+            ],
+            'Celine Triomphe': [
+                'https://asset.m-gs.kr/prod/1091811686/2/550',
+                'https://image.celine.com/a2c8d88ab703689/original/4S282CPLB-19TR_3_SS24_W.jpg?im=Resize=(2000)',
+                'https://image.celine.com/1006beed20e2d877/original/4S282CPLB-19TR_4_SS24_W.jpg?im=Resize=(2000)',
+                'https://image.celine.com/54753bee51926621/original/4S282CPLB-19TR_1_SS24_W.jpg?im=Resize=(2000)',
+                'https://image.celine.com/6189ea1c85971e64/original/4S282CPLB-19TR_2_SS24_W.jpg?im=Resize=(2000)'
+            ],
+            'Chanel Gatinho': [
+                'https://sunluxmx.com/cdn/shop/files/CHA_600x.jpg?v=1752012411',
+                'https://sunluxmx.com/cdn/shop/files/CHA_2_600x.jpg?v=1752012411',
+                'https://sunluxmx.com/cdn/shop/files/CHA_3_600x.jpg?v=1752012411'
+            ],
+            'Chanel Gatinho-2': [
+                'https://www.chanel.com/images///t_fashioncommercial_trim,f_auto,q_auto:good,dpr_1.1/w_480/-9537978597406.jpg',
+                'https://www.chanel.com/images///t_fashioncommercial_trim,f_auto,q_auto:good,dpr_1.1/w_960/-9540996890654.jpg',
+                'https://www.chanel.com/images///t_fashioncommercial_trim,f_auto,q_auto:good,dpr_1.1/w_960/-9540997316638.jpg',
+                'https://www.chanel.com/images///t_fashioncommercial_trim,f_auto,q_auto:good,dpr_1.1/w_1600/-9540995809310.jpg'
+            ],
+            'oculos-bottega-2': [
+                'https://bottega-veneta.dam.kering.com/m/420c1ddb34ebd4c5/Large-660165V23302819_A.jpg?v=6',
+                'https://bottega-veneta.dam.kering.com/m/63154978d0ccba3c/Large-660165V23302819_C.jpg?v=6',
+                'https://bottega-veneta.dam.kering.com/m/d413bd37db00687/Large-660165V23302819_D.jpg?v=6'
+            ],
+            'oculos-YSL-1': [
+                'https://saint-laurent.dam.kering.com/m/1370273f34b71b83/Medium2-671762Y99011000_A.jpg?v=10',
+                'https://saint-laurent.dam.kering.com/m/1ccd2dc38e4b6588/Medium2-671762Y99011000_B.jpg?v=9'
+            ],
+        };
+
+        function openGallery(galleryId) {
+            if (productGalleries[galleryId]) {
+                currentGallery = productGalleries[galleryId];
+                currentImageIndex = 0;
+                
+                // Gera thumbnails dinamicamente
+                const thumbContainer = document.querySelector(".gallery-thumbs-container");
+                thumbContainer.innerHTML = '';
+                currentGallery.forEach((image, index) => {
+                    const thumb = document.createElement('img');
+                    thumb.className = 'gallery-thumb w-20 h-20 object-cover cursor-pointer border-2 border-gray-200 hover:border-cyan-500 transition';
+                    thumb.src = image;
+                    thumb.onclick = () => {
+                        currentImageIndex = index;
+                        updateGalleryImage();
+                    };
+                    thumbContainer.appendChild(thumb);
+                });
+                
+                document.getElementById("modalGallery").classList.remove("hidden");
+                document.getElementById("galleryOverlay").classList.remove("hidden");
+                updateGalleryImage();
+            }
+        }
+
+        function closeGallery() {
+            document.getElementById("modalGallery").classList.add("hidden");
+            document.getElementById("galleryOverlay").classList.add("hidden");
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % currentGallery.length;
+            updateGalleryImage();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + currentGallery.length) % currentGallery.length;
+            updateGalleryImage();
+        }
+
+        function toggleMobileMenu() {
+        const mobileNav = document.getElementById("mobileNav");
+        mobileNav.classList.toggle("hidden");
+        }
+
+        function updateGalleryImage() {
+            document.getElementById("mainGalleryImage").src = currentGallery[currentImageIndex];
+            document.getElementById("imageCounter").textContent = `${currentImageIndex + 1} / ${currentGallery.length}`;
+            
+            // Atualiza estilos dos thumbnails
+            document.querySelectorAll(".gallery-thumb").forEach((thumb, index) => {
+                thumb.classList.toggle("border-cyan-500", index === currentImageIndex);
+                thumb.classList.toggle("border-gray-200", index !== currentImageIndex);
+            });
+        }
+
+        // Fechar ao clicar no overlay
+        document.addEventListener("DOMContentLoaded", function() {
+            const overlay = document.getElementById("galleryOverlay");
+            if (overlay) {
+                overlay.addEventListener("click", closeGallery);
+            }
+        });
+    </script>
+</body>
+</html>
