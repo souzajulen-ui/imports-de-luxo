@@ -15,6 +15,21 @@
         }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-luxo); color: var(--black-soft); }
         h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+            body { padding-top: 7rem !important; }
+            header { padding: 1rem 1.5rem !important; top: 2.5rem !important; }
+            header .text-2xl, header .md\:text-3xl { font-size: 1.25rem !important; }
+            .fixed.top-0 { padding: 0.5rem 1rem !important; font-size: 9px !important; }
+            h1.text-4xl, h1.md\:text-6xl { font-size: 2rem !important; line-height: 2.4rem !important; }
+            .grid.grid-cols-2.md\:grid-cols-3 { grid-template-columns: repeat(3, 1fr) !important; gap: 0.75rem !important; }
+            .product { padding: 0.75rem !important; }
+            .product img { height: 180px !important; }
+            .product h3 { font-size: 0.875rem !important; }
+            button.add-cart { width: 100% !important; display: block !important; font-size: 9px !important; }
+            #cartSidebar { width: 75vw !important; right: -75vw !important; }
+            #cartSidebar.right-0 { right: 0 !important; }
+        }
     </style>
 </head>
 <body class="antialiased text-gray-900 pt-32">

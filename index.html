@@ -14,7 +14,7 @@
     }
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://github.com/souzajulen-ui/logo-do-site/blob/main/favicon_logo_v2.png?raw=true">
+    <link rel="icon" type="image/jpeg" href="https://github.com/souzajulen-ui/logo-do-site/blob/main/logo_redonda.png?raw=true">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -30,6 +30,167 @@
         .luxury-card { border: 1px solid rgb(0, 206, 209); background: white; }
         .fade-in { animation: fadeIn 1.5s ease-in; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* MEDIA QUERIES PARA iPAD */
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+            /* Ajustes gerais para iPad em modo retrato */
+            body {
+                font-size: 15px;
+                padding-top: 7rem !important;
+            }
+
+            /* Navbar ajustado */
+            header {
+                padding: 1rem 1.5rem !important;
+                top: 2.5rem !important;
+            }
+
+            header .text-xl,
+            header .text-2xl,
+            header .text-3xl {
+                font-size: 1.25rem !important;
+            }
+
+            /* Barra de urgência */
+            .fixed.top-0.left-0 {
+                padding: 0.5rem 1rem !important;
+                font-size: 9px !important;
+            }
+
+            /* Hero section */
+            section.relative {
+                min-height: 50vh !important;
+                padding: 2rem 1.5rem !important;
+            }
+
+            h1 {
+                font-size: 2rem !important;
+                line-height: 2.4rem !important;
+            }
+
+            span.italic {
+                font-size: 1.5rem !important;
+            }
+
+            /* Grid de produtos: 3 colunas em iPad retrato */
+            .max-w-7xl.mx-auto.grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 0.75rem !important;
+            }
+
+            /* Produtos */
+            .product {
+                padding: 0.75rem !important;
+            }
+
+            .product img {
+                height: 180px !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .product h3 {
+                font-size: 0.875rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+
+            .product p {
+                font-size: 0.95rem !important;
+            }
+
+            /* Seções de categoria */
+            .category-section {
+                padding: 2.5rem 1.5rem !important;
+            }
+
+            .category-section h2 {
+                font-size: 1.25rem !important;
+                margin-left: 0 !important;
+            }
+
+            /* Grid de 2 colunas para benefícios e depoimentos */
+            .grid.grid-cols-1 {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1.5rem !important;
+            }
+
+            .luxury-card {
+                padding: 1.5rem !important;
+            }
+
+            /* Rodapé */
+            footer .grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1.5rem !important;
+            }
+
+            /* CTA final */
+            #colecao h2 {
+                font-size: 2rem !important;
+            }
+
+            #colecao p {
+                font-size: 0.95rem !important;
+            }
+
+            /* Botões de adicionar ao carrinho */
+            button.add-cart {
+                width: 100% !important;
+                display: block !important;
+                padding: 0.5rem 1rem !important;
+                font-size: 9px !important;
+            }
+
+            /* Carrinho lateral ajustado */
+            #cartSidebar {
+                width: 75vw !important;
+                right: -75vw !important;
+            }
+
+            #cartSidebar.right-0 {
+                right: 0 !important;
+            }
+
+            /* Mobile nav */
+            #mobileNav {
+                top: 8.5rem !important;
+            }
+
+            /* Ajuste de tamanhos */
+            h2 {
+                font-size: 1.25rem !important;
+            }
+
+            p {
+                font-size: 0.95rem !important;
+            }
+
+            footer .text-2xl {
+                font-size: 1.25rem !important;
+            }
+        }
+
+        @media (min-width: 1025px) and (max-width: 1366px) and (orientation: landscape) {
+            /* iPad em modo paisagem - mantém comportamento próximo ao desktop */
+            .grid.grid-cols-2.lg\\:grid-cols-4 {
+                grid-template-columns: repeat(4, 1fr) !important;
+                gap: 1.25rem !important;
+            }
+
+            .product {
+                padding: 1rem !important;
+            }
+
+            .product img {
+                height: 200px !important;
+            }
+        }
+
+        /* Ajuste adicional para evitar problemas com containers fixed */
+        @media (max-width: 1024px) {
+            .fixed.top-8.left-0 {
+                padding: 1rem 1rem !important;
+            }
+        }
     </style>
 </head>
 <body class="antialiased text-gray-900 pt-28 overflow-x-hidden">
