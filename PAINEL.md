@@ -221,6 +221,20 @@ em memória, então dá para mexer no painel sem tocar no projeto de verdade:
 - `http://localhost:4173/admin/mobile.html` — o mesmo roteiro em 375px de largura
 - `MOCK_UPLOAD_FAIL=1 node scripts/mock-server.mjs` — simula falha de envio de imagem
 
+### Regra ao escrever uma migration nova
+
+Nunca faça uma migration publicar o site:
+
+```sql
+-- NÃO faça isto:
+insert into public.site_snapshot (id, data) values ('published', public.build_snapshot()) ...
+```
+
+Isso publica junto qualquer alteração que o administrador tenha salvo e ainda
+não confirmado — exatamente o que aconteceu em 16/09/2026 com as cores. Para
+levar um campo novo ao site publicado, acrescente só aquela chave ao snapshot
+com `jsonb_set`, como fazem as migrations `0004` e `0005`.
+
 ### Ao adicionar uma seção nova no HTML
 
 1. Acrescente o campo em `scripts/content-map.mjs`.

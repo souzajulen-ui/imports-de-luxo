@@ -37,7 +37,37 @@ update public.content_blocks set value = 'assets/img/logo-512.jpg', updated_at =
  where page_slug = 'index' and key = 'seo.image'
    and value like '%logo_redonda%';
 
-insert into public.site_snapshot (id, data, updated_at) values ('draft', public.build_snapshot(), now())
-  on conflict (id) do update set data = excluded.data, updated_at = now();
-insert into public.site_snapshot (id, data, updated_at) values ('published', public.build_snapshot(), now())
-  on conflict (id) do update set data = excluded.data, updated_at = now();
+-- IMPORTANTE: uma migration NUNCA deve chamar build_snapshot() para 'published'.
+-- Isso publicaria, junto, qualquer alteração que o administrador tenha salvo e
+-- ainda não confirmado. Abaixo os campos novos são acrescentados ao que já está
+-- publicado, um a um, sem tocar no resto.
+update public.site_snapshot p
+   set data = jsonb_set(
+         p.data,
+         '{blocks,_global}',
+         coalesce(p.data -> 'blocks' -> '_global', '{}'::jsonb) || jsonb_build_object(
+           'brand.favicon', coalesce(p.data -> 'blocks' -> '_global' ->> 'brand.favicon', 'assets/img/favicon-96.png'),
+           'brand.logo',    case when coalesce(p.data -> 'blocks' -> '_global' ->> 'brand.logo', '') like '%logo_redonda%'
+                                 then 'assets/img/logo-512.jpg'
+                                 else coalesce(p.data -> 'blocks' -> '_global' ->> 'brand.logo', 'assets/img/logo-512.jpg') end
+         )
+       )
+ where p.id = 'published';
+
+update public.site_snapshot p
+   set data = jsonb_set(
+         p.data,
+         '{blocks,index}',
+         coalesce(p.data -> 'blocks' -> 'index', '{}'::jsonb) || jsonb_build_object(
+           'hero.image_desktop', case when coalesce(p.data -> 'blocks' -> 'index' ->> 'hero.image_desktop', '') like '%githubusercontent%'
+                                      then 'assets/img/hero-desktop.webp'
+                                      else coalesce(p.data -> 'blocks' -> 'index' ->> 'hero.image_desktop', 'assets/img/hero-desktop.webp') end,
+           'hero.image_mobile',  case when coalesce(p.data -> 'blocks' -> 'index' ->> 'hero.image_mobile', '') like '%githubusercontent%'
+                                      then 'assets/img/hero-mobile.webp'
+                                      else coalesce(p.data -> 'blocks' -> 'index' ->> 'hero.image_mobile', 'assets/img/hero-mobile.webp') end,
+           'seo.image',          case when coalesce(p.data -> 'blocks' -> 'index' ->> 'seo.image', '') like '%logo_redonda%'
+                                      then 'assets/img/logo-512.jpg'
+                                      else coalesce(p.data -> 'blocks' -> 'index' ->> 'seo.image', 'assets/img/logo-512.jpg') end
+         )
+       )
+ where p.id = 'published';

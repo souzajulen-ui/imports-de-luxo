@@ -17,11 +17,19 @@ on conflict (page_slug, key) do update set
   label = excluded.label, help = excluded.help, type = excluded.type,
   section = excluded.section, section_label = excluded.section_label, sort = excluded.sort;
 
--- A seção de cores fica logo no começo das configurações.
-update public.content_blocks set sort = sort where page_slug = '_global';
-
--- Atualiza rascunho e publicado para os campos novos já chegarem ao site.
-insert into public.site_snapshot (id, data, updated_at) values ('draft', public.build_snapshot(), now())
-  on conflict (id) do update set data = excluded.data, updated_at = now();
-insert into public.site_snapshot (id, data, updated_at) values ('published', public.build_snapshot(), now())
-  on conflict (id) do update set data = excluded.data, updated_at = now();
+-- IMPORTANTE: uma migration NUNCA deve chamar build_snapshot() para 'published'.
+-- Isso publicaria, junto, qualquer alteração que o administrador tenha salvo e
+-- ainda não confirmado. Abaixo os campos novos são acrescentados ao que já está
+-- publicado, um a um, sem tocar no resto.
+update public.site_snapshot p
+   set data = jsonb_set(
+         p.data,
+         '{blocks,_global}',
+         coalesce(p.data -> 'blocks' -> '_global', '{}'::jsonb) || jsonb_build_object(
+           'theme.accent',      coalesce(p.data -> 'blocks' -> '_global' ->> 'theme.accent',      '#06b6d4'),
+           'theme.topbar_bg',   coalesce(p.data -> 'blocks' -> '_global' ->> 'theme.topbar_bg',   '#06b6d4'),
+           'theme.topbar_text', coalesce(p.data -> 'blocks' -> '_global' ->> 'theme.topbar_text', '#000000'),
+           'theme.button_text', coalesce(p.data -> 'blocks' -> '_global' ->> 'theme.button_text', '#ffffff')
+         )
+       )
+ where p.id = 'published';
