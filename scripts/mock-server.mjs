@@ -200,6 +200,36 @@ const E2E = `
       registra('editor de produto abriu', true);
       registra('galeria no editor', !!document.querySelector('[data-gallery] img'));
       document.querySelector('[data-close]').click();
+
+      // setas de reordenar
+      var cartoes = document.querySelectorAll('[data-edit-product]');
+      var primeiroNome = cartoes[0].closest('.card').querySelector('.font-serif').textContent;
+      window.__primeiroNome = primeiroNome;
+      var subir = document.querySelectorAll('[data-move][data-dir="-1"]');
+      registra('seta de subir desativada no 1o item', subir[0].disabled);
+      var descer = document.querySelector('[data-move][data-dir="1"]');
+      registra('botao de previa na tela de produtos', !!document.querySelector('[data-preview]'));
+      descer.click();
+      return espera(function () {
+        var atual = document.querySelectorAll('[data-edit-product]')[0].closest('.card').querySelector('.font-serif').textContent;
+        return atual !== window.__primeiroNome ? atual : null;
+      });
+    })
+    .then(function (novoPrimeiro) {
+      registra('setas trocam a ordem', true, novoPrimeiro.slice(0, 22));
+      return espera(function () { return document.querySelector('[data-discard-draft]'); });
+    })
+    .then(function (botao) {
+      registra('botao de descartar aparece no topo', true);
+      botao.click();
+      return espera(function () { return document.querySelector('[data-ok]'); });
+    })
+    .then(function (ok) {
+      ok.click();
+      return espera(function () { return document.getElementById('toasts').textContent.indexOf('descartadas') > -1; }, 20000);
+    })
+    .then(function () {
+      registra('descartou e voltou ao publicado', true);
       // Volta para a página inicial e testa o envio de imagem.
       document.querySelector('[data-go="page:index"]').click();
       return espera(function () { return document.querySelector('[data-image-field] input[type=file]'); });
@@ -299,6 +329,22 @@ http
     }
 
     // ---------------------------------------------------------------- RPC
+    if (p === '/rest/v1/rpc/restore_from_published') {
+      const pub = db.snapshot.published;
+      for (const b of db.content_blocks) {
+        const v = pub.data.blocks?.[b.page_slug]?.[b.key];
+        if (v !== undefined) b.value = v;
+      }
+      const publicados = new Map(pub.data.products.map((x) => [x.id, x]));
+      for (const prod of db.products) {
+        const orig = publicados.get(prod.id);
+        if (orig) Object.assign(prod, orig, { active: true });
+        else prod.active = false;
+      }
+      db.snapshot.draft = { data: buildSnapshot(), updated_at: pub.updated_at };
+      return json(res, 200, pub.updated_at);
+    }
+
     if (p === '/rest/v1/rpc/publish_site') {
       db.snapshot.published = { data: buildSnapshot(), updated_at: new Date().toISOString() };
       return json(res, 200, db.snapshot.published.updated_at);

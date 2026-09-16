@@ -49,6 +49,7 @@
     publishing: false,
     productFilter: 'todas',
     productSearch: '',
+    pendingChanges: false,
   };
 
   // ============================================================== utilidades
@@ -193,6 +194,11 @@
         if (row.id === 'published') state.publishedAt = row.updated_at;
         if (row.id === 'draft') state.draftAt = row.updated_at;
       });
+      // Os dois carimbos vêm do mesmo servidor, então aqui a comparação é segura.
+      state.pendingChanges =
+        !!state.draftAt &&
+        !!state.publishedAt &&
+        new Date(state.draftAt).getTime() > new Date(state.publishedAt).getTime();
     });
   }
 
@@ -214,9 +220,17 @@
     refreshSaveBar();
   }
 
+  // Há algo salvo que ainda não foi publicado?
+  // Não comparamos relógios (o do computador pode estar errado): marcamos
+  // explicitamente a cada alteração e limpamos ao publicar ou descartar.
   function hasUnpublished() {
-    if (!state.draftAt || !state.publishedAt) return false;
-    return new Date(state.draftAt).getTime() > new Date(state.publishedAt).getTime();
+    return state.pendingChanges;
+  }
+
+  function marcarPendente() {
+    state.pendingChanges = true;
+    state.draftAt = new Date().toISOString();
+    renderTopBar();
   }
 
   // ================================================================= salvar
@@ -249,7 +263,7 @@
           if (b) b.value = value;
         });
         state.dirty.clear();
-        state.draftAt = new Date().toISOString();
+        marcarPendente();
         toast('Alterações salvas.', 'ok');
         return true;
       })
@@ -273,6 +287,7 @@
         return sb.rpc('publish_site').then(function (r) {
           if (r.error) throw r.error;
           state.publishedAt = r.data || new Date().toISOString();
+          state.pendingChanges = false;
           toast('Site publicado! As alterações já estão no ar.', 'ok');
         });
       })
@@ -697,12 +712,87 @@
     );
   }
 
+  // Produtos de uma categoria, na ordem em que aparecem no site.
+  function categoriaOrdenada(categoria) {
+    return state.products
+      .filter(function (p) {
+        return p.category === categoria;
+      })
+      .sort(function (a, b) {
+        return (a.sort || 0) - (b.sort || 0) || (a.name || '').localeCompare(b.name || '');
+      });
+  }
+
+  // Troca um produto de lugar com o vizinho da mesma categoria.
+  function moverProduto(id, direcao) {
+    var produto = state.products.find(function (p) {
+      return p.id === id;
+    });
+    if (!produto) return;
+
+    var lista = categoriaOrdenada(produto.category);
+    var i = lista.findIndex(function (p) {
+      return p.id === id;
+    });
+    var j = i + direcao;
+    if (j < 0 || j >= lista.length) return;
+
+    lista.splice(j, 0, lista.splice(i, 1)[0]);
+
+    // Renumera a categoria inteira e grava só o que mudou.
+    var alterados = [];
+    lista.forEach(function (p, pos) {
+      var novo = pos * 10;
+      if (p.sort !== novo) {
+        p.sort = novo;
+        alterados.push(p);
+      }
+    });
+    if (!alterados.length) return;
+
+    renderMain(); // move na tela na hora, sem esperar o banco
+
+    Promise.all(
+      alterados.map(function (p) {
+        return sb.from('products').update({ sort: p.sort, updated_at: new Date().toISOString() }).eq('id', p.id);
+      })
+    ).then(function (res) {
+      var erro = res.find(function (r) {
+        return r.error;
+      });
+      if (erro) {
+        toast('Não foi possível salvar a nova ordem: ' + erro.error.message, 'erro');
+        loadAll().then(renderMain);
+        return;
+      }
+      marcarPendente();
+    });
+  }
+
   function viewProducts() {
-    var lista = state.products.filter(function (p) {
-      var okCat = state.productFilter === 'todas' || p.category === state.productFilter;
-      var okBusca =
-        !state.productSearch || (p.name || '').toLowerCase().indexOf(state.productSearch.toLowerCase()) > -1;
-      return okCat && okBusca;
+    var buscando = !!state.productSearch;
+    var lista = state.products
+      .filter(function (p) {
+        var okCat = state.productFilter === 'todas' || p.category === state.productFilter;
+        var okBusca =
+          !state.productSearch || (p.name || '').toLowerCase().indexOf(state.productSearch.toLowerCase()) > -1;
+        return okCat && okBusca;
+      })
+      .sort(function (a, b) {
+        return (
+          (a.category || '').localeCompare(b.category || '') ||
+          (a.sort || 0) - (b.sort || 0) ||
+          (a.name || '').localeCompare(b.name || '')
+        );
+      });
+
+    // Para saber quem é o primeiro e o último de cada categoria.
+    var posicoes = {};
+    Object.keys(CATEGORY_LABEL).forEach(function (c) {
+      var ordenada = categoriaOrdenada(c);
+      ordenada.forEach(function (p, i) {
+        posicoes[p.id] = { indice: i, total: ordenada.length };
+      });
     });
 
     var filtros = ['todas']
@@ -720,29 +810,57 @@
     var cards = lista.length
       ? lista
           .map(function (p) {
+            var pos = posicoes[p.id] || { indice: 0, total: 1 };
+            var primeiro = pos.indice === 0;
+            var ultimo = pos.indice === pos.total - 1;
+            var motivo = buscando ? 'Limpe a busca para reordenar' : 'Mudar de posição';
+
+            function seta(direcao, simbolo, desativado) {
+              return (
+                '<button class="btn btn-ghost px-2 py-1 leading-none"' +
+                (desativado ? ' disabled' : '') +
+                ' title="' + esc(motivo) + '"' +
+                ' aria-label="' + (direcao < 0 ? 'Subir' : 'Descer') + ' ' + esc(p.name) + '"' +
+                ' data-move="' + esc(p.id) + '" data-dir="' + direcao + '">' +
+                simbolo +
+                '</button>'
+              );
+            }
+
             return (
-              '<div class="card p-4 flex gap-4 items-center">' +
+              '<div class="card p-4 flex gap-3 md:gap-4 items-center">' +
               '<img src="' + esc(p.image) + '" class="w-16 h-16 object-contain shrink-0 bg-gray-50 rounded" alt="" loading="lazy">' +
               '<div class="flex-1 min-w-0">' +
               '<p class="font-serif text-base truncate">' + esc(p.name) + '</p>' +
               '<p class="text-sm font-semibold">' + money(p.price) + '</p>' +
               '<p class="text-[11px] text-gray-400">' +
               esc(CATEGORY_LABEL[p.category] || p.category) +
+              ' · ' + (pos.indice + 1) + 'º' +
               (p.featured ? ' · <span class="text-cyan-600 font-bold">destaque na home</span>' : '') +
               (p.gallery && p.gallery.length > 1 ? ' · ' + p.gallery.length + ' fotos' : '') +
               '</p></div>' +
-              '<button class="btn btn-ghost" data-edit-product="' + esc(p.id) + '">Editar</button>' +
+              '<div class="flex gap-1 shrink-0">' +
+              seta(-1, '▲', buscando || primeiro) +
+              seta(1, '▼', buscando || ultimo) +
+              '</div>' +
+              '<button class="btn btn-ghost shrink-0" data-edit-product="' + esc(p.id) + '">Editar</button>' +
               '</div>'
             );
           })
           .join('')
       : '<p class="text-sm text-gray-400 py-12 text-center">Nenhum produto encontrado.</p>';
 
+    var arquivoPrevia =
+      state.productFilter !== 'todas' ? state.productFilter + '.html' : 'index.html';
+
     return (
       '<div class="flex flex-wrap items-center justify-between gap-3 mb-6">' +
       '<div><h1 class="font-serif text-3xl mb-1">Produtos</h1>' +
-      '<p class="text-gray-500 text-sm">' + state.products.length + ' peças no catálogo.</p></div>' +
-      '<button class="btn btn-accent" data-new-product>+ Novo produto</button></div>' +
+      '<p class="text-gray-500 text-sm">' + state.products.length + ' peças no catálogo. ' +
+      'Use as setas ▲▼ para mudar a ordem em que aparecem no site.</p></div>' +
+      '<div class="flex flex-wrap gap-2">' +
+      '<button class="btn btn-ghost" data-preview="' + esc(arquivoPrevia) + '">Pré-visualizar</button>' +
+      '<button class="btn btn-accent" data-new-product>+ Novo produto</button></div></div>' +
       '<div class="flex flex-wrap gap-2 mb-4">' + filtros + '</div>' +
       '<input class="field-input mb-5" placeholder="Buscar pelo nome…" value="' + esc(state.productSearch) + '" data-product-search>' +
       '<div class="grid gap-3" id="product-list">' + cards + '</div>'
@@ -1001,7 +1119,7 @@
           });
           if (i > -1) state.products[i] = r.data;
         }
-        state.draftAt = new Date().toISOString();
+        marcarPendente();
         m.close();
         toast('Produto salvo. Publique para aparecer no site.', 'ok');
         renderMain();
@@ -1022,7 +1140,7 @@
               state.products = state.products.filter(function (x) {
                 return x.id !== p.id;
               });
-              state.draftAt = new Date().toISOString();
+              marcarPendente();
               m.close();
               toast('Produto excluído.', 'ok');
               renderMain();
@@ -1102,7 +1220,9 @@
       '<header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-gray-100 px-4 md:px-8 py-3 flex items-center gap-3">' +
       '<button class="lg:hidden btn btn-ghost" data-drawer-open>☰</button>' +
       '<div class="flex-1"></div>' +
-      '<button class="btn btn-ghost" data-open-site>Ver site</button>' +
+      '<button class="btn btn-ghost" data-preview-current>Pré-visualizar</button>' +
+      (pendente ? '<button class="btn btn-danger" data-discard-draft>Descartar alterações</button>' : '') +
+      '<button class="btn btn-ghost hidden sm:inline-flex" data-open-site>Ver site</button>' +
       '<button class="btn btn-primary" data-publish' + (state.publishing ? ' disabled' : '') + '>' +
       (state.publishing ? 'Publicando…' : 'Publicar no site') +
       '</button>' +
@@ -1110,6 +1230,8 @@
       (pendente
         ? '<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-[13px] px-4 md:px-8 py-2 flex flex-wrap items-center gap-2">' +
           '<span>Você tem alterações salvas que ainda <strong>não estão no site</strong>.</span>' +
+          '<button class="underline font-semibold" data-preview-current>Ver como ficou</button>' +
+          '<span class="text-amber-400">·</span>' +
           '<button class="underline font-semibold" data-publish>Publicar agora</button></div>'
         : '');
   }
@@ -1137,6 +1259,7 @@
       '</button></div>';
   }
 
+  // Qual página do site faz sentido pré-visualizar de onde o usuário está.
   function currentFile() {
     if (state.view === 'page') {
       var p = PAGES.find(function (x) {
@@ -1144,7 +1267,37 @@
       });
       return p ? p.file : 'index.html';
     }
+    if (state.view === 'produtos' && state.productFilter !== 'todas') return state.productFilter + '.html';
     return 'index.html';
+  }
+
+  // Joga fora tudo o que foi salvo mas ainda não publicado.
+  function descartarRascunho() {
+    confirmar(
+      'Descartar alterações',
+      'Tudo o que você salvou e ainda não publicou será perdido, e o painel volta a ficar igual ao site que está no ar. ' +
+        'Produtos criados depois da última publicação não são apagados — apenas ficam ocultos.',
+      'Descartar tudo'
+    ).then(function (ok) {
+      if (!ok) return;
+      toast('Voltando ao conteúdo publicado…', 'info');
+      sb.rpc('restore_from_published')
+        .then(function (r) {
+          if (r.error) throw r.error;
+          state.dirty.clear();
+          return loadAll().then(function () {
+            state.pendingChanges = false;
+          });
+        })
+        .then(function () {
+          renderTopBar();
+          renderMain();
+          toast('Alterações descartadas. O painel está igual ao site.', 'ok');
+        })
+        .catch(function (err) {
+          toast('Não foi possível descartar: ' + (err.message || 'erro'), 'erro');
+        });
+    });
   }
 
   function openPreview(file) {
@@ -1216,6 +1369,13 @@
       b.addEventListener('click', function () {
         state.productFilter = b.getAttribute('data-filter');
         renderMain();
+      });
+    });
+
+    root.querySelectorAll('[data-move]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (b.disabled) return;
+        moverProduto(b.getAttribute('data-move'), Number(b.getAttribute('data-dir')));
       });
     });
 
@@ -1366,6 +1526,7 @@
     }
     if (e.target.closest('[data-open-site]')) window.open('../index.html', '_blank');
     if (e.target.closest('[data-publish]')) publish();
+    if (e.target.closest('[data-discard-draft]')) descartarRascunho();
     if (e.target.closest('[data-save-blocks]')) saveDirty();
     if (e.target.closest('[data-preview-current]')) openPreview(currentFile());
     if (e.target.closest('[data-discard]')) {

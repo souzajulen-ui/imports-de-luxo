@@ -28,6 +28,7 @@ do zero, abra **SQL Editor** → **New query** e rode, nesta ordem:
 
 1. Cole todo o conteúdo de `supabase/migrations/0001_schema.sql` → **Run**.
 2. Cole todo o conteúdo de `supabase/migrations/0002_seed.sql` → **Run**.
+3. Cole todo o conteúdo de `supabase/migrations/0003_descartar.sql` → **Run**.
 
 O primeiro cria as tabelas, as permissões e o espaço das imagens.
 O segundo carrega **o conteúdo que já está no site hoje**: 124 campos de texto e
@@ -113,11 +114,17 @@ seções, novas páginas).
 | Ação | O que acontece |
 |---|---|
 | **Salvar** | Guarda a alteração no rascunho. Os clientes **ainda não veem**. |
-| **Pré-visualizar** | Abre o site de verdade mostrando o rascunho. |
+| **Pré-visualizar** | Abre o site de verdade mostrando o rascunho, no computador e no celular. |
 | **Publicar no site** | Coloca o rascunho no ar para todo mundo. |
+| **Descartar alterações** | Joga fora tudo o que não foi publicado e volta ao site que está no ar. |
 
 Enquanto houver algo salvo e não publicado, aparece uma faixa amarela no topo do
-painel avisando.
+painel, com atalhos para ver como ficou ou publicar na hora.
+
+O **Descartar alterações** só aparece quando existe algo pendente, pede
+confirmação e é o botão de arrependimento: tudo volta a ficar igual ao site
+publicado. Produtos criados depois da última publicação não são apagados —
+apenas ficam ocultos, e dá para reativá-los em Produtos.
 
 ### O que dá para editar
 
@@ -135,7 +142,10 @@ Cintos): aviso do topo, título, subtítulo e SEO.
 **Página de busca**: aviso do topo, textos da busca e SEO.
 
 **Produtos**: nome, preço, categoria, foto principal, galeria de fotos, descrição
-que vai para o WhatsApp, ordem, se aparece na página inicial e se está visível.
+que vai para o WhatsApp, se aparece na página inicial e se está visível. As
+setas ▲▼ ao lado de cada peça mudam a ordem em que ela aparece no site, e o
+número (1º, 2º…) mostra a posição atual dentro da categoria. Para reordenar,
+limpe o campo de busca.
 O mesmo catálogo alimenta a home, as páginas de categoria e a busca — cadastrar
 um produto uma vez basta.
 
@@ -158,7 +168,7 @@ assets/cms-config.js     endereço e chave pública do Supabase
 assets/cms.js            runtime do site público (aplica conteúdo e produtos)
 admin/index.html         casca do painel
 admin/app.js             painel (login, editores, upload, publicação)
-supabase/migrations/     SQL a rodar no Supabase (schema + conteúdo inicial)
+supabase/migrations/     SQL a rodar no Supabase (schema, conteúdo, descarte)
 scripts/extract-content  lê o HTML atual e monta o catálogo de produtos
 scripts/content-map.mjs  inventário dos campos editáveis (fonte da verdade)
 scripts/generate-seed    gera o 0002_seed.sql
@@ -186,7 +196,7 @@ conteúdo reserva e aparece se o banco não responder.
 
 ```bash
 node scripts/mock-server.mjs     # http://localhost:4173/index.html
-node scripts/smoke-test.mjs      # 34 verificações no Chrome headless
+node scripts/smoke-test.mjs      # 39 verificações no Chrome headless
 ```
 
 O servidor de teste imita o Supabase inteiro (login, banco, storage) com dados
