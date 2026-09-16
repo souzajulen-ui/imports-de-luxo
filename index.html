@@ -7,13 +7,13 @@
     <meta property="og:site_name" content="Imports de Luxo">
     <meta property="og:title" content="Imports de Luxo | O Padrão da Elegância">
     <meta property="og:description" content="CONFIRA NOSSA COLEÇÃO EXCLUSIVA DE BOLSAS DE LUXO COM OS MELHORES PREÇOS E QUALIDADE.">
-    <meta property="og:image" content="https://importsdeluxo.com.br/logo_redonda%20(1).png">
+    <meta property="og:image" content="https://importsdeluxo.com.br/assets/img/logo-512.jpg">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://importsdeluxo.com.br/">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Imports de Luxo">
     <meta name="twitter:description" content="CONFIRA NOSSA COLEÇÃO EXCLUSIVA DE BOLSAS DE LUXO COM OS MELHORES PREÇOS E QUALIDADE.">
-    <meta name="twitter:image" content="https://importsdeluxo.com.br/logo_redonda%20(1).png">
+    <meta name="twitter:image" content="https://importsdeluxo.com.br/assets/img/logo-512.jpg">
     
     <script type="application/ld+json">
     {
@@ -21,17 +21,19 @@
       "@type": "Organization",
       "name": "Imports de Luxo",
       "url": "https://importsdeluxo.com.br/",
-      "logo": "https://importsdeluxo.com.br/logo_redonda%20(1).png"
+      "logo": "https://importsdeluxo.com.br/assets/img/logo-512.jpg"
     }
     </script>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="icon" type="image/png" href="logo_redonda (1).png">
-    <link rel="shortcut icon" type="image/png" href="logo_redonda (1).png">
-    <link rel="apple-touch-icon" href="logo_redonda (1).png">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96.png">
+    <link rel="apple-touch-icon" href="assets/img/icone-192.png">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/tailwind.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -209,8 +211,8 @@
         }
     </style>
     <!-- Conteúdo editável pelo painel (/admin) -->
-    <script src="assets/cms-config.js?v=4"></script>
-    <script src="assets/cms.js?v=4" defer></script>
+    <script src="assets/cms-config.js?v=5"></script>
+    <script src="assets/cms.js?v=5" defer></script>
 </head>
 <body class="antialiased text-gray-900 pt-28 overflow-x-hidden">
 
@@ -278,13 +280,14 @@
 
     <div class="absolute inset-0 z-0">
 
-    <!-- MOBILE -->
-    <img src="https://raw.githubusercontent.com/souzajulen-ui/imagem-hermes/main/Bolsas%20de%20luxo%20em%20pedestais%20perfeitos.png"
-         class="block md:hidden w-full h-full object-cover" data-cms-src="hero.image_mobile">
-
-    <!-- DESKTOP -->
-    <img src="https://raw.githubusercontent.com/souzajulen-ui/bolsas-hermes/main/bolsas_direita%20(1).png"
-        class="hidden md:block w-full h-full object-cover object-right" data-cms-src="hero.image_desktop">
+    <!-- Uma imagem por aparelho: antes as duas baixavam em todo celular. -->
+    <picture>
+        <source media="(min-width: 768px)" srcset="assets/img/hero-desktop.webp" data-cms-srcset="hero.image_desktop">
+        <img src="assets/img/hero-mobile.webp"
+             class="w-full h-full object-cover md:object-right"
+             alt="" fetchpriority="high" decoding="async"
+             data-cms-src="hero.image_mobile">
+    </picture>
 
     <!-- OVERLAY -->
     <div class="absolute inset-0 bg-white/75 md:bg-white/0"></div>

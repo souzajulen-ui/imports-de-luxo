@@ -132,6 +132,7 @@
     // Atributos avulsos: um link pode ter texto e endereço editáveis ao mesmo tempo.
     applyAttribute('data-cms-href', 'href');
     applyAttribute('data-cms-src', 'src');
+    applyAttribute('data-cms-srcset', 'srcset');
   }
 
   function applyAttribute(dataAttr, target) {
@@ -197,8 +198,8 @@
     var slug = pageSlug();
     var title = CMS.get('seo.title');
     var desc = CMS.get('seo.description');
-    var ogImage = CMS.get('seo.image');
-    var logo = CMS.get('brand.logo');
+    var ogImage = CMS.get('seo.image') || CMS.get('brand.logo');
+    var icone = CMS.get('brand.favicon') || CMS.get('brand.logo');
 
     if (title) document.title = title;
 
@@ -215,9 +216,14 @@
     meta('meta[property="og:image"]', ogImage);
     meta('meta[name="twitter:image"]', ogImage);
 
-    if (logo) {
+    // Troca o ícone só se o painel tiver um diferente do que já está na página,
+    // para não baixar duas vezes a mesma imagem em toda visita.
+    if (icone) {
       var icons = document.head.querySelectorAll('link[rel*="icon"]');
-      for (var i = 0; i < icons.length; i++) icons[i].setAttribute('href', logo);
+      for (var i = 0; i < icons.length; i++) {
+        var atual = icons[i].getAttribute('href') || '';
+        if (atual.indexOf(icone) === -1 && icone.indexOf(atual) === -1) icons[i].setAttribute('href', icone);
+      }
     }
     return slug;
   }

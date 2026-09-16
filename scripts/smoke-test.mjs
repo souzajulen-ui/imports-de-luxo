@@ -70,6 +70,17 @@ function dump(url, budget = 6000) {
   );
 }
 
+// O Chrome em modo automático às vezes engasga e a página não termina de
+// carregar. Nesses casos repetimos a leitura antes de considerar falha.
+function dumpAte(url, marcador, budget = 30000, tentativas = 3) {
+  let ultimo = '';
+  for (let i = 0; i < tentativas; i++) {
+    ultimo = dump(url, budget);
+    if (ultimo.includes(marcador)) return ultimo;
+  }
+  return ultimo;
+}
+
 const checks = [];
 const check = (nome, condicao, detalhe) => checks.push({ nome, ok: !!condicao, detalhe });
 
@@ -106,12 +117,12 @@ check('busca: resultados vindos do catálogo', /Chanel/i.test(busca));
 check('busca: cabeçalho editável', busca.includes('data-cms="search.heading"'));
 
 // --------------------------------------------------------------- admin
-const admin = dump(`${BASE}/admin/index.html`, 60000);
+const admin = dumpAte(`${BASE}/admin/index.html`, 'id="login-form"', 60000);
 check('painel: tela de login carregou', admin.includes('Painel de conteúdo') && admin.includes('id="login-form"'));
 check('painel: não expõe chave privada', !/service_role/i.test(admin));
 
 // Roteiro completo do painel: login → editar → salvar → publicar → produtos → upload.
-const e2e = dump(`${BASE}/admin/e2e.html`, 180000);
+const e2e = dumpAte(`${BASE}/admin/e2e.html`, 'FIM', 180000);
 const linha = (e2e.match(/e2e: [^<]*/) || [''])[0];
 const etapas = linha.replace('e2e: ', '').split(' | ');
 for (const etapa of etapas) {
@@ -121,7 +132,7 @@ for (const etapa of etapas) {
 check('painel: roteiro chegou ao fim', etapas.includes('FIM'), linha.slice(0, 120));
 
 // O mesmo roteiro em largura de celular (375px), dentro de um iframe.
-const mobile = dump(`${BASE}/admin/mobile.html`, 200000);
+const mobile = dumpAte(`${BASE}/admin/mobile.html`, 'FIM', 200000);
 const espelho = (mobile.match(/<div id="espelho">([^<]*)/) || ['', ''])[1];
 check('painel no celular: roteiro completo', espelho.includes('FIM') && !espelho.includes('FALHA'), espelho.slice(-80));
 

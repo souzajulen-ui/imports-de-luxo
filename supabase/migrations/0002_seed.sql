@@ -1,15 +1,16 @@
 -- ============================================================================
 -- Imports de Luxo — Migration 2/2: conteúdo inicial.
 -- Gerado automaticamente a partir do site atual por scripts/generate-seed.mjs.
--- Gerado em: 2026-09-16T22:43:34.620Z
+-- Gerado em: 2026-09-16T23:45:56.930Z
 -- Rode DEPOIS de 0001_schema.sql.
 -- ============================================================================
 
--- 128 campos de texto/imagem editáveis
+-- 129 campos de texto/imagem editáveis
 insert into public.content_blocks (page_slug, key, label, help, type, value, section, section_label, sort) values
   ('_global', 'brand.name_main', 'Nome no cabeçalho', null, 'text', 'IMPORTS', 'marca', 'Marca e topo do site', 0),
   ('_global', 'brand.name_accent', 'Complemento do nome (itálico)', null, 'text', 'de Luxo', 'marca', 'Marca e topo do site', 10),
-  ('_global', 'brand.logo', 'Logo / imagem da marca', 'Usada no favicon e no compartilhamento em redes sociais.', 'image', 'logo_redonda (1).png', 'marca', 'Marca e topo do site', 20),
+  ('_global', 'brand.logo', 'Logo (compartilhamento em redes sociais)', 'Aparece quando alguém compartilha o site no WhatsApp, Instagram ou Facebook.', 'image', 'assets/img/logo-512.jpg', 'marca', 'Marca e topo do site', 20),
+  ('_global', 'brand.favicon', 'Ícone do site (aba do navegador e Google)', 'Use uma imagem quadrada. O ideal é que o desenho vá até a borda, sem moldura branca.', 'image', 'assets/img/favicon-96.png', 'marca', 'Marca e topo do site', 30),
   ('_global', 'theme.accent', 'Cor principal', 'Usada nos botões, nos detalhes e nos destaques do site inteiro.', 'color', '#06b6d4', 'aparencia', 'Cores do site', 0),
   ('_global', 'theme.topbar_bg', 'Faixa do topo — fundo', null, 'color', '#06b6d4', 'aparencia', 'Cores do site', 10),
   ('_global', 'theme.topbar_text', 'Faixa do topo — letras', null, 'color', '#000000', 'aparencia', 'Cores do site', 20),
@@ -60,8 +61,8 @@ insert into public.content_blocks (page_slug, key, label, help, type, value, sec
   ('index', 'seo.description', 'Descrição para o Google', null, 'textarea', 'CONFIRA NOSSA COLEÇÃO EXCLUSIVA DE BOLSAS DE LUXO COM OS MELHORES PREÇOS E QUALIDADE.', 'seo', 'SEO (Google e redes sociais)', 10),
   ('index', 'seo.image', 'Imagem de compartilhamento', null, 'image', 'https://importsdeluxo.com.br/logo_redonda%20(1).png', 'seo', 'SEO (Google e redes sociais)', 20),
   ('index', 'topbar.text', 'Aviso na faixa superior', null, 'text', 'marcas Exclusivas | Frete em todo Brasil', 'topo', 'Faixa do topo', 0),
-  ('index', 'hero.image_desktop', 'Imagem de fundo — computador', null, 'image', 'https://raw.githubusercontent.com/souzajulen-ui/bolsas-hermes/main/bolsas_direita%20(1).png', 'hero', 'Banner principal', 0),
-  ('index', 'hero.image_mobile', 'Imagem de fundo — celular', null, 'image', 'https://raw.githubusercontent.com/souzajulen-ui/imagem-hermes/main/Bolsas%20de%20luxo%20em%20pedestais%20perfeitos.png', 'hero', 'Banner principal', 10),
+  ('index', 'hero.image_desktop', 'Imagem de fundo — computador', null, 'image', 'assets/img/hero-desktop.webp', 'hero', 'Banner principal', 0),
+  ('index', 'hero.image_mobile', 'Imagem de fundo — celular', null, 'image', 'assets/img/hero-mobile.webp', 'hero', 'Banner principal', 10),
   ('index', 'hero.eyebrow', 'Texto de destaque (acima do título)', null, 'text', 'A recompensa do seu sucesso', 'hero', 'Banner principal', 20),
   ('index', 'hero.title', 'Título principal', null, 'text', 'O luxo que você merece,', 'hero', 'Banner principal', 30),
   ('index', 'hero.subtitle', 'Segunda linha do título (itálico)', null, 'text', 'agora ao seu alcance.', 'hero', 'Banner principal', 40),

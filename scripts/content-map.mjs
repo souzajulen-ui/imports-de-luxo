@@ -12,7 +12,8 @@ export const GLOBAL = [
     fields: [
       ['brand.name_main', 'Nome no cabeçalho', 'text', 'IMPORTS'],
       ['brand.name_accent', 'Complemento do nome (itálico)', 'text', 'de Luxo'],
-      ['brand.logo', 'Logo / imagem da marca', 'image', 'logo_redonda (1).png', 'Usada no favicon e no compartilhamento em redes sociais.'],
+      ['brand.logo', 'Logo (compartilhamento em redes sociais)', 'image', 'assets/img/logo-512.jpg', 'Aparece quando alguém compartilha o site no WhatsApp, Instagram ou Facebook.'],
+      ['brand.favicon', 'Ícone do site (aba do navegador e Google)', 'image', 'assets/img/favicon-96.png', 'Use uma imagem quadrada. O ideal é que o desenho vá até a borda, sem moldura branca.'],
     ],
   },
   {
@@ -133,8 +134,8 @@ export const PAGES = [
         section: 'hero',
         label: 'Banner principal',
         fields: [
-          ['hero.image_desktop', 'Imagem de fundo — computador', 'image', 'https://raw.githubusercontent.com/souzajulen-ui/bolsas-hermes/main/bolsas_direita%20(1).png'],
-          ['hero.image_mobile', 'Imagem de fundo — celular', 'image', 'https://raw.githubusercontent.com/souzajulen-ui/imagem-hermes/main/Bolsas%20de%20luxo%20em%20pedestais%20perfeitos.png'],
+          ['hero.image_desktop', 'Imagem de fundo — computador', 'image', 'assets/img/hero-desktop.webp'],
+          ['hero.image_mobile', 'Imagem de fundo — celular', 'image', 'assets/img/hero-mobile.webp'],
           ['hero.eyebrow', 'Texto de destaque (acima do título)', 'text', 'A recompensa do seu sucesso'],
           ['hero.title', 'Título principal', 'text', 'O luxo que você merece,'],
           ['hero.subtitle', 'Segunda linha do título (itálico)', 'text', 'agora ao seu alcance.'],

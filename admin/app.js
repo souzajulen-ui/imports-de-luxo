@@ -1606,7 +1606,7 @@
       '<div class="min-h-screen flex items-center justify-center p-4">' +
       '<div class="card w-full max-w-sm p-8 fade-up">' +
       '<div class="text-center mb-7">' +
-      '<img src="../logo_redonda (1).png" alt="Imports de Luxo" class="w-16 h-16 mx-auto mb-4 object-contain">' +
+      '<img src="../assets/img/icone-192.png" alt="Imports de Luxo" class="w-16 h-16 mx-auto mb-4 object-contain">' +
       '<p class="font-serif text-2xl font-bold">IMPORTS <span class="italic font-light">de Luxo</span></p>' +
       '<p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 mt-2">Painel de conteúdo</p></div>' +
       '<form id="login-form">' +

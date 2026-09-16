@@ -184,7 +184,8 @@ scripts/extract-content  lê o HTML atual e monta o catálogo de produtos
 scripts/content-map.mjs  inventário dos campos editáveis (fonte da verdade)
 scripts/generate-seed    gera o 0002_seed.sql
 scripts/instrument.mjs   marca o HTML com data-cms (idempotente)
-scripts/bump-version.mjs carimba versão nos .js (evita cache velho no navegador)
+scripts/bump-version.mjs carimba versão nos .js/.css (evita cache velho)
+scripts/build-css.mjs    gera assets/tailwind.css (rodar se mudar classe no HTML)
 scripts/mock-server.mjs  servidor local que simula o Supabase
 scripts/smoke-test.mjs   testes no Chrome headless
 ```
@@ -229,7 +230,28 @@ em memória, então dá para mexer no painel sem tocar no projeto de verdade:
 
 ---
 
-## 5. Limitações conhecidas
+## 5. Desempenho no celular
+
+O site foi enxugado para abrir rápido em rede móvel:
+
+| Item | Antes | Agora |
+|---|---|---|
+| Tailwind | 398 KB de JavaScript montando o CSS no navegador | 23 KB de CSS pronto |
+| Banner | 1.288 KB (as duas versões baixavam em todo aparelho) | 27 KB, uma por aparelho |
+| Ícone do site | 396 KB | 7 KB |
+
+São cerca de **2 MB a menos por visita**. O banner agora usa `<picture>`, então o
+celular baixa só a imagem de celular.
+
+**Atenção para quem mexer no código:** como o CSS não é mais montado no
+navegador, ao acrescentar uma classe nova no HTML é preciso rodar
+`node scripts/build-css.mjs` e depois `node scripts/bump-version.mjs`. Isso
+**não** vale para o uso normal do painel — textos, fotos, produtos e cores
+continuam funcionando sem nenhum comando.
+
+---
+
+## 6. Limitações conhecidas
 
 - **SEO**: título e descrição são aplicados pelo navegador. O Google executa
   JavaScript e enxerga a versão nova, mas alguns robôs mais simples leem o que
