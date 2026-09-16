@@ -16,6 +16,16 @@ export const GLOBAL = [
     ],
   },
   {
+    section: 'aparencia',
+    label: 'Cores do site',
+    fields: [
+      ['theme.accent', 'Cor principal', 'color', '#06b6d4', 'Usada nos botões, nos detalhes e nos destaques do site inteiro.'],
+      ['theme.topbar_bg', 'Faixa do topo — fundo', 'color', '#06b6d4'],
+      ['theme.topbar_text', 'Faixa do topo — letras', 'color', '#000000'],
+      ['theme.button_text', 'Letras dos botões coloridos', 'color', '#ffffff'],
+    ],
+  },
+  {
     section: 'contato',
     label: 'Contato e atendimento',
     fields: [

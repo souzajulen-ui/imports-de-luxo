@@ -144,6 +144,55 @@
     }
   }
 
+  // ------------------------------------------------------------------ cores
+  // Só aceita cor em formato seguro (#rgb, #rrggbb, #rrggbbaa), para o campo
+  // de cor nunca virar uma porta de entrada para código estranho na página.
+  function corValida(v) {
+    return typeof v === 'string' && /^#(?:[0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})$/i.test(v.trim());
+  }
+
+  function applyTheme() {
+    var accent = CMS.get('theme.accent');
+    var topoFundo = CMS.get('theme.topbar_bg');
+    var topoLetra = CMS.get('theme.topbar_text');
+    var botaoLetra = CMS.get('theme.button_text');
+    var css = '';
+
+    if (corValida(accent)) {
+      css +=
+        ':root{--gold:' + accent + '}' +
+        '.bg-cyan-500,.bg-cyan-600,.btn-gold{background-color:' + accent + ' !important}' +
+        '.text-cyan-500,.text-cyan-600,.text-cyan-700{color:' + accent + ' !important}' +
+        '.border-cyan-500,.border-cyan-400,.luxury-card{border-color:' + accent + ' !important}' +
+        '.decoration-cyan-400{text-decoration-color:' + accent + ' !important}' +
+        '.hover\\:text-cyan-500:hover{color:' + accent + ' !important}' +
+        '.hover\\:bg-cyan-600:hover{background-color:' + accent + ' !important}' +
+        '.hover\\:border-cyan-500:hover{border-color:' + accent + ' !important}';
+    }
+    if (corValida(botaoLetra)) {
+      css += '.bg-cyan-500,.bg-cyan-600,.btn-gold{color:' + botaoLetra + ' !important}';
+    }
+    if (corValida(topoFundo) || corValida(topoLetra)) {
+      css +=
+        '[data-cms="topbar.text"]{' +
+        (corValida(topoFundo) ? 'background-color:' + topoFundo + ' !important;' : '') +
+        (corValida(topoLetra) ? 'color:' + topoLetra + ' !important;' : '') +
+        '}';
+    }
+
+    var tag = document.getElementById('cms-theme');
+    if (!css) {
+      if (tag) tag.remove();
+      return;
+    }
+    if (!tag) {
+      tag = document.createElement('style');
+      tag.id = 'cms-theme';
+      document.head.appendChild(tag);
+    }
+    if (tag.textContent !== css) tag.textContent = css;
+  }
+
   function applySeo() {
     var slug = pageSlug();
     var title = CMS.get('seo.title');
@@ -338,6 +387,7 @@
       CMS.galleries[p.id] = (p.gallery && p.gallery.length ? p.gallery : [p.image]).filter(Boolean);
     });
 
+    applyTheme();
     applySeo();
     applyBlocks();
     applyProducts();

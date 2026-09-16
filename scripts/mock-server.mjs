@@ -134,7 +134,9 @@ const E2E = `
     passos.push('ERRO-JS: ' + e.message + ' @' + (e.filename || '').split('/').pop() + ':' + e.lineno);
     document.getElementById('e2e-result').textContent = 'e2e: ' + passos.join(' | ');
   });
-  var registra = function (nome, ok, extra) { passos.push((ok ? 'OK ' : 'FALHA ') + nome + (extra ? ' (' + extra + ')' : '')); pinta(); };
+  // O detalhe não pode conter "|", que é o separador entre as etapas.
+  var limpa = function (t) { return String(t).replace(/[|\\n]+/g, ' / ').trim(); };
+  var registra = function (nome, ok, extra) { passos.push((ok ? 'OK ' : 'FALHA ') + nome + (extra ? ' (' + limpa(extra) + ')' : '')); pinta(); };
   var pinta = function () { document.getElementById('e2e-result').textContent = 'e2e: ' + passos.join(' | '); };
   var espera = function (fn, ms) {
     ms = ms || 8000;
@@ -182,6 +184,36 @@ const E2E = `
     })
     .then(function () {
       registra('salvou no banco', true);
+      window.__tituloNovo = document.querySelector('[data-block]').value;
+
+      // A prévia precisa mostrar o que foi salvo e ainda NÃO publicado.
+      var previa = document.createElement('iframe');
+      previa.id = 'teste-previa';
+      previa.src = '../index.html?preview=1&t=' + Date.now();
+      previa.style.cssText = 'width:900px;height:600px;position:fixed;left:-9999px';
+      document.body.appendChild(previa);
+
+      var publico = document.createElement('iframe');
+      publico.id = 'teste-publico';
+      publico.src = '../index.html?t=' + Date.now();
+      publico.style.cssText = 'width:900px;height:600px;position:fixed;left:-9999px';
+      document.body.appendChild(publico);
+
+      return espera(function () {
+        var a = document.getElementById('teste-previa').contentDocument;
+        var b = document.getElementById('teste-publico').contentDocument;
+        if (!a || !b || !a.title || !b.title) return null;
+        if (a.title === 'Carregando' || b.title === 'Carregando') return null;
+        return { previa: a.title, publico: b.title, corTopo: a.defaultView.getComputedStyle(a.querySelector('[data-cms="topbar.text"]')).backgroundColor };
+      }, 25000);
+    })
+    .then(function (r) {
+      registra('prévia mostra a alteração não publicada', r.previa === window.__tituloNovo, r.previa.slice(0, 26));
+      registra('site público ainda NÃO mostra', r.publico !== window.__tituloNovo, r.publico.slice(0, 26));
+      registra('cor da faixa aplicada pelo painel', r.corTopo === 'rgb(6, 182, 212)', r.corTopo);
+      document.getElementById('teste-previa').remove();
+      document.getElementById('teste-publico').remove();
+
       var publicar = document.querySelector('[data-publish]');
       publicar.click();
       return espera(function () { return document.getElementById('toasts').textContent.indexOf('publicado') > -1; });

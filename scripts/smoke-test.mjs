@@ -111,7 +111,7 @@ check('painel: tela de login carregou', admin.includes('Painel de conteúdo') &&
 check('painel: não expõe chave privada', !/service_role/i.test(admin));
 
 // Roteiro completo do painel: login → editar → salvar → publicar → produtos → upload.
-const e2e = dump(`${BASE}/admin/e2e.html`, 60000);
+const e2e = dump(`${BASE}/admin/e2e.html`, 100000);
 const linha = (e2e.match(/e2e: [^<]*/) || [''])[0];
 const etapas = linha.replace('e2e: ', '').split(' | ');
 for (const etapa of etapas) {
@@ -121,7 +121,7 @@ for (const etapa of etapas) {
 check('painel: roteiro chegou ao fim', etapas.includes('FIM'), linha.slice(0, 120));
 
 // O mesmo roteiro em largura de celular (375px), dentro de um iframe.
-const mobile = dump(`${BASE}/admin/mobile.html`, 70000);
+const mobile = dump(`${BASE}/admin/mobile.html`, 120000);
 const espelho = (mobile.match(/<div id="espelho">([^<]*)/) || ['', ''])[1];
 check('painel no celular: roteiro completo', espelho.includes('FIM') && !espelho.includes('FALHA'), espelho.slice(-80));
 

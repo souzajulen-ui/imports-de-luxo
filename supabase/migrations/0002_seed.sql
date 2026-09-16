@@ -1,15 +1,19 @@
 -- ============================================================================
 -- Imports de Luxo — Migration 2/2: conteúdo inicial.
 -- Gerado automaticamente a partir do site atual por scripts/generate-seed.mjs.
--- Gerado em: 2026-09-16T18:46:46.520Z
+-- Gerado em: 2026-09-16T22:43:34.620Z
 -- Rode DEPOIS de 0001_schema.sql.
 -- ============================================================================
 
--- 124 campos de texto/imagem editáveis
+-- 128 campos de texto/imagem editáveis
 insert into public.content_blocks (page_slug, key, label, help, type, value, section, section_label, sort) values
   ('_global', 'brand.name_main', 'Nome no cabeçalho', null, 'text', 'IMPORTS', 'marca', 'Marca e topo do site', 0),
   ('_global', 'brand.name_accent', 'Complemento do nome (itálico)', null, 'text', 'de Luxo', 'marca', 'Marca e topo do site', 10),
   ('_global', 'brand.logo', 'Logo / imagem da marca', 'Usada no favicon e no compartilhamento em redes sociais.', 'image', 'logo_redonda (1).png', 'marca', 'Marca e topo do site', 20),
+  ('_global', 'theme.accent', 'Cor principal', 'Usada nos botões, nos detalhes e nos destaques do site inteiro.', 'color', '#06b6d4', 'aparencia', 'Cores do site', 0),
+  ('_global', 'theme.topbar_bg', 'Faixa do topo — fundo', null, 'color', '#06b6d4', 'aparencia', 'Cores do site', 10),
+  ('_global', 'theme.topbar_text', 'Faixa do topo — letras', null, 'color', '#000000', 'aparencia', 'Cores do site', 20),
+  ('_global', 'theme.button_text', 'Letras dos botões coloridos', null, 'color', '#ffffff', 'aparencia', 'Cores do site', 30),
   ('_global', 'contact.whatsapp_number', 'Número do WhatsApp (só números, com DDI)', 'Usado para finalizar o pedido do carrinho. Ex.: 5544998214237', 'text', '5544998214237', 'contato', 'Contato e atendimento', 0),
   ('_global', 'contact.whatsapp_link', 'Link do botão de WhatsApp', null, 'url', 'https://wa.me/message/6AMQ5WF2AWS2L1', 'contato', 'Contato e atendimento', 10),
   ('_global', 'contact.email', 'E-mail de atendimento', null, 'text', 'reneetartarelli@gmail.com', 'contato', 'Contato e atendimento', 20),

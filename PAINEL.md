@@ -29,6 +29,7 @@ do zero, abra **SQL Editor** → **New query** e rode, nesta ordem:
 1. Cole todo o conteúdo de `supabase/migrations/0001_schema.sql` → **Run**.
 2. Cole todo o conteúdo de `supabase/migrations/0002_seed.sql` → **Run**.
 3. Cole todo o conteúdo de `supabase/migrations/0003_descartar.sql` → **Run**.
+4. Cole todo o conteúdo de `supabase/migrations/0004_cores.sql` → **Run**.
 
 O primeiro cria as tabelas, as permissões e o espaço das imagens.
 O segundo carrega **o conteúdo que já está no site hoje**: 124 campos de texto e
@@ -128,9 +129,15 @@ apenas ficam ocultos, e dá para reativá-los em Produtos.
 
 ### O que dá para editar
 
-**Configurações do site** (valem para todas as páginas): nome da marca, logo,
-WhatsApp, e-mail, horário de atendimento, itens do menu, textos do carrinho,
-rodapé inteiro e bandeiras de pagamento.
+**Configurações do site** (valem para todas as páginas): cores do site, nome da
+marca, logo, WhatsApp, e-mail, horário de atendimento, itens do menu, textos do
+carrinho, rodapé inteiro e bandeiras de pagamento.
+
+**Cores**: em Configurações do site → Cores do site dá para trocar a cor
+principal (botões, links e detalhes de todas as páginas de uma vez), o fundo e
+as letras da faixa do topo, e a cor das letras dos botões coloridos. Cada campo
+tem o seletor de cor, o código em texto e um botão **Cor original** para voltar
+atrás.
 
 **Página inicial**: faixa do topo, banner principal (inclusive as duas imagens de
 fundo — celular e computador), títulos das vitrines, benefícios, frase de
@@ -173,6 +180,7 @@ scripts/extract-content  lê o HTML atual e monta o catálogo de produtos
 scripts/content-map.mjs  inventário dos campos editáveis (fonte da verdade)
 scripts/generate-seed    gera o 0002_seed.sql
 scripts/instrument.mjs   marca o HTML com data-cms (idempotente)
+scripts/bump-version.mjs carimba versão nos .js (evita cache velho no navegador)
 scripts/mock-server.mjs  servidor local que simula o Supabase
 scripts/smoke-test.mjs   testes no Chrome headless
 ```
@@ -196,7 +204,7 @@ conteúdo reserva e aparece se o banco não responder.
 
 ```bash
 node scripts/mock-server.mjs     # http://localhost:4173/index.html
-node scripts/smoke-test.mjs      # 39 verificações no Chrome headless
+node scripts/smoke-test.mjs      # 42 verificações no Chrome headless
 ```
 
 O servidor de teste imita o Supabase inteiro (login, banco, storage) com dados

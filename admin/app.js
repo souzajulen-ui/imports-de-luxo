@@ -493,6 +493,14 @@
       control = imageField(block);
     } else if (block.type === 'textarea') {
       control = '<textarea class="field-input" rows="3" data-block="' + block.id + '">' + esc(value) + '</textarea>';
+    } else if (block.type === 'color') {
+      var cor = /^#[0-9a-fA-F]{6}$/.test(value) ? value : '#000000';
+      control =
+        '<div class="flex items-center gap-3" data-color-field="' + block.id + '">' +
+        '<input type="color" value="' + esc(cor) + '" class="w-14 h-10 rounded border border-gray-200 cursor-pointer p-1 bg-white">' +
+        '<input type="text" class="field-input w-36 font-mono" value="' + esc(value) + '" placeholder="#000000" data-hex>' +
+        '<button type="button" class="btn btn-ghost" data-reset-color="' + esc(block.value || '') + '">Cor original</button>' +
+        '</div>';
     } else if (block.type === 'richtext') {
       control =
         '<div class="border border-gray-200 rounded-lg overflow-hidden">' +
@@ -529,6 +537,32 @@
       if (!block) return;
       input.addEventListener('input', function () {
         setValue(block, input.value);
+      });
+    });
+
+    root.querySelectorAll('[data-color-field]').forEach(function (box) {
+      var block = state.blocks.find(function (b) {
+        return b.id === box.getAttribute('data-color-field');
+      });
+      if (!block) return;
+      var seletor = box.querySelector('input[type=color]');
+      var hex = box.querySelector('[data-hex]');
+      var original = box.querySelector('[data-reset-color]');
+
+      function aplica(valor, vindoDoTexto) {
+        setValue(block, valor);
+        if (!vindoDoTexto) hex.value = valor;
+        if (/^#[0-9a-fA-F]{6}$/.test(valor)) seletor.value = valor;
+      }
+      seletor.addEventListener('input', function () {
+        aplica(seletor.value, false);
+      });
+      hex.addEventListener('input', function () {
+        aplica(hex.value.trim(), true);
+      });
+      original.addEventListener('click', function () {
+        aplica(original.getAttribute('data-reset-color'), false);
+        hex.value = original.getAttribute('data-reset-color');
       });
     });
 
