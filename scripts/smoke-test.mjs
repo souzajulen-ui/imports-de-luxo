@@ -106,7 +106,7 @@ check('busca: resultados vindos do catálogo', /Chanel/i.test(busca));
 check('busca: cabeçalho editável', busca.includes('data-cms="search.heading"'));
 
 // --------------------------------------------------------------- admin
-const admin = dump(`${BASE}/admin/index.html`, 20000);
+const admin = dump(`${BASE}/admin/index.html`, 35000);
 check('painel: tela de login carregou', admin.includes('Painel de conteúdo') && admin.includes('id="login-form"'));
 check('painel: não expõe chave privada', !/service_role/i.test(admin));
 

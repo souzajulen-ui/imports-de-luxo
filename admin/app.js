@@ -1217,12 +1217,14 @@
     if (!bar) return;
     var pendente = hasUnpublished();
     bar.innerHTML =
-      '<header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-gray-100 px-4 md:px-8 py-3 flex items-center gap-3">' +
+      '<header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-gray-100 px-4 md:px-8 py-3 flex flex-wrap items-center gap-2">' +
       '<button class="lg:hidden btn btn-ghost" data-drawer-open>☰</button>' +
       '<div class="flex-1"></div>' +
+      '<button class="btn btn-ghost" data-open-site>Ver site</button>' +
       '<button class="btn btn-ghost" data-preview-current>Pré-visualizar</button>' +
-      (pendente ? '<button class="btn btn-danger" data-discard-draft>Descartar alterações</button>' : '') +
-      '<button class="btn btn-ghost hidden sm:inline-flex" data-open-site>Ver site</button>' +
+      '<button class="btn btn-danger" data-discard-draft' +
+      (pendente ? '' : ' disabled title="Não há alterações pendentes para descartar"') +
+      '>Descartar alterações</button>' +
       '<button class="btn btn-primary" data-publish' + (state.publishing ? ' disabled' : '') + '>' +
       (state.publishing ? 'Publicando…' : 'Publicar no site') +
       '</button>' +
@@ -1526,7 +1528,8 @@
     }
     if (e.target.closest('[data-open-site]')) window.open('../index.html', '_blank');
     if (e.target.closest('[data-publish]')) publish();
-    if (e.target.closest('[data-discard-draft]')) descartarRascunho();
+    var descartar = e.target.closest('[data-discard-draft]');
+    if (descartar && !descartar.disabled) descartarRascunho();
     if (e.target.closest('[data-save-blocks]')) saveDirty();
     if (e.target.closest('[data-preview-current]')) openPreview(currentFile());
     if (e.target.closest('[data-discard]')) {

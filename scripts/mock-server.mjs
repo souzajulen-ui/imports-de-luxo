@@ -217,10 +217,13 @@ const E2E = `
     })
     .then(function (novoPrimeiro) {
       registra('setas trocam a ordem', true, novoPrimeiro.slice(0, 22));
-      return espera(function () { return document.querySelector('[data-discard-draft]'); });
+      return espera(function () {
+        var b = document.querySelector('[data-discard-draft]');
+        return b && !b.disabled ? b : null;
+      });
     })
     .then(function (botao) {
-      registra('botao de descartar aparece no topo', true);
+      registra('botao de descartar habilita apos alteracao', true);
       botao.click();
       return espera(function () { return document.querySelector('[data-ok]'); });
     })
