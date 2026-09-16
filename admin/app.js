@@ -9,7 +9,8 @@
   var configured =
     cfg.url && cfg.anonKey && cfg.url.indexOf('SEU-PROJETO') === -1 && cfg.anonKey.indexOf('COLE_AQUI') === -1;
 
-  var sb = configured ? window.supabase.createClient(cfg.url, cfg.anonKey) : null;
+  var bibliotecaOk = !!(window.supabase && window.supabase.createClient);
+  var sb = configured && bibliotecaOk ? window.supabase.createClient(cfg.url, cfg.anonKey) : null;
   var BUCKET = 'site-images';
   var MAX_UPLOAD = 5 * 1024 * 1024; // 5 MB
   var TYPES_OK = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
@@ -970,13 +971,27 @@
     var galeria = (p.gallery || []).slice();
 
     function galleryHtml() {
+      if (!galeria.length)
+        return '<p class="col-span-full text-[11px] text-gray-400 py-4">Nenhuma foto na galeria. A foto principal será usada sozinha.</p>';
+
       return galeria
         .map(function (src, i) {
+          var primeira = i === 0;
+          var ultima = i === galeria.length - 1;
           return (
-            '<div class="relative group border border-gray-200 rounded-lg overflow-hidden">' +
+            '<div class="relative border border-gray-200 rounded-lg overflow-hidden bg-white">' +
             '<img src="' + esc(src) + '" class="w-full h-20 object-contain bg-gray-50" alt="">' +
-            '<button class="absolute top-1 right-1 bg-white/90 text-red-600 text-[10px] font-bold px-1.5 py-0.5 rounded" data-rm-gal="' + i + '">✕</button>' +
-            '</div>'
+            '<button class="absolute top-1 right-1 bg-white/90 text-red-600 text-[10px] font-bold px-1.5 py-0.5 rounded" ' +
+            'title="Remover foto" data-rm-gal="' + i + '">✕</button>' +
+            '<div class="flex items-center justify-between border-t border-gray-100 px-1 py-1">' +
+            '<button class="px-1.5 py-0.5 text-xs rounded hover:bg-gray-100 disabled:opacity-30" ' +
+            (primeira ? 'disabled ' : '') +
+            'title="Mover para trás" data-gal-move="' + i + '" data-gal-dir="-1">◀</button>' +
+            '<span class="text-[10px] text-gray-400">' + (i + 1) + 'ª</span>' +
+            '<button class="px-1.5 py-0.5 text-xs rounded hover:bg-gray-100 disabled:opacity-30" ' +
+            (ultima ? 'disabled ' : '') +
+            'title="Mover para frente" data-gal-move="' + i + '" data-gal-dir="1">▶</button>' +
+            '</div></div>'
           );
         })
         .join('');
@@ -1011,8 +1026,9 @@
         '<img data-main-preview src="' + esc(p.image) + '" class="w-full h-full object-contain" alt=""></div>' +
         '<div><button class="btn btn-ghost" data-pick-main>Alterar foto</button>' +
         '<p class="text-[11px] mt-2" data-main-status></p></div></div></div>' +
-        '<div class="mt-5"><label class="block text-[13px] font-semibold mb-2">Galeria de fotos</label>' +
-        '<div class="grid grid-cols-4 gap-2 mb-2" data-gallery>' + galleryHtml() + '</div>' +
+        '<div class="mt-5"><label class="block text-[13px] font-semibold mb-1">Galeria de fotos</label>' +
+        '<p class="text-[11px] text-gray-400 mb-2">Use ◀ ▶ para ordenar. A 1ª é a que o cliente vê ao abrir a peça.</p>' +
+        '<div class="grid grid-cols-3 md:grid-cols-4 gap-2 mb-2" data-gallery>' + galleryHtml() + '</div>' +
         '<button class="btn btn-ghost" data-add-gal>+ Adicionar foto</button>' +
         '<p class="text-[11px] mt-2" data-gal-status></p></div>' +
         '<div class="mt-5 flex flex-wrap gap-6">' +
@@ -1064,6 +1080,17 @@
       m.querySelectorAll('[data-rm-gal]').forEach(function (b) {
         b.addEventListener('click', function () {
           galeria.splice(Number(b.getAttribute('data-rm-gal')), 1);
+          redrawGallery();
+        });
+      });
+      // Setas ◀ ▶: trocam a foto de lugar na galeria.
+      m.querySelectorAll('[data-gal-move]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          if (b.disabled) return;
+          var de = Number(b.getAttribute('data-gal-move'));
+          var para = de + Number(b.getAttribute('data-gal-dir'));
+          if (para < 0 || para >= galeria.length) return;
+          galeria.splice(para, 0, galeria.splice(de, 1)[0]);
           redrawGallery();
         });
       });
@@ -1684,6 +1711,16 @@
     }
   });
 
+  function renderErroBiblioteca() {
+    app().innerHTML =
+      '<div class="min-h-screen flex items-center justify-center p-4"><div class="card max-w-md p-8 text-center">' +
+      '<h1 class="font-serif text-2xl mb-3">Não foi possível carregar o painel</h1>' +
+      '<p class="text-sm text-gray-600 mb-6">Um arquivo necessário não chegou. Normalmente é a conexão: ' +
+      'verifique a internet e recarregue a página.</p>' +
+      '<button class="btn btn-accent" onclick="location.reload()">Tentar de novo</button></div></div>';
+  }
+
   if (!configured) renderErroConfig();
+  else if (!bibliotecaOk) renderErroBiblioteca();
   else boot();
 })();

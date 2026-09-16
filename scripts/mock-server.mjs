@@ -230,8 +230,23 @@ const E2E = `
     })
     .then(function () {
       registra('editor de produto abriu', true);
-      registra('galeria no editor', !!document.querySelector('[data-gallery] img'));
-      document.querySelector('[data-close]').click();
+      var fotos = document.querySelectorAll('[data-gallery] img');
+      registra('galeria no editor', fotos.length > 1, fotos.length + ' fotos');
+
+      // reordenar as fotos da galeria
+      var antes = Array.prototype.map.call(fotos, function (i) { return i.src; });
+      var primeiraSeta = document.querySelector('[data-gal-move][data-gal-dir="-1"]');
+      registra('1a foto nao pode voltar', primeiraSeta.disabled);
+      document.querySelector('[data-gal-move="0"][data-gal-dir="1"]').click();
+      var depois = Array.prototype.map.call(document.querySelectorAll('[data-gallery] img'), function (i) { return i.src; });
+      registra('setas trocam as fotos de lugar', depois[0] === antes[1] && depois[1] === antes[0]);
+      window.__ordemFotos = depois;
+
+      document.querySelector('[data-save]').click();
+      return espera(function () { return document.getElementById('toasts').textContent.indexOf('Produto salvo') > -1; }, 20000);
+    })
+    .then(function () {
+      registra('nova ordem das fotos salva', true);
 
       // setas de reordenar
       var cartoes = document.querySelectorAll('[data-edit-product]');
@@ -400,27 +415,32 @@ http
       const rows = db[tabela];
       if (!rows) return json(res, 404, { message: 'tabela desconhecida: ' + tabela });
 
-      if (req.method === 'GET') return json(res, 200, applyFilters(rows, url));
+      // Com .single(), o PostgREST devolve UM objeto, não uma lista. O painel
+      // conta com isso, então o simulador precisa se comportar igual.
+      const umSo = (req.headers.accept || '').includes('vnd.pgrst.object+json');
+      const responde = (status, lista) => json(res, status, umSo ? lista[0] ?? null : lista);
+
+      if (req.method === 'GET') return responde(200, applyFilters(rows, url));
 
       if (req.method === 'PATCH') {
         const patch = await body(req);
         const alvos = applyFilters(rows, url);
         alvos.forEach((r) => Object.assign(r, patch));
         refreshDraft();
-        return json(res, 200, alvos);
+        return responde(200, alvos);
       }
       if (req.method === 'POST') {
         const novo = await body(req);
         const item = Array.isArray(novo) ? novo[0] : novo;
         rows.push(item);
         refreshDraft();
-        return json(res, 201, [item]);
+        return responde(201, [item]);
       }
       if (req.method === 'DELETE') {
         const alvos = applyFilters(rows, url);
         db[tabela] = rows.filter((r) => alvos.indexOf(r) === -1);
         refreshDraft();
-        return json(res, 200, alvos);
+        return responde(200, alvos);
       }
     }
 

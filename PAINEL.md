@@ -156,6 +156,9 @@ limpe o campo de busca.
 O mesmo catálogo alimenta a home, as páginas de categoria e a busca — cadastrar
 um produto uma vez basta.
 
+Dentro do produto, as setas ◀ ▶ embaixo de cada foto da galeria mudam a ordem
+das fotos. A 1ª é a que o cliente vê ao abrir a peça no site.
+
 **Imagens**: biblioteca com tudo o que você já enviou, para reaproveitar.
 
 ### Imagens
@@ -174,6 +177,7 @@ um produto uma vez basta.
 assets/cms-config.js     endereço e chave pública do Supabase
 assets/cms.js            runtime do site público (aplica conteúdo e produtos)
 admin/index.html         casca do painel
+admin/vendor/            biblioteca do Supabase servida pelo próprio site
 admin/app.js             painel (login, editores, upload, publicação)
 supabase/migrations/     SQL a rodar no Supabase (schema, conteúdo, descarte)
 scripts/extract-content  lê o HTML atual e monta o catálogo de produtos
@@ -204,7 +208,7 @@ conteúdo reserva e aparece se o banco não responder.
 
 ```bash
 node scripts/mock-server.mjs     # http://localhost:4173/index.html
-node scripts/smoke-test.mjs      # 42 verificações no Chrome headless
+node scripts/smoke-test.mjs      # 45 verificações no Chrome headless
 ```
 
 O servidor de teste imita o Supabase inteiro (login, banco, storage) com dados
