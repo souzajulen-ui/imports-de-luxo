@@ -208,13 +208,14 @@
             }
         }
     </style>
+    <!-- Conteúdo editável pelo painel (/admin) -->
+    <script src="assets/cms-config.js"></script>
+    <script src="assets/cms.js" defer></script>
 </head>
 <body class="antialiased text-gray-900 pt-28 overflow-x-hidden">
 
     <!-- BARRA SUPERIOR (URGÊNCIA SUTIL) -->
-    <div class="fixed top-0 left-0 w-full z-50 bg-cyan-500 text-black text-[10px] uppercase tracking-[0.3em] py-2 text-center">
-    marcas Exclusivas | Frete em todo Brasil
-</div>
+    <div class="fixed top-0 left-0 w-full z-50 bg-cyan-500 text-black text-[10px] uppercase tracking-[0.3em] py-2 text-center" data-cms="topbar.text">marcas Exclusivas | Frete em todo Brasil</div>
 
     <!-- NAVBAR PREMIUM -->
 <header class="fixed top-8 left-0 w-full z-50 bg-white py-4 px-4 md:py-6 md:px-20 border-b border-gray-100 shadow-sm">
@@ -222,7 +223,7 @@
     <div class="flex items-center justify-between gap-4">
         <!-- LOGO -->
         <div class="text-xl sm:text-2xl md:text-3xl font-serif font-bold tracking-tight">
-            IMPORTS <span class="italic font-light">de Luxo</span>
+            <span data-cms="brand.name_main">IMPORTS</span> <span class="italic font-light" data-cms="brand.name_accent">de Luxo</span>
         </div>
 
         <!-- MOBILE MENU BUTTON -->
@@ -232,13 +233,13 @@
 
         <!-- DESKTOP MENU -->
         <nav class="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center space-x-8 text-[13px] uppercase tracking-widest font-semibold">
-            <a href="index.html" class="hover:text-cyan-500 transition">Início</a>
-            <a href="bolsas.html" class="hover:text-cyan-500 transition">Bolsas</a>
-            <a href="relogios.html" class="hover:text-cyan-500 transition">Relógios</a>
-            <a href="oculos.html" class="hover:text-cyan-500 transition">Óculos</a>
-            <a href="calcados.html" class="hover:text-cyan-500 transition">Calçados</a>
-            <a href="acessorios.html" class="hover:text-cyan-500 transition">Acessórios</a>
-            <a href="cintos.html" class="hover:text-cyan-500 transition">Cintos</a>
+            <a href="index.html" class="hover:text-cyan-500 transition" data-cms="nav.1_label" data-cms-href="nav.1_url">Início</a>
+            <a href="bolsas.html" class="hover:text-cyan-500 transition" data-cms="nav.2_label" data-cms-href="nav.2_url">Bolsas</a>
+            <a href="relogios.html" class="hover:text-cyan-500 transition" data-cms="nav.3_label" data-cms-href="nav.3_url">Relógios</a>
+            <a href="oculos.html" class="hover:text-cyan-500 transition" data-cms="nav.4_label" data-cms-href="nav.4_url">Óculos</a>
+            <a href="calcados.html" class="hover:text-cyan-500 transition" data-cms="nav.5_label" data-cms-href="nav.5_url">Calçados</a>
+            <a href="acessorios.html" class="hover:text-cyan-500 transition" data-cms="nav.6_label" data-cms-href="nav.6_url">Acessórios</a>
+            <a href="cintos.html" class="hover:text-cyan-500 transition" data-cms="nav.7_label" data-cms-href="nav.7_url">Cintos</a>
         </nav>
 
         <!-- ÍCONES -->
@@ -263,12 +264,12 @@
 <div id="mobileNav" class="hidden fixed top-[110px] left-0 w-full bg-white z-40 border-b border-gray-100 md:hidden">
     <nav class="flex flex-col p-6 space-y-4 text-[13px] uppercase tracking-[0.2em] font-bold">
         
-        <a href="bolsas.html" class="hover:text-cyan-500 transition">Bolsas</a>
-        <a href="relogios.html" class="hover:text-cyan-500 transition">Relógios</a>
-        <a href="oculos.html" class="hover:text-cyan-500 transition">Óculos</a>
-        <a href="calcados.html" class="hover:text-cyan-500 transition">Calçados</a>
-        <a href="acessorios.html" class="hover:text-cyan-500 transition">Acessórios</a>
-        <a href="cintos.html" class="hover:text-cyan-500 transition">Cintos</a>
+        <a href="bolsas.html" class="hover:text-cyan-500 transition" data-cms="nav.2_label" data-cms-href="nav.2_url">Bolsas</a>
+        <a href="relogios.html" class="hover:text-cyan-500 transition" data-cms="nav.3_label" data-cms-href="nav.3_url">Relógios</a>
+        <a href="oculos.html" class="hover:text-cyan-500 transition" data-cms="nav.4_label" data-cms-href="nav.4_url">Óculos</a>
+        <a href="calcados.html" class="hover:text-cyan-500 transition" data-cms="nav.5_label" data-cms-href="nav.5_url">Calçados</a>
+        <a href="acessorios.html" class="hover:text-cyan-500 transition" data-cms="nav.6_label" data-cms-href="nav.6_url">Acessórios</a>
+        <a href="cintos.html" class="hover:text-cyan-500 transition" data-cms="nav.7_label" data-cms-href="nav.7_url">Cintos</a>
     </nav>
 </div>
 
@@ -279,11 +280,11 @@
 
     <!-- MOBILE -->
     <img src="https://raw.githubusercontent.com/souzajulen-ui/imagem-hermes/main/Bolsas%20de%20luxo%20em%20pedestais%20perfeitos.png"
-         class="block md:hidden w-full h-full object-cover">
+         class="block md:hidden w-full h-full object-cover" data-cms-src="hero.image_mobile">
 
     <!-- DESKTOP -->
     <img src="https://raw.githubusercontent.com/souzajulen-ui/bolsas-hermes/main/bolsas_direita%20(1).png"
-        class="hidden md:block w-full h-full object-cover object-right">
+        class="hidden md:block w-full h-full object-cover object-right" data-cms-src="hero.image_desktop">
 
     <!-- OVERLAY -->
     <div class="absolute inset-0 bg-white/75 md:bg-white/0"></div>
@@ -292,17 +293,13 @@
 
     <!-- CONTEÚDO -->
     <div class="relative z-10 max-w-xl text-center md:text-left mx-auto md:mx-0">
-        <span class="text-black uppercase tracking-[0.3em] text-[13px] md:text-xs font-bold mb-4 block pt-28">
-            A recompensa do seu sucesso
-        </span>
+        <span class="text-black uppercase tracking-[0.3em] text-[13px] md:text-xs font-bold mb-4 block pt-28" data-cms="hero.eyebrow">A recompensa do seu sucesso</span>
 
         <h1 class="text-3xl sm:text-4xl md:text-6xl leading-tight font-serif mb-4 ">
-            O luxo que você merece,
-            <span class="italic font-light block mt-2 text-3xl sm:text-3xl md:text-5xl underline decoration-cyan-400">
-                agora ao seu alcance.
-            </span>
+            <span data-cms="hero.title">O luxo que você merece,</span>
+            <span class="italic font-light block mt-2 text-3xl sm:text-3xl md:text-5xl underline decoration-cyan-400" data-cms="hero.subtitle">agora ao seu alcance.</span>
         </h1>
-        <span class="block text-[13px] text-gray-500 uppercase tracking-tighter italic mt-56 md:mt-0">+ de 1.000 clientes satisfeitas</span>
+        <span class="block text-[13px] text-gray-500 uppercase tracking-tighter italic mt-56 md:mt-0" data-cms="hero.social_proof">+ de 1.000 clientes satisfeitas</span>
                 </div>
             </div>
         </div>
@@ -311,11 +308,11 @@
 <!-- BOLSAS -->
 <section id="Bolsas" class="category-section py-20 px- md:px-20"> 
     <div class="max-w-7xl mx-auto flex justify-between items-end mb-6 border-b border-gray-100 pb-4">
-        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4">Bolsas</h2>
-        <a href="bolsas.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition">Exibir Mais</a>
+        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4" data-cms="home.bolsas_title">Bolsas</h2>
+        <a href="bolsas.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition" data-cms="home.bolsas_link">Exibir Mais</a>
     </div>
 
-    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10" data-cms-products="featured:bolsas" data-cms-limit="4">
 
     <!-- PRODUTO 1 -->
     <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
@@ -391,11 +388,11 @@ Adicionar ao carrinho
 <!-- relógio -->
 <section id="Relogios" class="category-section py-20 px- md:px-20">
     <div class="max-w-7xl mx-auto flex justify-between items-end mb-6 border-b border-gray-100 pb-4">
-        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4">Relógios</h2>
-        <a href="relogios.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition">Exibir Mais</a>
+        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4" data-cms="home.relogios_title">Relógios</h2>
+        <a href="relogios.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition" data-cms="home.relogios_link">Exibir Mais</a>
     </div>
 
-    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10" data-cms-products="featured:relogios" data-cms-limit="4">
 
 <!-- PRODUTO 1 -->
         <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
@@ -470,11 +467,11 @@ Adicionar ao carrinho
 <!-- oculos de sol -->
 <section id="Oculos" class="category-section py-20 px- md:px-20">
     <div class="max-w-7xl mx-auto flex justify-between items-end mb-6 border-b border-gray-100 pb-4">
-        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4">Óculos</h2>
-        <a href="oculos.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition">Exibir Mais</a>
+        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4" data-cms="home.oculos_title">Óculos</h2>
+        <a href="oculos.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition" data-cms="home.oculos_link">Exibir Mais</a>
     </div>
 
-    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10" data-cms-products="featured:oculos" data-cms-limit="4">
 
 
 <!-- PRODUTO 1 -->
@@ -553,11 +550,11 @@ Adicionar ao carrinho
 <!-- calçados -->
 <section id="Calçados" class="category-section py-20 px- md:px-20">
     <div class="max-w-7xl mx-auto flex justify-between items-end mb-6 border-b border-gray-100 pb-4">
-        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4">Calçados</h2>
-        <a href="calcados.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition">Exibir Mais</a>
+        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4" data-cms="home.calcados_title">Calçados</h2>
+        <a href="calcados.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition" data-cms="home.calcados_link">Exibir Mais</a>
     </div>
 
-    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10" data-cms-products="featured:calcados" data-cms-limit="4">
 
 
 <!-- PRODUTO 1 -->
@@ -638,11 +635,11 @@ Adicionar ao carrinho
 <!-- acessorios -->
 <section id="Acessorios" class="category-section py-20 px- md:px-20"> 
     <div class="max-w-7xl mx-auto flex justify-between items-end mb-6 border-b border-gray-100 pb-4">
-        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4">Acessórios</h2>
-        <a href="acessorios.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition">Exibir Mais</a>
+        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4" data-cms="home.acessorios_title">Acessórios</h2>
+        <a href="acessorios.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition" data-cms="home.acessorios_link">Exibir Mais</a>
     </div>
 
-    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10" data-cms-products="featured:acessorios" data-cms-limit="4">
 
         <!-- PRODUTO 1 -->
         <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
@@ -702,11 +699,11 @@ Adicionar ao carrinho
 <!-- cintos -->
 <section id="Cintos" class="category-section py-20 px- md:px-20"> 
     <div class="max-w-7xl mx-auto flex justify-between items-end mb-6 border-b border-gray-100 pb-4">
-        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4">Cintos</h2>
-        <a href="cintos.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition">Exibir Mais</a>
+        <h2 class="font-serif text-2xl uppercase tracking-widest ml-4" data-cms="home.cintos_title">Cintos</h2>
+        <a href="cintos.html" class="text-[12px] uppercase tracking-[0.2em] font-bold border-b border-cyan-500 pb-1 hover:text-cyan-500 transition" data-cms="home.cintos_link">Exibir Mais</a>
     </div>
 
-    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-10" data-cms-products="featured:cintos" data-cms-limit="4">
 
         <!-- PRODUTO 1 -->
         <div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white">
@@ -768,16 +765,16 @@ Adicionar ao carrinho
     <section id="beneficios" class="py-24 bg-white px-6 md:px-20">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
             <div class="text-center md:text-left">
-                <h3 class="font-serif text-2xl mb-4">Acabamento Impecável</h3>
-                <p class="text-black-500 text-sm leading-relaxed font-light">Nossas peças seguem o padrão 1:1. O mesmo peso, a mesma textura do couro e as marcações idênticas aos modelos de boutique.</p>
+                <h3 class="font-serif text-2xl mb-4" data-cms="beneficios.1_title">Acabamento Impecável</h3>
+                <p class="text-black-500 text-sm leading-relaxed font-light" data-cms="beneficios.1_text" data-cms-attr="html">Nossas peças seguem o padrão 1:1. O mesmo peso, a mesma textura do couro e as marcações idênticas aos modelos de boutique.</p>
             </div>
             <div class="text-center md:text-left">
-                <h3 class="font-serif text-2xl mb-4">Curadoria Premium</h3>
-                <p class="text-black-500 text-sm leading-relaxed font-light">Não vendemos réplicas comuns. Cada item da <strong>Imports de Luxo</strong> passa por uma inspeção manual antes de chegar até você.</p>
+                <h3 class="font-serif text-2xl mb-4" data-cms="beneficios.2_title">Curadoria Premium</h3>
+                <p class="text-black-500 text-sm leading-relaxed font-light" data-cms="beneficios.2_text" data-cms-attr="html">Não vendemos réplicas comuns. Cada item da <strong>Imports de Luxo</strong> passa por uma inspeção manual antes de chegar até você.</p>
             </div>
             <div class="text-center md:text-left">
-                <h3 class="font-serif text-2xl mb-4">Discrição & Segurança</h3>
-                <p class="text-black-500 text-sm leading-relaxed font-light">Embalagens premium e envio segurado. Sua experiência de compra é tratada com o sigilo e a exclusividade que o luxo exige.</p>
+                <h3 class="font-serif text-2xl mb-4" data-cms="beneficios.3_title">Discrição & Segurança</h3>
+                <p class="text-black-500 text-sm leading-relaxed font-light" data-cms="beneficios.3_text" data-cms-attr="html">Embalagens premium e envio segurado. Sua experiência de compra é tratada com o sigilo e a exclusividade que o luxo exige.</p>
             </div>
         </div>
     </section>
@@ -786,8 +783,8 @@ Adicionar ao carrinho
     <section id="experiencia" class="py-32 bg-white relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-6 text-center">
             <span class="text-cyan-700 text-4xl mb-4 block font-serif italic">“</span>
-            <h2 class="text-3xl md:text-5xl font-serif mb-8 leading-tight italic">Elegância é a única beleza que nunca desaparece.</h2>
-            <p class="text-black-600 text-lg font-light leading-loose mb-10">
+            <h2 class="text-3xl md:text-5xl font-serif mb-8 leading-tight italic" data-cms="experiencia.quote">Elegância é a única beleza que nunca desaparece.</h2>
+            <p class="text-black-600 text-lg font-light leading-loose mb-10" data-cms="experiencia.text" data-cms-attr="html">
                 Portar um acessório de grife não é sobre o objeto, é sobre a <strong>sensação</strong>. É a confiança ao entrar em uma reunião, o brilho no olhar em um jantar especial e o respeito que sua presença impõe. Na Imports de Luxo, entregamos essa experiência incrível.
             </p>
             <div class="w-24 h-[1px] bg-cyan-600 mx-auto"></div>
@@ -796,22 +793,22 @@ Adicionar ao carrinho
 
     <!-- PROVA SOCIAL / DEPOIMENTOS -->
     <section class="py-24 bg-white px-6 md:px-20">
-        <h2 class="text-center font-serif text-3xl mb-16 uppercase tracking-widest">Relatos de clientes</h2>
+        <h2 class="text-center font-serif text-3xl mb-16 uppercase tracking-widest" data-cms="depoimentos.title">Relatos de clientes</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="luxury-card p-10 italic shadow-sm">
                 <div class="flex text-amber-500 mb-4 text-xs">★★★★★</div>
-                <p class="text-gray-600 mb-8 font-light text-sm">"Eu tenho bolsas originais e comprei uma da Imports de Luxo para testar. Fiquei chocada, é impossível notar a diferença. O metal, o fecho... tudo perfeito."</p>
-                <p class="text-[10px] uppercase font-bold tracking-widest">— Cláudia M., Brasília</p>
+                <p class="text-gray-600 mb-8 font-light text-sm" data-cms="depoimentos.1_text">"Eu tenho bolsas originais e comprei uma da Imports de Luxo para testar. Fiquei chocada, é impossível notar a diferença. O metal, o fecho... tudo perfeito."</p>
+                <p class="text-[10px] uppercase font-bold tracking-widest" data-cms="depoimentos.1_author">— Cláudia M., Brasília</p>
             </div>
             <div class="luxury-card p-10 italic shadow-sm">
                 <div class="flex text-amber-500 mb-4 text-xs">★★★★★</div>
-                <p class="text-gray-600 mb-8 font-light text-sm">"O relógio é lindo e a caixa é magnífica. Atendimento impecável via WhatsApp."</p>
-                <p class="text-[10px] uppercase font-bold tracking-widest">— Dr. Renato F., Porto Alegre</p>
+                <p class="text-gray-600 mb-8 font-light text-sm" data-cms="depoimentos.2_text">"O relógio é lindo e a caixa é magnífica. Atendimento impecável via WhatsApp."</p>
+                <p class="text-[10px] uppercase font-bold tracking-widest" data-cms="depoimentos.2_author">— Dr. Renato F., Porto Alegre</p>
             </div>
             <div class="luxury-card p-10 italic shadow-sm">
                 <div class="flex text-amber-500 mb-4 text-xs">★★★★★</div>
-                <p class="text-gray-600 mb-8 font-light text-sm">"Comprei um óculos e chegou em 4 dias em SP. A lente é ótima e o acabamento da haste é muito boa"</p>
-                <p class="text-[10px] uppercase font-bold tracking-widest">— Juliana P., São Paulo</p>
+                <p class="text-gray-600 mb-8 font-light text-sm" data-cms="depoimentos.3_text">"Comprei um óculos e chegou em 4 dias em SP. A lente é ótima e o acabamento da haste é muito boa"</p>
+                <p class="text-[10px] uppercase font-bold tracking-widest" data-cms="depoimentos.3_author">— Juliana P., São Paulo</p>
             </div>
         </div>
     </section>
@@ -821,19 +818,19 @@ Adicionar ao carrinho
         <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
             <div class="flex flex-col items-center text-center">
                 <div class="w-12 h-12 mb-4 border border-cyan-500 rounded-full flex items-center justify-center text-amber-700">✓</div>
-                <span class="text-[10px] uppercase font-bold tracking-widest"> atendimento rápido</span>
+                <span class="text-[10px] uppercase font-bold tracking-widest" data-cms="garantia.1_text"> atendimento rápido</span>
             </div>
             <div class="flex flex-col items-center text-center">
                 <div class="w-12 h-12 mb-4 border border-cyan-500 rounded-full flex items-center justify-center text-amber-700">🔒</div>
-                <span class="text-[10px] uppercase font-bold tracking-widest">Pagamento seguro</span>
+                <span class="text-[10px] uppercase font-bold tracking-widest" data-cms="garantia.2_text">Pagamento seguro</span>
             </div>
             <div class="flex flex-col items-center text-center">
                 <div class="w-12 h-12 mb-4 border border-cyan-500 rounded-full flex items-center justify-center text-amber-700">📦</div>
-                <span class="text-[10px] uppercase font-bold tracking-widest">Inspeção Pré-Envio</span>
+                <span class="text-[10px] uppercase font-bold tracking-widest" data-cms="garantia.3_text">Inspeção Pré-Envio</span>
             </div>
             <div class="flex flex-col items-center text-center">
                 <div class="w-12 h-12 mb-4 border border-cyan-500 rounded-full flex items-center justify-center text-amber-700">💎</div>
-                <span class="text-[10px] uppercase font-bold tracking-widest">Qualidade premium</span>
+                <span class="text-[10px] uppercase font-bold tracking-widest" data-cms="garantia.4_text">Qualidade premium</span>
             </div>
         </div>
     </section>
@@ -841,11 +838,9 @@ Adicionar ao carrinho
     <!-- CALL TO ACTION FINAL -->
     <section id="colecao" class="py-24 bg-black text-white text-center">
         <div class="max-w-3xl mx-auto px-6">
-            <h2 class="text-4xl md:text-6xl font-serif mb-8 italic">Faça parte do mundo Imports de Luxo</h2>
-            <p class="text-gray-400 font-light mb-12 text-lg">Clique no botão abaixo para acessar o atendimento via WhatsApp.</p>
-            <a href="https://wa.me/message/6AMQ5WF2AWS2L1" class="btn-gold px-12 py-6 text-sm uppercase tracking-[0.3em] font-bold inline-block shadow-xl">
-                acesso ao WhatsApp
-            </a>
+            <h2 class="text-4xl md:text-6xl font-serif mb-8 italic" data-cms="cta.title">Faça parte do mundo Imports de Luxo</h2>
+            <p class="text-gray-400 font-light mb-12 text-lg" data-cms="cta.text">Clique no botão abaixo para acessar o atendimento via WhatsApp.</p>
+            <a href="https://wa.me/message/6AMQ5WF2AWS2L1" class="btn-gold px-12 py-6 text-sm uppercase tracking-[0.3em] font-bold inline-block shadow-xl" data-cms="cta.button_label" data-cms-href="cta.button_url">acesso ao WhatsApp</a>
             <p class="mt-8 text-[10px] uppercase tracking-widest text-gray-500 italic"></p>
         </div>
     </section>
@@ -854,51 +849,51 @@ Adicionar ao carrinho
     <footer class="bg-white py-16 px-6 md:px-20 border-t border-gray-100">
         <div class="grid grid-cols-1 md:grid-cols-5 gap-12 mb-16">
             <div class="col-span-1 md:col-span-2">
-                <div class="text-2xl font-serif font-bold mb-6 italic">IMPORTS DE LUXO</div>
-                <p class="text-gray-500 text-xs font-light max-w-sm leading-loose uppercase tracking-tighter">Sua boutique de confiança para itens premium internacionais. Unindo o desejo da alta moda e Elegância.</p>
+                <div class="text-2xl font-serif font-bold mb-6 italic" data-cms="footer.brand">IMPORTS DE LUXO</div>
+                <p class="text-gray-500 text-xs font-light max-w-sm leading-loose uppercase tracking-tighter" data-cms="footer.description">Sua boutique de confiança para itens premium internacionais. Unindo o desejo da alta moda e Elegância.</p>
             </div>
             <div>
-                <h4 class="text-[11px] font-bold uppercase tracking-widest mb-6">Institucional</h4>
+                <h4 class="text-[11px] font-bold uppercase tracking-widest mb-6" data-cms="footer.institucional_title">Institucional</h4>
                 <ul class="text-xs text-gray-500 space-y-3 font-light">
-                    <li><a href="#" class="hover:text-amber-600 transition">Políticas de Privacidade</a></li>
-                    <li><a href="#" class="hover:text-amber-600 transition">Trocas e Devoluções</a></li>
-                    <li><a href="#" class="hover:text-amber-600 transition">Termos de Uso</a></li>
+                    <li><a href="#" class="hover:text-amber-600 transition" data-cms="footer.link1_label" data-cms-href="footer.link1_url">Políticas de Privacidade</a></li>
+                    <li><a href="#" class="hover:text-amber-600 transition" data-cms="footer.link2_label" data-cms-href="footer.link2_url">Trocas e Devoluções</a></li>
+                    <li><a href="#" class="hover:text-amber-600 transition" data-cms="footer.link3_label" data-cms-href="footer.link3_url">Termos de Uso</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-[11px] font-bold uppercase tracking-widest mb-6">Atendimento</h4>
+                <h4 class="text-[11px] font-bold uppercase tracking-widest mb-6" data-cms="footer.atendimento_title">Atendimento</h4>
                 <p class="text-xs text-gray-500 font-light leading-relaxed">
-                    Segunda a domingo: 09h às 22h<br>
-                    E-mail: reneetartarelli@gmail.com
+                    <span data-cms="contact.hours">Segunda a domingo: 09h às 22h</span><br>
+                    E-mail: <span data-cms="contact.email">reneetartarelli@gmail.com</span>
                 </p>
             </div>
             <div>
-                <h4 class="text-[11px] font-bold uppercase tracking-widest mb-6">Formas de Pagamento</h4>
+                <h4 class="text-[11px] font-bold uppercase tracking-widest mb-6" data-cms="footer.payment_title">Formas de Pagamento</h4>
                 <div class="grid grid-cols-4 gap-3">
                     <div class="bg-white-100 p-2 rounded flex items-center justify-center">
-                        <img src="https://logosmarcas.net/wp-content/uploads/2020/04/Visa-Logo-2014%E2%80%93presente.jpg" alt="VISA" class="w-full h-auto object-contain">
+                        <img src="https://logosmarcas.net/wp-content/uploads/2020/04/Visa-Logo-2014%E2%80%93presente.jpg" alt="VISA" class="w-full h-auto object-contain" data-cms-src="footer.pay1">
                     </div>
                     <div class="bg-white-100 p-2 rounded flex items-center justify-center">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQtLk6e-zGF6C2RSMHVg57wBxu6F-Aufauew&s" alt="Mastercard" class="w-full h-auto object-contain">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQtLk6e-zGF6C2RSMHVg57wBxu6F-Aufauew&s" alt="Mastercard" class="w-full h-auto object-contain" data-cms-src="footer.pay2">
                     </div>
                     <div class="bg-white-100 p-2 rounded flex items-center justify-center">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Hipercard_logo.svg" alt="Hipercard" class="w-full h-auto object-contain">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Hipercard_logo.svg" alt="Hipercard" class="w-full h-auto object-contain" data-cms-src="footer.pay3">
                     </div>
                     <div class="bg-white-100 p-2 rounded flex items-center justify-center">
-                        <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSg6kd87KuRiNiDqwgI3AKAnvYLgxNaeOvyQntCfuzp6PSgh9bX" alt="Elo" class="w-full h-auto object-contain">
+                        <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSg6kd87KuRiNiDqwgI3AKAnvYLgxNaeOvyQntCfuzp6PSgh9bX" alt="Elo" class="w-full h-auto object-contain" data-cms-src="footer.pay4">
                     </div>
                     <div class="bg-white-100 p-2 rounded flex items-center justify-center">
-                        <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRSXwrqUH2v6eZ2JlpoHtDLxUbLc4YcgWS922B58C_KH5RBXaZD" alt="AMEX" class="w-full h-auto object-contain">
+                        <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRSXwrqUH2v6eZ2JlpoHtDLxUbLc4YcgWS922B58C_KH5RBXaZD" alt="AMEX" class="w-full h-auto object-contain" data-cms-src="footer.pay5">
                     </div>
                     <div class="bg-white-100 p-2 rounded flex items-center justify-center">
-                        <img src="https://images.seeklogo.com/logo-png/39/1/pix-logo-png_seeklogo-392002.png" alt="Pix" class="w-full h-auto object-contain">
+                        <img src="https://images.seeklogo.com/logo-png/39/1/pix-logo-png_seeklogo-392002.png" alt="Pix" class="w-full h-auto object-contain" data-cms-src="footer.pay6">
                     </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="border-t border-gray-50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-400 uppercase tracking-widest font-medium">
-            <p>© 2015 IMPORTS DE LUXO</p>
+            <p data-cms="footer.copyright">© 2015 IMPORTS DE LUXO</p>
             <div class="flex gap-6 italic lowercase font-serif text-lg">
         </div>
     </footer>
@@ -908,7 +903,7 @@ Adicionar ao carrinho
 <!-- CARRINHO LATERAL -->
 <div id="cartSidebar" class="fixed top-0 right-[-400px] w-80 md:w-96 h-full bg-white shadow-2xl z-[60] p-6 flex flex-col transition-all duration-500">
     <div class="flex justify-between items-center mb-8 border-b pb-4">
-        <h2 class="text-xl font-serif font-bold uppercase tracking-widest">Seu Carrinho</h2>
+        <h2 class="text-xl font-serif font-bold uppercase tracking-widest" data-cms="cart.title">Seu Carrinho</h2>
         <button onclick="toggleCart()" class="text-2xl hover:text-red-500">✕</button>
     </div>
     
@@ -920,9 +915,7 @@ Adicionar ao carrinho
             <span>Total:</span>
             <span id="cartTotal">R$ 0,00</span>
         </div>
-        <button onclick="finalizarCompra()" class="w-full bg-cyan-500 text-white py-4 text-xs uppercase tracking-[0.2em] font-bold hover:bg-black transition">
-            Finalizar Pedido via WhatsApp
-        </button>
+        <button onclick="finalizarCompra()" class="w-full bg-cyan-500 text-white py-4 text-xs uppercase tracking-[0.2em] font-bold hover:bg-black transition" data-cms="cart.checkout_label">Finalizar Pedido via WhatsApp</button>
     </div>
 </div>
 
@@ -979,7 +972,8 @@ Adicionar ao carrinho
         let total = 0;
 
         if (cart.length === 0) {
-            container.innerHTML = "<p class='text-center text-gray-400 py-10'>Seu carrinho está vazio.</p>";
+            const vazio = (window.CMS && window.CMS.get('cart.empty')) || "Seu carrinho está vazio.";
+            container.innerHTML = `<p class='text-center text-gray-400 py-10'>${vazio}</p>`;
         } else {
             cart.forEach((item, index) => {
                 total += item.price;
@@ -1020,7 +1014,7 @@ function finalizarCompra() {
         `${frase}\n\n${lista}\n\n*Total: R$ ${total.toFixed(2)}*\n\nPoderia me informar o prazo de entrega e as formas de pagamento?`
     );
 
-    window.open(`https://wa.me/5544998214237?text=${texto}`, '_blank');
+    window.open(`https://wa.me/${(window.CMS && window.CMS.get('contact.whatsapp_number')) || '5544998214237'}?text=${texto}`, '_blank');
 }
 
     // 6. Função de Busca (Toggle)
