@@ -157,7 +157,10 @@ O mesmo catálogo alimenta a home, as páginas de categoria e a busca — cadast
 um produto uma vez basta.
 
 Dentro do produto, as setas ◀ ▶ embaixo de cada foto da galeria mudam a ordem
-das fotos. A 1ª é a que o cliente vê ao abrir a peça no site.
+das fotos. **A 1ª foto é sempre a foto principal** — a que aparece na vitrine e
+a que abre quando o cliente amplia a peça. Ela vem marcada como "principal".
+Trocar a foto principal troca a 1ª da galeria, e vice-versa: as duas andam
+juntas, sem risco de ficarem diferentes.
 
 **Imagens**: biblioteca com tudo o que você já enviou, para reaproveitar.
 
@@ -188,6 +191,7 @@ scripts/bump-version.mjs carimba versão nos .js/.css (evita cache velho)
 scripts/build-css.mjs    gera assets/tailwind.css (rodar se mudar classe no HTML)
 scripts/mock-server.mjs  servidor local que simula o Supabase
 scripts/smoke-test.mjs   testes no Chrome headless
+scripts/teste-tablet.mjs testes de layout em celular, iPad e iPad Pro
 ```
 
 ### Como o conteúdo chega na página
@@ -209,7 +213,8 @@ conteúdo reserva e aparece se o banco não responder.
 
 ```bash
 node scripts/mock-server.mjs     # http://localhost:4173/index.html
-node scripts/smoke-test.mjs      # 45 verificações no Chrome headless
+node scripts/smoke-test.mjs      # 49 verificações no Chrome headless
+node scripts/teste-tablet.mjs    # 21 combinações de aparelho e página
 ```
 
 O servidor de teste imita o Supabase inteiro (login, banco, storage) com dados

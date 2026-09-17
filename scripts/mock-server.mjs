@@ -259,6 +259,13 @@ const E2E = `
       var depois = Array.prototype.map.call(document.querySelectorAll('[data-gallery] img'), function (i) { return i.src; });
       registra('setas trocam as fotos de lugar', depois[0] === antes[1] && depois[1] === antes[0]);
       window.__ordemFotos = depois;
+      // A foto principal tem que acompanhar a 1a da galeria.
+      var principal = document.querySelector('[data-main-preview]').src;
+      registra('foto principal acompanha a 1a da galeria',
+        principal.split('/').pop() === depois[0].split('/').pop(),
+        principal.split('/').pop().slice(0, 24));
+      registra('1a foto marcada como principal',
+        (document.querySelector('[data-gallery]').textContent || '').indexOf('principal') > -1);
 
       document.querySelector('[data-save]').click();
       return espera(function () { return document.getElementById('toasts').textContent.indexOf('Produto salvo') > -1; }, 20000);

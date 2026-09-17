@@ -997,7 +997,9 @@
             '<button class="px-1.5 py-0.5 text-xs rounded hover:bg-gray-100 disabled:opacity-30" ' +
             (primeira ? 'disabled ' : '') +
             'title="Mover para trás" data-gal-move="' + i + '" data-gal-dir="-1">◀</button>' +
-            '<span class="text-[10px] text-gray-400">' + (i + 1) + 'ª</span>' +
+            '<span class="text-[10px] ' + (primeira ? 'text-cyan-600 font-bold' : 'text-gray-400') + '">' +
+            (primeira ? 'principal' : i + 1 + 'ª') +
+            '</span>' +
             '<button class="px-1.5 py-0.5 text-xs rounded hover:bg-gray-100 disabled:opacity-30" ' +
             (ultima ? 'disabled ' : '') +
             'title="Mover para frente" data-gal-move="' + i + '" data-gal-dir="1">▶</button>' +
@@ -1030,7 +1032,8 @@
         '<div class="md:col-span-2"><label class="block text-[13px] font-semibold mb-1">Texto alternativo da foto (acessibilidade)</label>' +
         '<input class="field-input" data-f="alt" value="' + esc(p.alt || '') + '"></div>' +
         '</div>' +
-        '<div class="mt-5"><label class="block text-[13px] font-semibold mb-2">Foto principal</label>' +
+        '<div class="mt-5"><label class="block text-[13px] font-semibold mb-1">Foto principal</label>' +
+        '<p class="text-[11px] text-gray-400 mb-2">É sempre a 1ª foto da galeria — a mesma que abre quando o cliente amplia a peça.</p>' +
         '<div class="flex gap-4 items-start">' +
         '<div class="w-24 h-24 shrink-0 rounded-lg border border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden">' +
         '<img data-main-preview src="' + esc(urlPrevia(p.image)) + '" class="w-full h-full object-contain" alt=""></div>' +
@@ -1060,6 +1063,15 @@
     var fileMain = m.querySelector('[data-file-main]');
     var fileGal = m.querySelector('[data-file-gal]');
 
+    // A foto principal é sempre a 1ª da galeria. Quem manda é a galeria: ao
+    // reordenar, remover ou acrescentar fotos, a principal acompanha.
+    function sincronizarPrincipal() {
+      if (galeria.length) imagemAtual = galeria[0];
+      else if (imagemAtual) galeria = [imagemAtual];
+      var previa = m.querySelector('[data-main-preview]');
+      if (previa) previa.src = urlPrevia(imagemAtual || '');
+    }
+
     m.querySelector('[data-pick-main]').addEventListener('click', function () {
       fileMain.click();
     });
@@ -1071,8 +1083,11 @@
       status.textContent = 'Enviando…';
       uploadImage(f)
         .then(function (r) {
-          imagemAtual = r.url;
-          m.querySelector('[data-main-preview]').src = r.url;
+          // Trocar a foto principal é trocar a 1ª da galeria.
+          if (galeria.length) galeria[0] = r.url;
+          else galeria = [r.url];
+          sincronizarPrincipal();
+          redrawGallery();
           status.style.color = '#059669';
           status.textContent = 'Foto enviada.';
         })
@@ -1086,6 +1101,7 @@
     });
 
     function redrawGallery() {
+      sincronizarPrincipal();
       m.querySelector('[data-gallery]').innerHTML = galleryHtml();
       m.querySelectorAll('[data-rm-gal]').forEach(function (b) {
         b.addEventListener('click', function () {
@@ -1145,15 +1161,16 @@
       };
       var nome = get('name').value.trim();
       if (!nome) return toast('Dê um nome ao produto.', 'erro');
-      if (!imagemAtual) return toast('Escolha a foto principal.', 'erro');
+      if (!imagemAtual) return toast('Envie pelo menos uma foto do produto.', 'erro');
 
+      sincronizarPrincipal();
       var dados = {
         category: get('category').value,
         name: nome,
         cart_name: get('cart_name').value.trim() || nome,
         alt: get('alt').value.trim() || nome,
         price: Number(get('price').value || 0),
-        image: imagemAtual,
+        image: galeria[0] || imagemAtual,
         gallery: galeria.length ? galeria : [imagemAtual],
         featured: get('featured').checked,
         featured_sort: get('featured_sort').value === '' ? null : Number(get('featured_sort').value),

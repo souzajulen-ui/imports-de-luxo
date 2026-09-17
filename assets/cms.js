@@ -264,25 +264,24 @@
 
   // ---------------------------------------------------------- vitrine/cards
   function cardHtml(p) {
-    var twoLines = String(p.name || '').length > 22 ? ' h-14 md:h-auto' : '';
     var addLabel = CMS.get('cart.add_label', 'Adicionar ao carrinho');
+    // flex + mt-auto: em tablet os nomes ocupam 1 ou 2 linhas, e sem isso os
+    // preços e botões de cada card ficavam em alturas diferentes.
     return (
-      '<div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white" data-cms-card="' +
+      '<div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white flex flex-col h-full" data-cms-card="' +
       escapeHtml(p.id) +
       '">' +
       '<img src="' +
       escapeHtml(p.image) +
-      '" class="w-full h-40 md:h-64 object-contain mb-6 group-hover:scale-105 transition duration-500 cursor-pointer" alt="' +
+      '" class="w-full h-40 md:h-56 lg:h-64 object-contain mb-4 md:mb-6 shrink-0 group-hover:scale-105 transition duration-500 cursor-pointer" alt="' +
       escapeHtml(p.alt || p.name) +
       '" loading="lazy" onclick="openGallery(\'' +
       escapeHtml(p.id) +
       '\')">' +
-      '<h3 class="font-serif text-lg mb-2' +
-      twoLines +
-      '">' +
+      '<h3 class="font-serif text-base md:text-lg mb-2">' +
       escapeHtml(p.name) +
       '</h3>' +
-      '<p class="text-xl font-semibold mb-4">' +
+      '<p class="text-lg md:text-xl font-semibold mb-4 mt-auto">' +
       money(p.price) +
       '</p>' +
       '<button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" data-name="' +
