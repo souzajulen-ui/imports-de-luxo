@@ -136,6 +136,23 @@ const mobile = dumpAte(`${BASE}/admin/mobile.html`, 'FIM', 200000);
 const espelho = (mobile.match(/<div id="espelho">([^<]*)/) || ['', ''])[1];
 check('painel no celular: roteiro completo', espelho.includes('FIM') && !espelho.includes('FALHA'), espelho.slice(-80));
 
+// ------------------------------------------------ imagem quebrada no painel
+// Se o painel apontar para uma imagem que não existe, a página tem que voltar
+// para a imagem original do HTML em vez de ficar com um buraco.
+const servidorQuebrado = spawn(
+  process.execPath,
+  [path.join(path.dirname(fileURLToPath(import.meta.url)), 'mock-server.mjs'), String(PORTA + 1)],
+  { stdio: 'ignore', env: { ...process.env, MOCK_OVERRIDES: 'index:hero.image_mobile=assets/img/NAO-EXISTE.webp;index:hero.image_desktop=assets/img/NAO-EXISTE.webp' } }
+);
+await new Promise((r) => setTimeout(r, 1500));
+const quebrada = dump(`http://localhost:${PORTA + 1}/index.html`, 20000);
+servidorQuebrado.kill();
+check(
+  'imagem inexistente volta para a original',
+  quebrada.includes('hero-mobile.webp') || quebrada.includes('hero-desktop.webp'),
+  quebrada.includes('NAO-EXISTE') ? 'ficou com a imagem quebrada' : 'recuperou'
+);
+
 // -------------------------------------------------------- degradação
 // Sem servidor de conteúdo, o site precisa continuar mostrando o HTML original.
 const semBanco = dump(`file:///${process.cwd().replace(/\\/g, '/')}/index.html`);

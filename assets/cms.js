@@ -13,7 +13,9 @@
 (function () {
   'use strict';
 
-  var CACHE_KEY = 'cms:snapshot:v1';
+  // Ao mudar este número, toda cópia guardada nos navegadores é ignorada.
+  // Use isso quando um conteúdo antigo em cache puder atrapalhar.
+  var CACHE_KEY = 'cms:snapshot:v2';
   var cfg = window.CMS_CONFIG || {};
   var configured =
     cfg.url && cfg.anonKey && cfg.url.indexOf('SEU-PROJETO') === -1 && cfg.anonKey.indexOf('COLE_AQUI') === -1;
@@ -141,7 +143,39 @@
       var el = els[i];
       var value = CMS.blocks[el.getAttribute(dataAttr)];
       if (!value) continue; // vazio: mantém o que já está no HTML
+      // Guarda o endereço que veio no HTML, para poder voltar a ele se a
+      // imagem do painel não carregar.
+      if (!el.hasAttribute('data-cms-original')) el.setAttribute('data-cms-original', el.getAttribute(target) || '');
       if (el.getAttribute(target) !== value) el.setAttribute(target, value);
+    }
+  }
+
+  // Rede de segurança: se a imagem indicada pelo painel falhar (endereço
+  // errado, arquivo apagado, cópia velha no navegador), a página volta a usar
+  // a imagem original em vez de ficar com um espaço vazio.
+  function protegerImagens() {
+    var imgs = document.querySelectorAll('img[data-cms-src]');
+    for (var i = 0; i < imgs.length; i++) {
+      var img = imgs[i];
+      if (img.getAttribute('data-cms-protegida')) continue;
+      img.setAttribute('data-cms-protegida', '1');
+      img.addEventListener('error', function () {
+        var self = this;
+        var original = self.getAttribute('data-cms-original');
+        // Um <picture> pode estar mandando outra imagem pelo <source>.
+        var pai = self.parentElement;
+        if (pai && pai.tagName === 'PICTURE') {
+          var fontes = pai.querySelectorAll('source[data-cms-original]');
+          for (var j = 0; j < fontes.length; j++) {
+            var origemFonte = fontes[j].getAttribute('data-cms-original');
+            if (origemFonte && fontes[j].getAttribute('srcset') !== origemFonte) fontes[j].setAttribute('srcset', origemFonte);
+          }
+        }
+        if (original && self.getAttribute('src') !== original) {
+          console.warn('[CMS] imagem não carregou, voltando para a original:', self.getAttribute('src'));
+          self.setAttribute('src', original);
+        }
+      });
     }
   }
 
@@ -396,6 +430,7 @@
     applyTheme();
     applySeo();
     applyBlocks();
+    protegerImagens();
     applyProducts();
     CMS.ready = true;
     document.dispatchEvent(new CustomEvent('cms:ready', { detail: { preview: PREVIEW } }));
@@ -417,6 +452,7 @@
     }
     installGallery();
     installCart();
+    protegerImagens();
     previewBadge();
 
     if (!PREVIEW) {
