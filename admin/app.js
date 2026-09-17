@@ -74,6 +74,16 @@
     return Number(n || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
+  // O painel mora em /admin/, então um caminho como "assets/img/foto.webp"
+  // — que no site aponta para a raiz — precisa virar "../assets/img/foto.webp"
+  // para a miniatura aparecer aqui dentro.
+  function urlPrevia(valor) {
+    var v = String(valor || '').trim();
+    if (!v) return '';
+    if (/^(https?:|data:|blob:|\/|\.\.\/)/i.test(v)) return v;
+    return '../' + v;
+  }
+
   function when(ts) {
     if (!ts) return '—';
     var d = new Date(ts);
@@ -348,7 +358,7 @@
       '">' +
       '<div class="w-28 h-28 shrink-0 rounded-lg border border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden">' +
       (value
-        ? '<img src="' + esc(value) + '" class="w-full h-full object-contain" alt="">'
+        ? '<img src="' + esc(urlPrevia(value)) + '" class="w-full h-full object-contain" alt="">'
         : '<span class="text-[10px] uppercase tracking-widest text-gray-400">sem imagem</span>') +
       '</div>' +
       '<div class="flex-1 min-w-0 w-full">' +
@@ -386,7 +396,7 @@
       function mostrarImagem(url) {
         var moldura = box.querySelector('.w-28');
         moldura.innerHTML = url
-          ? '<img src="' + esc(url) + '" class="w-full h-full object-contain" alt="">'
+          ? '<img src="' + esc(urlPrevia(url)) + '" class="w-full h-full object-contain" alt="">'
           : '<span class="text-[10px] uppercase tracking-widest text-gray-400">sem imagem</span>';
         box.querySelector('[data-caption]').textContent = url
           ? url
@@ -451,7 +461,7 @@
                 '<button class="border border-gray-200 rounded-lg p-2 hover:border-cyan-500 transition" data-url="' +
                 esc(m.url) +
                 '">' +
-                '<img src="' + esc(m.url) + '" class="w-full h-24 object-contain" alt="">' +
+                '<img src="' + esc(urlPrevia(m.url)) + '" class="w-full h-24 object-contain" alt="">' +
                 '<span class="block text-[10px] text-gray-400 truncate mt-1">' + esc(m.label || m.path) + '</span>' +
                 '</button>'
               );
@@ -864,7 +874,7 @@
 
             return (
               '<div class="card p-4 flex gap-3 md:gap-4 items-center">' +
-              '<img src="' + esc(p.image) + '" class="w-16 h-16 object-contain shrink-0 bg-gray-50 rounded" alt="" loading="lazy">' +
+              '<img src="' + esc(urlPrevia(p.image)) + '" class="w-16 h-16 object-contain shrink-0 bg-gray-50 rounded" alt="" loading="lazy">' +
               '<div class="flex-1 min-w-0">' +
               '<p class="font-serif text-base truncate">' + esc(p.name) + '</p>' +
               '<p class="text-sm font-semibold">' + money(p.price) + '</p>' +
@@ -908,7 +918,7 @@
           .map(function (m) {
             return (
               '<div class="card p-3">' +
-              '<img src="' + esc(m.url) + '" class="w-full h-32 object-contain mb-2" alt="" loading="lazy">' +
+              '<img src="' + esc(urlPrevia(m.url)) + '" class="w-full h-32 object-contain mb-2" alt="" loading="lazy">' +
               '<p class="text-[11px] text-gray-500 truncate mb-2">' + esc(m.label || m.path) + '</p>' +
               '<div class="flex gap-2">' +
               '<button class="btn btn-ghost flex-1" data-copy="' + esc(m.url) + '">Copiar link</button>' +
@@ -980,7 +990,7 @@
           var ultima = i === galeria.length - 1;
           return (
             '<div class="relative border border-gray-200 rounded-lg overflow-hidden bg-white">' +
-            '<img src="' + esc(src) + '" class="w-full h-20 object-contain bg-gray-50" alt="">' +
+            '<img src="' + esc(urlPrevia(src)) + '" class="w-full h-20 object-contain bg-gray-50" alt="">' +
             '<button class="absolute top-1 right-1 bg-white/90 text-red-600 text-[10px] font-bold px-1.5 py-0.5 rounded" ' +
             'title="Remover foto" data-rm-gal="' + i + '">✕</button>' +
             '<div class="flex items-center justify-between border-t border-gray-100 px-1 py-1">' +
@@ -1023,7 +1033,7 @@
         '<div class="mt-5"><label class="block text-[13px] font-semibold mb-2">Foto principal</label>' +
         '<div class="flex gap-4 items-start">' +
         '<div class="w-24 h-24 shrink-0 rounded-lg border border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden">' +
-        '<img data-main-preview src="' + esc(p.image) + '" class="w-full h-full object-contain" alt=""></div>' +
+        '<img data-main-preview src="' + esc(urlPrevia(p.image)) + '" class="w-full h-full object-contain" alt=""></div>' +
         '<div><button class="btn btn-ghost" data-pick-main>Alterar foto</button>' +
         '<p class="text-[11px] mt-2" data-main-status></p></div></div></div>' +
         '<div class="mt-5"><label class="block text-[13px] font-semibold mb-1">Galeria de fotos</label>' +

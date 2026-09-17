@@ -211,8 +211,8 @@
         }
     </style>
     <!-- Conteúdo editável pelo painel (/admin) -->
-    <script src="assets/cms-config.js?v=5"></script>
-    <script src="assets/cms.js?v=5" defer></script>
+    <script src="assets/cms-config.js?v=6"></script>
+    <script src="assets/cms.js?v=6" defer></script>
 </head>
 <body class="antialiased text-gray-900 pt-28 overflow-x-hidden">
 
@@ -281,7 +281,7 @@
     <div class="absolute inset-0 z-0">
 
     <!-- Uma imagem por aparelho: antes as duas baixavam em todo celular. -->
-    <picture>
+    <picture class="block w-full h-full">
         <source media="(min-width: 768px)" srcset="assets/img/hero-desktop.webp" data-cms-srcset="hero.image_desktop">
         <img src="assets/img/hero-mobile.webp"
              class="w-full h-full object-cover md:object-right"

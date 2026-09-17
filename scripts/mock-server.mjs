@@ -173,13 +173,31 @@ const E2E = `
     .then(function (input) {
       registra('editor da página inicial', true);
       registra('campos de imagem', !!document.querySelector('[data-image-field]'));
+      // As miniaturas precisam carregar de verdade: o painel fica em /admin/,
+      // então um caminho relativo do site tem que virar ../caminho.
+      window.__checarMiniaturas = function () {
+        var imgs = document.querySelectorAll('[data-image-field] img');
+        if (!imgs.length) return null;
+        var quebradas = [];
+        for (var i = 0; i < imgs.length; i++) {
+          if (imgs[i].complete && imgs[i].naturalWidth === 0) quebradas.push(imgs[i].getAttribute('src'));
+          if (!imgs[i].complete) return null; // ainda carregando
+        }
+        return { total: imgs.length, quebradas: quebradas };
+      };
       input.value = 'VALOR EDITADO NO TESTE ' + Date.now();
       input.dispatchEvent(new Event('input', { bubbles: true }));
       return espera(function () { return document.querySelector('[data-save-blocks]'); });
     })
     .then(function (botao) {
       registra('barra de salvar apareceu', true);
-      botao.click();
+      window.__salvar = botao;
+      return espera(window.__checarMiniaturas, 20000);
+    })
+    .then(function (mini) {
+      registra('miniaturas das imagens carregam', mini.quebradas.length === 0,
+        mini.total + ' imagens' + (mini.quebradas.length ? ' / quebrada: ' + mini.quebradas[0] : ''));
+      window.__salvar.click();
       return espera(function () { return document.getElementById('toasts').textContent.indexOf('salvas') > -1; });
     })
     .then(function () {
