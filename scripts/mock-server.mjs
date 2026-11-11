@@ -38,7 +38,12 @@ const db = {
     value: overrides[`${b.page_slug}:${b.key}`] ?? b.value,
     updated_at: new Date().toISOString(),
   })),
-  products: content.products.map((p) => ({ ...p, updated_at: new Date().toISOString() })),
+  // Como na migration 0006: os relógios que já existiam são femininos.
+  products: content.products.map((p) => ({
+    ...p,
+    gender: p.gender ?? (p.category === 'relogios' ? 'feminino' : null),
+    updated_at: new Date().toISOString(),
+  })),
   media_assets: [],
   admin_users: [{ user_id: LOGIN.id, email: LOGIN.email, name: 'Administrador' }],
   snapshot: { draft: null, published: null },
@@ -67,6 +72,7 @@ function buildSnapshot() {
         featured: p.featured,
         featured_sort: p.featured_sort,
         sort: p.sort,
+        gender: p.gender ?? null,
       })),
   };
 }

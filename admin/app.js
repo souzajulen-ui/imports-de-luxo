@@ -49,6 +49,7 @@
     saving: false,
     publishing: false,
     productFilter: 'todas',
+    productGender: 'todos', // só usado dentro de Relógios
     productSearch: '',
     pendingChanges: false,
   };
@@ -768,21 +769,44 @@
       });
   }
 
-  // Troca um produto de lugar com o vizinho da mesma categoria.
+  // Público da peça. Relógio sem público marcado conta como feminino, igual
+  // ao site (os relógios antigos eram todos femininos).
+  function generoDe(p) {
+    return p.gender || (p.category === 'relogios' ? 'feminino' : '');
+  }
+
+  // O filtro Masculino/Feminino só vale dentro de Relógios.
+  function filtroGeneroAtivo() {
+    return state.productFilter === 'relogios' && state.productGender !== 'todos' ? state.productGender : '';
+  }
+
+  // O que aparece junto na tela: a categoria, ou só um público dos relógios.
+  function grupoOrdenado(categoria) {
+    var genero = categoria === 'relogios' ? filtroGeneroAtivo() : '';
+    return categoriaOrdenada(categoria).filter(function (p) {
+      return !genero || generoDe(p) === genero;
+    });
+  }
+
+  // Troca um produto de lugar com o vizinho que está aparecendo na tela.
   function moverProduto(id, direcao) {
     var produto = state.products.find(function (p) {
       return p.id === id;
     });
     if (!produto) return;
 
-    var lista = categoriaOrdenada(produto.category);
-    var i = lista.findIndex(function (p) {
+    var grupo = grupoOrdenado(produto.category);
+    var g = grupo.findIndex(function (p) {
       return p.id === id;
     });
-    var j = i + direcao;
-    if (j < 0 || j >= lista.length) return;
+    var vizinho = grupo[g + direcao];
+    if (!vizinho) return;
 
-    lista.splice(j, 0, lista.splice(i, 1)[0]);
+    var lista = categoriaOrdenada(produto.category);
+    var i = lista.indexOf(produto);
+    var j = lista.indexOf(vizinho);
+    lista[i] = vizinho;
+    lista[j] = produto;
 
     // Renumera a categoria inteira e grava só o que mudou.
     var alterados = [];
@@ -819,9 +843,10 @@
     var lista = state.products
       .filter(function (p) {
         var okCat = state.productFilter === 'todas' || p.category === state.productFilter;
+        var okGenero = !filtroGeneroAtivo() || generoDe(p) === filtroGeneroAtivo();
         var okBusca =
           !state.productSearch || (p.name || '').toLowerCase().indexOf(state.productSearch.toLowerCase()) > -1;
-        return okCat && okBusca;
+        return okCat && okGenero && okBusca;
       })
       .sort(function (a, b) {
         return (
@@ -834,7 +859,7 @@
     // Para saber quem é o primeiro e o último de cada categoria.
     var posicoes = {};
     Object.keys(CATEGORY_LABEL).forEach(function (c) {
-      var ordenada = categoriaOrdenada(c);
+      var ordenada = grupoOrdenado(c);
       ordenada.forEach(function (p, i) {
         posicoes[p.id] = { indice: i, total: ordenada.length };
       });
@@ -851,6 +876,29 @@
         );
       })
       .join('');
+
+    // Dentro de Relógios: Todos / Masculino / Feminino, com a contagem de cada.
+    var filtrosGenero = '';
+    if (state.productFilter === 'relogios') {
+      var relogios = categoriaOrdenada('relogios');
+      var contar = function (g) {
+        return relogios.filter(function (p) {
+          return !g || generoDe(p) === g;
+        }).length;
+      };
+      filtrosGenero =
+        '<div class="flex flex-wrap items-center gap-2 mb-4"><span class="text-[12px] text-gray-500 mr-1">Público:</span>' +
+        [['todos', 'Todos', ''], ['masculino', 'Masculino', 'masculino'], ['feminino', 'Feminino', 'feminino']]
+          .map(function (o) {
+            var ativo = state.productGender === o[0];
+            return (
+              '<button class="btn ' + (ativo ? 'btn-accent' : 'btn-ghost') + '" data-gender-filter="' + o[0] + '">' +
+              o[1] + ' (' + contar(o[2]) + ')</button>'
+            );
+          })
+          .join('') +
+        '</div>';
+    }
 
     var cards = lista.length
       ? lista
@@ -880,6 +928,7 @@
               '<p class="text-sm font-semibold">' + money(p.price) + '</p>' +
               '<p class="text-[11px] text-gray-400">' +
               esc(CATEGORY_LABEL[p.category] || p.category) +
+              (p.gender ? ' ' + (p.gender === 'masculino' ? 'masculino' : 'feminino') : '') +
               ' · ' + (pos.indice + 1) + 'º' +
               (p.featured ? ' · <span class="text-cyan-600 font-bold">destaque na home</span>' : '') +
               (p.gallery && p.gallery.length > 1 ? ' · ' + p.gallery.length + ' fotos' : '') +
@@ -907,6 +956,7 @@
       '<button class="btn btn-ghost" data-preview="' + esc(arquivoPrevia) + '">Pré-visualizar</button>' +
       '<button class="btn btn-accent" data-new-product>+ Novo produto</button></div></div>' +
       '<div class="flex flex-wrap gap-2 mb-4">' + filtros + '</div>' +
+      filtrosGenero +
       '<input class="field-input mb-5" placeholder="Buscar pelo nome…" value="' + esc(state.productSearch) + '" data-product-search>' +
       '<div class="grid gap-3" id="product-list">' + cards + '</div>'
     );
@@ -1027,6 +1077,16 @@
         '</select></div>' +
         '<div><label class="block text-[13px] font-semibold mb-1">Posição na categoria</label>' +
         '<input class="field-input" data-f="sort" type="number" value="' + Number(p.sort || 0) + '"></div>' +
+        // Só relógios têm a separação Masculino / Feminino no site.
+        '<div data-genero-box' + (p.category === 'relogios' ? '' : ' class="hidden"') + '>' +
+        '<label class="block text-[13px] font-semibold mb-1">Público</label>' +
+        '<select class="field-input" data-f="gender">' +
+        [['', 'Escolha…'], ['masculino', 'Masculino'], ['feminino', 'Feminino']]
+          .map(function (o) {
+            return '<option value="' + o[0] + '"' + ((p.gender || '') === o[0] ? ' selected' : '') + '>' + o[1] + '</option>';
+          })
+          .join('') +
+        '</select></div>' +
         '<div class="md:col-span-2"><label class="block text-[13px] font-semibold mb-1">Descrição no WhatsApp</label>' +
         '<input class="field-input" data-f="cart_name" value="' + esc(p.cart_name || '') + '" placeholder="Ex.: Bolsa Chanel Small 25 - branca e dourada"></div>' +
         '<div class="md:col-span-2"><label class="block text-[13px] font-semibold mb-1">Texto alternativo da foto (acessibilidade)</label>' +
@@ -1060,6 +1120,9 @@
     );
 
     var imagemAtual = p.image;
+    m.querySelector('[data-f="category"]').addEventListener('change', function () {
+      m.querySelector('[data-genero-box]').classList.toggle('hidden', this.value !== 'relogios');
+    });
     var fileMain = m.querySelector('[data-file-main]');
     var fileGal = m.querySelector('[data-file-gal]');
 
@@ -1164,8 +1227,12 @@
       if (!imagemAtual) return toast('Envie pelo menos uma foto do produto.', 'erro');
 
       sincronizarPrincipal();
+      var categoria = get('category').value;
+      var genero = categoria === 'relogios' ? get('gender').value : '';
+      if (categoria === 'relogios' && !genero) return toast('Escolha se o relógio é Masculino ou Feminino.', 'erro');
       var dados = {
-        category: get('category').value,
+        category: categoria,
+        gender: genero || null,
         name: nome,
         cart_name: get('cart_name').value.trim() || nome,
         alt: get('alt').value.trim() || nome,
@@ -1458,6 +1525,13 @@
     root.querySelectorAll('[data-filter]').forEach(function (b) {
       b.addEventListener('click', function () {
         state.productFilter = b.getAttribute('data-filter');
+        renderMain();
+      });
+    });
+
+    root.querySelectorAll('[data-gender-filter]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        state.productGender = b.getAttribute('data-gender-filter');
         renderMain();
       });
     });

@@ -15,7 +15,7 @@
 
   // Ao mudar este número, toda cópia guardada nos navegadores é ignorada.
   // Use isso quando um conteúdo antigo em cache puder atrapalhar.
-  var CACHE_KEY = 'cms:snapshot:v2';
+  var CACHE_KEY = 'cms:snapshot:v3';
   var cfg = window.CMS_CONFIG || {};
   var configured =
     cfg.url && cfg.anonKey && cfg.url.indexOf('SEU-PROJETO') === -1 && cfg.anonKey.indexOf('COLE_AQUI') === -1;
@@ -25,6 +25,10 @@
 
   var CMS = (window.CMS = {
     ready: false,
+    // Redesenha as vitrines (ex.: depois de trocar a aba Masculino/Feminino).
+    renderProducts: function () {
+      applyProducts();
+    },
     preview: PREVIEW,
     data: null,
     blocks: {},
@@ -297,6 +301,13 @@
     );
   }
 
+  function emptyHtml(genero) {
+    return (
+      '<p class="col-span-full text-center text-gray-500 uppercase tracking-widest text-xs py-20">' +
+      'Em breve novos modelos ' + (genero === 'masculino' ? 'masculinos' : 'femininos') + '.</p>'
+    );
+  }
+
   function applyProducts() {
     if (!CMS.products.length) return;
     var grids = document.querySelectorAll('[data-cms-products]');
@@ -306,8 +317,19 @@
       var parts = spec.split(':');
       var kind = parts[0];
       var cat = parts[1];
+      // data-cms-genero="masculino|feminino": a página de Relógios usa para
+      // mostrar só um público. Vazio ou ausente: mostra todos.
+      var genero = grid.getAttribute('data-cms-genero') || '';
+      // Peça sem público marcado conta como o público padrão da página
+      // (data-genero-original). Assim os relógios antigos aparecem em
+      // Feminino mesmo antes do banco ter o campo preenchido.
+      var padrao = grid.getAttribute('data-genero-original') || '';
       var list = CMS.products.filter(function (p) {
-        return p.category === cat && (kind !== 'featured' || p.featured);
+        return (
+          p.category === cat &&
+          (kind !== 'featured' || p.featured) &&
+          (!genero || (p.gender || padrao) === genero)
+        );
       });
       list.sort(function (a, b) {
         var ka = kind === 'featured' ? a.featured_sort : a.sort;
@@ -316,7 +338,12 @@
       });
       var limit = parseInt(grid.getAttribute('data-cms-limit') || '0', 10);
       if (limit > 0) list = list.slice(0, limit);
-      if (!list.length) continue; // sem produtos: preserva o HTML original
+      if (!list.length) {
+        // Com filtro de gênero, "nenhum" é uma resposta válida: avisa o cliente
+        // em vez de mostrar as peças do outro público que estão no HTML.
+        if (genero) grid.innerHTML = emptyHtml(genero);
+        continue; // sem filtro: preserva o HTML original
+      }
       grid.innerHTML = list.map(cardHtml).join('');
     }
     document.dispatchEvent(new CustomEvent('cms:products-rendered'));

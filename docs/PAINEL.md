@@ -30,6 +30,8 @@ do zero, abra **SQL Editor** → **New query** e rode, nesta ordem:
 2. Cole todo o conteúdo de `supabase/migrations/0002_seed.sql` → **Run**.
 3. Cole todo o conteúdo de `supabase/migrations/0003_descartar.sql` → **Run**.
 4. Cole todo o conteúdo de `supabase/migrations/0004_cores.sql` → **Run**.
+5. Cole todo o conteúdo de `supabase/migrations/0005_logo_e_imagens.sql` → **Run**.
+6. Cole todo o conteúdo de `supabase/migrations/0006_genero_relogios.sql` → **Run**. (Relógios Masculino / Feminino.)
 
 O primeiro cria as tabelas, as permissões e o espaço das imagens.
 O segundo carrega **o conteúdo que já está no site hoje**: 124 campos de texto e
