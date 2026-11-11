@@ -1,4 +1,4 @@
-// Gera supabase/migrations/0007_relogios_masculinos.sql com os Rolex masculinos.
+// Gera os SQL dos Rolex masculinos, um arquivo por leva (veja LEVAS abaixo).
 //
 // Cada relógio tem um código (RM01, RM02…) que vai na mensagem do WhatsApp,
 // junto com a pulseira, o fundo e a luneta, para achar a peça na hora.
@@ -49,16 +49,47 @@ const RELOGIOS = [
   ['Sky-Dweller', 'Oyster aço e dourado', 'branco', 'canelada dourada'],
   ['Sky-Dweller', 'Oyster aço', 'preto', 'canelada'],
   ['Sky-Dweller', 'borracha preta, caixa dourada', 'preto', 'canelada dourada'],
+  // RM35 em diante: terceira leva (image copy 36 a 56).
+  ['Daytona', 'Oyster aço', 'preto com mostradores brancos', 'cerâmica preta'],
+  ['Daytona', 'Oyster aço', 'preto', 'aço'],
+  ['Daytona', 'Oyster aço', 'cinza com mostradores pretos', 'aço'],
+  ['Daytona', 'Oyster aço', 'azul gelo', 'cerâmica marrom'],
+  ['Daytona', 'Oyster rosé', 'preto com mostradores rosé', 'rosé'],
+  ['Daytona', 'Oyster aço e dourado', 'preto', 'dourada'],
+  ['Daytona', 'Oyster aço e dourado', 'branco', 'dourada'],
+  ['Daytona', 'Oyster dourada', 'champagne com mostradores pretos', 'dourada'],
+  ['Daytona', 'Oyster dourada', 'verde com mostradores champagne', 'dourada'],
+  ['Daytona', 'Oyster aço', 'cinza com mostradores pretos', 'cerâmica preta'],
+  ['Daytona', 'Oyster aço', 'preto', 'cerâmica preta'],
+  ['Daytona', 'Oyster aço', 'branco com mostradores pretos', 'cerâmica preta'],
+  ['Daytona', 'Oyster aço', 'preto com mostradores brancos', 'cerâmica preta'],
+  ['Daytona', 'Oyster aço', 'cinza com mostradores pretos', 'aço'],
+  ['Daytona', 'borracha preta, caixa aço', 'branco com mostradores pretos', 'cerâmica preta'],
+  ['Daytona', 'Oyster aço', 'branco', 'aço'],
+  // GMT-Master II: o fundo é sempre preto, o que muda é a luneta. Por isso o
+  // 5º campo dá o nome exibido no site.
+  ['GMT-Master II', 'Oyster aço', 'preto', 'azul e vermelha', 'Azul e Vermelho'],
+  ['GMT-Master II', 'Jubilee aço e dourado', 'preto', 'preta com números dourados', 'Preto e Dourado'],
+  ['GMT-Master II', 'Jubilee aço', 'preto', 'preta e cinza', 'Preto e Cinza'],
+  ['GMT-Master II', 'Oyster aço', 'preto', 'verde e preta, coroa do lado esquerdo', 'Verde e Preto'],
+  ['GMT-Master II', 'Oyster aço', 'preto', 'vermelha e preta', 'Vermelho e Preto'],
+];
+
+// Cada leva vira um arquivo SQL próprio. Assim uma leva nova não traz de volta
+// um relógio que já foi apagado no painel.
+const LEVAS = [
+  { de: 1, ate: 34, arquivo: '0007_relogios_masculinos.sql', titulo: 'Migration 7', depois: '0006' },
+  { de: 35, ate: 55, arquivo: '0008_relogios_masculinos_daytona_gmt.sql', titulo: 'Migration 8', depois: '0007' },
 ];
 
 const sql = (s) => (s == null ? 'null' : "'" + String(s).replace(/'/g, "''") + "'");
 const maiuscula = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
-const linhas = RELOGIOS.map(([modelo, pulseira, fundo, luneta], i) => {
+const todas = RELOGIOS.map(([modelo, pulseira, fundo, luneta, destaque], i) => {
   const n = String(i + 1).padStart(2, '0');
   const codigo = 'RM' + n;
   const imagem = `assets/img/produtos/relogios/rolex-m${n}.webp`;
-  const nome = `Rolex ${modelo} ${maiuscula(fundo.split(' com ')[0])}`;
+  const nome = `Rolex ${modelo} ${destaque || maiuscula(fundo.split(' com ')[0])}`;
   const whatsapp = `Relógio Rolex ${modelo} (${codigo}) - pulseira ${pulseira}, fundo ${fundo}, luneta ${luneta}`;
   const alt = `Relógio Rolex ${modelo} masculino, pulseira ${pulseira}, fundo ${fundo}`;
   return (
@@ -67,11 +98,17 @@ const linhas = RELOGIOS.map(([modelo, pulseira, fundo, luneta], i) => {
   );
 });
 
-const saida = `-- ============================================================================
--- Imports de Luxo — Migration 7: ${RELOGIOS.length} relógios Rolex masculinos (R$ ${PRECO},00).
+if (LEVAS[LEVAS.length - 1].ate !== RELOGIOS.length) {
+  throw new Error(`A última leva termina em ${LEVAS[LEVAS.length - 1].ate}, mas a lista tem ${RELOGIOS.length} relógios.`);
+}
+
+for (const leva of LEVAS) {
+  const linhas = todas.slice(leva.de - 1, leva.ate);
+  const saida = `-- ============================================================================
+-- Imports de Luxo — ${leva.titulo}: ${linhas.length} relógios Rolex masculinos (R$ ${PRECO},00).
 --
 -- Gerado por scripts/relogios-masculinos.mjs — edite lá e rode de novo.
--- Rode no SQL Editor do Supabase DEPOIS da 0006.
+-- Rode no SQL Editor do Supabase DEPOIS da ${leva.depois}.
 --
 -- Os relógios entram no RASCUNHO. Confira no painel e clique em Publicar.
 -- Rodar de novo não apaga nem sobrescreve edições feitas no painel.
@@ -83,6 +120,6 @@ values
 ${linhas.join(',\n')}
 on conflict (id) do nothing;
 `;
-
-fs.writeFileSync(path.join(ROOT, 'supabase', 'migrations', '0007_relogios_masculinos.sql'), saida);
-console.log(`${RELOGIOS.length} relógios gravados em supabase/migrations/0007_relogios_masculinos.sql`);
+  fs.writeFileSync(path.join(ROOT, 'supabase', 'migrations', leva.arquivo), saida);
+  console.log(`RM${String(leva.de).padStart(2, '0')}–RM${leva.ate}: ${linhas.length} relógios em supabase/migrations/${leva.arquivo}`);
+}
