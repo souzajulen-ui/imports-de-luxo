@@ -931,6 +931,8 @@
               (p.gender ? ' ' + (p.gender === 'masculino' ? 'masculino' : 'feminino') : '') +
               ' · ' + (pos.indice + 1) + 'º' +
               (p.featured ? ' · <span class="text-cyan-600 font-bold">destaque na home</span>' : '') +
+              (!Number(p.price) ? ' · <span class="text-red-600 font-bold">sem preço</span>' : '') +
+              (p.active === false ? ' · <span class="text-red-600 font-bold">escondido do site</span>' : '') +
               (p.gallery && p.gallery.length > 1 ? ' · ' + p.gallery.length + ' fotos' : '') +
               '</p></div>' +
               '<div class="flex gap-1 shrink-0">' +
