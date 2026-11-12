@@ -119,7 +119,7 @@ export const GLOBAL = [
     section: 'beneficios',
     label: 'Faixa de benefícios e rodapé completo',
     fields: [
-      ['loja.beneficio1_titulo', 'Benefício 1 — título', 'text', 'Envio VIP'],
+      ['loja.beneficio1_titulo', 'Benefício 1 — título', 'text', 'Envio Rápido'],
       ['loja.beneficio1_texto', 'Benefício 1 — texto', 'text', 'Para todo o Brasil'],
       ['loja.beneficio2_titulo', 'Benefício 2 — título', 'text', 'Compra Segura'],
       ['loja.beneficio2_texto', 'Benefício 2 — texto', 'text', 'Pedido confirmado direto com a loja'],

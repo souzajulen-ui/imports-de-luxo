@@ -1,0 +1,11 @@
+{
+  "id": "ajustes-textos-4",
+  "titulo": "Envio Rápido no lugar de Envio VIP",
+  "blocos": [
+    {
+      "page_slug": "_global",
+      "key": "loja.beneficio1_titulo",
+      "value": "Envio Rápido"
+    }
+  ]
+}
