@@ -390,13 +390,6 @@
     );
   }
 
-  function htmlPagamentos(classeChip) {
-    var lista = get('loja.pagamentos').split(',').map(function (s) { return s.trim(); }).filter(Boolean);
-    return lista.map(function (m) {
-      return '<span class="' + (classeChip || 'text-[11px] font-semibold border border-gray-200 rounded px-2 py-1 bg-white text-gray-700') + '">' + esc(m) + '</span>';
-    }).join('');
-  }
-
   function htmlGarantias() {
     var itens = [['caminhao', 1], ['caixa', 2], ['estrela', 3]].map(function (g) {
       var titulo = get('loja.garantia' + g[1] + '_titulo');
@@ -651,12 +644,12 @@
   function montarRodape() {
     var numeroWhats = whatsNumero();
     $('#rodapeWhats').textContent = formatarWhats(numeroWhats);
+    $('#rodapeWhats').href = get('contact.whatsapp_link') || whatsLink();
     var email = get('contact.email');
     var liEmail = $('[data-rodape="email"]');
     liEmail.classList.toggle('hidden', !email);
     if (email) { $('#rodapeEmail').textContent = email; $('#rodapeEmail').href = 'mailto:' + email; }
     $('[data-rodape="horario"]').classList.toggle('hidden', !get('contact.hours'));
-    $('#rodapeWhatsBotao').href = get('contact.whatsapp_link') || whatsLink();
     $('#whatsFlutuante').href = whatsLink(estado.produto ? 'Olá! Vi o produto "' + estado.produto.name + '" no site: ' + linkParaCompartilhar() : '');
 
     // Políticas: o link do painel; se ainda estiver "#", as páginas do site.
@@ -675,7 +668,6 @@
     $('#rodapePoliticasLista').innerHTML = politicas;
     $('#rodapePoliticas').classList.toggle('hidden', !politicas);
 
-    $('#rodapePagamentos').innerHTML = htmlPagamentos('text-[11px] font-semibold rounded px-2 py-1 bg-white text-gray-800');
     $('#rodapeRedes').innerHTML = Object.keys(REDES).map(function (k) {
       var url = get('loja.' + k);
       return url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener" aria-label="' + REDES[k][0] + '" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' + REDES[k][1] + '</svg></a>' : '';
@@ -683,50 +675,10 @@
     var cnpj = get('loja.cnpj');
     $('#rodapeCnpj').textContent = cnpj ? ' · CNPJ ' + cnpj : '';
 
-    var chamada = get('loja.newsletter_texto');
-    $('#newsletterTexto').classList.toggle('hidden', !chamada);
 
     // Benefício sem título some.
     $$('[data-beneficio]').forEach(function (el) {
       el.classList.toggle('hidden', !get('loja.beneficio' + el.getAttribute('data-beneficio') + '_titulo'));
-    });
-  }
-
-  function newsletter() {
-    var form = $('#newsletterForm');
-    if (!form || form.__ligado) return;
-    form.__ligado = true;
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var campo = $('#newsletterEmail'), status = $('#newsletterStatus');
-      var email = campo.value.trim();
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-        status.className = 'text-xs mt-2 min-h-[1rem] text-red-300';
-        status.textContent = 'Digite um e-mail válido.';
-        campo.focus();
-        return;
-      }
-      var cfg = window.CMS_CONFIG || {};
-      status.className = 'text-xs mt-2 min-h-[1rem] text-gray-300';
-      status.textContent = 'Enviando…';
-      fetch(String(cfg.url || '').replace(/\/+$/, '') + '/rest/v1/newsletter_signups', {
-        method: 'POST',
-        headers: { apikey: cfg.anonKey, Authorization: 'Bearer ' + cfg.anonKey, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
-        body: JSON.stringify({ email: email, origem: 'produto' }),
-      })
-        .then(function (r) {
-          if (r.ok || r.status === 409) {
-            status.className = 'text-xs mt-2 min-h-[1rem] text-emerald-300';
-            status.textContent = r.status === 409 ? 'Este e-mail já está inscrito.' : 'Pronto! Você vai receber nossas novidades.';
-            campo.value = '';
-          } else {
-            throw new Error('HTTP ' + r.status);
-          }
-        })
-        .catch(function () {
-          status.className = 'text-xs mt-2 min-h-[1rem] text-red-300';
-          status.textContent = 'Não foi possível inscrever agora. Tente de novo mais tarde.';
-        });
     });
   }
 
@@ -954,7 +906,6 @@
     atualizarWhats();
     barraFixa();
     montarRodape();
-    newsletter();
     aplicarSeo(p);
     if (location.hash === '#avaliacoes') trocarAba('avaliacoes');
     verificarPaginaCompartilhar(p);
