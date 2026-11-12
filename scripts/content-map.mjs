@@ -125,7 +125,7 @@ export const GLOBAL = [
       ['loja.beneficio2_texto', 'Benefício 2 — texto', 'text', 'Pedido confirmado direto com a loja'],
       ['loja.beneficio3_titulo', 'Benefício 3 — título', 'text', 'Suporte Exclusivo'],
       ['loja.beneficio3_texto', 'Benefício 3 — texto', 'text', 'Atendimento pelo WhatsApp'],
-      ['loja.beneficio4_titulo', 'Benefício 4 — título', 'text', 'Qualidade Grife'],
+      ['loja.beneficio4_titulo', 'Benefício 4 — título', 'text', 'Qualidade Premium'],
       ['loja.beneficio4_texto', 'Benefício 4 — texto', 'text', 'A excelência que seu visual exige.'],
       ['loja.newsletter_titulo', 'Newsletter — título', 'text', 'Receba novidades'],
       ['loja.newsletter_texto', 'Newsletter — chamada', 'text', '', 'Ex.: Ganhe 3% de desconto na sua primeira compra! Vazio: só o título aparece.'],

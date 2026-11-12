@@ -7,7 +7,7 @@
      • preço antigo, descrição, tamanhos e tabela de medidas: campo "details"
        do produto (editável no painel, em "Editar produto");
      • textos da loja (parcelas, Pix, garantias, perguntas…): Configurações;
-     • avaliações: assets/avaliacoes.json — SÓ avaliações reais de clientes.
+     • perguntas frequentes: Configurações → Perguntas frequentes.
    Campo vazio = o trecho some. Nada é inventado aqui.
    =========================================================================== */
 (function () {
@@ -53,9 +53,7 @@
     },
   };
 
-  var POR_PAGINA_AVALIACOES = 6;
-
-  var estado = { produto: null, fotos: [], foto: 0, tamanho: null, avaliacoes: [], mostrar: POR_PAGINA_AVALIACOES, ordem: 'recentes', renderizado: null };
+  var estado = { produto: null, fotos: [], foto: 0, tamanho: null, renderizado: null };
 
   // ------------------------------------------------------------- utilidades
   function $(sel, raiz) { return (raiz || document).querySelector(sel); }
@@ -140,28 +138,6 @@
 
   function icone(nome, classe) {
     return '<svg class="' + (classe || 'w-6 h-6') + '" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">' + ICONES[nome] + '</svg>';
-  }
-
-  function estrelas(nota, classe) {
-    var cheia = Math.round(Number(nota) || 0);
-    var s = '';
-    for (var i = 1; i <= 5; i++) {
-      s += '<span class="' + (i <= cheia ? 'text-amber-400' : 'text-gray-300') + '">★</span>';
-    }
-    return '<span class="' + (classe || '') + '" aria-label="Nota ' + (Number(nota) || 0).toFixed(1).replace('.', ',') + ' de 5">' + s + '</span>';
-  }
-
-  function tempoAtras(data) {
-    var t = new Date(data).getTime();
-    if (!isFinite(t)) return '';
-    var dias = Math.floor((Date.now() - t) / 86400000);
-    if (dias < 1) return 'hoje';
-    if (dias === 1) return 'há 1 dia';
-    if (dias < 30) return 'há ' + dias + ' dias';
-    var meses = Math.floor(dias / 30);
-    if (meses < 12) return meses === 1 ? 'há 1 mês' : 'há ' + meses + ' meses';
-    var anos = Math.floor(meses / 12);
-    return anos === 1 ? 'há 1 ano' : 'há ' + anos + ' anos';
   }
 
   // Nome completo da peça: o da mensagem do WhatsApp (o mais detalhado do
@@ -405,7 +381,6 @@
   function htmlInfo(p) {
     var cat = CATEGORIAS[p.category] || { nome: 'Produtos', pagina: 'index.html' };
     var paginaCat = cat.pagina + (p.category === 'relogios' && p.gender ? '?genero=' + encodeURIComponent(p.gender) : '');
-    var media = resumoAvaliacoes();
     var completo = nomeCompleto(p);
     return (
       '<div>' +
@@ -415,9 +390,6 @@
       '<li aria-current="page" class="text-gray-800">' + esc(p.name) + '</li></ol></nav>' +
       '<h1 class="text-2xl md:text-3xl font-serif leading-tight">' + esc(completo.nome) + '</h1>' +
       (completo.codigo ? '<p class="text-xs uppercase tracking-widest text-gray-500 mt-2">Código: ' + esc(completo.codigo) + '</p>' : '') +
-      (media.total
-        ? '<a href="#avaliacoes" data-aba-link="avaliacoes" class="inline-flex items-center gap-2 text-sm mt-2 hover:underline">' + estrelas(media.media) + ' <span>' + media.total + (media.total === 1 ? ' avaliação' : ' avaliações') + '</span></a>'
-        : '') +
       '<div class="border-t border-gray-100 mt-4 pt-4">' + htmlPreco(p) + '</div>' +
       htmlTamanhos(p) +
       // A loja não tem pagamento pelo site: a compra é fechada no WhatsApp.
@@ -453,6 +425,11 @@
           return '<p>' + esc(par).replace(/\n/g, '<br>') + '</p>';
         }).join('')
       : '<p class="text-gray-500">Fale com a gente pelo WhatsApp para saber mais detalhes desta peça.</p>';
+    // Igual para todas as peças: como a compra funciona (pelo WhatsApp).
+    var troca = get('loja.garantia2_texto');
+    corpo += '<p class="text-gray-600 border-t border-gray-100 pt-3">Para comprar, ' + (tamanhosDe(p).length ? 'escolha o tamanho e ' : '') +
+      'toque em <strong>Comprar pelo WhatsApp</strong>: a loja confirma disponibilidade, prazo de entrega e forma de pagamento antes de fechar o pedido.' +
+      (troca ? ' ' + esc(troca.charAt(0).toUpperCase() + troca.slice(1)) + ' após o recebimento.' : '') + '</p>';
     return (
       '<section class="mt-12 grid ' + (tabela ? 'lg:grid-cols-2' : '') + ' gap-6" aria-label="Descrição e medidas">' +
       '<div class="border border-gray-200 rounded-lg p-6 bg-white"><h2 class="font-sans font-semibold text-lg mb-4">Descrição</h2>' +
@@ -470,59 +447,14 @@
     );
   }
 
-  // ------------------------------------------------------------ avaliações
-  function resumoAvaliacoes() {
-    var lista = estado.avaliacoes;
-    if (!lista.length) return { total: 0, media: 0 };
-    var soma = lista.reduce(function (s, a) { return s + (Number(a.nota) || 0); }, 0);
-    return { total: lista.length, media: soma / lista.length };
-  }
-
-  function htmlAvaliacoes() {
-    var lista = estado.avaliacoes.slice();
-    if (!lista.length) {
-      return '<div class="text-center py-10"><p class="text-gray-600">Este produto ainda não tem avaliações.</p>' +
-        '<a href="' + esc(whatsLink('Olá! Comprei o produto "' + estado.produto.name + '" e quero deixar minha avaliação.')) + '" target="_blank" rel="noopener" class="inline-block mt-4 text-sm underline underline-offset-2 hover:text-cyan-600">Comprou esta peça? Conte para a gente pelo WhatsApp</a></div>';
-    }
-    if (estado.ordem === 'nota') lista.sort(function (a, b) { return (b.nota || 0) - (a.nota || 0) || new Date(b.data) - new Date(a.data); });
-    else lista.sort(function (a, b) { return new Date(b.data) - new Date(a.data); });
-    var r = resumoAvaliacoes();
-    var visiveis = lista.slice(0, estado.mostrar);
-    return (
-      '<div class="flex flex-wrap items-center justify-between gap-4 mb-6">' +
-      '<div class="flex items-center gap-3"><span class="text-4xl font-semibold">' + r.media.toFixed(1).replace('.', ',') + '</span>' +
-      '<div>' + estrelas(r.media, 'text-xl') + '<p class="text-sm text-gray-600">' + r.total + (r.total === 1 ? ' avaliação' : ' avaliações') + '</p></div></div>' +
-      '<label class="text-sm flex items-center gap-2">Ordenar por <select id="ordemAvaliacoes" class="border border-gray-300 rounded-md px-2 py-2 bg-white">' +
-      '<option value="recentes"' + (estado.ordem === 'recentes' ? ' selected' : '') + '>Mais recentes</option>' +
-      '<option value="nota"' + (estado.ordem === 'nota' ? ' selected' : '') + '>Maior nota</option></select></label>' +
-      '</div>' +
-      '<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">' +
-      visiveis.map(function (a) {
-        var fotos = (a.fotos || []).filter(Boolean);
-        return '<article class="border border-gray-200 rounded-lg p-5 bg-white">' +
-          '<div class="flex items-center justify-between">' + estrelas(a.nota) + '<span class="text-xs text-gray-500">' + esc(tempoAtras(a.data)) + '</span></div>' +
-          (a.titulo ? '<h3 class="font-sans font-semibold mt-3">' + esc(a.titulo) + '</h3>' : '') +
-          (a.texto ? '<p class="text-sm text-gray-700 mt-2 leading-relaxed">' + esc(a.texto) + '</p>' : '') +
-          (fotos.length ? '<div class="flex gap-2 mt-3">' + fotos.map(function (f) { return '<img src="' + esc(f) + '" alt="Foto enviada pelo cliente" class="w-16 h-16 object-cover rounded" loading="lazy">'; }).join('') + '</div>' : '') +
-          '<p class="text-sm font-semibold mt-4">' + esc(a.nome || 'Cliente') + '</p>' +
-          (a.verificada ? '<p class="text-xs text-emerald-700 font-semibold mt-1">✓ Compra verificada</p>' : '') +
-          '</article>';
-      }).join('') +
-      '</div>' +
-      (lista.length > estado.mostrar ? '<div class="text-center mt-6"><button type="button" id="verMaisAvaliacoes" class="border border-black px-6 py-3 rounded-md text-sm font-semibold hover:bg-black hover:text-white transition">Ver mais</button></div>' : '')
-    );
-  }
-
+  // ---------------------------------------------------- perguntas frequentes
   function htmlPerguntas() {
     var itens = [];
     for (var n = 1; n <= 6; n++) {
       var q = get('faq.' + n + '_pergunta'), r = get('faq.' + n + '_resposta');
       if (q && r) itens.push([q, r]);
     }
-    if (!itens.length) {
-      return '<div class="text-center py-10"><p class="text-gray-600">Ainda não há perguntas sobre este produto.</p>' +
-        '<a href="' + esc(whatsLink('Olá! Tenho uma dúvida sobre o produto "' + estado.produto.name + '": ')) + '" target="_blank" rel="noopener" class="inline-block mt-4 text-sm underline underline-offset-2 hover:text-cyan-600">Pergunte pelo WhatsApp</a></div>';
-    }
+    if (!itens.length) return ''; // sem perguntas cadastradas: a seção nem aparece
     return '<div class="divide-y divide-gray-200 border border-gray-200 rounded-lg bg-white">' +
       itens.map(function (it) {
         return '<details class="group p-5"><summary class="cursor-pointer list-none [&::-webkit-details-marker]:hidden flex justify-between gap-4 font-semibold">' +
@@ -531,18 +463,10 @@
       }).join('') + '</div>';
   }
 
-  function htmlAbas() {
-    var r = resumoAvaliacoes();
-    return (
-      '<section class="mt-12" aria-label="Avaliações e perguntas">' +
-      '<div class="flex gap-6 border-b border-gray-200" role="tablist">' +
-      '<button type="button" role="tab" id="aba-avaliacoes" aria-controls="painel-avaliacoes" aria-selected="true" data-aba="avaliacoes" class="py-3 -mb-px border-b-2 border-black font-semibold">Avaliações' + (r.total ? ' (' + r.total + ')' : '') + '</button>' +
-      '<button type="button" role="tab" id="aba-perguntas" aria-controls="painel-perguntas" aria-selected="false" data-aba="perguntas" class="py-3 -mb-px border-b-2 border-transparent text-gray-500 font-semibold">Perguntas</button>' +
-      '</div>' +
-      '<div id="painel-avaliacoes" role="tabpanel" aria-labelledby="aba-avaliacoes" class="pt-6 scroll-mt-40"><div id="avaliacoes">' + htmlAvaliacoes() + '</div></div>' +
-      '<div id="painel-perguntas" role="tabpanel" aria-labelledby="aba-perguntas" class="pt-6 hidden">' + htmlPerguntas() + '</div>' +
-      '</section>'
-    );
+  // Só aparece quando há pergunta com resposta em Configurações.
+  function htmlSecaoPerguntas() {
+    var html = htmlPerguntas();
+    return html ? '<section class="mt-12" aria-labelledby="titulo-perguntas"><h2 id="titulo-perguntas" class="font-serif text-2xl mb-6">Perguntas frequentes</h2>' + html + '</section>' : '';
   }
 
   function relacionados(p) {
@@ -612,11 +536,6 @@
     };
     if (preco > 0) {
       dados.offers = { '@type': 'Offer', url: url, priceCurrency: 'BRL', price: preco.toFixed(2), availability: 'https://schema.org/InStock' };
-    }
-    // Só com avaliações reais (assets/avaliacoes.json).
-    var r = resumoAvaliacoes();
-    if (r.total) {
-      dados.aggregateRating = { '@type': 'AggregateRating', ratingValue: r.media.toFixed(1), reviewCount: r.total };
     }
     var tag = document.getElementById('jsonld-produto');
     if (!tag) {
@@ -748,7 +667,6 @@
         return;
       }
 
-
       if (t.closest('#comprarWhats') && !validarTamanho()) { e.preventDefault(); return; }
       if (t.closest('#compartilhar')) return compartilhar();
       if (t.closest('#adicionarCarrinho')) {
@@ -756,15 +674,6 @@
         return;
       }
 
-      var aba = t.closest('[data-aba]');
-      if (aba) return trocarAba(aba.getAttribute('data-aba'));
-      if (t.closest('[data-aba-link]')) trocarAba('avaliacoes');
-
-      if (t.closest('#verMaisAvaliacoes')) {
-        estado.mostrar += POR_PAGINA_AVALIACOES;
-        $('#avaliacoes').innerHTML = htmlAvaliacoes();
-        return;
-      }
       var rel = t.closest('[data-rel]');
       if (rel) {
         var c = $('#carrosselRel');
@@ -772,23 +681,6 @@
       }
     });
 
-    raiz.addEventListener('change', function (e) {
-      if (e.target.id === 'ordemAvaliacoes') {
-        estado.ordem = e.target.value;
-        $('#avaliacoes').innerHTML = htmlAvaliacoes();
-      }
-    });
-
-    // Setas do teclado nas abas (padrão de abas acessíveis).
-    raiz.addEventListener('keydown', function (e) {
-      if (e.target.matches && e.target.matches('[data-aba]') && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
-        var outra = e.target.getAttribute('data-aba') === 'avaliacoes' ? 'perguntas' : 'avaliacoes';
-        trocarAba(outra);
-        $('[data-aba="' + outra + '"]').focus();
-      }
-    });
-
-    // Barra do celular: sem tamanho escolhido, leva até os tamanhos em vez de abrir o WhatsApp.
     $('#barraWhats').addEventListener('click', function (e) {
       if (!validarTamanho()) e.preventDefault();
     });
@@ -838,19 +730,6 @@
     aceitarSwipe(lb, function (dir) { mostrarFoto(estado.foto + dir); });
   }
 
-  function trocarAba(nome) {
-    $$('[data-aba]').forEach(function (b) {
-      var ativa = b.getAttribute('data-aba') === nome;
-      b.setAttribute('aria-selected', ativa ? 'true' : 'false');
-      b.tabIndex = ativa ? 0 : -1;
-      b.classList.toggle('border-black', ativa);
-      b.classList.toggle('border-transparent', !ativa);
-      b.classList.toggle('text-gray-500', !ativa);
-    });
-    $('#painel-avaliacoes').classList.toggle('hidden', nome !== 'avaliacoes');
-    $('#painel-perguntas').classList.toggle('hidden', nome !== 'perguntas');
-  }
-
   function atualizarWhats() {
     var link = whatsLink(mensagemWhats());
     ['#comprarWhats', '#barraWhats'].forEach(function (sel) {
@@ -898,7 +777,7 @@
     main.setAttribute('aria-busy', 'false');
     main.innerHTML =
       '<div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">' + htmlGaleria(p) + htmlInfo(p) + '</div>' +
-      htmlDescricao(p) + htmlAbas() + htmlRelacionados(p);
+      htmlDescricao(p) + htmlSecaoPerguntas() + htmlRelacionados(p);
 
     ligarEventos();
     ligarPalco();
@@ -907,26 +786,11 @@
     barraFixa();
     montarRodape();
     aplicarSeo(p);
-    if (location.hash === '#avaliacoes') trocarAba('avaliacoes');
     verificarPaginaCompartilhar(p);
   }
 
-  function carregarAvaliacoes() {
-    return fetch('assets/avaliacoes.json?t=' + Math.floor(Date.now() / 3600000), { cache: 'no-cache' })
-      .then(function (r) { return r.ok ? r.json() : {}; })
-      .catch(function () { return {}; })
-      .then(function (todas) {
-        var lista = (todas && todas[idDoEndereco()]) || [];
-        // Só entra avaliação com nota de 1 a 5 e data: o arquivo é de avaliações reais.
-        estado.avaliacoes = Array.isArray(lista)
-          ? lista.filter(function (a) { return a && Number(a.nota) >= 1 && Number(a.nota) <= 5 && a.data; })
-          : [];
-      });
-  }
-
   function iniciar() {
-    var avaliacoes = carregarAvaliacoes();
-    var montar = function () { avaliacoes.then(render); };
+    var montar = function () { render(); };
     document.addEventListener('cms:ready', montar);
     // O cms.js pode ter aplicado a cópia salva antes deste arquivo carregar:
     // nesse caso o primeiro "cms:ready" já passou.

@@ -294,7 +294,13 @@
                   var atuais = (p.details && typeof p.details === 'object') ? p.details : {};
                   var preencher = {};
                   Object.keys(d.details || {}).forEach(function (k) {
-                    if (!atuais[k] && d.details[k]) preencher[k] = d.details[k];
+                    var novo = d.details[k];
+                    if (!novo || atuais[k] === novo) return;
+                    // Troca só o que está vazio ou ainda igual a um texto que
+                    // o próprio script escreveu antes ("antes"); o que foi
+                    // editado à mão no painel nunca é sobrescrito.
+                    var anteriores = (d.antes && Array.isArray(d.antes[k])) ? d.antes[k] : [];
+                    if (!atuais[k] || anteriores.indexOf(atuais[k]) > -1) preencher[k] = novo;
                   });
                   return Object.keys(preencher).length ? { id: d.id, details: Object.assign({}, atuais, preencher) } : null;
                 })

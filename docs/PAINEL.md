@@ -36,16 +36,6 @@ do zero, abra **SQL Editor** → **New query** e rode, nesta ordem:
 
 > As levas de produtos (0007 a 0011) entram pelo botão **Adicionar ao catálogo** do painel; os SQL ficam só como alternativa manual.
 
-### Avaliações da página de produto
-
-Ficam em `assets/avaliacoes.json`, por id do produto (o `?p=` do endereço). Cadastre **só avaliações reais** de clientes. Produto sem avaliação mostra "Este produto ainda não tem avaliações", e a nota média só entra no Google (JSON-LD) quando houver avaliação de verdade.
-
-O primeiro cria as tabelas, as permissões e o espaço das imagens.
-O segundo carrega **o conteúdo que já está no site hoje**: 124 campos de texto e
-imagem e os 141 produtos reais, com preços e galerias de fotos.
-
-> Rodar o `0002` de novo não apaga as suas edições — ele só recria o que faltar.
-
 ### 1.3 Criar o seu usuário de administrador — ✅ já executado
 
 O login abaixo já existe e está confirmado. Para recriar ou trocar a senha, rode

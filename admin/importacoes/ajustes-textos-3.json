@@ -1,0 +1,11 @@
+{
+  "id": "ajustes-textos-3",
+  "titulo": "Qualidade Premium no lugar de Qualidade Grife",
+  "blocos": [
+    {
+      "page_slug": "_global",
+      "key": "loja.beneficio4_titulo",
+      "value": "Qualidade Premium"
+    }
+  ]
+}

@@ -1,3 +1,0 @@
-{
-  "_como_usar": "Cadastre aqui SÓ avaliações reais de clientes. A chave é o id do produto (o que aparece no endereço da página: produto.html?p=ID). Cada avaliação: nota (1 a 5), data (AAAA-MM-DD), nome, titulo, texto, fotos (lista de endereços, opcional) e verificada (true só se a compra foi confirmada). Exemplo de formato: \"bolsa-bl19\": [{ \"nota\": 5, \"data\": \"2026-11-10\", \"nome\": \"Nome do cliente\", \"titulo\": \"Título\", \"texto\": \"Comentário\", \"fotos\": [], \"verificada\": true }]. Chaves que começam com _ são ignoradas."
-}
