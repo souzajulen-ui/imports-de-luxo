@@ -251,6 +251,14 @@
         state.products.forEach(function (p) {
           existentes[p.id] = true;
         });
+        // Uma leva pode trazer produtos novos e/ou ajustes de texto ("blocos":
+        // campos do painel que já existem, com o valor novo).
+        var valorAtual = function (b) {
+          var achado = state.blocks.find(function (x) {
+            return x.page_slug === b.page_slug && x.key === b.key;
+          });
+          return achado ? { existe: true, valor: achado.value || '' } : { existe: false };
+        };
         state.importacoes = lotes
           .map(function (l) {
             return {
@@ -259,10 +267,14 @@
               faltando: (l.produtos || []).filter(function (p) {
                 return !existentes[p.id];
               }),
+              ajustes: (l.blocos || []).filter(function (b) {
+                var atual = valorAtual(b);
+                return atual.existe && atual.valor !== b.value;
+              }),
             };
           })
           .filter(function (l) {
-            return l.faltando.length;
+            return l.faltando.length || l.ajustes.length;
           });
       })
       .catch(function () {
@@ -276,13 +288,19 @@
     var total = levas.reduce(function (n, l) {
       return n + l.faltando.length;
     }, 0);
+    var totalAjustes = levas.reduce(function (n, l) {
+      return n + l.ajustes.length;
+    }, 0);
+    var partes = [];
+    if (total) partes.push(total + ' produto(s) novo(s)');
+    if (totalAjustes) partes.push(totalAjustes + ' texto(s) do site ajustado(s)');
     confirmar(
       'Adicionar ao catálogo',
-      'Vão entrar ' + total + ' produtos: ' +
+      'Vão entrar ' + partes.join(' e ') + ': ' +
         levas.map(function (l) {
           return l.titulo;
         }).join('; ') +
-        '. Eles ficam no rascunho: confira e clique em “Publicar no site” para os clientes verem.',
+        '. Fica tudo no rascunho: confira e clique em “Publicar no site” para os clientes verem.',
       'Adicionar'
     ).then(function (ok) {
       if (!ok) return;
@@ -295,11 +313,27 @@
             var produtos = leva.faltando.map(function (p) {
               return Object.assign({}, p, { updated_at: agora });
             });
-            return sb
-              .from('products')
-              .upsert(produtos, { onConflict: 'id', ignoreDuplicates: true })
+            var inserir = produtos.length
+              ? sb.from('products').upsert(produtos, { onConflict: 'id', ignoreDuplicates: true })
+              : Promise.resolve({});
+            return inserir
               .then(function (r) {
                 if (r.error) throw r.error;
+                return Promise.all(
+                  leva.ajustes.map(function (b) {
+                    return sb
+                      .from('content_blocks')
+                      .update({ value: b.value, updated_at: agora })
+                      .eq('page_slug', b.page_slug)
+                      .eq('key', b.key);
+                  })
+                );
+              })
+              .then(function (res) {
+                var erro = (res || []).find(function (x) {
+                  return x && x.error;
+                });
+                if (erro) throw erro.error;
                 return sb.from('content_blocks').upsert(
                   {
                     page_slug: MARCA_IMPORTACAO.page_slug,
@@ -326,7 +360,7 @@
           state.importando = false;
           marcarPendente();
           renderMain();
-          toast(total + ' produtos adicionados. Confira e clique em Publicar no site.', 'ok');
+          toast(partes.join(' e ') + ' no rascunho. Confira e clique em Publicar no site.', 'ok');
         })
         .catch(function (err) {
           state.importando = false;
@@ -1786,7 +1820,7 @@
         : '') +
       (state.importacoes && state.importacoes.length
         ? '<div class="bg-cyan-50 border-b border-cyan-200 text-cyan-900 text-[13px] px-4 md:px-8 py-2 flex flex-wrap items-center gap-2">' +
-          '<span><strong>Produtos novos prontos:</strong> ' +
+          '<span><strong>Prontos para entrar no site:</strong> ' +
           esc(
             state.importacoes
               .map(function (l) {

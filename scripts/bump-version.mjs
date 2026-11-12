@@ -15,7 +15,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const VERSAO = process.argv[2] || new Date().toISOString().slice(0, 10).replace(/-/g, '');
 
 const ALVOS = [
-  ...['index', 'bolsas', 'relogios', 'oculos', 'calcados', 'acessorios', 'cintos', 'pesquisa', 'produto'].map((s) => `${s}.html`),
+  ...['index', 'bolsas', 'relogios', 'oculos', 'calcados', 'acessorios', 'cintos', 'pesquisa', 'produto', 'politica-de-privacidade', 'trocas-e-devolucoes', 'frete-e-envio'].map((s) => `${s}.html`),
   'admin/index.html',
 ];
 

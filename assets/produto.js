@@ -188,13 +188,48 @@
     return false;
   }
 
+  // ------------------------------------------------------- compartilhar
+  // O WhatsApp só mostra a foto do produto na prévia se o link apontar para a
+  // página de compartilhamento (p/<id>.html, gerada por
+  // scripts/gerar-compartilhamento.py). Enquanto ela não existir (produto
+  // acabou de entrar), usa o endereço normal da página.
+  function nomeArquivo(id) {
+    return String(id).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '');
+  }
+
+  function linkParaCompartilhar() {
+    return estado.linkCompartilhar || location.href.split('#')[0];
+  }
+
+  function verificarPaginaCompartilhar(p) {
+    var url = absoluto('p/' + nomeArquivo(p.id) + '.html');
+    return fetch(url, { method: 'HEAD', cache: 'no-cache' })
+      .then(function (r) { estado.linkCompartilhar = r.ok ? url : null; })
+      .catch(function () { estado.linkCompartilhar = null; })
+      .then(function () {
+        atualizarWhats();
+        montarRodape();
+      });
+  }
+
+  function compartilhar() {
+    var p = estado.produto, url = linkParaCompartilhar(), status = $('#compartilharStatus');
+    if (navigator.share) {
+      navigator.share({ title: p.name, text: p.name, url: url }).catch(function () {});
+      return;
+    }
+    (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject())
+      .then(function () { status.textContent = 'Link copiado! É só colar no WhatsApp.'; })
+      .catch(function () { status.textContent = url; });
+  }
+
   function mensagemWhats() {
     var p = estado.produto;
     var linhas = ['Olá! Quero comprar este produto:', '', '*' + (p.cart_name || p.name) + '*'];
     if (estado.tamanho) linhas.push('Tamanho: ' + estado.tamanho);
     linhas.push('Quantidade: ' + estado.qtd);
     linhas.push('Preço: ' + (Number(p.price) > 0 ? dinheiro(p.price) : 'sob consulta'));
-    linhas.push('', location.href.split('#')[0]);
+    linhas.push('', linkParaCompartilhar());
     return linhas.join('\n');
   }
 
@@ -382,6 +417,8 @@
       '<button type="button" id="adicionarSacola" class="flex-1 h-14 bg-cyan-500 hover:bg-cyan-600 text-white font-bold rounded-md transition">Adicionar à sacola</button>' +
       '</div>' +
       '<a id="comprarWhats" href="#" target="_blank" rel="noopener" class="w-full h-12 border-2 border-[#25D366] text-[#128C3E] hover:bg-[#25D366] hover:text-white font-bold rounded-md transition flex items-center justify-center gap-2">Comprar pelo WhatsApp</a>' +
+      '<button type="button" id="compartilhar" class="w-full h-11 text-sm font-semibold text-gray-700 hover:text-black underline underline-offset-4">Compartilhar este produto</button>' +
+      '<p id="compartilharStatus" class="text-xs text-center text-emerald-700 min-h-[1rem]" role="status" aria-live="polite"></p>' +
       '</div>' +
       (pagamentos
         ? '<div class="mt-6 border border-gray-200 rounded-lg p-4 bg-white"><p class="text-sm font-semibold text-center mb-3">' + esc(get('footer.payment_title', 'Formas de Pagamento')) + '</p>' +
@@ -595,12 +632,20 @@
     if (email) { $('#rodapeEmail').textContent = email; $('#rodapeEmail').href = 'mailto:' + email; }
     $('[data-rodape="horario"]').classList.toggle('hidden', !get('contact.hours'));
     $('#rodapeWhatsBotao').href = get('contact.whatsapp_link') || whatsLink();
-    $('#whatsFlutuante').href = whatsLink(estado.produto ? 'Olá! Vi o produto "' + estado.produto.name + '" no site: ' + location.href.split('#')[0] : '');
+    $('#whatsFlutuante').href = whatsLink(estado.produto ? 'Olá! Vi o produto "' + estado.produto.name + '" no site: ' + linkParaCompartilhar() : '');
 
-    // Políticas: só links preenchidos de verdade no painel.
+    // Políticas: o link do painel; se ainda estiver "#", as páginas do site.
+    var PADRAO = [
+      ['Política de Privacidade', 'politica-de-privacidade.html'],
+      ['Trocas e Devoluções', 'trocas-e-devolucoes.html'],
+      ['Frete e Envio', 'frete-e-envio.html'],
+    ];
     var politicas = [1, 2, 3].map(function (n) {
-      var rotulo = get('footer.link' + n + '_label'), url = get('footer.link' + n + '_url');
-      return rotulo && url && url !== '#' ? '<li><a class="hover:text-white hover:underline underline-offset-2" href="' + esc(url) + '">' + esc(rotulo) + '</a></li>' : '';
+      var url = get('footer.link' + n + '_url');
+      var usaPadrao = !url || url === '#';
+      var rotulo = usaPadrao ? PADRAO[n - 1][0] : get('footer.link' + n + '_label', PADRAO[n - 1][0]);
+      if (usaPadrao) url = PADRAO[n - 1][1];
+      return '<li><a class="hover:text-white hover:underline underline-offset-2" href="' + esc(url) + '">' + esc(rotulo) + '</a></li>';
     }).join('');
     $('#rodapePoliticasLista').innerHTML = politicas;
     $('#rodapePoliticas').classList.toggle('hidden', !politicas);
@@ -738,6 +783,7 @@
         return;
       }
       if (t.closest('#comprarWhats') && !validarTamanho()) { e.preventDefault(); return; }
+      if (t.closest('#compartilhar')) return compartilhar();
 
       var aba = t.closest('[data-aba]');
       if (aba) return trocarAba(aba.getAttribute('data-aba'));
@@ -895,6 +941,7 @@
     newsletter();
     aplicarSeo(p);
     if (location.hash === '#avaliacoes') trocarAba('avaliacoes');
+    verificarPaginaCompartilhar(p);
   }
 
   function carregarAvaliacoes() {

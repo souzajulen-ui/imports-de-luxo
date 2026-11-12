@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96.png">
+    <link rel="apple-touch-icon" href="assets/img/icone-192.png">
+    <title>Trocas e Devoluções | Imports de Luxo</title>
+    <meta name="description" content="Como trocar um produto comprado na Imports de Luxo.">
+    <link rel="canonical" href="https://importsdeluxo.com.br/trocas-e-devolucoes.html">
+    <meta property="og:title" content="Trocas e Devoluções | Imports de Luxo">
+    <meta property="og:description" content="Como trocar um produto comprado na Imports de Luxo.">
+    <meta property="og:image" content="https://importsdeluxo.com.br/assets/img/logo-512.jpg">
+    <link rel="stylesheet" href="assets/tailwind.css?v=2026111205">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-luxo: #FDFCFB; --gold: #00CED1; --black-soft: #1A1A1A; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-luxo); color: var(--black-soft); }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        #cartSidebar { max-width: 100vw; }
+    </style>
+    <style>
+        .politica h2 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.125rem; margin: 2rem 0 .75rem; }
+        .politica p, .politica li { color: #374151; line-height: 1.75; }
+        .politica p + p, .politica ul + p, .politica ol + p { margin-top: .75rem; }
+        .politica ul, .politica ol { padding-left: 1.25rem; margin-top: .5rem; }
+        .politica ul { list-style: disc; } .politica ol { list-style: decimal; }
+        .politica li + li { margin-top: .35rem; }
+    </style>
+    <!-- Conteúdo editável pelo painel (/admin) -->
+    <script src="assets/cms-config.js?v=2026111205"></script>
+    <script src="assets/cms.js?v=2026111205" defer></script>
+</head>
+<body class="antialiased text-gray-900 pt-32">
+
+    <div class="fixed top-0 left-0 w-full z-50 bg-cyan-500 text-black text-[10px] uppercase tracking-[0.3em] py-2 text-center" data-cms="topbar.text">marcas Exclusivas | Frete em todo Brasil</div>
+
+    <header class="fixed top-8 left-0 w-full z-50 bg-white py-6 px-6 md:px-8 xl:px-20 flex items-center justify-between border-b border-gray-100 shadow-sm">
+        <div class="text-2xl md:text-2xl xl:text-3xl font-serif font-bold tracking-tight">
+            <a href="index.html"><span data-cms="brand.name_main">IMPORTS</span> <span class="italic font-light" data-cms="brand.name_accent">de Luxo</span></a>
+        </div>
+
+        <!-- MOBILE MENU BUTTON -->
+        <button id="mobileMenuButton" onclick="toggleMobileMenu()" class="lg:hidden text-2xl p-2 text-gray-700 hover:text-cyan-500 transition" aria-label="Abrir menu">
+            ☰
+        </button>
+
+        <nav class="hidden lg:flex lg:mx-auto xl:absolute xl:left-1/2 xl:-translate-x-1/2 items-center gap-3 xl:gap-8 text-[11px] xl:text-[13px] uppercase tracking-widest font-semibold">
+    <a href="index.html" class="hover:text-cyan-500 transition" data-cms="nav.1_label" data-cms-href="nav.1_url">Início</a>
+    <a href="bolsas.html" class="hover:text-cyan-500 transition" data-cms="nav.2_label" data-cms-href="nav.2_url">Bolsas</a>
+    <!-- Relógios: passar o mouse abre Masculino / Feminino -->
+    <div class="relative group">
+        <a href="relogios.html" class="hover:text-cyan-500 transition" aria-haspopup="true" data-cms="nav.3_label" data-cms-href="nav.3_url">Relógios</a>
+        <div class="absolute left-1/2 -translate-x-1/2 top-full pt-3 hidden group-hover:block group-focus-within:block z-50">
+            <div class="bg-white border border-gray-100 shadow-xl py-2 text-left">
+                <a href="relogios.html?genero=masculino" class="block px-5 py-2 whitespace-nowrap hover:text-cyan-500 hover:bg-gray-50 transition">Masculino</a>
+                <a href="relogios.html?genero=feminino" class="block px-5 py-2 whitespace-nowrap hover:text-cyan-500 hover:bg-gray-50 transition">Feminino</a>
+            </div>
+        </div>
+    </div>
+    <a href="oculos.html" class="hover:text-cyan-500 transition" data-cms="nav.4_label" data-cms-href="nav.4_url">Óculos</a>
+    <a href="calcados.html" class="hover:text-cyan-500 transition" data-cms="nav.5_label" data-cms-href="nav.5_url">Calçados</a>
+    <a href="acessorios.html" class="hover:text-cyan-500 transition" data-cms="nav.6_label" data-cms-href="nav.6_url">Acessórios</a>
+    <a href="cintos.html" class="hover:text-cyan-500 transition" data-cms="nav.7_label" data-cms-href="nav.7_url">Cintos</a>
+</nav>
+
+        <div class="flex items-center space-x-6 text-xl">
+            <button onclick="toggleCart()" class="relative hover:text-cyan-500 transition" aria-label="Abrir sacola">
+                🛒
+                <span id="cartCount" class="absolute -top-2 -right-2 bg-cyan-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobileNav" class="hidden fixed top-[110px] left-0 w-full bg-white z-40 border-b border-gray-100 lg:hidden">
+    <nav class="flex flex-col p-6 space-y-4 text-[13px] uppercase tracking-[0.2em] font-bold">
+        <a href="index.html" class="hover:text-cyan-500 transition" data-cms="nav.1_label" data-cms-href="nav.1_url">Início</a>
+        <a href="bolsas.html" class="hover:text-cyan-500 transition" data-cms="nav.2_label" data-cms-href="nav.2_url">Bolsas</a>
+        <!-- Relógios no celular: tocar abre Masculino / Feminino logo abaixo -->
+        <details class="group">
+            <summary class="cursor-pointer list-none [&::-webkit-details-marker]:hidden flex items-center gap-2 hover:text-cyan-500 transition">
+                <span data-cms="nav.3_label">Relógios</span>
+                <span aria-hidden="true" class="text-[9px] transition-transform group-open:rotate-180">▼</span>
+            </summary>
+            <div class="flex flex-col space-y-3 pl-4 pt-3 text-[11px] tracking-[0.2em] font-semibold text-gray-500">
+                <a href="relogios.html?genero=masculino" class="hover:text-cyan-500 transition">Masculino</a>
+                <a href="relogios.html?genero=feminino" class="hover:text-cyan-500 transition">Feminino</a>
+            </div>
+        </details>
+        <a href="oculos.html" class="hover:text-cyan-500 transition" data-cms="nav.4_label" data-cms-href="nav.4_url">Óculos</a>
+        <a href="calcados.html" class="hover:text-cyan-500 transition" data-cms="nav.5_label" data-cms-href="nav.5_url">Calçados</a>
+        <a href="acessorios.html" class="hover:text-cyan-500 transition" data-cms="nav.6_label" data-cms-href="nav.6_url">Acessórios</a>
+        <a href="cintos.html" class="hover:text-cyan-500 transition" data-cms="nav.7_label" data-cms-href="nav.7_url">Cintos</a>
+    </nav>
+</div>
+
+
+    <main class="max-w-3xl mx-auto px-6 md:px-8 py-12 md:py-16">
+        <nav aria-label="Você está em" class="text-xs text-gray-500 mb-6"><a href="index.html" class="hover:text-black">Início</a> <span aria-hidden="true">›</span> <span aria-current="page">Trocas e Devoluções</span></nav>
+        <h1 class="text-4xl md:text-5xl font-serif mb-2">Trocas e Devoluções</h1>
+        <p class="text-xs uppercase tracking-widest text-gray-400 mb-8">Atualizada em 12/11/2026</p>
+        <article class="politica text-[15px]">
+<h2>1. Troca por outro produto</h2>
+<p>Você pode trocar o produto por <strong>outro produto da loja em até 7 dias corridos</strong> a partir do recebimento.</p>
+<p>Para a troca, o produto precisa estar:</p>
+<ul>
+  <li>sem sinais de uso;</li>
+  <li>com etiquetas, lacres e embalagem original;</li>
+  <li>com todos os acessórios que o acompanham (caixa, dust bag, certificados, manuais e brindes).</li>
+</ul>
+<p>Se o novo produto tiver valor diferente, a diferença é combinada no atendimento. A troca está sujeita à disponibilidade do produto escolhido.</p>
+
+<h2>2. Como pedir a troca</h2>
+<ol>
+  <li>Fale com a gente pelo WhatsApp dentro do prazo, informando o seu nome e o produto.</li>
+  <li>Envie fotos do produto e da embalagem.</li>
+  <li>Combinamos com você a forma de envio do produto de volta e a escolha do novo produto.</li>
+</ol>
+
+<h2>3. Produto com defeito</h2>
+<p>Se o produto apresentar defeito, fale com a gente pelo WhatsApp com fotos ou vídeo. Seguimos os prazos e as garantias do Código de Defesa do Consumidor: o produto será analisado e, confirmado o defeito, reparado ou trocado, e os custos de envio ficam por nossa conta.</p>
+
+<h2>4. Direito de arrependimento</h2>
+<p>Em compras feitas fora da loja física, como pelo site e pelo WhatsApp, o Código de Defesa do Consumidor (art. 49) garante o direito de desistir da compra em até 7 dias a partir do recebimento. Se quiser exercer esse direito, avise a gente pelo WhatsApp dentro desse prazo, com o produto nas mesmas condições em que foi recebido.</p>
+
+<h2>5. Atendimento</h2>
+<p data-contatos></p>
+</article>
+    </main>
+
+    <footer class="bg-white py-10 text-center border-t border-gray-100">
+        <nav aria-label="Políticas" class="flex flex-wrap justify-center gap-3 text-xs text-gray-500 mb-4"><a href="politica-de-privacidade.html" class="hover:text-black underline-offset-2 hover:underline">Política de Privacidade</a><span aria-hidden="true">·</span><a href="trocas-e-devolucoes.html" class="hover:text-black underline-offset-2 hover:underline">Trocas e Devoluções</a><span aria-hidden="true">·</span><a href="frete-e-envio.html" class="hover:text-black underline-offset-2 hover:underline">Frete e Envio</a></nav>
+        <p class="text-[10px] text-gray-400 uppercase tracking-widest" data-cms="footer.copyright_long">© 2015 IMPORTS DE LUXO - Todos os direitos reservados</p>
+    </footer>
+
+    <!-- Contatos vêm do painel (Configurações → Contato e atendimento). -->
+    <script>
+        (function () {
+            function preencher() {
+                var get = function (k, p) { return (window.CMS && window.CMS.get(k)) || p; };
+                var numero = String(get('contact.whatsapp_number', '5544998214237')).replace(/\D/g, '');
+                var m = numero.match(/^(\d{2})(\d{2})(\d{4,5})(\d{4})$/);
+                var bonito = m ? '+' + m[1] + ' (' + m[2] + ') ' + m[3] + '-' + m[4] : '+' + numero;
+                var email = get('contact.email', '');
+                var horario = get('contact.hours', '');
+                var html = 'WhatsApp: <a class="underline underline-offset-2 hover:text-cyan-600" href="https://wa.me/' + numero + '" target="_blank" rel="noopener">' + bonito + '</a>' +
+                    (email ? '<br>E-mail: <a class="underline underline-offset-2 hover:text-cyan-600" href="mailto:' + email + '">' + email + '</a>' : '') +
+                    (horario ? '<br>Horário de atendimento: ' + horario.replace(/</g, '&lt;') : '');
+                document.querySelectorAll('[data-contatos]').forEach(function (el) { el.innerHTML = html; });
+            }
+            preencher();
+            document.addEventListener('cms:ready', preencher);
+        })();
+    </script>
+
+    <div id="cartSidebar" style="right:-400px;" class="fixed top-0 w-80 h-full bg-white shadow-2xl transition-all duration-500 z-[60] p-6 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold font-serif" data-cms="cart.title">Seu Carrinho</h2>
+            <button onclick="toggleCart()" class="text-red-500 font-bold w-10 h-10" aria-label="Fechar sacola">X</button>
+        </div>
+        <div id="cartItems"></div>
+        <div class="mt-6 border-t pt-4">
+            <p class="text-lg font-bold mb-4">Total: <span id="cartTotal">R$ 0,00</span></p>
+            <button onclick="finalizarCompra()" class="bg-cyan-500 text-white w-full py-3 font-bold hover:bg-cyan-600 transition" data-cms="cart.checkout_label_short">Finalizar no WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Carrinho: o mesmo das outras páginas (localStorage "cart") -->
+    <script>
+        function toggleCart() {
+            const sidebar = document.getElementById("cartSidebar");
+            const isOpen = sidebar.style.right === "0px";
+            sidebar.style.right = isOpen ? "-400px" : "0px";
+            if (!isOpen) renderCart();
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cartCount").innerText = cart.length;
+        }
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartItems = document.getElementById("cartItems");
+            const cartTotal = document.getElementById("cartTotal");
+            cartItems.innerHTML = "";
+            let total = 0;
+            if (!cart.length) {
+                const vazio = (window.CMS && window.CMS.get('cart.empty')) || "Seu carrinho está vazio.";
+                cartItems.innerHTML = `<p class="text-center text-gray-400 py-10">${vazio}</p>`;
+            }
+            cart.forEach((product, index) => {
+                total += product.price;
+                cartItems.innerHTML += `
+                    <div class="flex items-center gap-4 mb-4 border-b pb-4">
+                        <img src="${product.image}" class="w-16 h-16 object-cover rounded" alt="">
+                        <div class="flex-1">
+                            <h3 class="text-[10px] font-bold uppercase">${product.name}</h3>
+                            <p class="text-sm font-semibold">${product.price ? product.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) : "Sob consulta"}</p>
+                        </div>
+                        <button onclick="removeItem(${index})" class="text-red-500 text-xs">Remover</button>
+                    </div>`;
+            });
+            cartTotal.innerText = total || !cart.length ? total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) : "Sob consulta";
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+        }
+
+        function finalizarCompra() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            if (cart.length === 0) return alert("Seu carrinho está vazio!");
+            let total = 0;
+            let mensagem = cart.length === 1
+                ? "Olá! Gostaria de saber mais sobre este produto:\n\n"
+                : "Olá! Gostaria de saber mais sobre estes produtos:\n\n";
+            cart.forEach(item => {
+                mensagem += `- ${item.name} (${item.price ? "R$ " + item.price.toFixed(2) : "preço sob consulta"})\n`;
+                total += item.price;
+            });
+            mensagem += `\n*Total: ${cart.some((i) => !i.price) ? (total ? "R$ " + total.toFixed(2) + " + itens sob consulta" : "sob consulta") : "R$ " + total.toFixed(2)}*\n\n`;
+            mensagem += "Poderia me informar o prazo de entrega e as formas de pagamento?";
+            window.open(`https://wa.me/${(window.CMS && window.CMS.get('contact.whatsapp_number')) || '5544998214237'}?text=${encodeURIComponent(mensagem)}`, '_blank');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById("mobileNav").classList.toggle("hidden");
+        }
+
+        document.addEventListener("DOMContentLoaded", updateCartCount);
+    </script>
+</body>
+</html>

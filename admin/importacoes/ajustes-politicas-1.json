@@ -1,0 +1,46 @@
+{
+  "id": "ajustes-politicas-1",
+  "titulo": "garantia de troca e links das políticas no rodapé",
+  "blocos": [
+    {
+      "page_slug": "_global",
+      "key": "loja.garantia2_titulo",
+      "value": "Troca garantida"
+    },
+    {
+      "page_slug": "_global",
+      "key": "loja.garantia2_texto",
+      "value": "Troque por outro produto em até 7 dias"
+    },
+    {
+      "page_slug": "_global",
+      "key": "footer.link1_label",
+      "value": "Política de Privacidade"
+    },
+    {
+      "page_slug": "_global",
+      "key": "footer.link1_url",
+      "value": "politica-de-privacidade.html"
+    },
+    {
+      "page_slug": "_global",
+      "key": "footer.link2_label",
+      "value": "Trocas e Devoluções"
+    },
+    {
+      "page_slug": "_global",
+      "key": "footer.link2_url",
+      "value": "trocas-e-devolucoes.html"
+    },
+    {
+      "page_slug": "_global",
+      "key": "footer.link3_label",
+      "value": "Frete e Envio"
+    },
+    {
+      "page_slug": "_global",
+      "key": "footer.link3_url",
+      "value": "frete-e-envio.html"
+    }
+  ]
+}
