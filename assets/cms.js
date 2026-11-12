@@ -277,7 +277,10 @@
     return !!(p.details && p.details.sizes && p.details.sizes.length);
   }
 
-  function cardHtml(p) {
+  // opcoes.verProduto: em vez do botão de sacola, um link "Ver produto"
+  // (carrossel da página de produto, onde a compra é só pelo WhatsApp).
+  function cardHtml(p, opcoes) {
+    var verProduto = !!(opcoes && opcoes.verProduto);
     var addLabel = CMS.get('cart.add_label', 'Adicionar ao carrinho');
     var url = escapeHtml(productUrl(p));
     // flex + mt-auto: em tablet os nomes ocupam 1 ou 2 linhas, e sem isso os
@@ -300,10 +303,12 @@
         ? '<p class="text-lg md:text-xl font-semibold mb-4 mt-auto">' + money(p.price) + '</p>'
         : '<p class="text-sm md:text-base font-semibold uppercase tracking-widest text-gray-500 mb-4 mt-auto">Preço sob consulta</p>') +
       // Peça com tamanho: o cliente escolhe o tamanho na página do produto.
-      (temTamanhos(p)
+      (verProduto
+        ? '<a href="' + url + '" class="bg-black text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-gray-800 transition">Ver produto</a>'
+        : temTamanhos(p)
         ? '<a href="' + url + '" class="bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition">Escolher tamanho</a>'
         : '') +
-      (temTamanhos(p) ? '' : '<button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" data-name="' +
+      (verProduto || temTamanhos(p) ? '' : '<button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" data-name="' +
       escapeHtml(p.cart_name || p.name) +
       '" data-price="' +
       Number(p.price || 0).toFixed(2) +

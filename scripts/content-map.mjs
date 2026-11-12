@@ -111,7 +111,7 @@ export const GLOBAL = [
       ['loja.garantia1_texto', 'Garantia 1 — texto', 'text', '', 'Ex.: Envio rastreado: 15 a 45 dias úteis.'],
       ['loja.garantia2_titulo', 'Garantia 2 — título', 'text', 'Troca garantida'],
       ['loja.garantia2_texto', 'Garantia 2 — texto', 'text', 'Troque por outro produto em até 7 dias'],
-      ['loja.garantia3_titulo', 'Garantia 3 — título', 'text', 'Qualidade VIP'],
+      ['loja.garantia3_titulo', 'Garantia 3 — título', 'text', 'Qualidade Premium'],
       ['loja.garantia3_texto', 'Garantia 3 — texto', 'text', 'A excelência que seu visual exige.'],
     ],
   },

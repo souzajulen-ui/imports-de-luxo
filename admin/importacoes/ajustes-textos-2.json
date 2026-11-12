@@ -1,0 +1,11 @@
+{
+  "id": "ajustes-textos-2",
+  "titulo": "Qualidade Premium no lugar de Qualidade VIP",
+  "blocos": [
+    {
+      "page_slug": "_global",
+      "key": "loja.garantia3_titulo",
+      "value": "Qualidade Premium"
+    }
+  ]
+}

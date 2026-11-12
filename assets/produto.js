@@ -55,7 +55,7 @@
 
   var POR_PAGINA_AVALIACOES = 6;
 
-  var estado = { produto: null, fotos: [], foto: 0, tamanho: null, qtd: 1, avaliacoes: [], mostrar: POR_PAGINA_AVALIACOES, ordem: 'recentes', renderizado: null };
+  var estado = { produto: null, fotos: [], foto: 0, tamanho: null, avaliacoes: [], mostrar: POR_PAGINA_AVALIACOES, ordem: 'recentes', renderizado: null };
 
   // ------------------------------------------------------------- utilidades
   function $(sel, raiz) { return (raiz || document).querySelector(sel); }
@@ -136,6 +136,8 @@
     caixa: '<path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>',
     estrela: '<path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"/>',
   };
+  var ICONE_WHATS = '<svg class="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.48.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.04 21.5h-.01a9.45 9.45 0 0 1-4.82-1.32l-.35-.21-3.58.94.96-3.49-.23-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.22 4.25-9.47 9.48-9.47 2.53 0 4.91.99 6.7 2.78a9.4 9.4 0 0 1 2.77 6.7c0 5.22-4.25 9.46-9.47 9.46m8.06-17.53A11.33 11.33 0 0 0 12.04.63C5.76.63.65 5.74.65 12.02c0 2 .52 3.96 1.52 5.69L.55 23.6l6.04-1.58a11.36 11.36 0 0 0 5.45 1.39h.01c6.28 0 11.39-5.11 11.39-11.39 0-3.04-1.18-5.9-3.34-8.05"/></svg>';
+
   function icone(nome, classe) {
     return '<svg class="' + (classe || 'w-6 h-6') + '" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">' + ICONES[nome] + '</svg>';
   }
@@ -160,20 +162,6 @@
     if (meses < 12) return meses === 1 ? 'há 1 mês' : 'há ' + meses + ' meses';
     var anos = Math.floor(meses / 12);
     return anos === 1 ? 'há 1 ano' : 'há ' + anos + ' anos';
-  }
-
-  // -------------------------------------------------------------- carrinho
-  // Mesmo formato das outras páginas: localStorage "cart" = [{name, price, image}].
-  function adicionarAoCarrinho() {
-    var p = estado.produto;
-    if (!validarTamanho()) return false;
-    var nome = (p.cart_name || p.name) + (estado.tamanho ? ' - Tamanho ' + estado.tamanho : '');
-    var cart = [];
-    try { cart = JSON.parse(localStorage.getItem('cart')) || []; } catch (e) { cart = []; }
-    for (var i = 0; i < estado.qtd; i++) cart.push({ name: nome, price: Number(p.price || 0), image: absoluto(p.image) });
-    localStorage.setItem('cart', JSON.stringify(cart));
-    if (typeof window.updateCartCount === 'function') window.updateCartCount();
-    return true;
   }
 
   function validarTamanho() {
@@ -227,7 +215,6 @@
     var p = estado.produto;
     var linhas = ['Olá! Quero comprar este produto:', '', '*' + (p.cart_name || p.name) + '*'];
     if (estado.tamanho) linhas.push('Tamanho: ' + estado.tamanho);
-    linhas.push('Quantidade: ' + estado.qtd);
     linhas.push('Preço: ' + (Number(p.price) > 0 ? dinheiro(p.price) : 'sob consulta'));
     linhas.push('', linkParaCompartilhar());
     return linhas.join('\n');
@@ -406,17 +393,12 @@
         : '') +
       '<div class="border-t border-gray-100 mt-4 pt-4">' + htmlPreco(p) + '</div>' +
       htmlTamanhos(p) +
+      // A loja não tem pagamento pelo site: a compra é fechada no WhatsApp,
+      // então este é o único botão de compra da página.
       '<div class="mt-6 space-y-3">' +
-      '<button type="button" id="comprarAgora" class="w-full h-14 bg-black hover:bg-gray-800 text-white font-bold rounded-md transition">Comprar Agora</button>' +
-      '<div class="flex gap-3">' +
-      '<div class="flex items-center border border-gray-300 rounded-md bg-white" role="group" aria-label="Quantidade">' +
-      '<button type="button" data-qtd="-1" class="w-11 h-14 text-xl hover:text-cyan-600" aria-label="Diminuir quantidade">−</button>' +
-      '<input id="qtd" type="number" min="1" max="20" value="1" inputmode="numeric" class="w-10 text-center bg-transparent focus:outline-none [appearance:textfield]" aria-label="Quantidade">' +
-      '<button type="button" data-qtd="1" class="w-11 h-14 text-xl hover:text-cyan-600" aria-label="Aumentar quantidade">+</button>' +
-      '</div>' +
-      '<button type="button" id="adicionarSacola" class="flex-1 h-14 bg-cyan-500 hover:bg-cyan-600 text-white font-bold rounded-md transition">Adicionar à sacola</button>' +
-      '</div>' +
-      '<a id="comprarWhats" href="#" target="_blank" rel="noopener" class="w-full h-12 border-2 border-[#25D366] text-[#128C3E] hover:bg-[#25D366] hover:text-white font-bold rounded-md transition flex items-center justify-center gap-2">Comprar pelo WhatsApp</a>' +
+      '<a id="comprarWhats" href="#" target="_blank" rel="noopener" class="w-full h-14 bg-green-700 hover:bg-green-800 text-white text-lg font-bold rounded-md transition flex items-center justify-center gap-3">' +
+      ICONE_WHATS + 'Comprar pelo WhatsApp</a>' +
+      '<p class="text-xs text-center text-gray-500">Você fala direto com a loja e combina pagamento e entrega.</p>' +
       '<button type="button" id="compartilhar" class="w-full h-11 text-sm font-semibold text-gray-700 hover:text-black underline underline-offset-4">Compartilhar este produto</button>' +
       '<p id="compartilharStatus" class="text-xs text-center text-emerald-700 min-h-[1rem]" role="status" aria-live="polite"></p>' +
       '</div>' +
@@ -546,7 +528,7 @@
       '<div class="hidden md:flex gap-2"><button type="button" data-rel="-1" class="w-10 h-10 rounded-full border border-gray-300 hover:border-black" aria-label="Anteriores">❮</button>' +
       '<button type="button" data-rel="1" class="w-10 h-10 rounded-full border border-gray-300 hover:border-black" aria-label="Próximos">❯</button></div></div>' +
       '<div id="carrosselRel" class="pdp-carrossel flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2">' +
-      lista.map(function (x) { return '<div class="snap-start shrink-0 w-[70%] sm:w-[45%] md:w-[30%] lg:w-[23%]">' + window.CMS.cardHtml(x) + '</div>'; }).join('') +
+      lista.map(function (x) { return '<div class="snap-start shrink-0 w-[70%] sm:w-[45%] md:w-[30%] lg:w-[23%]">' + window.CMS.cardHtml(x, { verProduto: true }) + '</div>'; }).join('') +
       '</div></section>'
     );
   }
@@ -705,7 +687,7 @@
     });
   }
 
-  // A barra aparece quando o botão "Adicionar à sacola" já passou para CIMA
+  // A barra aparece quando o botão "Comprar pelo WhatsApp" já passou para CIMA
   // da tela. Conferido a cada rolagem (uma vez por quadro), e não com
   // IntersectionObserver: no celular o botão começa abaixo da tela, e uma
   // rolagem rápida que o pula inteiro não gera aviso nenhum do observador.
@@ -727,14 +709,14 @@
   }
 
   function atualizarBarra() {
-    var barra = $('#barraCompra'), alvo = $('#adicionarSacola');
+    var barra = $('#barraCompra'), alvo = $('#comprarWhats');
     if (!barra || !alvo) return;
     var fora = alvo.getBoundingClientRect().bottom < 0 && window.innerWidth < 1024;
     if (fora === barra.__fora) return;
     barra.__fora = fora;
     barra.classList.toggle('translate-y-full', !fora);
     barra.setAttribute('aria-hidden', fora ? 'false' : 'true');
-    $('#barraAdicionar').tabIndex = fora ? 0 : -1;
+    $('#barraWhats').tabIndex = fora ? 0 : -1;
     // O botão do WhatsApp sobe para não ficar por cima da barra.
     $('#whatsFlutuante').style.bottom = fora ? '5.5rem' : '';
   }
@@ -771,17 +753,7 @@
         return;
       }
 
-      var q = t.closest('[data-qtd]');
-      if (q) { definirQtd(estado.qtd + Number(q.getAttribute('data-qtd'))); return; }
 
-      if (t.closest('#comprarAgora')) {
-        if (adicionarAoCarrinho() && typeof window.finalizarCompra === 'function') window.finalizarCompra();
-        return;
-      }
-      if (t.closest('#adicionarSacola')) {
-        if (adicionarAoCarrinho() && typeof window.toggleCart === 'function') window.toggleCart();
-        return;
-      }
       if (t.closest('#comprarWhats') && !validarTamanho()) { e.preventDefault(); return; }
       if (t.closest('#compartilhar')) return compartilhar();
 
@@ -806,7 +778,6 @@
         estado.ordem = e.target.value;
         $('#avaliacoes').innerHTML = htmlAvaliacoes();
       }
-      if (e.target.id === 'qtd') definirQtd(parseInt(e.target.value, 10));
     });
 
     // Setas do teclado nas abas (padrão de abas acessíveis).
@@ -818,8 +789,9 @@
       }
     });
 
-    $('#barraAdicionar').addEventListener('click', function () {
-      if (adicionarAoCarrinho() && typeof window.toggleCart === 'function') window.toggleCart();
+    // Barra do celular: sem tamanho escolhido, leva até os tamanhos em vez de abrir o WhatsApp.
+    $('#barraWhats').addEventListener('click', function (e) {
+      if (!validarTamanho()) e.preventDefault();
     });
   }
 
@@ -880,15 +852,12 @@
     $('#painel-perguntas').classList.toggle('hidden', nome !== 'perguntas');
   }
 
-  function definirQtd(n) {
-    estado.qtd = Math.min(20, Math.max(1, isFinite(n) ? n : 1));
-    $('#qtd').value = estado.qtd;
-    atualizarWhats();
-  }
-
   function atualizarWhats() {
-    var a = $('#comprarWhats');
-    if (a) a.href = whatsLink(mensagemWhats());
+    var link = whatsLink(mensagemWhats());
+    ['#comprarWhats', '#barraWhats'].forEach(function (sel) {
+      var a = $(sel);
+      if (a) a.href = link;
+    });
   }
 
   // ---------------------------------------------------------------- render
