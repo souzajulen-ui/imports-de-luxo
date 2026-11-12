@@ -12,6 +12,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { salvarLote } from './lib-importacao.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -34,7 +35,9 @@ const BOLSAS = [
 
 // Cada leva vira um arquivo SQL próprio. Assim uma leva nova não traz de volta
 // uma bolsa que já foi apagada no painel.
-const LEVAS = [{ de: 1, ate: 12, arquivo: '0009_bolsas_louis_vuitton.sql', titulo: 'Migration 9' }];
+const LEVAS = [
+  { de: 1, ate: 12, arquivo: '0009_bolsas_louis_vuitton.sql', titulo: 'Migration 9', lote: 'bolsas-1', resumo: 'bolsas Louis Vuitton (sem preço)' },
+];
 
 const sql = (s) => (s == null ? 'null' : "'" + String(s).replace(/'/g, "''") + "'");
 
@@ -45,18 +48,25 @@ const todas = BOLSAS.map(([marca, modelo, cor, descricao], i) => {
   const nome = `Bolsa ${marca} ${modelo} ${cor}`;
   const whatsapp = `Bolsa ${marca} ${modelo} (${codigo}) - ${descricao}`;
   const alt = `Bolsa ${marca} ${modelo}, ${descricao}`;
-  return (
-    `  (${sql('bolsa-' + codigo.toLowerCase())}, 'bolsas', null, ${sql(nome)}, ${sql(whatsapp)}, ${sql(alt)}, ` +
-    `0, ${sql(imagem)}, ${sql(JSON.stringify([imagem]))}::jsonb, false, null, ${1000 + (i + 1) * 10}, false)`
-  );
+  return {
+    id: 'bolsa-' + codigo.toLowerCase(), category: 'bolsas', gender: null,
+    name: nome, cart_name: whatsapp, alt, price: 0, image: imagem, gallery: [imagem],
+    featured: false, featured_sort: null, sort: 1000 + (i + 1) * 10, active: false,
+  };
 });
+
+const linhaSql = (p) =>
+  `  (${sql(p.id)}, ${sql(p.category)}, ${sql(p.gender)}, ${sql(p.name)}, ${sql(p.cart_name)}, ${sql(p.alt)}, ` +
+  `${p.price}, ${sql(p.image)}, ${sql(JSON.stringify(p.gallery))}::jsonb, ${p.featured}, null, ${p.sort}, ${p.active})`;
 
 if (LEVAS[LEVAS.length - 1].ate !== BOLSAS.length) {
   throw new Error(`A última leva termina em ${LEVAS[LEVAS.length - 1].ate}, mas a lista tem ${BOLSAS.length} bolsas.`);
 }
 
 for (const leva of LEVAS) {
-  const linhas = todas.slice(leva.de - 1, leva.ate);
+  const produtos = todas.slice(leva.de - 1, leva.ate);
+  const linhas = produtos.map(linhaSql);
+  salvarLote({ id: leva.lote, titulo: `${produtos.length} ${leva.resumo}`, produtos });
   const saida = `-- ============================================================================
 -- Imports de Luxo — ${leva.titulo}: ${linhas.length} bolsas, SEM PREÇO e escondidas do site.
 --

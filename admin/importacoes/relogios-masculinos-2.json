@@ -1,0 +1,363 @@
+{
+  "id": "relogios-masculinos-2",
+  "titulo": "21 relógios masculinos (Daytona e GMT-Master II)",
+  "produtos": [
+    {
+      "id": "relogio-rolex-rm35",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex Daytona Preto",
+      "cart_name": "Relógio Rolex Daytona (RM35) - pulseira Oyster aço, fundo preto com mostradores brancos, luneta cerâmica preta",
+      "alt": "Relógio Rolex Daytona masculino, pulseira Oyster aço, fundo preto com mostradores brancos",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m35.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m35.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1350,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm36",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex Daytona Preto",
+      "cart_name": "Relógio Rolex Daytona (RM36) - pulseira Oyster aço, fundo preto, luneta aço",
+      "alt": "Relógio Rolex Daytona masculino, pulseira Oyster aço, fundo preto",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m36.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m36.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1360,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm37",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex Daytona Cinza",
+      "cart_name": "Relógio Rolex Daytona (RM37) - pulseira Oyster aço, fundo cinza com mostradores pretos, luneta aço",
+      "alt": "Relógio Rolex Daytona masculino, pulseira Oyster aço, fundo cinza com mostradores pretos",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m37.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m37.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1370,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm38",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex Daytona Azul gelo",
+      "cart_name": "Relógio Rolex Daytona (RM38) - pulseira Oyster aço, fundo azul gelo, luneta cerâmica marrom",
+      "alt": "Relógio Rolex Daytona masculino, pulseira Oyster aço, fundo azul gelo",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m38.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m38.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1380,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm39",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex Daytona Preto",
+      "cart_name": "Relógio Rolex Daytona (RM39) - pulseira Oyster rosé, fundo preto com mostradores rosé, luneta rosé",
+      "alt": "Relógio Rolex Daytona masculino, pulseira Oyster rosé, fundo preto com mostradores rosé",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m39.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m39.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1390,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm40",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex Daytona Preto",
+      "cart_name": "Relógio Rolex Daytona (RM40) - pulseira Oyster aço e dourado, fundo preto, luneta dourada",
+      "alt": "Relógio Rolex Daytona masculino, pulseira Oyster aço e dourado, fundo preto",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m40.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m40.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1400,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm41",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex Daytona Branco",
+      "cart_name": "Relógio Rolex Daytona (RM41) - pulseira Oyster aço e dourado, fundo branco, luneta dourada",
+      "alt": "Relógio Rolex Daytona masculino, pulseira Oyster aço e dourado, fundo branco",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m41.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m41.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1410,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm42",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex Daytona Champagne",
+      "cart_name": "Relógio Rolex Daytona (RM42) - pulseira Oyster dourada, fundo champagne com mostradores pretos, luneta dourada",
+      "alt": "Relógio Rolex Daytona masculino, pulseira Oyster dourada, fundo champagne com mostradores pretos",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m42.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m42.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1420,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm43",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex Daytona Verde",
+      "cart_name": "Relógio Rolex Daytona (RM43) - pulseira Oyster dourada, fundo verde com mostradores champagne, luneta dourada",
+      "alt": "Relógio Rolex Daytona masculino, pulseira Oyster dourada, fundo verde com mostradores champagne",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m43.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m43.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1430,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm44",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex Daytona Cinza",
+      "cart_name": "Relógio Rolex Daytona (RM44) - pulseira Oyster aço, fundo cinza com mostradores pretos, luneta cerâmica preta",
+      "alt": "Relógio Rolex Daytona masculino, pulseira Oyster aço, fundo cinza com mostradores pretos",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m44.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m44.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1440,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm45",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex Daytona Preto",
+      "cart_name": "Relógio Rolex Daytona (RM45) - pulseira Oyster aço, fundo preto, luneta cerâmica preta",
+      "alt": "Relógio Rolex Daytona masculino, pulseira Oyster aço, fundo preto",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m45.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m45.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1450,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm46",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex Daytona Branco",
+      "cart_name": "Relógio Rolex Daytona (RM46) - pulseira Oyster aço, fundo branco com mostradores pretos, luneta cerâmica preta",
+      "alt": "Relógio Rolex Daytona masculino, pulseira Oyster aço, fundo branco com mostradores pretos",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m46.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m46.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1460,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm47",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex Daytona Preto",
+      "cart_name": "Relógio Rolex Daytona (RM47) - pulseira Oyster aço, fundo preto com mostradores brancos, luneta cerâmica preta",
+      "alt": "Relógio Rolex Daytona masculino, pulseira Oyster aço, fundo preto com mostradores brancos",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m47.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m47.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1470,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm48",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex Daytona Cinza",
+      "cart_name": "Relógio Rolex Daytona (RM48) - pulseira Oyster aço, fundo cinza com mostradores pretos, luneta aço",
+      "alt": "Relógio Rolex Daytona masculino, pulseira Oyster aço, fundo cinza com mostradores pretos",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m48.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m48.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1480,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm49",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex Daytona Branco",
+      "cart_name": "Relógio Rolex Daytona (RM49) - pulseira borracha preta, caixa aço, fundo branco com mostradores pretos, luneta cerâmica preta",
+      "alt": "Relógio Rolex Daytona masculino, pulseira borracha preta, caixa aço, fundo branco com mostradores pretos",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m49.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m49.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1490,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm50",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex Daytona Branco",
+      "cart_name": "Relógio Rolex Daytona (RM50) - pulseira Oyster aço, fundo branco, luneta aço",
+      "alt": "Relógio Rolex Daytona masculino, pulseira Oyster aço, fundo branco",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m50.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m50.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1500,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm51",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex GMT-Master II Azul e Vermelho",
+      "cart_name": "Relógio Rolex GMT-Master II (RM51) - pulseira Oyster aço, fundo preto, luneta azul e vermelha",
+      "alt": "Relógio Rolex GMT-Master II masculino, pulseira Oyster aço, fundo preto",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m51.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m51.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1510,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm52",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex GMT-Master II Preto e Dourado",
+      "cart_name": "Relógio Rolex GMT-Master II (RM52) - pulseira Jubilee aço e dourado, fundo preto, luneta preta com números dourados",
+      "alt": "Relógio Rolex GMT-Master II masculino, pulseira Jubilee aço e dourado, fundo preto",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m52.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m52.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1520,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm53",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex GMT-Master II Preto e Cinza",
+      "cart_name": "Relógio Rolex GMT-Master II (RM53) - pulseira Jubilee aço, fundo preto, luneta preta e cinza",
+      "alt": "Relógio Rolex GMT-Master II masculino, pulseira Jubilee aço, fundo preto",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m53.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m53.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1530,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm54",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex GMT-Master II Verde e Preto",
+      "cart_name": "Relógio Rolex GMT-Master II (RM54) - pulseira Oyster aço, fundo preto, luneta verde e preta, coroa do lado esquerdo",
+      "alt": "Relógio Rolex GMT-Master II masculino, pulseira Oyster aço, fundo preto",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m54.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m54.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1540,
+      "active": true
+    },
+    {
+      "id": "relogio-rolex-rm55",
+      "category": "relogios",
+      "gender": "masculino",
+      "name": "Rolex GMT-Master II Vermelho e Preto",
+      "cart_name": "Relógio Rolex GMT-Master II (RM55) - pulseira Oyster aço, fundo preto, luneta vermelha e preta",
+      "alt": "Relógio Rolex GMT-Master II masculino, pulseira Oyster aço, fundo preto",
+      "price": 1590,
+      "image": "assets/img/produtos/relogios/rolex-m55.webp",
+      "gallery": [
+        "assets/img/produtos/relogios/rolex-m55.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1550,
+      "active": true
+    }
+  ]
+}

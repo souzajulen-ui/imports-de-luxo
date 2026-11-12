@@ -461,11 +461,22 @@ http
         return responde(200, alvos);
       }
       if (req.method === 'POST') {
+        // Aceita lista (insert em massa) e upsert, como o PostgREST:
+        // Prefer: resolution=ignore-duplicates | merge-duplicates.
         const novo = await body(req);
-        const item = Array.isArray(novo) ? novo[0] : novo;
-        rows.push(item);
+        const itens = Array.isArray(novo) ? novo : [novo];
+        const prefer = req.headers.prefer || '';
+        const mesmo = (a, b) => (a.id != null ? a.id === b.id : a.page_slug === b.page_slug && a.key === b.key);
+        const gravados = [];
+        for (const item of itens) {
+          const atual = rows.find((r) => mesmo(item, r));
+          if (atual && prefer.includes('ignore-duplicates')) continue;
+          if (atual) Object.assign(atual, item);
+          else rows.push(item);
+          gravados.push(atual || item);
+        }
         refreshDraft();
-        return responde(201, [item]);
+        return responde(201, gravados);
       }
       if (req.method === 'DELETE') {
         const alvos = applyFilters(rows, url);

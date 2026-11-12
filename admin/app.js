@@ -214,6 +214,133 @@
     });
   }
 
+  // ======================================================= importar levas
+  // Levas de produtos preparadas fora do painel (fotos já no site) ficam em
+  // admin/importacoes/. Enquanto uma leva não foi importada, o painel mostra
+  // "Adicionar ao catálogo". Ao importar, anotamos isso no banco, para que
+  // um produto apagado depois não volte a aparecer como novo.
+  var MARCA_IMPORTACAO = { page_slug: '_sistema', prefixo: 'importacao.' };
+
+  function levaJaImportada(id) {
+    return state.blocks.some(function (b) {
+      return b.page_slug === MARCA_IMPORTACAO.page_slug && b.key === MARCA_IMPORTACAO.prefixo + id;
+    });
+  }
+
+  function lerJson(caminho) {
+    return fetch(caminho + '?t=' + Date.now(), { cache: 'no-store' }).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    });
+  }
+
+  function carregarImportacoes() {
+    return lerJson('importacoes/index.json')
+      .then(function (indice) {
+        var ids = (indice.lotes || []).filter(function (id) {
+          return !levaJaImportada(id);
+        });
+        return Promise.all(
+          ids.map(function (id) {
+            return lerJson('importacoes/' + encodeURIComponent(id) + '.json');
+          })
+        );
+      })
+      .then(function (lotes) {
+        var existentes = {};
+        state.products.forEach(function (p) {
+          existentes[p.id] = true;
+        });
+        state.importacoes = lotes
+          .map(function (l) {
+            return {
+              id: l.id,
+              titulo: l.titulo,
+              faltando: (l.produtos || []).filter(function (p) {
+                return !existentes[p.id];
+              }),
+            };
+          })
+          .filter(function (l) {
+            return l.faltando.length;
+          });
+      })
+      .catch(function () {
+        state.importacoes = []; // sem levas (ou arquivo fora do ar): nada a mostrar
+      });
+  }
+
+  function importarPendentes() {
+    var levas = state.importacoes.slice();
+    if (!levas.length || state.importando) return;
+    var total = levas.reduce(function (n, l) {
+      return n + l.faltando.length;
+    }, 0);
+    confirmar(
+      'Adicionar ao catálogo',
+      'Vão entrar ' + total + ' produtos: ' +
+        levas.map(function (l) {
+          return l.titulo;
+        }).join('; ') +
+        '. Eles ficam no rascunho: confira e clique em “Publicar no site” para os clientes verem.',
+      'Adicionar'
+    ).then(function (ok) {
+      if (!ok) return;
+      state.importando = true;
+      renderTopBar();
+      var agora = new Date().toISOString();
+      levas
+        .reduce(function (fila, leva) {
+          return fila.then(function () {
+            var produtos = leva.faltando.map(function (p) {
+              return Object.assign({}, p, { updated_at: agora });
+            });
+            return sb
+              .from('products')
+              .upsert(produtos, { onConflict: 'id', ignoreDuplicates: true })
+              .then(function (r) {
+                if (r.error) throw r.error;
+                return sb.from('content_blocks').upsert(
+                  {
+                    page_slug: MARCA_IMPORTACAO.page_slug,
+                    key: MARCA_IMPORTACAO.prefixo + leva.id,
+                    label: 'Leva importada: ' + leva.titulo,
+                    type: 'text',
+                    value: agora,
+                    section: 'sistema',
+                    updated_at: agora,
+                  },
+                  { onConflict: 'page_slug,key' }
+                );
+              })
+              .then(function (r) {
+                if (r.error) throw r.error;
+              });
+          });
+        }, Promise.resolve())
+        .then(function () {
+          return loadAll();
+        })
+        .then(function () {
+          state.importacoes = [];
+          state.importando = false;
+          marcarPendente();
+          renderMain();
+          toast(total + ' produtos adicionados. Confira e clique em Publicar no site.', 'ok');
+        })
+        .catch(function (err) {
+          state.importando = false;
+          toast('Não foi possível adicionar: ' + (err.message || 'erro'), 'erro');
+          loadAll()
+            .then(carregarImportacoes)
+            .then(function () {
+              renderTopBar();
+              renderMain();
+            });
+        });
+    });
+  }
+
   function blocksOf(slug) {
     return state.blocks.filter(function (b) {
       return b.page_slug === slug;
@@ -643,7 +770,7 @@
       '</div>' +
       '<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">' +
       card('Páginas', String(PAGES.length), 'páginas editáveis') +
-      card('Textos e campos', String(state.blocks.length), 'itens de conteúdo') +
+      card('Textos e campos', String(state.blocks.filter(function (b) { return b.page_slug !== MARCA_IMPORTACAO.page_slug; }).length), 'itens de conteúdo') +
       card('Produtos', String(state.products.length), 'no catálogo') +
       card('Imagens', String(imagens + state.media.length), 'campos de imagem e enviadas') +
       '</div>' +
@@ -1392,6 +1519,21 @@
           '<button class="underline font-semibold" data-preview-current>Ver como ficou</button>' +
           '<span class="text-amber-400">·</span>' +
           '<button class="underline font-semibold" data-publish>Publicar agora</button></div>'
+        : '') +
+      (state.importacoes && state.importacoes.length
+        ? '<div class="bg-cyan-50 border-b border-cyan-200 text-cyan-900 text-[13px] px-4 md:px-8 py-2 flex flex-wrap items-center gap-2">' +
+          '<span><strong>Produtos novos prontos:</strong> ' +
+          esc(
+            state.importacoes
+              .map(function (l) {
+                return l.titulo;
+              })
+              .join(' · ')
+          ) +
+          '.</span>' +
+          '<button class="btn btn-accent py-1" data-import' + (state.importando ? ' disabled' : '') + '>' +
+          (state.importando ? 'Adicionando…' : 'Adicionar ao catálogo') +
+          '</button></div>'
         : '');
   }
 
@@ -1692,6 +1834,8 @@
     }
     if (e.target.closest('[data-open-site]')) window.open('../index.html', '_blank');
     if (e.target.closest('[data-publish]')) publish();
+    var importar = e.target.closest('[data-import]');
+    if (importar && !importar.disabled) importarPendentes();
     var descartar = e.target.closest('[data-discard-draft]');
     if (descartar && !descartar.disabled) descartarRascunho();
     if (e.target.closest('[data-save-blocks]')) saveDirty();
@@ -1794,6 +1938,8 @@
           return loadAll().then(function () {
             readHash();
             renderShell();
+            // Não segura a abertura do painel: o aviso aparece quando chegar.
+            carregarImportacoes().then(renderTopBar);
           });
         })
         .catch(function (err) {

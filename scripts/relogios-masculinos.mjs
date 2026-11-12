@@ -8,6 +8,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { salvarLote } from './lib-importacao.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PRECO = 1590;
@@ -78,8 +79,10 @@ const RELOGIOS = [
 // Cada leva vira um arquivo SQL próprio. Assim uma leva nova não traz de volta
 // um relógio que já foi apagado no painel.
 const LEVAS = [
-  { de: 1, ate: 34, arquivo: '0007_relogios_masculinos.sql', titulo: 'Migration 7', depois: '0006' },
-  { de: 35, ate: 55, arquivo: '0008_relogios_masculinos_daytona_gmt.sql', titulo: 'Migration 8', depois: '0007' },
+  { de: 1, ate: 34, arquivo: '0007_relogios_masculinos.sql', titulo: 'Migration 7', depois: '0006',
+    lote: 'relogios-masculinos-1', resumo: 'relógios masculinos (Datejust e Sky-Dweller)' },
+  { de: 35, ate: 55, arquivo: '0008_relogios_masculinos_daytona_gmt.sql', titulo: 'Migration 8', depois: '0007',
+    lote: 'relogios-masculinos-2', resumo: 'relógios masculinos (Daytona e GMT-Master II)' },
 ];
 
 const sql = (s) => (s == null ? 'null' : "'" + String(s).replace(/'/g, "''") + "'");
@@ -92,18 +95,25 @@ const todas = RELOGIOS.map(([modelo, pulseira, fundo, luneta, destaque], i) => {
   const nome = `Rolex ${modelo} ${destaque || maiuscula(fundo.split(' com ')[0])}`;
   const whatsapp = `Relógio Rolex ${modelo} (${codigo}) - pulseira ${pulseira}, fundo ${fundo}, luneta ${luneta}`;
   const alt = `Relógio Rolex ${modelo} masculino, pulseira ${pulseira}, fundo ${fundo}`;
-  return (
-    `  (${sql('relogio-rolex-' + codigo.toLowerCase())}, 'relogios', 'masculino', ${sql(nome)}, ${sql(whatsapp)}, ${sql(alt)}, ` +
-    `${PRECO.toFixed(2)}, ${sql(imagem)}, ${sql(JSON.stringify([imagem]))}::jsonb, false, null, ${1000 + (i + 1) * 10}, true)`
-  );
+  return {
+    id: 'relogio-rolex-' + codigo.toLowerCase(), category: 'relogios', gender: 'masculino',
+    name: nome, cart_name: whatsapp, alt, price: PRECO, image: imagem, gallery: [imagem],
+    featured: false, featured_sort: null, sort: 1000 + (i + 1) * 10, active: true,
+  };
 });
+
+const linhaSql = (p) =>
+  `  (${sql(p.id)}, ${sql(p.category)}, ${sql(p.gender)}, ${sql(p.name)}, ${sql(p.cart_name)}, ${sql(p.alt)}, ` +
+  `${p.price.toFixed(2)}, ${sql(p.image)}, ${sql(JSON.stringify(p.gallery))}::jsonb, ${p.featured}, null, ${p.sort}, ${p.active})`;
 
 if (LEVAS[LEVAS.length - 1].ate !== RELOGIOS.length) {
   throw new Error(`A última leva termina em ${LEVAS[LEVAS.length - 1].ate}, mas a lista tem ${RELOGIOS.length} relógios.`);
 }
 
 for (const leva of LEVAS) {
-  const linhas = todas.slice(leva.de - 1, leva.ate);
+  const produtos = todas.slice(leva.de - 1, leva.ate);
+  const linhas = produtos.map(linhaSql);
+  salvarLote({ id: leva.lote, titulo: `${produtos.length} ${leva.resumo}`, produtos });
   const saida = `-- ============================================================================
 -- Imports de Luxo — ${leva.titulo}: ${linhas.length} relógios Rolex masculinos (R$ ${PRECO},00).
 --
