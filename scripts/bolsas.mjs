@@ -31,12 +31,34 @@ const BOLSAS = [
   ['Louis Vuitton', 'Capucines Mini', 'Preta Croco', 'couro croco preto brilhante, LV prateado, 14 x 20 cm, alça transversal'],
   ['Louis Vuitton', 'Sunset', 'Jeans', 'Monogram Denim azul, alça de couro'],
   ['Louis Vuitton', 'Passy', 'Monogram', 'Monogram marrom, LV preto, alça com corrente'],
+  // BL13 em diante: segunda leva (fotos do WhatsApp de 11/11, na ordem em que o
+  // computador ordena os nomes: "22.22.23 (1)" vem antes de "22.22.23").
+  ['Louis Vuitton', 'Speedy Bandoulière 25', 'Damier', 'Damier Ebène xadrez marrom, alças de couro vermelho, cadeado'],
+  ['Chanel', 'Executive Tote', 'Verde Escuro', 'couro croco verde escuro, CC dourado, alças longas'],
+  ['Chanel', 'Tote Matelassê', 'Vinho', 'camurça matelassê vinho com CC grande, alças de corrente, com nécessaire'],
+  ['Louis Vuitton', 'Wallet on Chain Ivy', 'Monogram', 'Monogram marrom, alça de couro e corrente dourada'],
+  ['Chanel', 'Executive Tote', 'Verde Oliva', 'couro croco verde oliva, CC dourado, alças longas'],
+  ['Chanel', 'Bucket Matelassê', 'Chocolate', 'couro caviar matelassê chocolate, alça de corrente, com nécessaire'],
+  ['Chanel', 'Bucket Matelassê', 'Caramelo', 'couro caviar matelassê caramelo, alça de corrente, com nécessaire'],
+  ['Louis Vuitton', 'Alma BB', 'Vinho', 'couro Monogram Empreinte vinho, cadeado'],
+  ['Chanel', 'Bucket Matelassê', 'Preta', 'couro caviar matelassê preto, alça de corrente, bolsos laterais'],
+  ['Louis Vuitton', 'Vanity', 'Monogram', 'Monogram marrom com couro preto, cadeado, alça de corrente e alça transversal'],
+  ['Gucci', 'Horsebit 1955', 'GG', 'lona GG Supreme bege e marrom, couro marrom, fecho Horsebit dourado'],
+  ['Louis Vuitton', 'Trunk Messenger', 'Verde Água', 'couro Monogram Taurillon verde água, ferragens prateadas, alça transversal'],
+  ['Chanel', 'Vanity', 'Preta Croco', 'couro croco preto brilhante, CC dourado, alça de mão'],
+  ['Chanel', 'Vanity', 'Cinza Croco', 'couro croco cinza, CC dourado, alça de mão'],
+  ['Chanel', 'Vanity', 'Verde Croco', 'couro croco verde, CC dourado, alça de mão'],
+  ['Gucci', 'Ombro GG', 'Preta', 'couro preto com GG perfurado, corrente dourada com GG, alça de ombro'],
+  ['Louis Vuitton', 'Alma BB', 'Monogram', 'Monogram marrom, couro natural, cadeado, alça transversal'],
+  ['Chanel', 'Bucket Matelassê Pequena', 'Vermelha', 'couro caviar matelassê vermelho, alça de corrente, bolsos laterais'],
+  ['Chanel', 'Bucket Matelassê Pequena', 'Cinza', 'couro caviar matelassê cinza, alça de corrente, bolsos laterais'],
 ];
 
 // Cada leva vira um arquivo SQL próprio. Assim uma leva nova não traz de volta
 // uma bolsa que já foi apagada no painel.
 const LEVAS = [
   { de: 1, ate: 12, arquivo: '0009_bolsas_louis_vuitton.sql', titulo: 'Migration 9', lote: 'bolsas-1', resumo: 'bolsas Louis Vuitton (sem preço)' },
+  { de: 13, ate: 31, arquivo: '0010_bolsas_chanel_lv_gucci.sql', titulo: 'Migration 10', lote: 'bolsas-2', resumo: 'bolsas Chanel, Louis Vuitton e Gucci (sem preço)' },
 ];
 
 const sql = (s) => (s == null ? 'null' : "'" + String(s).replace(/'/g, "''") + "'");

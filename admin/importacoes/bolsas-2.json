@@ -1,0 +1,329 @@
+{
+  "id": "bolsas-2",
+  "titulo": "19 bolsas Chanel, Louis Vuitton e Gucci (sem preço)",
+  "produtos": [
+    {
+      "id": "bolsa-bl13",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Louis Vuitton Speedy Bandoulière 25 Damier",
+      "cart_name": "Bolsa Louis Vuitton Speedy Bandoulière 25 (BL13) - Damier Ebène xadrez marrom, alças de couro vermelho, cadeado",
+      "alt": "Bolsa Louis Vuitton Speedy Bandoulière 25, Damier Ebène xadrez marrom, alças de couro vermelho, cadeado",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-13.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-13.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1130,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl14",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Chanel Executive Tote Verde Escuro",
+      "cart_name": "Bolsa Chanel Executive Tote (BL14) - couro croco verde escuro, CC dourado, alças longas",
+      "alt": "Bolsa Chanel Executive Tote, couro croco verde escuro, CC dourado, alças longas",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-14.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-14.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1140,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl15",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Chanel Tote Matelassê Vinho",
+      "cart_name": "Bolsa Chanel Tote Matelassê (BL15) - camurça matelassê vinho com CC grande, alças de corrente, com nécessaire",
+      "alt": "Bolsa Chanel Tote Matelassê, camurça matelassê vinho com CC grande, alças de corrente, com nécessaire",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-15.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-15.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1150,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl16",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Louis Vuitton Wallet on Chain Ivy Monogram",
+      "cart_name": "Bolsa Louis Vuitton Wallet on Chain Ivy (BL16) - Monogram marrom, alça de couro e corrente dourada",
+      "alt": "Bolsa Louis Vuitton Wallet on Chain Ivy, Monogram marrom, alça de couro e corrente dourada",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-16.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-16.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1160,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl17",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Chanel Executive Tote Verde Oliva",
+      "cart_name": "Bolsa Chanel Executive Tote (BL17) - couro croco verde oliva, CC dourado, alças longas",
+      "alt": "Bolsa Chanel Executive Tote, couro croco verde oliva, CC dourado, alças longas",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-17.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-17.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1170,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl18",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Chanel Bucket Matelassê Chocolate",
+      "cart_name": "Bolsa Chanel Bucket Matelassê (BL18) - couro caviar matelassê chocolate, alça de corrente, com nécessaire",
+      "alt": "Bolsa Chanel Bucket Matelassê, couro caviar matelassê chocolate, alça de corrente, com nécessaire",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-18.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-18.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1180,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl19",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Chanel Bucket Matelassê Caramelo",
+      "cart_name": "Bolsa Chanel Bucket Matelassê (BL19) - couro caviar matelassê caramelo, alça de corrente, com nécessaire",
+      "alt": "Bolsa Chanel Bucket Matelassê, couro caviar matelassê caramelo, alça de corrente, com nécessaire",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-19.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-19.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1190,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl20",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Louis Vuitton Alma BB Vinho",
+      "cart_name": "Bolsa Louis Vuitton Alma BB (BL20) - couro Monogram Empreinte vinho, cadeado",
+      "alt": "Bolsa Louis Vuitton Alma BB, couro Monogram Empreinte vinho, cadeado",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-20.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-20.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1200,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl21",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Chanel Bucket Matelassê Preta",
+      "cart_name": "Bolsa Chanel Bucket Matelassê (BL21) - couro caviar matelassê preto, alça de corrente, bolsos laterais",
+      "alt": "Bolsa Chanel Bucket Matelassê, couro caviar matelassê preto, alça de corrente, bolsos laterais",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-21.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-21.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1210,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl22",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Louis Vuitton Vanity Monogram",
+      "cart_name": "Bolsa Louis Vuitton Vanity (BL22) - Monogram marrom com couro preto, cadeado, alça de corrente e alça transversal",
+      "alt": "Bolsa Louis Vuitton Vanity, Monogram marrom com couro preto, cadeado, alça de corrente e alça transversal",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-22.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-22.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1220,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl23",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Gucci Horsebit 1955 GG",
+      "cart_name": "Bolsa Gucci Horsebit 1955 (BL23) - lona GG Supreme bege e marrom, couro marrom, fecho Horsebit dourado",
+      "alt": "Bolsa Gucci Horsebit 1955, lona GG Supreme bege e marrom, couro marrom, fecho Horsebit dourado",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-23.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-23.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1230,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl24",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Louis Vuitton Trunk Messenger Verde Água",
+      "cart_name": "Bolsa Louis Vuitton Trunk Messenger (BL24) - couro Monogram Taurillon verde água, ferragens prateadas, alça transversal",
+      "alt": "Bolsa Louis Vuitton Trunk Messenger, couro Monogram Taurillon verde água, ferragens prateadas, alça transversal",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-24.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-24.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1240,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl25",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Chanel Vanity Preta Croco",
+      "cart_name": "Bolsa Chanel Vanity (BL25) - couro croco preto brilhante, CC dourado, alça de mão",
+      "alt": "Bolsa Chanel Vanity, couro croco preto brilhante, CC dourado, alça de mão",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-25.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-25.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1250,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl26",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Chanel Vanity Cinza Croco",
+      "cart_name": "Bolsa Chanel Vanity (BL26) - couro croco cinza, CC dourado, alça de mão",
+      "alt": "Bolsa Chanel Vanity, couro croco cinza, CC dourado, alça de mão",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-26.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-26.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1260,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl27",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Chanel Vanity Verde Croco",
+      "cart_name": "Bolsa Chanel Vanity (BL27) - couro croco verde, CC dourado, alça de mão",
+      "alt": "Bolsa Chanel Vanity, couro croco verde, CC dourado, alça de mão",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-27.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-27.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1270,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl28",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Gucci Ombro GG Preta",
+      "cart_name": "Bolsa Gucci Ombro GG (BL28) - couro preto com GG perfurado, corrente dourada com GG, alça de ombro",
+      "alt": "Bolsa Gucci Ombro GG, couro preto com GG perfurado, corrente dourada com GG, alça de ombro",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-28.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-28.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1280,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl29",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Louis Vuitton Alma BB Monogram",
+      "cart_name": "Bolsa Louis Vuitton Alma BB (BL29) - Monogram marrom, couro natural, cadeado, alça transversal",
+      "alt": "Bolsa Louis Vuitton Alma BB, Monogram marrom, couro natural, cadeado, alça transversal",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-29.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-29.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1290,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl30",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Chanel Bucket Matelassê Pequena Vermelha",
+      "cart_name": "Bolsa Chanel Bucket Matelassê Pequena (BL30) - couro caviar matelassê vermelho, alça de corrente, bolsos laterais",
+      "alt": "Bolsa Chanel Bucket Matelassê Pequena, couro caviar matelassê vermelho, alça de corrente, bolsos laterais",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-30.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-30.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1300,
+      "active": false
+    },
+    {
+      "id": "bolsa-bl31",
+      "category": "bolsas",
+      "gender": null,
+      "name": "Bolsa Chanel Bucket Matelassê Pequena Cinza",
+      "cart_name": "Bolsa Chanel Bucket Matelassê Pequena (BL31) - couro caviar matelassê cinza, alça de corrente, bolsos laterais",
+      "alt": "Bolsa Chanel Bucket Matelassê Pequena, couro caviar matelassê cinza, alça de corrente, bolsos laterais",
+      "price": 0,
+      "image": "assets/img/produtos/bolsas/bl-31.webp",
+      "gallery": [
+        "assets/img/produtos/bolsas/bl-31.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1310,
+      "active": false
+    }
+  ]
+}

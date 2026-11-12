@@ -1,0 +1,57 @@
+{
+  "id": "calcados-1",
+  "titulo": "3 calçados Chanel (sem preço)",
+  "produtos": [
+    {
+      "id": "calcado-cl01",
+      "category": "calcados",
+      "gender": null,
+      "name": "Tênis Chanel Preto e Branco",
+      "cart_name": "Tênis Chanel (CL01) - camurça preta e branco, CC na lateral, cadarço trançado",
+      "alt": "Tênis Chanel, camurça preta e branco, CC na lateral, cadarço trançado",
+      "price": 0,
+      "image": "assets/img/produtos/calcados/cl-01.webp",
+      "gallery": [
+        "assets/img/produtos/calcados/cl-01.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1010,
+      "active": false
+    },
+    {
+      "id": "calcado-cl02",
+      "category": "calcados",
+      "gender": null,
+      "name": "Sapato Chanel Slingback Marrom",
+      "cart_name": "Sapato Chanel Slingback (CL02) - camurça marrom café, bico bege com CC dourado, salto bloco",
+      "alt": "Sapato Chanel Slingback, camurça marrom café, bico bege com CC dourado, salto bloco",
+      "price": 0,
+      "image": "assets/img/produtos/calcados/cl-02.webp",
+      "gallery": [
+        "assets/img/produtos/calcados/cl-02.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1020,
+      "active": false
+    },
+    {
+      "id": "calcado-cl03",
+      "category": "calcados",
+      "gender": null,
+      "name": "Sapato Chanel Slingback Vinho",
+      "cart_name": "Sapato Chanel Slingback (CL03) - camurça vinho, bico verde menta com CC dourado, salto bloco",
+      "alt": "Sapato Chanel Slingback, camurça vinho, bico verde menta com CC dourado, salto bloco",
+      "price": 0,
+      "image": "assets/img/produtos/calcados/cl-03.webp",
+      "gallery": [
+        "assets/img/produtos/calcados/cl-03.webp"
+      ],
+      "featured": false,
+      "featured_sort": null,
+      "sort": 1030,
+      "active": false
+    }
+  ]
+}
