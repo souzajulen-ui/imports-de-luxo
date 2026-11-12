@@ -248,8 +248,10 @@
       })
       .then(function (lotes) {
         var existentes = {};
+        var porId = {};
         state.products.forEach(function (p) {
           existentes[p.id] = true;
+          porId[p.id] = p;
         });
         // Uma leva pode trazer produtos novos e/ou ajustes de texto ("blocos":
         // campos do painel que já existem, com o valor novo).
@@ -259,6 +261,12 @@
           });
           return achado ? { existe: true, valor: achado.value || '' } : { existe: false };
         };
+        var novos = {};
+        lotes.forEach(function (l) {
+          (l.produtos || []).forEach(function (p) {
+            if (!existentes[p.id]) novos[p.id] = p;
+          });
+        });
         state.importacoes = lotes
           .map(function (l) {
             return {
@@ -271,15 +279,57 @@
                 var atual = valorAtual(b);
                 return atual.existe && atual.valor !== b.value;
               }),
+              // "detalhes": completa campos de details (nome completo,
+              // descrição…) SÓ onde ainda estão vazios.
+              detalhes: (l.detalhes || [])
+                .map(function (d) {
+                  var p = porId[d.id];
+                  // Produto que entra neste mesmo clique: a descrição vai junto
+                  // no cadastro (o objeto é o mesmo da lista "faltando").
+                  if (!p && novos[d.id]) {
+                    novos[d.id].details = Object.assign({}, d.details, novos[d.id].details || {});
+                    return null;
+                  }
+                  if (!p) return null;
+                  var atuais = (p.details && typeof p.details === 'object') ? p.details : {};
+                  var preencher = {};
+                  Object.keys(d.details || {}).forEach(function (k) {
+                    if (!atuais[k] && d.details[k]) preencher[k] = d.details[k];
+                  });
+                  return Object.keys(preencher).length ? { id: d.id, details: Object.assign({}, atuais, preencher) } : null;
+                })
+                .filter(Boolean),
             };
           })
           .filter(function (l) {
-            return l.faltando.length || l.ajustes.length;
+            return l.faltando.length || l.ajustes.length || (bancoTemDetalhes() && l.detalhes.length);
           });
       })
-      .catch(function () {
+      .catch(function (err) {
         state.importacoes = []; // sem levas (ou arquivo fora do ar): nada a mostrar
+        console.warn('[painel] não foi possível ler as levas de importação:', err);
       });
+  }
+
+  // Grava details de muitos produtos, de 20 em 20 (sem disparar centenas de
+  // pedidos de uma vez).
+  function atualizarDetalhesEmPartes(lista, agora) {
+    var grupos = [];
+    for (var i = 0; i < lista.length; i += 20) grupos.push(lista.slice(i, i + 20));
+    return grupos.reduce(function (fila, grupo) {
+      return fila.then(function () {
+        return Promise.all(
+          grupo.map(function (d) {
+            return sb.from('products').update({ details: d.details, updated_at: agora }).eq('id', d.id);
+          })
+        ).then(function (res) {
+          var erro = res.find(function (r) {
+            return r.error;
+          });
+          if (erro) throw erro.error;
+        });
+      });
+    }, Promise.resolve());
   }
 
   function importarPendentes() {
@@ -291,9 +341,13 @@
     var totalAjustes = levas.reduce(function (n, l) {
       return n + l.ajustes.length;
     }, 0);
+    var totalDetalhes = levas.reduce(function (n, l) {
+      return n + l.detalhes.length;
+    }, 0);
     var partes = [];
     if (total) partes.push(total + ' produto(s) novo(s)');
     if (totalAjustes) partes.push(totalAjustes + ' texto(s) do site ajustado(s)');
+    if (totalDetalhes) partes.push(totalDetalhes + ' produto(s) com nome completo e descrição');
     confirmar(
       'Adicionar ao catálogo',
       'Vão entrar ' + partes.join(' e ') + ': ' +
@@ -334,6 +388,9 @@
                   return x && x.error;
                 });
                 if (erro) throw erro.error;
+                return atualizarDetalhesEmPartes(leva.detalhes, agora);
+              })
+              .then(function () {
                 return sb.from('content_blocks').upsert(
                   {
                     page_slug: MARCA_IMPORTACAO.page_slug,
@@ -1383,6 +1440,8 @@
         })
         .join('') +
       '</select></div>' +
+      '<div class="md:col-span-2"><label class="block text-[13px] font-semibold mb-1">Nome completo (título da página do produto)</label>' +
+      '<input class="field-input" data-f="full_name" value="' + esc(d.full_name || '') + '" placeholder="Vazio: usa a descrição do WhatsApp"></div>' +
       '<div class="md:col-span-2"><label class="block text-[13px] font-semibold mb-1">Descrição</label>' +
       '<textarea class="field-input" rows="4" data-f="description" placeholder="Materiais, o que acompanha (caixa, dust bag…), detalhes. Vazio: usa o texto depois do traço na descrição do WhatsApp.">' +
       esc(d.description || '') + '</textarea></div>' +
@@ -1415,6 +1474,7 @@
     if (fora.length) return { erro: 'Tamanho esgotado que não está na lista de tamanhos: ' + fora.join(', ') };
     var details = Object.assign({}, antigos, {
       old_price: antigo || null,
+      full_name: campo('full_name').value.trim(),
       description: campo('description').value.trim(),
       size_table: campo('size_table').value,
       sizes: todos.map(function (t) {
@@ -1423,7 +1483,7 @@
     });
     return {
       details: details,
-      preenchido: !!(antigo || details.description || todos.length || details.size_table),
+      preenchido: !!(antigo || details.full_name || details.description || todos.length || details.size_table),
     };
   }
 

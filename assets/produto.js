@@ -164,6 +164,39 @@
     return anos === 1 ? 'há 1 ano' : 'há ' + anos + ' anos';
   }
 
+  // Nome completo da peça: o da mensagem do WhatsApp (o mais detalhado do
+  // cadastro), sem o código, que aparece separado. Ex.: "Relógio Rolex
+  // Datejust (RM01) - pulseira Jubilee aço…" → nome "Relógio Rolex Datejust -
+  // pulseira Jubilee aço…" e código "RM01".
+  function nomeCompleto(p) {
+    var d = detalhes(p);
+    // Nome completo escrito no painel (ou pela leva de descrições) tem prioridade.
+    if (d.full_name) {
+      return { nome: String(d.full_name), codigo: (String(p.cart_name || '').match(/\(([A-Z]{2}\d{2,})\)/) || [])[1] || '' };
+    }
+    var base = String(p.cart_name || '').trim();
+    if (base.length < String(p.name || '').length) base = String(p.name || '');
+    var codigo = (base.match(/\(([A-Z]{2}\d{2,})\)/) || [])[1] || '';
+    var nome = base.replace(/\s*\([A-Z]{2}\d{2,}\)/, '').replace(/\s+-\s*/g, ' - ').replace(/\s{2,}/g, ' ').trim();
+    return { nome: nome.charAt(0).toUpperCase() + nome.slice(1), codigo: codigo };
+  }
+
+  // Carrinho: mesmo formato das outras páginas (localStorage "cart").
+  function adicionarAoCarrinho() {
+    var p = estado.produto;
+    if (!validarTamanho()) return false;
+    var cart = [];
+    try { cart = JSON.parse(localStorage.getItem('cart')) || []; } catch (e) { cart = []; }
+    cart.push({
+      name: (p.cart_name || p.name) + (estado.tamanho ? ' - Tamanho ' + estado.tamanho : ''),
+      price: Number(p.price || 0),
+      image: absoluto(p.image),
+    });
+    localStorage.setItem('cart', JSON.stringify(cart));
+    if (typeof window.updateCartCount === 'function') window.updateCartCount();
+    return true;
+  }
+
   function validarTamanho() {
     if (!tamanhosDe(estado.produto).length || estado.tamanho) return true;
     var aviso = $('#avisoTamanho');
@@ -380,32 +413,30 @@
     var cat = CATEGORIAS[p.category] || { nome: 'Produtos', pagina: 'index.html' };
     var paginaCat = cat.pagina + (p.category === 'relogios' && p.gender ? '?genero=' + encodeURIComponent(p.gender) : '');
     var media = resumoAvaliacoes();
-    var pagamentos = htmlPagamentos();
+    var completo = nomeCompleto(p);
     return (
       '<div>' +
       '<nav aria-label="Você está em" class="text-xs text-gray-500 mb-4"><ol class="flex flex-wrap items-center gap-1">' +
       '<li><a href="index.html" class="hover:text-black">Início</a></li><li aria-hidden="true">›</li>' +
       '<li><a href="' + esc(paginaCat) + '" class="hover:text-black">' + esc(cat.nome) + '</a></li><li aria-hidden="true">›</li>' +
       '<li aria-current="page" class="text-gray-800">' + esc(p.name) + '</li></ol></nav>' +
-      '<h1 class="text-3xl md:text-4xl font-serif leading-tight">' + esc(p.name) + '</h1>' +
+      '<h1 class="text-2xl md:text-3xl font-serif leading-tight">' + esc(completo.nome) + '</h1>' +
+      (completo.codigo ? '<p class="text-xs uppercase tracking-widest text-gray-500 mt-2">Código: ' + esc(completo.codigo) + '</p>' : '') +
       (media.total
         ? '<a href="#avaliacoes" data-aba-link="avaliacoes" class="inline-flex items-center gap-2 text-sm mt-2 hover:underline">' + estrelas(media.media) + ' <span>' + media.total + (media.total === 1 ? ' avaliação' : ' avaliações') + '</span></a>'
         : '') +
       '<div class="border-t border-gray-100 mt-4 pt-4">' + htmlPreco(p) + '</div>' +
       htmlTamanhos(p) +
-      // A loja não tem pagamento pelo site: a compra é fechada no WhatsApp,
-      // então este é o único botão de compra da página.
+      // A loja não tem pagamento pelo site: a compra é fechada no WhatsApp.
+      // O carrinho junta várias peças numa mensagem só, também no WhatsApp.
       '<div class="mt-6 space-y-3">' +
       '<a id="comprarWhats" href="#" target="_blank" rel="noopener" class="w-full h-14 bg-green-700 hover:bg-green-800 text-white text-lg font-bold rounded-md transition flex items-center justify-center gap-3">' +
       ICONE_WHATS + 'Comprar pelo WhatsApp</a>' +
+      '<button type="button" id="adicionarCarrinho" class="w-full h-12 border-2 border-black hover:bg-black hover:text-white font-bold rounded-md transition">Adicionar ao carrinho</button>' +
       '<p class="text-xs text-center text-gray-500">Você fala direto com a loja e combina pagamento e entrega.</p>' +
       '<button type="button" id="compartilhar" class="w-full h-11 text-sm font-semibold text-gray-700 hover:text-black underline underline-offset-4">Compartilhar este produto</button>' +
       '<p id="compartilharStatus" class="text-xs text-center text-emerald-700 min-h-[1rem]" role="status" aria-live="polite"></p>' +
       '</div>' +
-      (pagamentos
-        ? '<div class="mt-6 border border-gray-200 rounded-lg p-4 bg-white"><p class="text-sm font-semibold text-center mb-3">' + esc(get('footer.payment_title', 'Formas de Pagamento')) + '</p>' +
-          '<div class="flex flex-wrap justify-center gap-2">' + pagamentos + '</div></div>'
-        : '') +
       htmlGarantias() +
       '</div>'
     );
@@ -414,8 +445,20 @@
   function htmlDescricao(p) {
     var texto = descricaoDe(p);
     var tabela = tabelaDe(p);
+    // Parágrafo em que toda linha é "Característica: valor" vira ficha técnica.
+    var FICHA = /^([^:\n]{2,30}):\s+(.+)$/;
     var corpo = texto
-      ? texto.split(/\n{2,}/).map(function (par) { return '<p>' + esc(par).replace(/\n/g, '<br>') + '</p>'; }).join('')
+      ? texto.split(/\n{2,}/).map(function (par) {
+          var linhas = par.split('\n').filter(function (l) { return l.trim(); });
+          if (linhas.length && linhas.every(function (l) { return FICHA.test(l); })) {
+            return '<dl class="grid grid-cols-[auto,1fr] gap-x-6 gap-y-2 border-t border-gray-100 pt-3">' +
+              linhas.map(function (l) {
+                var m = l.match(FICHA);
+                return '<dt class="font-semibold text-gray-900">' + esc(m[1]) + '</dt><dd>' + esc(m[2]) + '</dd>';
+              }).join('') + '</dl>';
+          }
+          return '<p>' + esc(par).replace(/\n/g, '<br>') + '</p>';
+        }).join('')
       : '<p class="text-gray-500">Fale com a gente pelo WhatsApp para saber mais detalhes desta peça.</p>';
     return (
       '<section class="mt-12 grid ' + (tabela ? 'lg:grid-cols-2' : '') + ' gap-6" aria-label="Descrição e medidas">' +
@@ -756,6 +799,10 @@
 
       if (t.closest('#comprarWhats') && !validarTamanho()) { e.preventDefault(); return; }
       if (t.closest('#compartilhar')) return compartilhar();
+      if (t.closest('#adicionarCarrinho')) {
+        if (adicionarAoCarrinho() && typeof window.toggleCart === 'function') window.toggleCart();
+        return;
+      }
 
       var aba = t.closest('[data-aba]');
       if (aba) return trocarAba(aba.getAttribute('data-aba'));
