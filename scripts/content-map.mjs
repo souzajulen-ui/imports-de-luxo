@@ -90,12 +90,12 @@ export const GLOBAL = [
     section: 'pagamento',
     label: 'Bandeiras de pagamento',
     fields: [
-      ['footer.pay1', 'Bandeira 1', 'image', 'https://logosmarcas.net/wp-content/uploads/2020/04/Visa-Logo-2014%E2%80%93presente.jpg'],
-      ['footer.pay2', 'Bandeira 2', 'image', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQtLk6e-zGF6C2RSMHVg57wBxu6F-Aufauew&s'],
-      ['footer.pay3', 'Bandeira 3', 'image', 'https://upload.wikimedia.org/wikipedia/commons/8/89/Hipercard_logo.svg'],
-      ['footer.pay4', 'Bandeira 4', 'image', 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSg6kd87KuRiNiDqwgI3AKAnvYLgxNaeOvyQntCfuzp6PSgh9bX'],
-      ['footer.pay5', 'Bandeira 5', 'image', 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRSXwrqUH2v6eZ2JlpoHtDLxUbLc4YcgWS922B58C_KH5RBXaZD'],
-      ['footer.pay6', 'Bandeira 6', 'image', 'https://images.seeklogo.com/logo-png/39/1/pix-logo-png_seeklogo-392002.png'],
+      ['footer.pay1', 'Bandeira 1', 'image', 'assets/img/pagamento/visa.webp'],
+      ['footer.pay2', 'Bandeira 2', 'image', 'assets/img/pagamento/mastercard.webp'],
+      ['footer.pay3', 'Bandeira 3', 'image', 'assets/img/pagamento/hipercard.svg'],
+      ['footer.pay4', 'Bandeira 4', 'image', 'assets/img/pagamento/elo.webp'],
+      ['footer.pay5', 'Bandeira 5', 'image', 'assets/img/pagamento/diners.webp'],
+      ['footer.pay6', 'Bandeira 6', 'image', 'assets/img/pagamento/pix.webp'],
     ],
   },
   // ---- Página de produto (migration 0012). Campo vazio = o trecho some do site:

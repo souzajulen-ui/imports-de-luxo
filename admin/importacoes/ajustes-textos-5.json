@@ -1,0 +1,36 @@
+{
+  "id": "ajustes-textos-5",
+  "titulo": "bandeiras de pagamento guardadas no próprio site",
+  "blocos": [
+    {
+      "page_slug": "_global",
+      "key": "footer.pay1",
+      "value": "assets/img/pagamento/visa.webp"
+    },
+    {
+      "page_slug": "_global",
+      "key": "footer.pay2",
+      "value": "assets/img/pagamento/mastercard.webp"
+    },
+    {
+      "page_slug": "_global",
+      "key": "footer.pay3",
+      "value": "assets/img/pagamento/hipercard.svg"
+    },
+    {
+      "page_slug": "_global",
+      "key": "footer.pay4",
+      "value": "assets/img/pagamento/elo.webp"
+    },
+    {
+      "page_slug": "_global",
+      "key": "footer.pay5",
+      "value": "assets/img/pagamento/diners.webp"
+    },
+    {
+      "page_slug": "_global",
+      "key": "footer.pay6",
+      "value": "assets/img/pagamento/pix.webp"
+    }
+  ]
+}
