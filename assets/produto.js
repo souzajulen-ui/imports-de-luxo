@@ -378,9 +378,31 @@
     return itens ? '<div class="mt-6 space-y-3">' + itens + '</div>' : '';
   }
 
+  function paginaDaCategoria(p) {
+    var cat = CATEGORIAS[p.category] || { nome: 'Produtos', pagina: 'index.html' };
+    return cat.pagina + (p.category === 'relogios' && p.gender ? '?genero=' + encodeURIComponent(p.gender) : '');
+  }
+
+  // "Voltar": volta para a página de onde o cliente veio, no mesmo ponto da
+  // lista (a página anterior guarda a rolagem, veja assets/cms.js). Quem
+  // chegou direto (link do WhatsApp, Google) vai para a categoria da peça.
+  function htmlVoltar(p) {
+    return '<a href="' + esc(paginaDaCategoria(p)) + '" id="voltar" class="inline-flex items-center gap-2 min-h-[40px] pr-3 mb-3 text-sm font-semibold text-gray-700 hover:text-black">' +
+      '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>' +
+      'Voltar</a>';
+  }
+
+  function veioDoSite() {
+    try {
+      return !!document.referrer && new URL(document.referrer).origin === location.origin && history.length > 1;
+    } catch (e) {
+      return false;
+    }
+  }
+
   function htmlInfo(p) {
     var cat = CATEGORIAS[p.category] || { nome: 'Produtos', pagina: 'index.html' };
-    var paginaCat = cat.pagina + (p.category === 'relogios' && p.gender ? '?genero=' + encodeURIComponent(p.gender) : '');
+    var paginaCat = paginaDaCategoria(p);
     var completo = nomeCompleto(p);
     return (
       '<div>' +
@@ -668,6 +690,12 @@
       }
 
       if (t.closest('#comprarWhats') && !validarTamanho()) { e.preventDefault(); return; }
+      if (t.closest('#voltar') && veioDoSite()) {
+        e.preventDefault();
+        try { sessionStorage.setItem('voltando', '1'); } catch (err) {}
+        history.back();
+        return;
+      }
       if (t.closest('#compartilhar')) return compartilhar();
       if (t.closest('#adicionarCarrinho')) {
         if (adicionarAoCarrinho() && typeof window.toggleCart === 'function') window.toggleCart();
@@ -776,6 +804,7 @@
     var main = $('#pdp');
     main.setAttribute('aria-busy', 'false');
     main.innerHTML =
+      htmlVoltar(p) +
       '<div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">' + htmlGaleria(p) + htmlInfo(p) + '</div>' +
       htmlDescricao(p) + htmlSecaoPerguntas() + htmlRelacionados(p);
 

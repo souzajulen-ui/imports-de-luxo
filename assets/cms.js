@@ -481,8 +481,51 @@
     applyBlocks();
     protegerImagens();
     applyProducts();
+    restaurarRolagem();
     CMS.ready = true;
     document.dispatchEvent(new CustomEvent('cms:ready', { detail: { preview: PREVIEW } }));
+  }
+
+  // ---------------------------------------------- voltar para onde estava
+  // Ao abrir um produto, a página guarda a posição da rolagem. Quando o
+  // cliente volta (botão "Voltar" da página do produto ou o do navegador), a
+  // lista é montada de novo e a rolagem volta para o mesmo ponto — sem isso,
+  // como os cards chegam depois, o navegador voltava para o topo.
+  var CHAVE_ROLAGEM = 'rolagem:' + location.pathname + location.search;
+  var rolagemRestaurada = false;
+
+  function lembrarRolagem() {
+    document.addEventListener(
+      'click',
+      function (e) {
+        var a = e.target.closest ? e.target.closest('a[href*="produto.html?p="]') : null;
+        if (!a) return;
+        try {
+          sessionStorage.setItem(CHAVE_ROLAGEM, String(Math.round(window.scrollY)));
+        } catch (err) {
+          /* navegação privada sem armazenamento: só não restaura */
+        }
+      },
+      true
+    );
+  }
+
+  function restaurarRolagem() {
+    if (rolagemRestaurada || !CMS.products.length) return;
+    rolagemRestaurada = true;
+    try {
+      var nav = performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+      var voltando = (nav && nav.type === 'back_forward') || sessionStorage.getItem('voltando') === '1';
+      sessionStorage.removeItem('voltando');
+      var y = parseInt(sessionStorage.getItem(CHAVE_ROLAGEM), 10);
+      if (voltando && y > 0) {
+        requestAnimationFrame(function () {
+          window.scrollTo(0, y);
+        });
+      }
+    } catch (err) {
+      /* sem armazenamento: segue sem restaurar */
+    }
   }
 
   function previewBadge() {
@@ -501,6 +544,7 @@
     }
     installGallery();
     installCart();
+    lembrarRolagem();
     protegerImagens();
     previewBadge();
 
