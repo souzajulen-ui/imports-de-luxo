@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96.png">
     <link rel="apple-touch-icon" href="assets/img/icone-192.png">
 
-    <link rel="stylesheet" href="assets/tailwind.css?v=2026111201">
+    <link rel="stylesheet" href="assets/tailwind.css?v=2026111202">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -211,8 +211,8 @@
         }
     </style>
     <!-- Conteúdo editável pelo painel (/admin) -->
-    <script src="assets/cms-config.js?v=2026111201"></script>
-    <script src="assets/cms.js?v=2026111201" defer></script>
+    <script src="assets/cms-config.js?v=2026111202"></script>
+    <script src="assets/cms.js?v=2026111202" defer></script>
 </head>
 <body class="antialiased text-gray-900 pt-28 overflow-x-hidden">
 
@@ -1004,14 +1004,14 @@ Adicionar ao carrinho
                         <img src="${item.image}" class="w-16 h-16 object-contain">
                         <div class="flex-grow">
                             <h4 class="text-[10px] font-bold uppercase">${item.name}</h4>
-                            <p class="text-sm font-semibold text-cyan-600">R$ ${item.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+                            <p class="text-sm font-semibold text-cyan-600">${item.price ? "R$ " + item.price.toLocaleString('pt-BR', {minimumFractionDigits: 2}) : "Sob consulta"}</p>
                         </div>
                         <button onclick="removeItem(${index})" class="text-gray-300 hover:text-red-500 text-xs">REMOVER</button>
                     </div>
                 `;
             });
         }
-        totalElement.innerText = `R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+        totalElement.innerText = total || !cart.length ? `R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}` : "Sob consulta";
     }
 
     function removeItem(index) {
@@ -1025,7 +1025,7 @@ function finalizarCompra() {
     if (cart.length === 0) return alert("Adicione itens para continuar!");
 
     const total = cart.reduce((sum, item) => sum + item.price, 0);
-    const lista = cart.map(i => `• ${i.name} (R$ ${i.price})`).join('\n');
+    const lista = cart.map(i => `• ${i.name} (${i.price ? "R$ " + i.price.toFixed(2) : "preço sob consulta"})`).join('\n');
 
     // verifica se é singular ou plural
     const frase = cart.length === 1
@@ -1033,7 +1033,7 @@ function finalizarCompra() {
         : "Olá! Gostaria de saber mais sobre estes produtos:";
 
     const texto = encodeURIComponent(
-        `${frase}\n\n${lista}\n\n*Total: R$ ${total.toFixed(2)}*\n\nPoderia me informar o prazo de entrega e as formas de pagamento?`
+        `${frase}\n\n${lista}\n\n*Total: ${cart.some((i) => !i.price) ? (total ? "R$ " + total.toFixed(2) + " + itens sob consulta" : "sob consulta") : "R$ " + total.toFixed(2)}*\n\nPoderia me informar o prazo de entrega e as formas de pagamento?`
     );
 
     window.open(`https://wa.me/${(window.CMS && window.CMS.get('contact.whatsapp_number')) || '5544998214237'}?text=${texto}`, '_blank');

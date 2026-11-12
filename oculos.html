@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96.png">
     <link rel="apple-touch-icon" href="assets/img/icone-192.png">
     <title>Óculos de Sol Premium | Imports de Luxo</title>
-    <link rel="stylesheet" href="assets/tailwind.css?v=2026111201">
+    <link rel="stylesheet" href="assets/tailwind.css?v=2026111202">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -38,8 +38,8 @@
         }
     </style>
     <!-- Conteúdo editável pelo painel (/admin) -->
-    <script src="assets/cms-config.js?v=2026111201"></script>
-    <script src="assets/cms.js?v=2026111201" defer></script>
+    <script src="assets/cms-config.js?v=2026111202"></script>
+    <script src="assets/cms.js?v=2026111202" defer></script>
 </head>
 <body class="antialiased text-gray-900 pt-32">
 
@@ -351,12 +351,12 @@
                         <img src="${product.image}" class="w-16 h-16 object-cover rounded">
                         <div class="flex-1">
                             <h3 class="text-[10px] font-bold uppercase">${product.name}</h3>
-                            <p class="text-sm font-semibold">${product.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+                            <p class="text-sm font-semibold">${product.price ? product.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) : "Sob consulta"}</p>
                         </div>
                         <button onclick="removeItem(${index})" class="text-red-500 text-xs">Remover</button>
                     </div>`;
             });
-            cartTotal.innerText = total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+            cartTotal.innerText = total || !cart.length ? total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) : "Sob consulta";
         }
 
         function removeItem(index) {
@@ -379,11 +379,11 @@
         : "Olá! Gostaria de saber mais sobre estes produtos:\n\n";
 
     cart.forEach(item => {
-        mensagem += `- ${item.name} (R$ ${item.price.toFixed(2)})\n`;
+        mensagem += `- ${item.name} (${item.price ? "R$ " + item.price.toFixed(2) : "preço sob consulta"})\n`;
         total += item.price;
     });
 
-    mensagem += `\n*Total: R$ ${total.toFixed(2)}*\n\n`;
+    mensagem += `\n*Total: ${cart.some((i) => !i.price) ? (total ? "R$ " + total.toFixed(2) + " + itens sob consulta" : "sob consulta") : "R$ " + total.toFixed(2)}*\n\n`;
     mensagem += "Poderia me informar o prazo de entrega e as formas de pagamento?";
     
     window.open(`https://wa.me/${(window.CMS && window.CMS.get('contact.whatsapp_number')) || '5544998214237'}?text=${encodeURIComponent(mensagem)}`, '_blank');

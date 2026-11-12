@@ -285,9 +285,10 @@
       '<h3 class="font-serif text-base md:text-lg mb-2">' +
       escapeHtml(p.name) +
       '</h3>' +
-      '<p class="text-lg md:text-xl font-semibold mb-4 mt-auto">' +
-      money(p.price) +
-      '</p>' +
+      // Sem preço cadastrado: nunca mostrar "R$ 0,00" para o cliente.
+      (Number(p.price) > 0
+        ? '<p class="text-lg md:text-xl font-semibold mb-4 mt-auto">' + money(p.price) + '</p>'
+        : '<p class="text-sm md:text-base font-semibold uppercase tracking-widest text-gray-500 mb-4 mt-auto">Preço sob consulta</p>') +
       '<button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" data-name="' +
       escapeHtml(p.cart_name || p.name) +
       '" data-price="' +

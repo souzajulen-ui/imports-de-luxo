@@ -915,6 +915,106 @@
     });
   }
 
+  // Chave de "marca e modelo": o nome sem a palavra do tipo na frente
+  // ("Bolsa Chanel Vanity" → "Chanel Vanity"), para Chanel ficar junto de
+  // Chanel e não espalhado pelos "Bolsa…", "Sapato…", "Tênis…".
+  var TIPOS_NO_NOME = /^(bolsa|bolsas|relógio|relogio|tênis|tenis|sapato|sapatilha|bota|botas|sandália|sandalia|mocassim|rasteira|chinelo|óculos|oculos|cinto|carteira|lenço|lenco|colar|pulseira|brinco|anel)\s+/i;
+
+  function chaveMarcaModelo(p) {
+    return String(p.name || '').trim().replace(TIPOS_NO_NOME, '');
+  }
+
+  // Renumera a ordem das categorias (a que está aberta, ou todas) por marca e
+  // modelo. Depois dá para ajustar uma peça ou outra com as setas.
+  function ordenarPorMarcaModelo() {
+    var categorias = state.productFilter === 'todas' ? Object.keys(CATEGORY_LABEL) : [state.productFilter];
+    var nomes = categorias
+      .map(function (c) {
+        return CATEGORY_LABEL[c];
+      })
+      .join(', ');
+    confirmar(
+      'Ordenar por marca e modelo',
+      'Os produtos de ' + nomes + ' vão ficar em ordem alfabética de marca e modelo no site. ' +
+        'A ordem que existe hoje será substituída. Depois dá para ajustar com as setas ▲▼.',
+      'Ordenar'
+    ).then(function (ok) {
+      if (!ok) return;
+      var alterados = [];
+      categorias.forEach(function (c) {
+        categoriaOrdenada(c)
+          .sort(function (a, b) {
+            return chaveMarcaModelo(a).localeCompare(chaveMarcaModelo(b), 'pt-BR', { sensitivity: 'base', numeric: true });
+          })
+          .forEach(function (p, pos) {
+            if (p.sort !== pos * 10) {
+              p.sort = pos * 10;
+              alterados.push(p);
+            }
+          });
+      });
+      if (!alterados.length) return toast('Já estava em ordem de marca e modelo.', 'info');
+      salvarCampoEmMassa(alterados, function (p) {
+        return { sort: p.sort };
+      }, alterados.length + ' produtos reordenados por marca e modelo.');
+    });
+  }
+
+  // Deixa visíveis no site os produtos escondidos (da categoria aberta, ou todos).
+  function mostrarTodos() {
+    var escondidos = state.products.filter(function (p) {
+      return p.active === false && (state.productFilter === 'todas' || p.category === state.productFilter);
+    });
+    if (!escondidos.length) return toast('Nenhum produto escondido aqui.', 'info');
+    var semPreco = escondidos.filter(function (p) {
+      return !Number(p.price);
+    }).length;
+    confirmar(
+      'Mostrar no site',
+      escondidos.length + ' produto(s) vão ficar visíveis no site' +
+        (semPreco ? ', ' + semPreco + ' deles sem preço (aparecem como “Preço sob consulta”)' : '') +
+        ': ' +
+        escondidos
+          .slice(0, 12)
+          .map(function (p) {
+            return p.name;
+          })
+          .join('; ') +
+        (escondidos.length > 12 ? '; e mais ' + (escondidos.length - 12) + '.' : '.'),
+      'Mostrar todos'
+    ).then(function (ok) {
+      if (!ok) return;
+      escondidos.forEach(function (p) {
+        p.active = true;
+      });
+      salvarCampoEmMassa(escondidos, function () {
+        return { active: true };
+      }, escondidos.length + ' produto(s) agora visíveis no site.');
+    });
+  }
+
+  // Grava o mesmo tipo de mudança em vários produtos e avisa no fim.
+  function salvarCampoEmMassa(produtos, campos, mensagemOk) {
+    renderMain(); // mostra na hora, sem esperar o banco
+    var agora = new Date().toISOString();
+    Promise.all(
+      produtos.map(function (p) {
+        return sb.from('products').update(Object.assign({ updated_at: agora }, campos(p))).eq('id', p.id);
+      })
+    ).then(function (res) {
+      var erro = res.find(function (r) {
+        return r.error;
+      });
+      if (erro) {
+        toast('Não foi possível salvar: ' + erro.error.message, 'erro');
+        loadAll().then(renderMain);
+        return;
+      }
+      marcarPendente();
+      toast(mensagemOk + ' Clique em Publicar no site para os clientes verem.', 'ok');
+    });
+  }
+
   // Troca um produto de lugar com o vizinho que está aparecendo na tela.
   function moverProduto(id, direcao) {
     var produto = state.products.find(function (p) {
@@ -1082,6 +1182,12 @@
       '<p class="text-gray-500 text-sm">' + state.products.length + ' peças no catálogo. ' +
       'Use as setas ▲▼ para mudar a ordem em que aparecem no site.</p></div>' +
       '<div class="flex flex-wrap gap-2">' +
+      '<button class="btn btn-ghost" data-sort-brand>Ordenar por marca e modelo</button>' +
+      (state.products.some(function (p) {
+        return p.active === false && (state.productFilter === 'todas' || p.category === state.productFilter);
+      })
+        ? '<button class="btn btn-ghost" data-show-all>Mostrar todos no site</button>'
+        : '') +
       '<button class="btn btn-ghost" data-preview="' + esc(arquivoPrevia) + '">Pré-visualizar</button>' +
       '<button class="btn btn-accent" data-new-product>+ Novo produto</button></div></div>' +
       '<div class="flex flex-wrap gap-2 mb-4">' + filtros + '</div>' +
@@ -1834,6 +1940,8 @@
     }
     if (e.target.closest('[data-open-site]')) window.open('../index.html', '_blank');
     if (e.target.closest('[data-publish]')) publish();
+    if (e.target.closest('[data-sort-brand]')) ordenarPorMarcaModelo();
+    if (e.target.closest('[data-show-all]')) mostrarTodos();
     var importar = e.target.closest('[data-import]');
     if (importar && !importar.disabled) importarPendentes();
     var descartar = e.target.closest('[data-discard-draft]');
