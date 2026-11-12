@@ -201,7 +201,7 @@ def main():
                       '<meta property="product:price:currency" content="BRL">\n' % preco) if preco > 0 else ''
         e = lambda s: html.escape(str(s), quote=True)
         pagina = PAGINA.format(
-            titulo=e(p.get('name') or 'Produto'), descricao=e(descricao(p)), url=e(site + '/p/' + pid + '.html'),
+            titulo=e(p.get('name') or 'Produto'), descricao=e(descricao(p)), url=e(site + '/p/' + pid),  # a Cloudflare tira o .html do endereço
             destino=e(destino), destino_js=json.dumps(destino), imagem=e(imagem),
             largura=tamanho[0], altura=tamanho[1], preco_meta=preco_meta)
         caminho = os.path.join(PASTA, pid + '.html')
