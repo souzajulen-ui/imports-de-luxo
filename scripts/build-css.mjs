@@ -25,6 +25,7 @@ fs.writeFileSync(
     ${JSON.stringify(ROOT + '/admin/index.html')},
     ${JSON.stringify(ROOT + '/admin/app.js')},
     ${JSON.stringify(ROOT + '/assets/cms.js')},
+    ${JSON.stringify(ROOT + '/assets/produto.js')},
   ],
   theme: { extend: {} },
   plugins: [],

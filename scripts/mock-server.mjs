@@ -42,9 +42,11 @@ const db = {
   products: content.products.map((p) => ({
     ...p,
     gender: p.gender ?? (p.category === 'relogios' ? 'feminino' : null),
+    details: p.details ?? {},
     updated_at: new Date().toISOString(),
   })),
   media_assets: [],
+  newsletter_signups: [],
   admin_users: [{ user_id: LOGIN.id, email: LOGIN.email, name: 'Administrador' }],
   snapshot: { draft: null, published: null },
 };
@@ -73,6 +75,7 @@ function buildSnapshot() {
         featured_sort: p.featured_sort,
         sort: p.sort,
         gender: p.gender ?? null,
+        details: p.details ?? {},
       })),
   };
 }

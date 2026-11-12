@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96.png">
+    <link rel="apple-touch-icon" href="assets/img/icone-192.png">
+    <!-- Título, descrição, canonical, Open Graph e JSON-LD são preenchidos
+         por assets/produto.js com os dados do produto do endereço (?p=…). -->
+    <title>Produto | Imports de Luxo</title>
+    <meta name="description" content="Peças exclusivas com atendimento pelo WhatsApp e envio para todo o Brasil.">
+    <link rel="canonical" href="https://importsdeluxo.com.br/produto.html">
+    <meta property="og:type" content="product">
+    <meta property="og:site_name" content="Imports de Luxo">
+    <meta property="og:title" content="Imports de Luxo">
+    <meta property="og:description" content="Peças exclusivas com atendimento pelo WhatsApp e envio para todo o Brasil.">
+    <meta property="og:image" content="https://importsdeluxo.com.br/assets/img/logo-512.jpg">
+    <meta property="og:url" content="https://importsdeluxo.com.br/produto.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Imports de Luxo">
+    <meta name="twitter:description" content="Peças exclusivas com atendimento pelo WhatsApp e envio para todo o Brasil.">
+    <meta name="twitter:image" content="https://importsdeluxo.com.br/assets/img/logo-512.jpg">
+    <link rel="stylesheet" href="assets/tailwind.css?v=2026111204">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-luxo: #FDFCFB; --gold: #00CED1; --black-soft: #1A1A1A; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-luxo); color: var(--black-soft); }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        /* Galeria: a foto principal reserva o espaço (sem pulo de layout) */
+        .pdp-palco { aspect-ratio: 1 / 1; }
+        .pdp-palco img { transition: transform .15s ease-out; }
+        .pdp-palco.zoom img { transform: scale(2); }
+        .pdp-carrossel { scrollbar-width: none; }
+        .pdp-carrossel::-webkit-scrollbar { display: none; }
+        .pdp-tam[aria-disabled="true"] { text-decoration: line-through; color: #9ca3af; background: #f9fafb; cursor: not-allowed; }
+        .pdp-skel { background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 37%, #f3f4f6 63%); background-size: 400% 100%; animation: pdp-skel 1.4s ease infinite; }
+        @keyframes pdp-skel { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
+        @media (prefers-reduced-motion: reduce) { .pdp-skel { animation: none; } .pdp-palco img { transition: none; } }
+        #cartSidebar { max-width: 100vw; }
+    </style>
+    <!-- Conteúdo editável pelo painel (/admin) -->
+    <script src="assets/cms-config.js?v=2026111204"></script>
+    <script src="assets/cms.js?v=2026111204" defer></script>
+    <script src="assets/produto.js?v=2026111204" defer></script>
+</head>
+<body class="antialiased text-gray-900 pt-32">
+
+    <div class="fixed top-0 left-0 w-full z-50 bg-cyan-500 text-black text-[10px] uppercase tracking-[0.3em] py-2 text-center" data-cms="topbar.text">marcas Exclusivas | Frete em todo Brasil</div>
+
+    <header class="fixed top-8 left-0 w-full z-50 bg-white py-6 px-6 md:px-8 xl:px-20 flex items-center justify-between border-b border-gray-100 shadow-sm">
+        <div class="text-2xl md:text-2xl xl:text-3xl font-serif font-bold tracking-tight">
+            <a href="index.html"><span data-cms="brand.name_main">IMPORTS</span> <span class="italic font-light" data-cms="brand.name_accent">de Luxo</span></a>
+        </div>
+
+        <!-- MOBILE MENU BUTTON -->
+        <button id="mobileMenuButton" onclick="toggleMobileMenu()" class="lg:hidden text-2xl p-2 text-gray-700 hover:text-cyan-500 transition" aria-label="Abrir menu">
+            ☰
+        </button>
+
+        <nav class="hidden lg:flex lg:mx-auto xl:absolute xl:left-1/2 xl:-translate-x-1/2 items-center gap-3 xl:gap-8 text-[11px] xl:text-[13px] uppercase tracking-widest font-semibold">
+    <a href="index.html" class="hover:text-cyan-500 transition" data-cms="nav.1_label" data-cms-href="nav.1_url">Início</a>
+    <a href="bolsas.html" class="hover:text-cyan-500 transition" data-cms="nav.2_label" data-cms-href="nav.2_url">Bolsas</a>
+    <!-- Relógios: passar o mouse abre Masculino / Feminino -->
+    <div class="relative group">
+        <a href="relogios.html" class="hover:text-cyan-500 transition" aria-haspopup="true" data-cms="nav.3_label" data-cms-href="nav.3_url">Relógios</a>
+        <div class="absolute left-1/2 -translate-x-1/2 top-full pt-3 hidden group-hover:block group-focus-within:block z-50">
+            <div class="bg-white border border-gray-100 shadow-xl py-2 text-left">
+                <a href="relogios.html?genero=masculino" class="block px-5 py-2 whitespace-nowrap hover:text-cyan-500 hover:bg-gray-50 transition">Masculino</a>
+                <a href="relogios.html?genero=feminino" class="block px-5 py-2 whitespace-nowrap hover:text-cyan-500 hover:bg-gray-50 transition">Feminino</a>
+            </div>
+        </div>
+    </div>
+    <a href="oculos.html" class="hover:text-cyan-500 transition" data-cms="nav.4_label" data-cms-href="nav.4_url">Óculos</a>
+    <a href="calcados.html" class="hover:text-cyan-500 transition" data-cms="nav.5_label" data-cms-href="nav.5_url">Calçados</a>
+    <a href="acessorios.html" class="hover:text-cyan-500 transition" data-cms="nav.6_label" data-cms-href="nav.6_url">Acessórios</a>
+    <a href="cintos.html" class="hover:text-cyan-500 transition" data-cms="nav.7_label" data-cms-href="nav.7_url">Cintos</a>
+</nav>
+
+        <div class="flex items-center space-x-6 text-xl">
+            <button onclick="toggleCart()" class="relative hover:text-cyan-500 transition" aria-label="Abrir sacola">
+                🛒
+                <span id="cartCount" class="absolute -top-2 -right-2 bg-cyan-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobileNav" class="hidden fixed top-[110px] left-0 w-full bg-white z-40 border-b border-gray-100 lg:hidden">
+    <nav class="flex flex-col p-6 space-y-4 text-[13px] uppercase tracking-[0.2em] font-bold">
+        <a href="index.html" class="hover:text-cyan-500 transition" data-cms="nav.1_label" data-cms-href="nav.1_url">Início</a>
+        <a href="bolsas.html" class="hover:text-cyan-500 transition" data-cms="nav.2_label" data-cms-href="nav.2_url">Bolsas</a>
+        <!-- Relógios no celular: tocar abre Masculino / Feminino logo abaixo -->
+        <details class="group">
+            <summary class="cursor-pointer list-none [&::-webkit-details-marker]:hidden flex items-center gap-2 hover:text-cyan-500 transition">
+                <span data-cms="nav.3_label">Relógios</span>
+                <span aria-hidden="true" class="text-[9px] transition-transform group-open:rotate-180">▼</span>
+            </summary>
+            <div class="flex flex-col space-y-3 pl-4 pt-3 text-[11px] tracking-[0.2em] font-semibold text-gray-500">
+                <a href="relogios.html?genero=masculino" class="hover:text-cyan-500 transition">Masculino</a>
+                <a href="relogios.html?genero=feminino" class="hover:text-cyan-500 transition">Feminino</a>
+            </div>
+        </details>
+        <a href="oculos.html" class="hover:text-cyan-500 transition" data-cms="nav.4_label" data-cms-href="nav.4_url">Óculos</a>
+        <a href="calcados.html" class="hover:text-cyan-500 transition" data-cms="nav.5_label" data-cms-href="nav.5_url">Calçados</a>
+        <a href="acessorios.html" class="hover:text-cyan-500 transition" data-cms="nav.6_label" data-cms-href="nav.6_url">Acessórios</a>
+        <a href="cintos.html" class="hover:text-cyan-500 transition" data-cms="nav.7_label" data-cms-href="nav.7_url">Cintos</a>
+    </nav>
+</div>
+
+    <!-- Página do produto: preenchida por assets/produto.js -->
+    <main id="pdp" class="max-w-7xl mx-auto px-4 md:px-8 pt-6 md:pt-10 pb-16" aria-busy="true">
+        <div class="grid lg:grid-cols-2 gap-8 lg:gap-12" aria-hidden="true">
+            <div class="pdp-skel pdp-palco rounded-lg"></div>
+            <div class="space-y-4">
+                <div class="pdp-skel h-4 w-1/2 rounded"></div>
+                <div class="pdp-skel h-9 w-4/5 rounded"></div>
+                <div class="pdp-skel h-8 w-1/3 rounded"></div>
+                <div class="pdp-skel h-14 w-full rounded"></div>
+                <div class="pdp-skel h-14 w-full rounded"></div>
+            </div>
+        </div>
+        <p class="sr-only">Carregando o produto…</p>
+    </main>
+
+    <!-- FAIXA DE BENEFÍCIOS -->
+    <!-- Texto escuro sobre o turquesa: branco não tem contraste suficiente (igual à faixa do topo). -->
+    <section id="pdpBeneficios" class="bg-cyan-500" aria-label="Benefícios">
+        <div class="max-w-7xl mx-auto px-6 md:px-8 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+            <div data-beneficio="1">
+                <svg class="w-8 h-8 mx-auto mb-3 text-gray-900" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg>
+                <h3 class="font-sans font-bold text-lg md:text-xl text-gray-900" data-cms="loja.beneficio1_titulo">Envio VIP</h3>
+                <p class="text-sm text-gray-900" data-cms="loja.beneficio1_texto">Para todo o Brasil</p>
+            </div>
+            <div data-beneficio="2">
+                <svg class="w-8 h-8 mx-auto mb-3 text-gray-900" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+                <h3 class="font-sans font-bold text-lg md:text-xl text-gray-900" data-cms="loja.beneficio2_titulo">Compra Segura</h3>
+                <p class="text-sm text-gray-900" data-cms="loja.beneficio2_texto">Pedido confirmado direto com a loja</p>
+            </div>
+            <div data-beneficio="3">
+                <svg class="w-8 h-8 mx-auto mb-3 text-gray-900" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z"/></svg>
+                <h3 class="font-sans font-bold text-lg md:text-xl text-gray-900" data-cms="loja.beneficio3_titulo">Suporte Exclusivo</h3>
+                <p class="text-sm text-gray-900" data-cms="loja.beneficio3_texto">Atendimento pelo WhatsApp</p>
+            </div>
+            <div data-beneficio="4">
+                <svg class="w-8 h-8 mx-auto mb-3 text-gray-900" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"/></svg>
+                <h3 class="font-sans font-bold text-lg md:text-xl text-gray-900" data-cms="loja.beneficio4_titulo">Qualidade Grife</h3>
+                <p class="text-sm text-gray-900" data-cms="loja.beneficio4_texto">A excelência que seu visual exige.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RODAPÉ COMPLETO -->
+    <footer class="bg-black text-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-8 py-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-10 text-sm">
+            <div>
+                <h2 class="font-sans uppercase tracking-wider text-sm font-semibold mb-4">Central de atendimento</h2>
+                <ul class="space-y-3 text-gray-300">
+                    <li class="flex gap-2 items-start" data-rodape="horario"><span aria-hidden="true">🕘</span><span data-cms="contact.hours">Segunda a domingo: 09h às 22h</span></li>
+                    <li class="flex gap-2 items-start" data-rodape="whatsapp"><span aria-hidden="true">💬</span><span id="rodapeWhats"></span></li>
+                    <li class="flex gap-2 items-start break-all" data-rodape="email"><span aria-hidden="true">✉️</span><a id="rodapeEmail" class="hover:text-white underline-offset-2 hover:underline" href="#"></a></li>
+                </ul>
+                <a id="rodapeWhatsBotao" href="#" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mt-5 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold px-5 py-3 rounded-md transition">Atendimento via WhatsApp</a>
+            </div>
+            <div id="rodapePoliticas">
+                <h2 class="font-sans uppercase tracking-wider text-sm font-semibold mb-4">Políticas</h2>
+                <ul class="space-y-3 text-gray-300" id="rodapePoliticasLista"></ul>
+            </div>
+            <div>
+                <h2 class="font-sans uppercase tracking-wider text-sm font-semibold mb-4" data-cms="loja.newsletter_titulo">Receba novidades</h2>
+                <p class="text-gray-300 mb-4" data-cms="loja.newsletter_texto" id="newsletterTexto"></p>
+                <form id="newsletterForm" class="flex bg-white rounded-md overflow-hidden" novalidate>
+                    <label for="newsletterEmail" class="sr-only">Seu e-mail</label>
+                    <input id="newsletterEmail" type="email" required autocomplete="email" placeholder="Seu e-mail" class="flex-1 min-w-0 px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                    <button type="submit" class="px-4 text-gray-900 hover:text-cyan-600 font-bold" aria-label="Inscrever na newsletter">→</button>
+                </form>
+                <p id="newsletterStatus" class="text-xs mt-2 min-h-[1rem]" role="status" aria-live="polite"></p>
+            </div>
+            <div>
+                <h2 class="font-sans uppercase tracking-wider text-sm font-semibold mb-4" data-cms="footer.payment_title">Formas de Pagamento</h2>
+                <div id="rodapePagamentos" class="flex flex-wrap gap-2"></div>
+                <div id="rodapeRedes" class="flex gap-3 mt-6"></div>
+            </div>
+        </div>
+        <div class="border-t border-white/10">
+            <p class="max-w-7xl mx-auto px-6 md:px-8 py-6 text-xs text-gray-400"><span data-cms="footer.copyright_long">© 2015 IMPORTS DE LUXO - Todos os direitos reservados</span><span id="rodapeCnpj"></span></p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp flutuante -->
+    <a id="whatsFlutuante" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp" class="fixed right-4 bottom-4 z-40 w-14 h-14 rounded-full bg-[#25D366] text-white shadow-xl flex items-center justify-center hover:scale-105 transition-all">
+        <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.48.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.04 21.5h-.01a9.45 9.45 0 0 1-4.82-1.32l-.35-.21-3.58.94.96-3.49-.23-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.22 4.25-9.47 9.48-9.47 2.53 0 4.91.99 6.7 2.78a9.4 9.4 0 0 1 2.77 6.7c0 5.22-4.25 9.46-9.47 9.46m8.06-17.53A11.33 11.33 0 0 0 12.04.63C5.76.63.65 5.74.65 12.02c0 2 .52 3.96 1.52 5.69L.55 23.6l6.04-1.58a11.36 11.36 0 0 0 5.45 1.39h.01c6.28 0 11.39-5.11 11.39-11.39 0-3.04-1.18-5.9-3.34-8.05"/></svg>
+    </a>
+
+    <!-- Barra fixa no celular: aparece quando o botão principal sai da tela -->
+    <div id="barraCompra" class="lg:hidden fixed inset-x-0 bottom-0 z-40 bg-white border-t border-gray-200 shadow-[0_-4px_16px_rgba(0,0,0,.08)] px-4 py-3 flex items-center gap-3 translate-y-full transition-transform" aria-hidden="true">
+        <div class="min-w-0 flex-1">
+            <p id="barraNome" class="text-xs text-gray-500 truncate"></p>
+            <p id="barraPreco" class="font-bold"></p>
+        </div>
+        <button id="barraAdicionar" type="button" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold px-5 py-3 rounded-md text-sm whitespace-nowrap" tabindex="-1">Adicionar à sacola</button>
+    </div>
+
+    <!-- Lightbox da galeria -->
+    <div id="lightbox" class="hidden fixed inset-0 z-[80] bg-black/95 flex items-center justify-center" role="dialog" aria-modal="true" aria-label="Fotos do produto">
+        <button type="button" data-lb="fechar" class="absolute top-4 right-4 w-12 h-12 text-white text-3xl hover:text-cyan-400" aria-label="Fechar">✕</button>
+        <button type="button" data-lb="ant" class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl" aria-label="Foto anterior">❮</button>
+        <img id="lightboxImg" src="" alt="" class="max-w-[92vw] max-h-[85vh] object-contain select-none">
+        <button type="button" data-lb="prox" class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl" aria-label="Próxima foto">❯</button>
+        <p id="lightboxContador" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/80 text-sm tracking-widest"></p>
+    </div>
+
+    <div id="cartSidebar" style="right:-400px;" class="fixed top-0 w-80 h-full bg-white shadow-2xl transition-all duration-500 z-[60] p-6 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold font-serif" data-cms="cart.title">Seu Carrinho</h2>
+            <button onclick="toggleCart()" class="text-red-500 font-bold w-10 h-10" aria-label="Fechar sacola">X</button>
+        </div>
+        <div id="cartItems"></div>
+        <div class="mt-6 border-t pt-4">
+            <p class="text-lg font-bold mb-4">Total: <span id="cartTotal">R$ 0,00</span></p>
+            <button onclick="finalizarCompra()" class="bg-cyan-500 text-white w-full py-3 font-bold hover:bg-cyan-600 transition" data-cms="cart.checkout_label_short">Finalizar no WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Carrinho: o mesmo das outras páginas (localStorage "cart") -->
+    <script>
+        function toggleCart() {
+            const sidebar = document.getElementById("cartSidebar");
+            const isOpen = sidebar.style.right === "0px";
+            sidebar.style.right = isOpen ? "-400px" : "0px";
+            if (!isOpen) renderCart();
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cartCount").innerText = cart.length;
+        }
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartItems = document.getElementById("cartItems");
+            const cartTotal = document.getElementById("cartTotal");
+            cartItems.innerHTML = "";
+            let total = 0;
+            if (!cart.length) {
+                const vazio = (window.CMS && window.CMS.get('cart.empty')) || "Seu carrinho está vazio.";
+                cartItems.innerHTML = `<p class="text-center text-gray-400 py-10">${vazio}</p>`;
+            }
+            cart.forEach((product, index) => {
+                total += product.price;
+                cartItems.innerHTML += `
+                    <div class="flex items-center gap-4 mb-4 border-b pb-4">
+                        <img src="${product.image}" class="w-16 h-16 object-cover rounded" alt="">
+                        <div class="flex-1">
+                            <h3 class="text-[10px] font-bold uppercase">${product.name}</h3>
+                            <p class="text-sm font-semibold">${product.price ? product.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) : "Sob consulta"}</p>
+                        </div>
+                        <button onclick="removeItem(${index})" class="text-red-500 text-xs">Remover</button>
+                    </div>`;
+            });
+            cartTotal.innerText = total || !cart.length ? total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) : "Sob consulta";
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+        }
+
+        function finalizarCompra() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            if (cart.length === 0) return alert("Seu carrinho está vazio!");
+            let total = 0;
+            let mensagem = cart.length === 1
+                ? "Olá! Gostaria de saber mais sobre este produto:\n\n"
+                : "Olá! Gostaria de saber mais sobre estes produtos:\n\n";
+            cart.forEach(item => {
+                mensagem += `- ${item.name} (${item.price ? "R$ " + item.price.toFixed(2) : "preço sob consulta"})\n`;
+                total += item.price;
+            });
+            mensagem += `\n*Total: ${cart.some((i) => !i.price) ? (total ? "R$ " + total.toFixed(2) + " + itens sob consulta" : "sob consulta") : "R$ " + total.toFixed(2)}*\n\n`;
+            mensagem += "Poderia me informar o prazo de entrega e as formas de pagamento?";
+            window.open(`https://wa.me/${(window.CMS && window.CMS.get('contact.whatsapp_number')) || '5544998214237'}?text=${encodeURIComponent(mensagem)}`, '_blank');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById("mobileNav").classList.toggle("hidden");
+        }
+
+        document.addEventListener("DOMContentLoaded", updateCartCount);
+    </script>
+</body>
+</html>

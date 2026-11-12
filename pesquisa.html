@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96.png">
     <link rel="apple-touch-icon" href="assets/img/icone-192.png">
     <title>Resultados da Pesquisa | Imports de Luxo</title>
-    <link rel="stylesheet" href="assets/tailwind.css?v=2026111202">
+    <link rel="stylesheet" href="assets/tailwind.css?v=2026111204">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -31,8 +31,8 @@
         }
     </style>
     <!-- Conteúdo editável pelo painel (/admin) -->
-    <script src="assets/cms-config.js?v=2026111202"></script>
-    <script src="assets/cms.js?v=2026111202" defer></script>
+    <script src="assets/cms-config.js?v=2026111204"></script>
+    <script src="assets/cms.js?v=2026111204" defer></script>
 </head>
 
 <body class="antialiased text-gray-900 pt-32">
@@ -272,7 +272,8 @@
 
     filtered.forEach(p => {
         // Se o produto tiver ID, ele pode abrir a galeria, senão apenas mostra a imagem
-        const clickAction = p.id ? `onclick="openGallery('${p.id}')"` : "";
+        // Produto do catálogo do painel abre a página do produto; os da lista antiga, a galeria.
+        const clickAction = p.link ? `onclick="location.href='${p.link}'"` : p.id ? `onclick="openGallery('${p.id}')"` : "";
         const cursorClass = p.id ? "cursor-pointer" : "";
 
         container.innerHTML += `
@@ -281,7 +282,7 @@
                     <img src="${p.image}" class="w-full h-40 md:h-64 object-contain group-hover:scale-105 transition duration-500">
                     ${p.id ? '<div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"><span class="bg-white/90 px-2 py-1 text-[9px] uppercase font-bold tracking-widest shadow-sm">Ver Detalhes</span></div>' : ''}
                 </div>
-                <h3 class="font-serif text-sm md:text-lg mb-1 h-12 overflow-hidden">${p.name}</h3>
+                <h3 class="font-serif text-sm md:text-lg mb-1 h-12 overflow-hidden">${p.link ? `<a href="${p.link}" class="hover:text-cyan-600">${p.name}</a>` : p.name}</h3>
                 <p class="text-base md:text-xl font-bold mb-4 text-gray-800">${p.price ? "R$ " + p.price.toLocaleString('pt-BR', {minimumFractionDigits: 2}) : "Preço sob consulta"}</p>
                 <button onclick="addToCart('${p.name}', ${p.price}, '${p.image}')" 
                         class="w-full bg-cyan-500 text-white py-2 md:py-3 text-[10px] md:text-xs uppercase tracking-widest font-bold hover:bg-black transition">
@@ -400,7 +401,7 @@ function addToCart(name, price, image) {
         document.addEventListener("cms:ready", () => {
             if (!window.CMS || !window.CMS.products.length) return;
             filtered = window.CMS.products
-                .map(p => ({ id: p.id, name: p.name, price: Number(p.price), image: p.image }))
+                .map(p => ({ id: p.id, name: p.name, price: Number(p.price), image: p.image, link: window.CMS.productUrl ? window.CMS.productUrl(p) : '' }))
                 .filter(p => p.name.toLowerCase().includes(searchTerm));
             renderProducts();
         });

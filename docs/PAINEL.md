@@ -32,6 +32,13 @@ do zero, abra **SQL Editor** → **New query** e rode, nesta ordem:
 4. Cole todo o conteúdo de `supabase/migrations/0004_cores.sql` → **Run**.
 5. Cole todo o conteúdo de `supabase/migrations/0005_logo_e_imagens.sql` → **Run**.
 6. Cole todo o conteúdo de `supabase/migrations/0006_genero_relogios.sql` → **Run**. (Relógios Masculino / Feminino.)
+7. Cole todo o conteúdo de `supabase/migrations/0012_pagina_de_produto.sql` → **Run**. (Página de produto: preço antigo, descrição, tamanhos, newsletter e textos da loja.)
+
+> As levas de produtos (0007 a 0011) entram pelo botão **Adicionar ao catálogo** do painel; os SQL ficam só como alternativa manual.
+
+### Avaliações da página de produto
+
+Ficam em `assets/avaliacoes.json`, por id do produto (o `?p=` do endereço). Cadastre **só avaliações reais** de clientes. Produto sem avaliação mostra "Este produto ainda não tem avaliações", e a nota média só entra no Google (JSON-LD) quando houver avaliação de verdade.
 
 O primeiro cria as tabelas, as permissões e o espaço das imagens.
 O segundo carrega **o conteúdo que já está no site hoje**: 124 campos de texto e

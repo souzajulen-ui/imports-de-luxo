@@ -15,7 +15,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const VERSAO = process.argv[2] || new Date().toISOString().slice(0, 10).replace(/-/g, '');
 
 const ALVOS = [
-  ...['index', 'bolsas', 'relogios', 'oculos', 'calcados', 'acessorios', 'cintos', 'pesquisa'].map((s) => `${s}.html`),
+  ...['index', 'bolsas', 'relogios', 'oculos', 'calcados', 'acessorios', 'cintos', 'pesquisa', 'produto'].map((s) => `${s}.html`),
   'admin/index.html',
 ];
 
@@ -23,7 +23,7 @@ const ALVOS = [
 // e também o CSS: "assets/tailwind.css", "../assets/tailwind.css?v=123".
 // O CSS ficou de fora até nov/2026, e o menu novo não aparecia no computador
 // de quem já tinha a versão antiga guardada (o servidor manda guardar 4 horas).
-const ARQUIVOS_JS = /((?:src|href)=")((?:\.\.\/)?(?:assets\/)?(?:cms-config\.js|cms\.js|app\.js|tailwind\.css))(\?v=[^"]*)?(")/g;
+const ARQUIVOS_JS = /((?:src|href)=")((?:\.\.\/)?(?:assets\/)?(?:cms-config\.js|cms\.js|produto\.js|app\.js|tailwind\.css))(\?v=[^"]*)?(")/g;
 
 let total = 0;
 for (const alvo of ALVOS) {

@@ -341,6 +341,48 @@
     });
   }
 
+  // ============================================================ newsletter
+  // Fora do loadAll de propósito: antes do SQL 0012 a tabela não existe, e
+  // isso não pode impedir o painel de abrir.
+  function carregarNewsletter() {
+    return sb
+      .from('newsletter_signups')
+      .select('email,created_at')
+      .order('created_at', { ascending: false })
+      .then(function (r) {
+        state.newsletter = r.error ? null : r.data || [];
+      })
+      .catch(function () {
+        state.newsletter = null;
+      });
+  }
+
+  function verNewsletter() {
+    var lista = state.newsletter || [];
+    var m = modal(
+      '<div class="p-6">' +
+        '<h3 class="font-serif text-2xl mb-1">Newsletter</h3>' +
+        '<p class="text-sm text-gray-500 mb-4">' + lista.length + ' e-mail(s), do mais recente para o mais antigo.</p>' +
+        '<div class="max-h-[50vh] overflow-y-auto border border-gray-100 rounded-lg divide-y divide-gray-100 mb-5">' +
+        lista
+          .map(function (n) {
+            return '<div class="flex justify-between gap-3 px-3 py-2 text-sm"><span class="break-all">' + esc(n.email) + '</span>' +
+              '<span class="text-gray-400 whitespace-nowrap">' + esc(when(n.created_at)) + '</span></div>';
+          })
+          .join('') +
+        '</div>' +
+        '<div class="flex justify-end gap-2"><button class="btn btn-ghost" data-close>Fechar</button>' +
+        '<button class="btn btn-primary" data-copiar-emails>Copiar todos</button></div></div>',
+      { width: 'max-w-lg' }
+    );
+    m.querySelector('[data-copiar-emails]').addEventListener('click', function () {
+      var texto = lista.map(function (n) { return n.email; }).join('\n');
+      (navigator.clipboard ? navigator.clipboard.writeText(texto) : Promise.reject())
+        .then(function () { toast('E-mails copiados.', 'ok'); })
+        .catch(function () { toast('Não foi possível copiar. Selecione e copie a lista.', 'erro'); });
+    });
+  }
+
   function blocksOf(slug) {
     return state.blocks.filter(function (b) {
       return b.page_slug === slug;
@@ -773,6 +815,14 @@
       card('Textos e campos', String(state.blocks.filter(function (b) { return b.page_slug !== MARCA_IMPORTACAO.page_slug; }).length), 'itens de conteúdo') +
       card('Produtos', String(state.products.length), 'no catálogo') +
       card('Imagens', String(imagens + state.media.length), 'campos de imagem e enviadas') +
+      '</div>' +
+      '<div class="card p-5 mb-8 flex flex-wrap items-center justify-between gap-3">' +
+      '<div><p class="text-[11px] uppercase tracking-widest text-gray-400 mb-1">Newsletter</p>' +
+      (state.newsletter
+        ? '<p class="text-sm"><strong>' + state.newsletter.length + '</strong> e-mail(s) inscrito(s) pelo rodapé da página de produto.</p>'
+        : '<p class="text-sm text-gray-500">Começa a receber inscrições depois que o SQL 0012 for rodado no Supabase.</p>') +
+      '</div>' +
+      (state.newsletter && state.newsletter.length ? '<button class="btn btn-ghost" data-newsletter>Ver e-mails</button>' : '') +
       '</div>' +
       '<div class="grid md:grid-cols-3 gap-4 mb-8">' +
       PAGES.slice(0, 3)
@@ -1246,6 +1296,103 @@
     );
   }
 
+  // ============================================ campos da página de produto
+  // Guardados em products.details (migration 0012): preço antigo, descrição,
+  // tamanhos (com os esgotados) e qual tabela de medidas mostrar.
+  var PRESETS_TAMANHO = [
+    ['Calçados 33 a 44', '33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44'],
+    ['Cintos 80 a 120', '80, 85, 90, 95, 100, 105, 110, 115, 120'],
+    ['Anéis aro 10 a 30', '10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30'],
+  ];
+
+  function bancoTemDetalhes() {
+    return state.products.some(function (p) {
+      return Object.prototype.hasOwnProperty.call(p, 'details');
+    });
+  }
+
+  function listaTamanhos(texto) {
+    var vistos = {};
+    return String(texto || '')
+      .split(/[,;]+/)
+      .map(function (s) {
+        return s.trim();
+      })
+      .filter(function (s) {
+        if (!s || vistos[s.toLowerCase()]) return false;
+        vistos[s.toLowerCase()] = true;
+        return true;
+      });
+  }
+
+  function htmlCamposPaginaProduto(p) {
+    var d = (p.details && typeof p.details === 'object') ? p.details : {};
+    var tamanhos = Array.isArray(d.sizes) ? d.sizes : [];
+    var todos = tamanhos.map(function (t) { return t.label; }).join(', ');
+    var esgotados = tamanhos.filter(function (t) { return t.available === false; }).map(function (t) { return t.label; }).join(', ');
+    var tabela = d.size_table || '';
+    var aviso = bancoTemDetalhes()
+      ? ''
+      : '<p class="md:col-span-2 text-[12px] text-amber-800 bg-amber-50 border border-amber-200 rounded-md px-3 py-2">Estes campos passam a ser salvos depois que o SQL 0012 for rodado no Supabase.</p>';
+    return (
+      '<div class="mt-6 pt-5 border-t border-gray-100">' +
+      '<h4 class="font-semibold text-sm mb-1">Página do produto</h4>' +
+      '<p class="text-[11px] text-gray-400 mb-3">O que aparece quando o cliente abre a peça. Campo vazio não aparece.</p>' +
+      '<div class="grid md:grid-cols-2 gap-4">' + aviso +
+      '<div><label class="block text-[13px] font-semibold mb-1">Preço antigo (R$, riscado)</label>' +
+      '<input class="field-input" data-f="old_price" type="number" step="0.01" min="0" value="' + (d.old_price ? Number(d.old_price) : '') + '" placeholder="Vazio: sem preço riscado"></div>' +
+      '<div><label class="block text-[13px] font-semibold mb-1">Tabela de medidas</label>' +
+      '<select class="field-input" data-f="size_table">' +
+      [['', 'Automática (pela categoria)'], ['calcados', 'Calçados'], ['cintos', 'Cintos'], ['aneis', 'Anéis'], ['nenhuma', 'Não mostrar tabela']]
+        .map(function (o) {
+          return '<option value="' + o[0] + '"' + (tabela === o[0] ? ' selected' : '') + '>' + o[1] + '</option>';
+        })
+        .join('') +
+      '</select></div>' +
+      '<div class="md:col-span-2"><label class="block text-[13px] font-semibold mb-1">Descrição</label>' +
+      '<textarea class="field-input" rows="4" data-f="description" placeholder="Materiais, o que acompanha (caixa, dust bag…), detalhes. Vazio: usa o texto depois do traço na descrição do WhatsApp.">' +
+      esc(d.description || '') + '</textarea></div>' +
+      '<div class="md:col-span-2"><label class="block text-[13px] font-semibold mb-1">Tamanhos (separe por vírgula)</label>' +
+      '<input class="field-input" data-f="sizes" value="' + esc(todos) + '" placeholder="Vazio: peça sem tamanho">' +
+      '<div class="flex flex-wrap gap-2 mt-2">' +
+      PRESETS_TAMANHO.map(function (pr) {
+        return '<button type="button" class="btn btn-ghost py-1 text-[12px]" data-preset-tam="' + esc(pr[1]) + '">' + esc(pr[0]) + '</button>';
+      }).join('') +
+      '</div></div>' +
+      '<div class="md:col-span-2"><label class="block text-[13px] font-semibold mb-1">Tamanhos esgotados</label>' +
+      '<input class="field-input" data-f="sizes_out" value="' + esc(esgotados) + '" placeholder="Ex.: 33, 44 (aparecem riscados no site)"></div>' +
+      '</div></div>'
+    );
+  }
+
+  function lerCamposPaginaProduto(m, p) {
+    var campo = function (n) {
+      return m.querySelector('[data-f="' + n + '"]');
+    };
+    var antigos = (p.details && typeof p.details === 'object') ? p.details : {};
+    var preco = Number(campo('price').value || 0);
+    var antigo = Number(campo('old_price').value || 0);
+    if (antigo && antigo <= preco) return { erro: 'O preço antigo precisa ser maior que o preço atual (ou deixe vazio).' };
+    var todos = listaTamanhos(campo('sizes').value);
+    var esgotados = listaTamanhos(campo('sizes_out').value).map(function (s) { return s.toLowerCase(); });
+    var fora = esgotados.filter(function (s) {
+      return !todos.some(function (t) { return t.toLowerCase() === s; });
+    });
+    if (fora.length) return { erro: 'Tamanho esgotado que não está na lista de tamanhos: ' + fora.join(', ') };
+    var details = Object.assign({}, antigos, {
+      old_price: antigo || null,
+      description: campo('description').value.trim(),
+      size_table: campo('size_table').value,
+      sizes: todos.map(function (t) {
+        return { label: t, available: esgotados.indexOf(t.toLowerCase()) === -1 };
+      }),
+    });
+    return {
+      details: details,
+      preenchido: !!(antigo || details.description || todos.length || details.size_table),
+    };
+  }
+
   // ====================================================== editor de produto
   function productModal(product) {
     var novo = !product;
@@ -1327,6 +1474,7 @@
         '<div class="md:col-span-2"><label class="block text-[13px] font-semibold mb-1">Texto alternativo da foto (acessibilidade)</label>' +
         '<input class="field-input" data-f="alt" value="' + esc(p.alt || '') + '"></div>' +
         '</div>' +
+        htmlCamposPaginaProduto(p) +
         '<div class="mt-5"><label class="block text-[13px] font-semibold mb-1">Foto principal</label>' +
         '<p class="text-[11px] text-gray-400 mb-2">É sempre a 1ª foto da galeria — a mesma que abre quando o cliente amplia a peça.</p>' +
         '<div class="flex gap-4 items-start">' +
@@ -1355,6 +1503,11 @@
     );
 
     var imagemAtual = p.image;
+    m.querySelectorAll('[data-preset-tam]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        m.querySelector('[data-f="sizes"]').value = b.getAttribute('data-preset-tam');
+      });
+    });
     m.querySelector('[data-f="category"]').addEventListener('change', function () {
       m.querySelector('[data-genero-box]').classList.toggle('hidden', this.value !== 'relogios');
     });
@@ -1480,6 +1633,11 @@
         active: get('active').checked,
         updated_at: new Date().toISOString(),
       };
+      var det = lerCamposPaginaProduto(m, p);
+      if (det.erro) return toast(det.erro, 'erro');
+      if (bancoTemDetalhes()) dados.details = det.details;
+      else if (det.preenchido)
+        return toast('Para salvar preço antigo, descrição e tamanhos, rode antes o SQL 0012 no Supabase.', 'erro');
 
       var acao;
       if (novo) {
@@ -1940,6 +2098,7 @@
     }
     if (e.target.closest('[data-open-site]')) window.open('../index.html', '_blank');
     if (e.target.closest('[data-publish]')) publish();
+    if (e.target.closest('[data-newsletter]')) verNewsletter();
     if (e.target.closest('[data-sort-brand]')) ordenarPorMarcaModelo();
     if (e.target.closest('[data-show-all]')) mostrarTodos();
     var importar = e.target.closest('[data-import]');
@@ -2048,6 +2207,9 @@
             renderShell();
             // Não segura a abertura do painel: o aviso aparece quando chegar.
             carregarImportacoes().then(renderTopBar);
+            carregarNewsletter().then(function () {
+              if (state.view === 'dashboard') renderMain();
+            });
           });
         })
         .catch(function (err) {

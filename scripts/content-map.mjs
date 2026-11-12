@@ -98,6 +98,52 @@ export const GLOBAL = [
       ['footer.pay6', 'Bandeira 6', 'image', 'https://images.seeklogo.com/logo-png/39/1/pix-logo-png_seeklogo-392002.png'],
     ],
   },
+  // ---- Página de produto (migration 0012). Campo vazio = o trecho some do site:
+  // nada de prazo, parcela ou desconto inventado.
+  {
+    section: 'loja',
+    label: 'Página de produto: pagamento e garantias',
+    fields: [
+      ['loja.parcelas', 'Parcelamento: número máximo de parcelas', 'text', '', 'Ex.: 12. Vazio: a linha "ou até 12x de R$ …" não aparece.'],
+      ['loja.pix_desconto', 'Desconto no Pix (%)', 'text', '', 'Só o número. Ex.: 5. Vazio: o preço no Pix não aparece.'],
+      ['loja.pagamentos', 'Formas de pagamento aceitas', 'text', 'Visa, Mastercard, Elo, Amex, Diners, Pix, Boleto', 'Separe por vírgula. Aparecem como selos na página de produto e no rodapé.'],
+      ['loja.garantia1_titulo', 'Garantia 1 — título', 'text', 'Envio para todo o Brasil'],
+      ['loja.garantia1_texto', 'Garantia 1 — texto', 'text', '', 'Ex.: Envio rastreado: 15 a 45 dias úteis.'],
+      ['loja.garantia2_titulo', 'Garantia 2 — título', 'text', 'Devolução garantida'],
+      ['loja.garantia2_texto', 'Garantia 2 — texto', 'text', 'Dinheiro de volta em até 7 dias'],
+      ['loja.garantia3_titulo', 'Garantia 3 — título', 'text', 'Qualidade VIP'],
+      ['loja.garantia3_texto', 'Garantia 3 — texto', 'text', 'A excelência que seu visual exige.'],
+    ],
+  },
+  {
+    section: 'beneficios',
+    label: 'Faixa de benefícios e rodapé completo',
+    fields: [
+      ['loja.beneficio1_titulo', 'Benefício 1 — título', 'text', 'Envio VIP'],
+      ['loja.beneficio1_texto', 'Benefício 1 — texto', 'text', 'Para todo o Brasil'],
+      ['loja.beneficio2_titulo', 'Benefício 2 — título', 'text', 'Compra Segura'],
+      ['loja.beneficio2_texto', 'Benefício 2 — texto', 'text', 'Pedido confirmado direto com a loja'],
+      ['loja.beneficio3_titulo', 'Benefício 3 — título', 'text', 'Suporte Exclusivo'],
+      ['loja.beneficio3_texto', 'Benefício 3 — texto', 'text', 'Atendimento pelo WhatsApp'],
+      ['loja.beneficio4_titulo', 'Benefício 4 — título', 'text', 'Qualidade Grife'],
+      ['loja.beneficio4_texto', 'Benefício 4 — texto', 'text', 'A excelência que seu visual exige.'],
+      ['loja.newsletter_titulo', 'Newsletter — título', 'text', 'Receba novidades'],
+      ['loja.newsletter_texto', 'Newsletter — chamada', 'text', '', 'Ex.: Ganhe 3% de desconto na sua primeira compra! Vazio: só o título aparece.'],
+      ['loja.cnpj', 'CNPJ (linha de direitos autorais)', 'text', '', 'Ex.: 00.000.000/0001-00. Vazio: não aparece.'],
+      ['loja.instagram', 'Instagram — link', 'url', ''],
+      ['loja.facebook', 'Facebook — link', 'url', ''],
+      ['loja.tiktok', 'TikTok — link', 'url', ''],
+      ['loja.youtube', 'YouTube — link', 'url', ''],
+    ],
+  },
+  {
+    section: 'faq',
+    label: 'Perguntas frequentes (página de produto)',
+    fields: [1, 2, 3, 4, 5, 6].flatMap((n) => [
+      [`faq.${n}_pergunta`, `Pergunta ${n}`, 'text', ''],
+      [`faq.${n}_resposta`, `Resposta ${n}`, 'textarea', '', n === 1 ? 'Pergunta sem resposta não aparece no site.' : undefined],
+    ]),
+  },
 ];
 
 const CATEGORY_SECTIONS = [

@@ -267,29 +267,43 @@
   }
 
   // ---------------------------------------------------------- vitrine/cards
+  // Endereço da página de produto (compartilhável).
+  function productUrl(p) {
+    return 'produto.html?p=' + encodeURIComponent(p.id);
+  }
+  CMS.productUrl = productUrl;
+
+  function temTamanhos(p) {
+    return !!(p.details && p.details.sizes && p.details.sizes.length);
+  }
+
   function cardHtml(p) {
     var addLabel = CMS.get('cart.add_label', 'Adicionar ao carrinho');
+    var url = escapeHtml(productUrl(p));
     // flex + mt-auto: em tablet os nomes ocupam 1 ou 2 linhas, e sem isso os
     // preços e botões de cada card ficavam em alturas diferentes.
     return (
       '<div class="product border border-gray-100 shadow-sm hover:shadow-xl transition duration-500 group text-center p-2 md:p-6 bg-white flex flex-col h-full" data-cms-card="' +
       escapeHtml(p.id) +
       '">' +
+      '<a href="' + url + '" class="block mb-4 md:mb-6 shrink-0">' +
       '<img src="' +
       escapeHtml(p.image) +
-      '" class="w-full h-40 md:h-56 lg:h-64 object-contain mb-4 md:mb-6 shrink-0 group-hover:scale-105 transition duration-500 cursor-pointer" alt="' +
+      '" class="w-full h-40 md:h-56 lg:h-64 object-contain group-hover:scale-105 transition duration-500" alt="' +
       escapeHtml(p.alt || p.name) +
-      '" loading="lazy" onclick="openGallery(\'' +
-      escapeHtml(p.id) +
-      '\')">' +
-      '<h3 class="font-serif text-base md:text-lg mb-2">' +
+      '" loading="lazy"></a>' +
+      '<h3 class="font-serif text-base md:text-lg mb-2"><a href="' + url + '" class="hover:text-cyan-600 transition">' +
       escapeHtml(p.name) +
-      '</h3>' +
+      '</a></h3>' +
       // Sem preço cadastrado: nunca mostrar "R$ 0,00" para o cliente.
       (Number(p.price) > 0
         ? '<p class="text-lg md:text-xl font-semibold mb-4 mt-auto">' + money(p.price) + '</p>'
         : '<p class="text-sm md:text-base font-semibold uppercase tracking-widest text-gray-500 mb-4 mt-auto">Preço sob consulta</p>') +
-      '<button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" data-name="' +
+      // Peça com tamanho: o cliente escolhe o tamanho na página do produto.
+      (temTamanhos(p)
+        ? '<a href="' + url + '" class="bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition">Escolher tamanho</a>'
+        : '') +
+      (temTamanhos(p) ? '' : '<button class="add-cart bg-cyan-500 text-white w-full md:w-auto py-2 md:py-3 text-[10px] md:text-xs px-0 md:px-6 uppercase tracking-widest font-bold block md:inline-block hover:bg-black md:hover:bg-cyan-600 transition" data-name="' +
       escapeHtml(p.cart_name || p.name) +
       '" data-price="' +
       Number(p.price || 0).toFixed(2) +
@@ -297,10 +311,13 @@
       escapeHtml(p.image) +
       '">' +
       escapeHtml(addLabel) +
-      '</button>' +
+      '</button>') +
       '</div>'
     );
   }
+
+  // A página de produto usa o mesmo card no carrossel "Você também pode gostar".
+  CMS.cardHtml = cardHtml;
 
   function emptyHtml(genero) {
     return (
