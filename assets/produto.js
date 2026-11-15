@@ -453,7 +453,7 @@
       'toque em <strong>Comprar pelo WhatsApp</strong>: a loja confirma disponibilidade, prazo de entrega e forma de pagamento antes de fechar o pedido.' +
       (troca ? ' ' + esc(troca.charAt(0).toUpperCase() + troca.slice(1)) + ' após o recebimento.' : '') + '</p>';
     return (
-      '<section class="mt-12 grid ' + (tabela ? 'lg:grid-cols-2' : '') + ' gap-6" aria-label="Descrição e medidas">' +
+      '<section class="mt-12 grid grid-cols-1 ' + (tabela ? 'lg:grid-cols-2' : '') + ' gap-6" aria-label="Descrição e medidas">' +
       '<div class="border border-gray-200 rounded-lg p-6 bg-white"><h2 class="font-sans font-semibold text-lg mb-4">Descrição</h2>' +
       '<div class="text-sm text-gray-700 leading-relaxed space-y-3">' + corpo + '</div></div>' +
       (tabela
@@ -805,7 +805,7 @@
     main.setAttribute('aria-busy', 'false');
     main.innerHTML =
       htmlVoltar(p) +
-      '<div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">' + htmlGaleria(p) + htmlInfo(p) + '</div>' +
+      '<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">' + htmlGaleria(p) + htmlInfo(p) + '</div>' +
       htmlDescricao(p) + htmlSecaoPerguntas() + htmlRelacionados(p);
 
     ligarEventos();
